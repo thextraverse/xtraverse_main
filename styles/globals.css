@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+/* font-family: 'Inter', sans-serif;
+
+font-family: 'Open Sans', sans-serif; */
+html,
+body {
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  background: #1f1f1f;
+}
+
+.slick-prev {
+  top: 95% !important;
+  left: 46% !important;
+  transform: translate(-50%, -50%) !important;
+  /* top: 110% !important; */
+}
+.slick-next {
+  top: 95% !important;
+  left: 54% !important;
+  transform: translate(-50%, -50%) !important;
+  /* top: 110% !important; */
+}
+.slick-slider {
+  height: 60vh !important;
+}
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 85% !important;
+}
+.slick-track {
+  height: 100% !important;
+}
+.slick-slide {
+  border: 3px solid rgba(255, 255, 255, 0.6) !important;
+  height: 100% !important;
+}
+.slick-slide > div {
+  width: 100%;
+  height: 100% !important;
+}
+.slick-slide > div span {
+  width: 100% !important;
+  height: 100% !important;
+}
+.slick-slide img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+}
+.slick-prev::before,
+.slick-next::before {
+  font-size: 32px !important;
+  opacity: 0.6 !important;
+  color: white;
+}

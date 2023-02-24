@@ -10,8 +10,4 @@ npm run dev
 yarn dev
 ```
 
-#� �x�t�r�a�v�r�s�e�
-�
-�#� �x�t�r�a�v�r�s�e�
-�
-�#� �m�a�i�n�_�x�t�r�a�v�e�r�s�e�
+

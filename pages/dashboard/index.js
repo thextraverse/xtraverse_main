@@ -12,33 +12,7 @@ const Main = styled.main`
   height: 100%;
   color: #fff;
 `;
-// const Header = styled.header`
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
-//   .btnsc {
-//     display: flex;
-//     gap: 15px;
-//     a {
-//       text-decoration: none;
-//       border: 2px solid #bebebe;
-//       width: 120px;
-//       height: 42px;
-//       text-align: center;
-//       color: #fff;
-//       border-radius: 10px;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-//       transition: all 0.3s;
-//       &:hover {
-//         background: #fff;
-//         border: 2px solid #fff;
-//         color: #000;
-//       }
-//     }
-//   }
-// `;
+
 const Dashboardsc = styled.div`
   width: 100%;
   position: relative;

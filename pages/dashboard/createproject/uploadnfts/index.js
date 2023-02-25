@@ -11,6 +11,7 @@ import Nftfeaures from "../../../../components/dashboard/upladnft/nftfeatures";
 import Sidebar from "../../../../components/dashboard/sidebar";
 import Stepnav from "../../../../components/dashboard/stepnav";
 import { drawerWidth } from "../../../../components/dashboard/createproject";
+
 const Main = styled.main`
   background: #1f1f1f;
   padding: 30px;
@@ -55,19 +56,12 @@ function Uploadnfts() {
   const [tokenType, setTokenType] = useState("");
   const [mintType, setMintType] = useState("");
 
-  // for upload image to firebase
-
-  // for image url
+  const [imageupload, setImageUpload] = useState();
   const [selectedImage, setSelectedImage] = useState();
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    setSelectedImage(imageFile);
-    const reader = new FileReader();
-    reader.onload = () => setSelectedImage(reader.result);
-    reader.readAsDataURL(imageFile);
-  };
-  const removeSelectedImage = () => {
-    setSelectedImage();
+    setSelectedImage(URL.createObjectURL(imageFile));
+    setImageUpload(imageFile);
   };
 
   //! for upload videosec
@@ -75,17 +69,14 @@ function Uploadnfts() {
   const [addStory, setAddStory] = useState(
     "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem,provident vero numquam aperiam ratione vel corrupti maioresconsequuntur aliquid impedit"
   );
+  const [uploadVideoUrl, setUploadVideoUrl] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [selectedVideoUrl, setSelectedVideoUrl] = useState(null);
+
   const handleVideoChange = (event) => {
     const videoFile = event.target.files[0];
-    setSelectedVideo(videoFile);
-    const videoUrl = URL.createObjectURL(videoFile);
-    setSelectedVideoUrl(videoUrl);
+    setSelectedVideo(URL.createObjectURL(videoFile));
+    setUploadVideoUrl(videoFile);
   };
-
-  //for tags
-  const [tags, setTags] = useState([]);
 
   const layouts = [
     <Nftgeneral
@@ -96,12 +87,10 @@ function Uploadnfts() {
       nftCollectionName={nftCollectionName}
       setNftCollectionName={setNftCollectionName}
       setNftDescript={setAddNftDescript}
-      setTags={setTags}
       nftType={nftType}
       setNftType={setNftType}
       selectedImage={selectedImage}
       handleImageChange={handleImageChange}
-      removeSelectedImage={removeSelectedImage}
       nftPrice={nftPrice}
       setNftPrice={setNftPrice}
       nftMindBtn={nftMindBtn}
@@ -111,13 +100,14 @@ function Uploadnfts() {
     <Nftfeaures
       handlePrev={handlePrev}
       handleVideoChange={handleVideoChange}
-      selectedVideoUrl={selectedVideoUrl}
+      uploadVideoUrl={uploadVideoUrl}
+      selectedVideo={selectedVideo}
+      // selectedVideoUrl={selectedVideoUrl}
       setAddStory={setAddStory}
       addStory={addStory}
       selectedImage={selectedImage}
       nftName={nftName}
       addUntility={setAddNftDescript}
-      tags={tags}
       videoTitle={videoTitle}
       setVideoTitle={setVideoTitle}
       tokenType={tokenType}
@@ -128,6 +118,7 @@ function Uploadnfts() {
       addNftDescript={addNftDescript}
       nftPrice={nftPrice}
       nftMindBtn={nftMindBtn}
+      imageupload={imageupload}
       key="2"
     />,
   ];

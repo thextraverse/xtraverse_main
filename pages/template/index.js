@@ -178,7 +178,7 @@ function TemplateIndex() {
     const templateDataRef = collection(db, "templateData");
     getDocs(templateDataRef)
       .then((response) => {
-        console.log(response.docs);
+        // console.log(response.docs);
         const datas = response.docs.map((doc) => ({
           data: doc.data(),
           id: doc.id,

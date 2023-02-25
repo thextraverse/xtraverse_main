@@ -80,6 +80,8 @@ function MarketPlace() {
           }}
         >
           {uploadData.map((uploadData, index) => {
+            // const imagefromserver = uploadData.data.nftimage;
+            // console.log(imagefromserver);
             return (
               <>
                 <Grid item xs={3} key={index}>
@@ -99,7 +101,7 @@ function MarketPlace() {
                         },
                       }}
                     >
-                      <Image alt="amneiimage" />
+                      <Image src="" alt="amneiimage" width={100} height={100} />
                     </Box>
                     <Box
                       sx={{

@@ -27,51 +27,10 @@ import { useUserAuth } from "../../configfile/UserAuthContext";
 import { async } from "@firebase/util";
 import { Router } from "next/router";
 const drawerWidth = 240;
-const Ul = styled.ul`
-  list-style: none;
-  padding: 10px 10px;
-  li {
-    padding: 0px 0px;
-  }
-  a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    color: #000;
-    font-weight: 500;
-
-    svg {
-      font-size: 1.4em;
-    }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: #000;
-    }
-  }
-`;
-const SearchBox = styled.div`
-  position: relative;
-  width: 400px;
-  outline: none;
-  input {
-    width: 100%;
-    border: 0px;
-    border-radius: 10px;
-    padding: 10px 10px 10px 30px;
-    background: #d7dcdf;
-  }
-  svg {
-    position: absolute;
-    left: 8px;
-    top: 25%;
-  }
-`;
+import { Ul, SearchBox } from "./dashboard.styled";
 function Sidebar(props) {
   const { user, logOut } = useUserAuth();
-  console.log(user);
+  // console.log(user);
   // logout
   const router = useRouter();
   const handleLogout = async () => {

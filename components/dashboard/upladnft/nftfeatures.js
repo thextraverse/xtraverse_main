@@ -12,7 +12,8 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaPercent } from "react-icons/fa";
 import { db, storage } from "../../../configfile/firebaseConfig";
-import { addDoc, collection, ref, uploadBytes } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 function Nftfeaures(props) {
   const {
@@ -35,50 +36,53 @@ function Nftfeaures(props) {
     addNftDescript,
     nftPrice,
     nftMindBtn,
+    imageupload,
+    uploadVideoUrl,
+    selectedVideo,
   } = props;
   const router = useRouter();
-  // console.log(tokenType, mintType);
-  // const handleSubmitAllData = async (e) => {
-  //   e.preventDefault();
-  //   const allData = {
-  //     nftName,
-  //     addUntility,
-  //     addStory,
-  //     tags,
-  //     selectedVideoUrl,
-  //     selectedImage,
-  //   };
-
-  //   try {
-  //     const { data } = await axios({
-  //       url: "/api/uploadNftData",
-  //       method: "POST",
-  //       data: allData,
-  //     });
-
-  //     router.push("/dashboard/createproject/edithomepage");
-  //   } catch (error) {
-  //     console.log("Error", error);
-  //   }
-  // };
   // send data to firebase
   const userDataCollectionRef = collection(db, "uploadNfts");
-  const handleDataSubmit = () => {
-    addDoc(userDataCollectionRef, {
-      nftname: nftName,
-      collectionName: nftCollectionName,
-      description: addNftDescript,
-      // nftimage: selectedImage,
-      price: nftPrice,
-      button: nftMindBtn,
-      token: tokenType,
-      mint: mintType,
-      videoTitle: videoTitle,
-      // video: selectedVideoUrl,
-      videoStory: addStory,
-    })
+  const handleDataSubmit = (e) => {
+    e.preventDefault();
+    const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
+    const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
+    // Upload the files to Firebase storage
+    uploadBytes(imageRef, imageupload)
       .then(() => {
-        if (!alert("Form Submitted Succesfully!!!"));
+        console.log("Image uploaded");
+        return uploadBytes(videoRef, uploadVideoUrl);
+      })
+      .then(() => {
+        console.log("Video uploaded");
+        // Get the download URLs for the files
+        return Promise.all([
+          getDownloadURL(imageRef),
+          getDownloadURL(videoRef),
+        ]);
+      })
+      .then(([imageurl, videoUrl]) => {
+        // Use the download URL to add the data to Firestore
+        addDoc(userDataCollectionRef, {
+          nftimage: imageurl,
+          nftvideo: videoUrl,
+          nftname: nftName,
+          collectionName: nftCollectionName,
+          description: addNftDescript,
+          // nftimage: selectedImage,
+          price: nftPrice,
+          button: nftMindBtn,
+          token: tokenType,
+          mint: mintType,
+          videoTitle: videoTitle,
+          videoStory: addStory,
+        })
+          .then(() => {
+            if (!alert("Form Submitted Succesfully!!!"));
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -295,7 +299,7 @@ function Nftfeaures(props) {
                 <div className="videowrap">
                   <h1>{videoTitle}</h1>
                   <div className="videoBox">
-                    <video src={selectedVideoUrl} muted autoPlay></video>
+                    <video src={selectedVideo} muted autoPlay></video>
                   </div>
                   <p>{addStory}</p>
                 </div>

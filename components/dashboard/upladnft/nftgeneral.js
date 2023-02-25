@@ -31,6 +31,7 @@ function Nftgeneral(props) {
     setNftMindBtn,
     nftType,
     setNftType,
+    handleImgUpload,
   } = props;
 
   return (
@@ -126,7 +127,7 @@ function Nftgeneral(props) {
                       type="file"
                       placeholder="upload Nft"
                       onChange={handleImageChange}
-                      accept="image/png, image/jpeg, image/jpg, image/gif"
+                      accept="image/*"
                     />
                     <span>
                       Upload NFTs

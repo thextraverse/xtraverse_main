@@ -6,10 +6,10 @@ import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
+
 import demoimg from "../../../components/images/blacklogo.svg";
+
 import CryptoCanvaSEdithero from "./EditHero";
-import Stepnav from "../../../components/dashboard/StepNav";
-import Sidebar from "../../../components/dashboard/SideBar";
 const drawerWidth = 240;
 
 const Main = styled.main`
@@ -90,21 +90,8 @@ function CryptoCanvasEditHome() {
   ];
   return (
     <>
-      <Sidebar />
-      <Box
-        sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          marginLeft: "auto",
-          background: "transparent",
-          height: "100%",
-          display: "grid",
-          gridTemplateColumns: "100%",
-          alignItems: "center",
-        }}
-      >
-        <Stepnav />
-        {layouts[index]}
-        {/* <ul className="activeDot">
+      {layouts[index]}
+      {/* <ul className="activeDot">
         <li className={index === 0 ? "active" : ""}></li>
         <li className={index === 1 ? "active" : ""}></li>
         <li className={index === 2 ? "active" : ""}></li>
@@ -113,7 +100,6 @@ function CryptoCanvasEditHome() {
         <li className={index === 5 ? "active" : ""}></li>
         <li className={index === 6 ? "active" : ""}></li>
       </ul> */}
-      </Box>
     </>
   );
 }

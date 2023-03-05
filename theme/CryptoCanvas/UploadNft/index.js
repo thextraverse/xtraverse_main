@@ -9,10 +9,6 @@ import { Button } from "@mui/material";
 
 import CryptoCanvasNftfeaures from "./NftFeatures";
 import CryptoCanvasNftgeneral from "./NftGeneral";
-import Stepnav from "../../../components/dashboard/StepNav";
-import Sidebar from "../../../components/dashboard/SideBar";
-
-const drawerWidth = 240;
 
 function CryptoCanvasUploadNftIndex() {
   const [index, setIndex] = useState(0);
@@ -105,25 +101,11 @@ function CryptoCanvasUploadNftIndex() {
 
   return (
     <>
-      <Sidebar />
-      <Box
-        sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          marginLeft: "auto",
-          background: "transparent",
-          height: "100%",
-          display: "grid",
-          gridTemplateColumns: "100%",
-          alignItems: "center",
-        }}
-      >
-        <Stepnav />
-        {layouts[index]}
-        <ul className="activeDot">
-          <li className={index === 0 ? "active" : ""}></li>
-          <li className={index === 1 ? "active" : ""}></li>
-        </ul>
-      </Box>
+      {layouts[index]}
+      <ul className="activeDot">
+        <li className={index === 0 ? "active" : ""}></li>
+        <li className={index === 1 ? "active" : ""}></li>
+      </ul>
     </>
   );
 }

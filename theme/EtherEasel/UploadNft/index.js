@@ -6,11 +6,9 @@ import Link from "next/link";
 import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
 import { Button } from "@mui/material";
+
 import EtherEaselNftgeneral from "./NftGeneral";
 import EtherEaselNftfeaures from "./NftFeatures";
-import Stepnav from "../../../components/dashboard/StepNav";
-import Sidebar from "../../../components/dashboard/SideBar";
-const drawerWidth = 240;
 
 function EtherEaselUploadNftIndex() {
   const [index, setIndex] = useState(0);
@@ -103,25 +101,11 @@ function EtherEaselUploadNftIndex() {
 
   return (
     <>
-      <Sidebar />
-      <Box
-        sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          marginLeft: "auto",
-          background: "transparent",
-          height: "100%",
-          display: "grid",
-          gridTemplateColumns: "100%",
-          alignItems: "center",
-        }}
-      >
-        <Stepnav />
-        {layouts[index]}
-        <ul className="activeDot">
-          <li className={index === 0 ? "active" : ""}></li>
-          <li className={index === 1 ? "active" : ""}></li>
-        </ul>
-      </Box>
+      {layouts[index]}
+      <ul className="activeDot">
+        <li className={index === 0 ? "active" : ""}></li>
+        <li className={index === 1 ? "active" : ""}></li>
+      </ul>
     </>
   );
 }

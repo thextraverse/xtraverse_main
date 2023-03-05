@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
+import Stepnav from "../../../../components/dashboard/StepNav";
 import { db } from "../../../../configfile/firebaseConfig";
 import {
   collection,
@@ -14,6 +15,9 @@ import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import CryptoCanvasEditHome from "../../../../theme/CryptoCanvas/EditHomePage";
 import EtherEaselEditHome from "../../../../theme/EtherEasel/EditHomePage";
 import PixelVaultEditHome from "../../../../theme/PixelVault/EditHomePage";
+import Sidebar from "../../../../components/dashboard/SideBar";
+
+const drawerWidth = 240;
 
 const Main = styled.main`
   background: #303030;
@@ -78,7 +82,23 @@ function EditHomePageindex() {
   }
   return (
     <>
-      <Main>{selectedTemplate}</Main>
+      <Main>
+        <Sidebar />
+        <Box
+          sx={{
+            width: { lg: `calc(100% - ${drawerWidth}px)` },
+            marginLeft: "auto",
+            background: "transparent",
+            height: "100%",
+            display: "grid",
+            gridTemplateColumns: "100%",
+            alignItems: "center",
+          }}
+        >
+          <Stepnav />
+          {selectedTemplate}
+        </Box>
+      </Main>
     </>
   );
 }

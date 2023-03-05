@@ -33,10 +33,10 @@ function Sidebar(props) {
   // console.log(user);
   // logout
   const router = useRouter();
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
       router.push("/");
-      await logOut();
+      logOut();
     } catch (err) {
       console.log(err);
     }

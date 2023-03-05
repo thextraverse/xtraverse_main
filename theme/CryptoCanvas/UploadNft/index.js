@@ -9,28 +9,11 @@ import { Button } from "@mui/material";
 
 import CryptoCanvasNftfeaures from "./NftFeatures";
 import CryptoCanvasNftgeneral from "./NftGeneral";
-const Main = styled.main`
-  background: #303030;
-  padding: 30px;
-  .activeDot {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin: 30px 0px;
-    li {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      list-style: none;
-      background: transparent;
-      border: 2px solid #fff;
-      transition: all 0.3s;
-      &.active {
-        background: #fff;
-      }
-    }
-  }
-`;
+import Stepnav from "../../../components/dashboard/StepNav";
+import Sidebar from "../../../components/dashboard/SideBar";
+
+const drawerWidth = 240;
+
 function CryptoCanvasUploadNftIndex() {
   const [index, setIndex] = useState(0);
 
@@ -122,11 +105,25 @@ function CryptoCanvasUploadNftIndex() {
 
   return (
     <>
-      {layouts[index]}
-      <ul className="activeDot">
-        <li className={index === 0 ? "active" : ""}></li>
-        <li className={index === 1 ? "active" : ""}></li>
-      </ul>
+      <Sidebar />
+      <Box
+        sx={{
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
+          marginLeft: "auto",
+          background: "transparent",
+          height: "100%",
+          display: "grid",
+          gridTemplateColumns: "100%",
+          alignItems: "center",
+        }}
+      >
+        <Stepnav />
+        {layouts[index]}
+        <ul className="activeDot">
+          <li className={index === 0 ? "active" : ""}></li>
+          <li className={index === 1 ? "active" : ""}></li>
+        </ul>
+      </Box>
     </>
   );
 }

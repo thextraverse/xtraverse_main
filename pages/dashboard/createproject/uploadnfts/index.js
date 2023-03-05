@@ -81,25 +81,7 @@ function UploadNftindex() {
   } else if (tempalteId === "PixelVault") {
     selectedTemplate = <PixelVaultUploadNftIndex />;
   }
-  return (
-    <Main>
-      <Sidebar />
-      <Box
-        sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          marginLeft: "auto",
-          background: "transparent",
-          height: "100%",
-          display: "grid",
-          gridTemplateColumns: "100%",
-          alignItems: "center",
-        }}
-      >
-        <Stepnav />
-        {selectedTemplate}
-      </Box>
-    </Main>
-  );
+  return <Main>{selectedTemplate}</Main>;
 }
 
 export default UploadNftindex;

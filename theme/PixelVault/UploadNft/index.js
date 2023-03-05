@@ -8,6 +8,9 @@ import Image from "next/image";
 import { Button } from "@mui/material";
 import PixelVaultNftgeneral from "./NftGeneral";
 import PixelVaultNftfeaures from "./NftFeatures";
+import Stepnav from "../../../components/dashboard/StepNav";
+import Sidebar from "../../../components/dashboard/SideBar";
+const drawerWidth = 240;
 
 function PixelVaultUploadNftIndex() {
   const [index, setIndex] = useState(0);
@@ -100,11 +103,25 @@ function PixelVaultUploadNftIndex() {
 
   return (
     <>
-      {layouts[index]}
-      <ul className="activeDot">
-        <li className={index === 0 ? "active" : ""}></li>
-        <li className={index === 1 ? "active" : ""}></li>
-      </ul>
+      <Sidebar />
+      <Box
+        sx={{
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
+          marginLeft: "auto",
+          background: "transparent",
+          height: "100%",
+          display: "grid",
+          gridTemplateColumns: "100%",
+          alignItems: "center",
+        }}
+      >
+        <Stepnav />
+        {layouts[index]}
+        <ul className="activeDot">
+          <li className={index === 0 ? "active" : ""}></li>
+          <li className={index === 1 ? "active" : ""}></li>
+        </ul>
+      </Box>
     </>
   );
 }

@@ -138,7 +138,7 @@ export const Ul = styled.ul`
     border-radius: 5px;
     color: #000;
     font-weight: 500;
-
+    color: #fff;
     svg {
       font-size: 1.4em;
     }
@@ -155,13 +155,16 @@ export const SearchBox = styled.div`
   input {
     width: 100%;
     border: 0px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px 10px 10px 30px;
-    background: #d7dcdf;
+    background: #252525;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
   }
   svg {
     position: absolute;
     left: 8px;
-    top: 25%;
+    top: 30%;
+    color: #fff;
   }
 `;

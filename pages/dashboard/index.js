@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../components/images/logo.svg";
 import { Box } from "@mui/system";
-import Sidebar from "../../components/dashboard/sidebar";
-import CreateProject from "../../components/dashboard/createproject";
+import Sidebar from "../../components/dashboard/SideBar";
+import CreateProject from "../../components/dashboard/CreateProject";
 
 const Main = styled.main`
-  background: #1f1f1f;
+  background: #303030;
   padding: 30px;
   height: 100%;
   color: #fff;

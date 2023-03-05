@@ -13,8 +13,7 @@ import unstoppable from "../../../../components/images/unstoppable.svg";
 import tiktok from "../../../../components/images/tiktok.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Sidebar from "../../../../components/dashboard/sidebar";
-import { drawerWidth } from "../../../../components/dashboard/createproject";
+import Sidebar, { drawerWidth } from "../../../../components/dashboard/sidebar";
 import Stepnav from "../../../../components/dashboard/stepnav";
 import {
   Connectionsec,
@@ -22,7 +21,7 @@ import {
   Btn,
 } from "../../../../components/dashboard/connection/connection.styled";
 const Main = styled.main`
-  background: #1f1f1f;
+  background: #303030;
   padding: 30px;
 `;
 function Connection() {
@@ -34,7 +33,7 @@ function Connection() {
         sx={{
           width: { lg: `calc(100% - ${drawerWidth}px)` },
           marginLeft: "auto",
-          background: "#1f1f1f",
+          background: "transparent",
           height: "100%",
           display: "grid",
           gridTemplateColumns: "100%",

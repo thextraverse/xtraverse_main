@@ -8,6 +8,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import prjctImg1 from "../images/project1.png";
+import { drawerWidth } from "./SideBar";
 import {
   InitializeProject,
   H1,
@@ -16,7 +17,6 @@ import {
   NFT_pro,
   Imgsc,
 } from "./dashboard.styled";
-export const drawerWidth = 240;
 
 function CreateProject() {
   const router = useRouter();

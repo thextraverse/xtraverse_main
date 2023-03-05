@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
-import Login from "../components/auth/signin";
+import Login from "../components/auth/SignIn";
 const Main = styled.main`
   background: rgb(31, 31, 31);
   padding: 0px;

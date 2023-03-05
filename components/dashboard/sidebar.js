@@ -26,7 +26,7 @@ import Link from "next/link";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { async } from "@firebase/util";
 import { Router } from "next/router";
-const drawerWidth = 240;
+export const drawerWidth = 240;
 import { Ul, SearchBox } from "./dashboard.styled";
 function Sidebar(props) {
   const { user, logOut } = useUserAuth();
@@ -35,13 +35,13 @@ function Sidebar(props) {
   const router = useRouter();
   const handleLogout = async () => {
     try {
-      await logOut();
       router.push("/");
+      await logOut();
     } catch (err) {
       console.log(err);
     }
   };
-
+  // console.log(user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleProfileDropdown = (event) => {
@@ -57,7 +57,18 @@ function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
   const drawer = (
-    <Box>
+    <Box
+      sx={{
+        boxSizing: "border-box",
+        width: "90%",
+        background: "#252525",
+        borderRadius: "10px",
+        height: "95%",
+        margin: "auto",
+        marginTop: "6%",
+        color: "#000",
+      }}
+    >
       <Ul>
         <li>
           <Box
@@ -102,6 +113,7 @@ function Sidebar(props) {
       </Ul>
     </Box>
   );
+  // console.log(user.photoURL);
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -112,11 +124,11 @@ function Sidebar(props) {
         position="fixed"
         sx={{
           width: { lg: `calc(100% - ${drawerWidth}px)` },
-          background: "#F6F7F9",
+          background: "#aaa0",
+          backdropFilter: "blur(10px)",
           color: "#000",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.12)",
+          borderBottom: "2px solid #212121",
           boxShadow: "0px 0px 0px transparent",
-
           ml: { sm: `${drawerWidth}px` },
         }}
       >
@@ -134,7 +146,7 @@ function Sidebar(props) {
             sx={{
               width: "100%",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               alignItems: "center",
               gap: "12px",
             }}
@@ -165,7 +177,18 @@ function Sidebar(props) {
                   aria-haspopup="true"
                   aria-expanded={open ? "true" : undefined}
                 >
-                  <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                  <Avatar sx={{ width: 32, height: 32 }}>
+                    {user.photoURL ? (
+                      <Image
+                        src={user.photoURL}
+                        alt="User Profile Picture"
+                        width={100}
+                        height={100}
+                      />
+                    ) : (
+                      "M"
+                    )}
+                  </Avatar>
                 </IconButton>
               </Tooltip>
             </Box>
@@ -204,7 +227,9 @@ function Sidebar(props) {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem>{user && user.email}</MenuItem>
+              <MenuItem>
+                {user.displayName ? user.displayName : user.email}
+              </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Avatar /> My account
               </MenuItem>
@@ -253,7 +278,7 @@ function Sidebar(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              background: "#F6F7F9",
+              background: "#252525",
               color: "#000",
               borderRight: "1px solid rgba(255, 255, 255, 0.12)",
             },
@@ -266,11 +291,11 @@ function Sidebar(props) {
           sx={{
             display: { xs: "none", sm: "none", md: "none", lg: "block" },
             "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
               width: drawerWidth,
-              background: "#F6F7F9",
+              background: "transparent",
+              height: "100%",
               color: "#000",
-              borderRight: " 1px solid rgba(255, 255, 255, 0.12)",
+              borderLeft: "none",
             },
           }}
           open

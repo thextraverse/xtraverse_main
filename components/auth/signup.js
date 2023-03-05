@@ -10,9 +10,16 @@ import { Box } from "@mui/system";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { GoogleBtn, Form, Span, SignSec } from "./signup.styled";
+import { auth, db } from "../../configfile/firebaseConfig";
 
-//
-
+import {
+  addDoc,
+  getDocs,
+  doc,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 function Signup({ signuphandleClose, signupOpen, signInhandleClickOpen }) {
   const [index, setIndex] = useState(0);
   const [userName, setUserName] = useState("");
@@ -107,6 +114,18 @@ const Step1 = ({
   websiteName,
   setWebsiteName,
 }) => {
+  const { loginAuth, googleSignUp } = useUserAuth();
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignUp();
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
   return (
     <>
       <Form action="#">
@@ -167,7 +186,7 @@ const Step1 = ({
           Sign in
         </a>
       </Span>
-      <GoogleBtn>
+      <GoogleBtn onClick={handleGoogleSignIn}>
         <AiFillGoogleCircle />
         <span>Sign up with Google</span>
       </GoogleBtn>
@@ -188,14 +207,30 @@ const Step2 = ({
 
   const [error, setError] = useState("");
   const { signUpAuth } = useUserAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
-      await signUpAuth(email, password, confirmpassword);
-      // signuphandleClose();
-      // signInhandleClickOpen();
-      router.push("/dashboard");
+      const result = await signUpAuth(email, password);
+
+      const userDataCollectionRef = collection(db, "Users");
+      const querySnapshot = await getDocs(
+        query(userDataCollectionRef, where("Email", "==", result.user.email))
+      );
+      if (querySnapshot.docs.length > 0) {
+        // User exists in Firestore, sign them in without creating a new collection
+        router.push("/dashboard");
+      } else {
+        // User doesn't exist in Firestore, create a new collection for them
+        await addDoc(userDataCollectionRef, {
+          Uid: result.user.uid,
+          // Provider: result.user.providerData[0].providerId,
+          Email: result.user.email,
+        });
+        router.push("/dashboard");
+      }
     } catch (err) {
       setError(err.message);
     }

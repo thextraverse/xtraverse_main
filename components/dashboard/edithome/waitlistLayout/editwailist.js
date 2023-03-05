@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
-import { Form } from "../../edithome/edithomepage.style";
+import { Form } from "../edithomepage.style";
 
 const Wrapper = styled.div`
   width: 500px;

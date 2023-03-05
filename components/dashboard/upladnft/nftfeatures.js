@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
 import { Button, Grid } from "@mui/material";
@@ -12,9 +12,28 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaPercent } from "react-icons/fa";
 import { db, storage } from "../../../configfile/firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  uploadBytesResumable,
+  UploadTask,
+} from "firebase/storage";
+import {
+  query,
+  addDoc,
+  collection,
+  getDocs,
+  where,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { v4 } from "uuid";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import LinearProgress from "@mui/joy/LinearProgress";
+import Typography from "@mui/joy/Typography";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 function Nftfeaures(props) {
   const {
     handlePrev,
@@ -40,54 +59,154 @@ function Nftfeaures(props) {
     uploadVideoUrl,
     selectedVideo,
   } = props;
+  const MySwal = withReactContent(Swal);
   const router = useRouter();
-  // send data to firebase
-  const userDataCollectionRef = collection(db, "uploadNfts");
-  const handleDataSubmit = (e) => {
-    e.preventDefault();
+  const { user } = useUserAuth();
+  const uniqueId = v4();
+
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
+  // const [firebaseUserData, setFirebaseUserData] = useState([]);
+  // const [emailData, setEmailData] = useState([]);
+  // const [useruid, setUserUid] = useState([]);
+
+  // useEffect(() => {
+  //   getTemplates();
+  // }, []);
+
+  // useEffect(() => {
+  //   setEmailData(
+  //     firebaseUserData.map((userData, index) => userData.data.Email)
+  //   );
+  //   setUserUid(firebaseUserData.map((userData, index) => userData.data.Uid));
+  // }, [firebaseUserData]);
+
+  // function getTemplates() {
+  //   const getUploadDataRef = collection(db, "Users");
+  //   getDocs(getUploadDataRef)
+  //     .then((response) => {
+  //       console.log(response.docs);
+  //       const datas = response.docs.map((doc) => ({
+  //         data: doc.data(),
+  //         id: doc.id,
+  //       }));
+  //       setFirebaseUserData(datas);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.messages);
+  //     });
+  // }
+  // console.log(emailData, useruid);
+  // console.log(emailData, useruid, imageupload);
+  const emailData = user.email;
+  // setEmailData(user.email);
+  // handleshubmit function for sending data to firebase
+  console.log(emailData);
+  const handleDataSubmit = async () => {
     const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
     const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
+
     // Upload the files to Firebase storage
-    uploadBytes(imageRef, imageupload)
-      .then(() => {
-        console.log("Image uploaded");
-        return uploadBytes(videoRef, uploadVideoUrl);
-      })
-      .then(() => {
-        console.log("Video uploaded");
-        // Get the download URLs for the files
-        return Promise.all([
-          getDownloadURL(imageRef),
-          getDownloadURL(videoRef),
-        ]);
-      })
-      .then(([imageurl, videoUrl]) => {
-        // Use the download URL to add the data to Firestore
-        addDoc(userDataCollectionRef, {
+    const [imageSnapshot, videoSnapshot] = await Promise.all([
+      uploadBytesResumable(imageRef, imageupload),
+      uploadBytesResumable(videoRef, uploadVideoUrl),
+    ]);
+
+    // Track upload progress for image
+    let imageUploadProgress = 0;
+    const imageUploadTask = uploadBytesResumable(imageRef, imageupload);
+    imageUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        imageUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${imageUploadProgress}%`);
+        setImageUploadProgrees(imageUploadProgress);
+        setUploadProgress(imageUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
+
+    // Track upload progress for video
+    let videoUploadProgress = 0;
+    const videoUploadTask = uploadBytesResumable(videoRef, uploadVideoUrl);
+    videoUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        videoUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Video Upload Progress: ${videoUploadProgress}%`);
+
+        setUploadProgress(videoUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Video upload complete.");
+      }
+    );
+
+    // Wait for all the files to finish uploading
+    await Promise.all([imageUploadTask, videoUploadTask]);
+
+    // Get the download URLs for the files
+    const [imageurl, videoUrl] = await Promise.all([
+      getDownloadURL(imageSnapshot.ref),
+      getDownloadURL(videoSnapshot.ref),
+    ]);
+
+    try {
+      const usersRef = collection(db, "Users");
+      const q = query(usersRef, where("Email", "==", emailData));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        const autoId = querySnapshot.docs[0].id;
+        console.log(`AutoId: ${autoId}`);
+        const userDataCollectionRef = collection(
+          db,
+          "Users",
+          autoId,
+          "nftData"
+        );
+        await addDoc(userDataCollectionRef, {
           nftimage: imageurl,
           nftvideo: videoUrl,
           nftname: nftName,
           collectionName: nftCollectionName,
           description: addNftDescript,
-          // nftimage: selectedImage,
           price: nftPrice,
           button: nftMindBtn,
           token: tokenType,
           mint: mintType,
           videoTitle: videoTitle,
           videoStory: addStory,
-        })
-          .then(() => {
-            if (!alert("Form Submitted Succesfully!!!"));
+          id: uniqueId,
+        });
+        if (
+          MySwal.fire({
+            title: <strong>Uploaded</strong>,
+            icon: "success",
           })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        );
+      } else {
+        alert("No documents found.");
+      }
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+      alert("Error submitting form. Please try again later.");
+    }
+    setUploadProgress("");
   };
+  console.log(uploadProgress);
   const handleSubmitAllData = (e) => {
     e.preventDefault();
     router.push("/dashboard/createproject/edithomepage");
@@ -108,6 +227,40 @@ function Nftfeaures(props) {
         <Grid item xs={4} lg={4.5} xl={4.5}>
           <Form className="forminput" onSubmit={handleSubmitAllData}>
             <h1>Features</h1>
+            <Box sx={{ width: "100%" }}>
+              {uploadProgress > 0 ? (
+                <Box>
+                  {imageUploadProgrees !== 100
+                    ? "image upload progress"
+                    : "video upload progress"}
+                  <LinearProgress
+                    determinate
+                    variant="outlined"
+                    color="neutral"
+                    size="sm"
+                    thickness={32}
+                    value={uploadProgress}
+                    sx={{
+                      "--LinearProgress-radius": "0px",
+                      "--LinearProgress-progressThickness": "24px",
+                      boxShadow: "sm",
+                      borderColor: "neutral.500",
+                    }}
+                  >
+                    <Typography
+                      level="body3"
+                      fontWeight="xl"
+                      textColor="common.white"
+                      sx={{ mixBlendMode: "difference" }}
+                    >
+                      LOADING… {`${Math.round(uploadProgress)}%`}
+                    </Typography>
+                  </LinearProgress>
+                </Box>
+              ) : (
+                ""
+              )}
+            </Box>
             <Grid container>
               <Grid item xs={12}>
                 <div className="typslction">

@@ -1,19 +1,28 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Box } from "@mui/system";
 import styled from "@emotion/styled";
-import Link from "next/link";
-import { BsPlusLg } from "react-icons/bs";
-import Image from "next/image";
-import { Button } from "@mui/material";
-import Nftgeneral from "../../../../components/dashboard/upladnft/nftgeneral";
-import Nftfeaures from "../../../../components/dashboard/upladnft/nftfeatures";
-import Sidebar from "../../../../components/dashboard/sidebar";
-import Stepnav from "../../../../components/dashboard/stepnav";
-import { drawerWidth } from "../../../../components/dashboard/createproject";
+import React, { useEffect, useState } from "react";
+import { db } from "../../../../configfile/firebaseConfig";
+import {
+  collection,
+  doc,
+  query,
+  where,
+  getDocs,
+  collectionGroup,
+} from "firebase/firestore";
+import { useUserAuth } from "../../../../configfile/UserAuthContext";
+import CryptoCanvasEditHome from "../../../../theme/CryptoCanvas/EditHomePage";
+
+import Sidebar from "../../../../components/dashboard/SideBar";
+import { Box } from "@mui/system";
+import Stepnav from "../../../../components/dashboard/StepNav";
+import CryptoCanvasUploadNftIndex from "../../../../theme/CryptoCanvas/UploadNft";
+import EtherEaselUploadNftIndex from "../../../../theme/EtherEasel/UploadNft";
+import PixelVaultUploadNftIndex from "../../../../theme/PixelVault/UploadNft";
+
+const drawerWidth = 240;
 
 const Main = styled.main`
-  background: #1f1f1f;
+  background: #303030;
   padding: 30px;
   .activeDot {
     display: flex;
@@ -34,118 +43,65 @@ const Main = styled.main`
     }
   }
 `;
-function Uploadnfts() {
-  const [index, setIndex] = useState(0);
 
-  const handleNext = () => {
-    setIndex(index === layouts.length - 1 ? 0 : index + 1);
-  };
-  const handlePrev = () => {
-    setIndex(index === 0 ? layouts.length - 1 : index - 1);
-  };
+function index() {
+  const { user, logOut } = useUserAuth();
+  // console.log(user.email);
+  const [tempalteId, setTempalteId] = useState();
+  const queryUser = collection(db, "Users");
+  // console.log(users);
+  const emailData = user.email;
+  console.log(emailData);
+  async function handleGetData() {
+    if (!emailData) return;
 
-  //! nft details name, collection name,price, chain utitlity, tag
-  const [nftCollectionName, setNftCollectionName] = useState("Green Gremlins");
-  const [nftName, setNftName] = useState("Draken");
-  const [addNftDescript, setAddNftDescript] = useState(
-    "DRK is the first of its kind. Bringing AAA quality to the #NFT world with mythical creatures inside virtual realtiy space."
-  );
-  const [nftPrice, setNftPrice] = useState("7");
-  const [nftMindBtn, setNftMindBtn] = useState("Mint Now");
-  const [nftType, setNftType] = useState("");
-  const [tokenType, setTokenType] = useState("");
-  const [mintType, setMintType] = useState("");
+    const q = query(queryUser, where("Email", "==", emailData));
+    const querySnapshot1 = await getDocs(q);
 
-  const [imageupload, setImageUpload] = useState();
-  const [selectedImage, setSelectedImage] = useState();
-  const handleImageChange = (event) => {
-    const imageFile = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(imageFile));
-    setImageUpload(imageFile);
-  };
+    if (!querySnapshot1.empty) {
+      const autoId = querySnapshot1.docs[0].id;
+      const subcollectionRef = collection(db, "Users", autoId, "template");
+      const querySnapshot2 = await getDocs(subcollectionRef);
+      const docs = querySnapshot2.docs.map((doc) => doc.data());
+      docs.map((data) => {
+        setTempalteId(data.id);
+      });
+    }
+  }
 
-  //! for upload videosec
-  const [videoTitle, setVideoTitle] = useState("Draken's Origin");
-  const [addStory, setAddStory] = useState(
-    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem,provident vero numquam aperiam ratione vel corrupti maioresconsequuntur aliquid impedit"
-  );
-  const [uploadVideoUrl, setUploadVideoUrl] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  useEffect(() => {
+    handleGetData();
+  }, [emailData]);
 
-  const handleVideoChange = (event) => {
-    const videoFile = event.target.files[0];
-    setSelectedVideo(URL.createObjectURL(videoFile));
-    setUploadVideoUrl(videoFile);
-  };
-
-  const layouts = [
-    <Nftgeneral
-      handleNext={handleNext}
-      setNftName={setNftName}
-      nftName={nftName}
-      nftdescription={addNftDescript}
-      nftCollectionName={nftCollectionName}
-      setNftCollectionName={setNftCollectionName}
-      setNftDescript={setAddNftDescript}
-      nftType={nftType}
-      setNftType={setNftType}
-      selectedImage={selectedImage}
-      handleImageChange={handleImageChange}
-      nftPrice={nftPrice}
-      setNftPrice={setNftPrice}
-      nftMindBtn={nftMindBtn}
-      setNftMindBtn={setNftMindBtn}
-      key="1"
-    />,
-    <Nftfeaures
-      handlePrev={handlePrev}
-      handleVideoChange={handleVideoChange}
-      uploadVideoUrl={uploadVideoUrl}
-      selectedVideo={selectedVideo}
-      // selectedVideoUrl={selectedVideoUrl}
-      setAddStory={setAddStory}
-      addStory={addStory}
-      selectedImage={selectedImage}
-      nftName={nftName}
-      addUntility={setAddNftDescript}
-      videoTitle={videoTitle}
-      setVideoTitle={setVideoTitle}
-      tokenType={tokenType}
-      setTokenType={setTokenType}
-      mintType={mintType}
-      setMintType={setMintType}
-      nftCollectionName={nftCollectionName}
-      addNftDescript={addNftDescript}
-      nftPrice={nftPrice}
-      nftMindBtn={nftMindBtn}
-      imageupload={imageupload}
-      key="2"
-    />,
-  ];
-
+  let selectedTemplate;
+  if (tempalteId === "CryptoCanvas") {
+    selectedTemplate = <CryptoCanvasUploadNftIndex />;
+  } else if (tempalteId === "EtherEasel") {
+    selectedTemplate = <EtherEaselUploadNftIndex />;
+  } else if (tempalteId === "PixelVault") {
+    selectedTemplate = <PixelVaultUploadNftIndex />;
+  }
   return (
-    <Main>
-      <Sidebar />
-      <Box
-        sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          marginLeft: "auto",
-          background: "#1f1f1f",
-          height: "100%",
-          display: "grid",
-          gridTemplateColumns: "100%",
-          alignItems: "center",
-        }}
-      >
-        <Stepnav />
-        {layouts[index]}
-        <ul className="activeDot">
-          <li className={index === 0 ? "active" : ""}></li>
-          <li className={index === 1 ? "active" : ""}></li>
-        </ul>
-      </Box>
-    </Main>
+    <>
+      <Main>
+        <Sidebar />
+        <Box
+          sx={{
+            width: { lg: `calc(100% - ${drawerWidth}px)` },
+            marginLeft: "auto",
+            background: "transparent",
+            height: "100%",
+            display: "grid",
+            gridTemplateColumns: "100%",
+            alignItems: "center",
+          }}
+        >
+          <Stepnav />
+          {selectedTemplate}
+        </Box>
+      </Main>
+    </>
   );
 }
 
-export default Uploadnfts;
+export default index;

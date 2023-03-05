@@ -7,11 +7,19 @@ import DialogContent from "@mui/material/DialogContent";
 import logo from "../../components/images/logo.svg";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { Box } from "@mui/system";
-import Signup from "./signup";
+import Signup from "./SignUp";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import Alert from "@mui/material/Alert";
 import { Span, Form, Hr, GoogleBtn, Btn, SignSec } from "./singin.styled";
-
+import {
+  addDoc,
+  getDocs,
+  doc,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
+import { auth, db } from "../../configfile/firebaseConfig";
 function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -19,7 +27,9 @@ function Login() {
   const [open, setOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
   const [error, setError] = useState("");
-  const { loginAuth, googleSignIn } = useUserAuth();
+  const { loginAuth, googleSignUp, user, data } = useUserAuth();
+  const userDataCollectionRef = collection(db, "Users");
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -42,16 +52,33 @@ function Login() {
     setError("");
     try {
       await loginAuth(email, password);
+
       router.push("/dashboard");
     } catch (err) {
       setError(err.message);
     }
   };
+
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await googleSignIn();
-      router.push("/dashboard");
+      const result = await googleSignUp();
+      const userDataCollectionRef = collection(db, "Users");
+      const querySnapshot = await getDocs(
+        query(userDataCollectionRef, where("Email", "==", result.user.email))
+      );
+      if (querySnapshot.docs.length > 0) {
+        // User exists in Firestore, sign them in without creating a new collection
+        router.push("/dashboard");
+      } else {
+        // User doesn't exist in Firestore, create a new collection for them
+        await addDoc(userDataCollectionRef, {
+          Uid: result.user.uid,
+          Provider: result.user.providerData[0].providerId,
+          Email: result.user.email,
+        });
+        router.push("/dashboard");
+      }
     } catch (err) {
       setError(err.message);
     }
@@ -94,14 +121,16 @@ function Login() {
               <Image src={logo} alt="logo" />
             </Box>
 
+            {/* google signin button */}
             <GoogleBtn onClick={handleGoogleSignIn}>
               <AiFillGoogleCircle />
               <span>Sign in with Google</span>
             </GoogleBtn>
             <Hr></Hr>
 
+            {/* form for signin */}
             <Form onSubmit={handleSubmit}>
-              {error && <Alert severity="error">user is not valid</Alert>}
+              {error && <Alert severity="error">{error}</Alert>}
               <Box
                 sx={{
                   margin: "25px 0px",

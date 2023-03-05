@@ -9,7 +9,7 @@ const Ul = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-between;
-  margin: 100px auto 25px;
+  margin: 60px auto 25px;
   li {
     display: flex;
     align-items: center;

@@ -7,8 +7,7 @@ import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { drawerWidth } from "../../../../components/dashboard/createproject";
-import Sidebar from "../../../../components/dashboard/sidebar";
+import Sidebar, { drawerWidth } from "../../../../components/dashboard/sidebar";
 import Stepnav from "../../../../components/dashboard/stepnav";
 import {
   FormInput,
@@ -18,7 +17,7 @@ import {
   EditHomesc,
 } from "../../../../components/dashboard/domain/domain.styled";
 const Main = styled.main`
-  background: #1f1f1f;
+  background: #303030;
   padding: 30px;
 `;
 function Domain() {
@@ -50,8 +49,8 @@ function Domain() {
           sx={{
             width: { lg: `calc(100% - ${drawerWidth}px)` },
             marginLeft: "auto",
-            background: "#1f1f1f",
-            height: "100%",
+            background: "transparent",
+            height: "100vh",
             display: "grid",
             gridTemplateColumns: "100%",
             alignItems: "center",

@@ -2,23 +2,27 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
-import TemplateHeader from "../templateheader";
+import TemplateHeader from "../../../components/template/TemplateHeader";
 import Grid from "@mui/material/Grid";
 import { Box, Container } from "@mui/system";
 import { RiTicketLine } from "react-icons/ri";
 import { db } from "../../../configfile/firebaseConfig";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import {
   collection,
   getDocs,
   addDoc,
   updateDoc,
   deleteDoc,
-  doc,
+  where,
+  query,
 } from "firebase/firestore";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 
 const Main = styled.div`
   background: #fff;
-  height: 150vh;
+  height: 100%;
+  padding-bottom: 50px;
   color: #000000;
 `;
 const Heading = styled.div`
@@ -34,33 +38,47 @@ const Heading = styled.div`
     color: #000000;
   }
 `;
+const NftImage = styled.div`
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  span {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 10px;
+  }
+  img {
+    object-fit: cover;
+  }
+`;
 function MarketPlace() {
-  const [uploadData, setUploadData] = useState([]);
+  const { user, logOut } = useUserAuth();
+  const [uploadData, setUploadata] = useState([]);
+  const queryUser = collection(db, "Users");
+  const [users, error] = useCollectionData(queryUser);
+  // console.log(users);
+  const emailData = user.email;
+  // console.log(emailData);
+  async function handleGetData() {
+    if (!emailData) return;
 
-  useEffect(() => {
-    getTemplates();
-  }, []);
-  useEffect(() => {
-    console.log(uploadData);
-  }, [uploadData]);
+    const q = query(queryUser, where("Email", "==", emailData));
+    const querySnapshot1 = await getDocs(q);
 
-  function getTemplates() {
-    const getUploadDataRef = collection(db, "uploadNfts");
-    getDocs(getUploadDataRef)
-      .then((response) => {
-        console.log(response.docs);
-        const datas = response.docs.map((doc) => ({
-          data: doc.data(),
-          id: doc.id,
-        }));
-        setUploadData(datas);
-        // const tpltDt = response.
-      })
-      .catch((error) => {
-        console.log(error.messages);
-      });
+    if (!querySnapshot1.empty) {
+      const autoId = querySnapshot1.docs[0].id;
+      const subcollectionRef = collection(db, "Users", autoId, "nftData");
+      const querySnapshot2 = await getDocs(subcollectionRef);
+      const docs = querySnapshot2.docs.map((doc) => doc.data());
+      setUploadata(docs);
+    }
   }
 
+  useEffect(() => {
+    handleGetData();
+  }, [emailData]);
+
+  // console.log(uploadData, emailData);
   return (
     <Main>
       <TemplateHeader />
@@ -79,9 +97,25 @@ function MarketPlace() {
             marginTop: "20px",
           }}
         >
+          {uploadData.length === 0 && <p>Loading...</p>}
+          {uploadData.map((data, index) => (
+            <Link
+              href={"/template/marketplace/" + data.id}
+              key={data.id}
+              className="newpglnk ancbtn"
+            >
+              <img
+                src={data.nftimage}
+                alt="amneiimage"
+                width={100}
+                height={100}
+              />
+            </Link>
+          ))}
+
           {uploadData.map((uploadData, index) => {
             // const imagefromserver = uploadData.data.nftimage;
-            // console.log(imagefromserver);
+            console.log(uploadData.id);
             return (
               <>
                 <Grid item xs={3} key={index}>
@@ -94,14 +128,20 @@ function MarketPlace() {
                   >
                     <Box
                       sx={{
-                        height: {
-                          borderRadius: "10px",
-                          lg: "250px",
-                          background: "#202020",
-                        },
+                        borderRadius: "10px",
+                        lg: "250px",
+                        background: "#202020",
+                        // height: {},
                       }}
                     >
-                      <Image src="" alt="amneiimage" width={100} height={100} />
+                      <NftImage>
+                        <Image
+                          src={uploadData.nftimage}
+                          alt="amneiimage"
+                          width={100}
+                          height={100}
+                        />
+                      </NftImage>
                     </Box>
                     <Box
                       sx={{
@@ -116,7 +156,7 @@ function MarketPlace() {
                           fontWeight: "500",
                         }}
                       >
-                        {uploadData.data.nftname}
+                        {uploadData.nftname}
                       </Box>
                       <Box
                         component="span"
@@ -135,7 +175,7 @@ function MarketPlace() {
                         fontSize: ".8em",
                       }}
                     >
-                      <p>{uploadData.data.description}</p>
+                      <p>{uploadData.description}</p>
                     </Box>
                     <Box
                       sx={{
@@ -171,7 +211,7 @@ function MarketPlace() {
                           color: "#212121",
                         }}
                       >
-                        $ <span> {uploadData.data.price}</span>
+                        $ <span> {uploadData.price}</span>
                       </Box>
                     </Box>
                   </Box>

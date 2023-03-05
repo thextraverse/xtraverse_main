@@ -10,6 +10,7 @@ import { Box } from "@mui/system";
 import demoimg from "../../../components/images/blacklogo.svg";
 
 import CryptoCanvaSEdithero from "./EditHero";
+import Stepnav from "../../../components/dashboard/StepNav";
 const drawerWidth = 240;
 
 const Main = styled.main`
@@ -90,6 +91,7 @@ function CryptoCanvasEditHome() {
   ];
   return (
     <>
+      <Stepnav />
       {layouts[index]}
       {/* <ul className="activeDot">
         <li className={index === 0 ? "active" : ""}></li>

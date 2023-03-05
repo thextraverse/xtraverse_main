@@ -10,6 +10,7 @@ import { Box } from "@mui/system";
 import demoimg from "../../../components/images/blacklogo.svg";
 
 import CryptoCanvaSEdithero from "./EditHero";
+import Stepnav from "../../../components/dashboard/StepNav";
 
 function PixelVaultEditHome() {
   const [index, setIndex] = useState(0);
@@ -66,6 +67,7 @@ function PixelVaultEditHome() {
   ];
   return (
     <>
+      <Stepnav />
       {layouts[index]}
       {/* <ul className="activeDot">
         <li className={index === 0 ? "active" : ""}></li>

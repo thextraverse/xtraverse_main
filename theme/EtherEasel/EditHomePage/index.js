@@ -9,6 +9,7 @@ import { Box } from "@mui/system";
 
 import demoimg from "../../../components/images/blacklogo.svg";
 import CryptoCanvaSEdithero from "./EditHero";
+import Stepnav from "../../../components/dashboard/StepNav";
 
 function EtherEaselEditHome() {
   const [index, setIndex] = useState(0);
@@ -65,6 +66,7 @@ function EtherEaselEditHome() {
   ];
   return (
     <>
+      <Stepnav />
       {layouts[index]}
       {/* <ul className="activeDot">
         <li className={index === 0 ? "active" : ""}></li>

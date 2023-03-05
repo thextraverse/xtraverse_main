@@ -95,7 +95,6 @@ function EditHomePageindex() {
             alignItems: "center",
           }}
         >
-          <Stepnav />
           {selectedTemplate}
         </Box>
       </Main>

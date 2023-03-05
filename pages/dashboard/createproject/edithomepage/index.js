@@ -42,7 +42,7 @@ const Main = styled.main`
   }
 `;
 
-function index() {
+function EditHomePageindex() {
   const { user, logOut } = useUserAuth();
   // console.log(user.email);
   const [tempalteId, setTempalteId] = useState();
@@ -102,4 +102,4 @@ function index() {
   );
 }
 
-export default index;
+export default EditHomePageindex;

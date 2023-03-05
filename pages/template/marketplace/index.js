@@ -104,7 +104,7 @@ function MarketPlace() {
               key={data.id}
               className="newpglnk ancbtn"
             >
-              <img
+              <Image
                 src={data.nftimage}
                 alt="amneiimage"
                 width={100}

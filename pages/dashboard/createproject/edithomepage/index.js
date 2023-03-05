@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
+import { Box } from "@mui/system";
+import Sidebar from "../../../../components/dashboard/SideBar";
+import Stepnav from "../../../../components/dashboard/StepNav";
 import { db } from "../../../../configfile/firebaseConfig";
 import {
   collection,
@@ -13,9 +16,6 @@ import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import CryptoCanvasEditHome from "../../../../theme/CryptoCanvas/EditHomePage";
 import EtherEaselEditHome from "../../../../theme/EtherEasel/EditHomePage";
 import PixelVaultEditHome from "../../../../theme/PixelVault/EditHomePage";
-import Sidebar from "../../../../components/dashboard/SideBar";
-import { Box } from "@mui/system";
-import Stepnav from "../../../../components/dashboard/StepNav";
 
 const drawerWidth = 240;
 

@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
+import Sidebar from "../../../../components/dashboard/SideBar";
+import Stepnav from "../../../../components/dashboard/StepNav";
+import { Box } from "@mui/system";
 import { db } from "../../../../configfile/firebaseConfig";
 import {
   collection,
@@ -11,10 +14,6 @@ import {
 } from "firebase/firestore";
 import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import CryptoCanvasEditHome from "../../../../theme/CryptoCanvas/EditHomePage";
-
-import Sidebar from "../../../../components/dashboard/SideBar";
-import { Box } from "@mui/system";
-import Stepnav from "../../../../components/dashboard/StepNav";
 import CryptoCanvasUploadNftIndex from "../../../../theme/CryptoCanvas/UploadNft";
 import EtherEaselUploadNftIndex from "../../../../theme/EtherEasel/UploadNft";
 import PixelVaultUploadNftIndex from "../../../../theme/PixelVault/UploadNft";

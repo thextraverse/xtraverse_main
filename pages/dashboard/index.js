@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
+import Sidebar from "../../components/dashboard/SideBar";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../components/images/logo.svg";
 import { Box } from "@mui/system";
-import Sidebar from "../../components/dashboard/SideBar";
 import CreateProject from "../../components/dashboard/CreateProject";
 
 const Main = styled.main`

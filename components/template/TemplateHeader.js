@@ -94,6 +94,7 @@ export default function TemplateHeader({ Logo }) {
 
   useEffect(() => {
     handleGetData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailData]);
   return (
     <Header>

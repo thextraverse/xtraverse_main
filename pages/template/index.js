@@ -50,6 +50,7 @@ function TemplateIndex() {
 
   useEffect(() => {
     handleGetData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailData]);
 
   let selectedTemplate;

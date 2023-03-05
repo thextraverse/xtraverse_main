@@ -76,6 +76,7 @@ function MarketPlace() {
 
   useEffect(() => {
     handleGetData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailData]);
 
   // console.log(uploadData, emailData);

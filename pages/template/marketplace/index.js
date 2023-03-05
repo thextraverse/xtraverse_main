@@ -40,7 +40,7 @@ const Heading = styled.div`
 `;
 const NftImage = styled.div`
   width: 100%;
-  height: 250px;
+  height: 251px;
   border-radius: 10px;
   span {
     width: 100% !important;

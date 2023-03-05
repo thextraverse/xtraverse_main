@@ -20,10 +20,7 @@ import { db } from "../../configfile/firebaseConfig";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import Template from "../../pages/dashboard/createproject";
 import TemplateHeader from "../../components/template/TemplateHeader";
-const Main = styled.div`
-  background: #fff;
-  height: 150vh;
-`;
+
 const Templatepage = styled.div`
   background: #fff;
   padding: 0px;
@@ -209,8 +206,8 @@ function CryptoCanvas() {
   }, [emailData]);
 
   return (
-    <Main>
-      <Templatepage>
+    <>
+      <>
         <TemplateHeader />
         <HomepagePreview>
           {/* svg  */}
@@ -434,8 +431,8 @@ function CryptoCanvas() {
             </div>
           </div>
         </HomepagePreview>
-      </Templatepage>
-    </Main>
+      </>
+    </>
   );
 }
 

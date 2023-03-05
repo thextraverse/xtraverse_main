@@ -21,15 +21,6 @@ import { useUserAuth } from "../../configfile/UserAuthContext";
 import Template from "../../pages/dashboard/createproject";
 import TemplateHeader from "../../components/template/TemplateHeader";
 
-const Main = styled.div`
-  background: #fff;
-  height: 150vh;
-`;
-const Templatepage = styled.div`
-  background: #fff;
-  padding: 0px;
-  position: relative;
-`;
 const HomepagePreview = styled.div`
   background: #fff;
   padding: 0px;
@@ -184,238 +175,236 @@ function EtherEasel() {
   }, [emailData]);
 
   return (
-    <Main>
-      <Templatepage>
-        <TemplateHeader />
-        <HomepagePreview>
-          {/* svg  */}
-          <svg
-            width="1285"
-            height="337"
-            viewBox="0 0 1285 337"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g filter="url(#filter0_f_403_33)">
-              <circle
-                cx="711"
-                cy="-55"
-                r="238"
-                transform="rotate(180 711 -55)"
-                fill={color1}
+    <>
+      <TemplateHeader />
+      <HomepagePreview>
+        {/* svg  */}
+        <svg
+          width="1285"
+          height="337"
+          viewBox="0 0 1285 337"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g filter="url(#filter0_f_403_33)">
+            <circle
+              cx="711"
+              cy="-55"
+              r="238"
+              transform="rotate(180 711 -55)"
+              fill={color1}
+            />
+          </g>
+          <g filter="url(#filter1_f_403_33)">
+            <circle
+              cx="662"
+              cy="-145"
+              r="238"
+              transform="rotate(180 662 -145)"
+              fill={color3}
+            />
+          </g>
+          <g filter="url(#filter2_f_403_33)">
+            <circle
+              cx="392"
+              cy="-124"
+              r="238"
+              transform="rotate(180 392 -124)"
+              fill={color2}
+            />
+          </g>
+          <g filter="url(#filter3_f_403_33)">
+            <circle
+              cx="893"
+              cy="-107"
+              r="238"
+              transform="rotate(180 893 -107)"
+              fill={color1}
+            />
+          </g>
+          <g filter="url(#filter4_f_403_33)">
+            <circle
+              cx="697"
+              cy="-145"
+              r="238"
+              transform="rotate(180 697 -145)"
+              fill={color3}
+            />
+          </g>
+          <defs>
+            <filter
+              id="filter0_f_403_33"
+              x="319"
+              y="-447"
+              width="784"
+              height="784"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
-            </g>
-            <g filter="url(#filter1_f_403_33)">
-              <circle
-                cx="662"
-                cy="-145"
-                r="238"
-                transform="rotate(180 662 -145)"
-                fill={color3}
+              <feGaussianBlur
+                stdDeviation="77"
+                result="effect1_foregroundBlur_403_33"
               />
-            </g>
-            <g filter="url(#filter2_f_403_33)">
-              <circle
-                cx="392"
-                cy="-124"
-                r="238"
-                transform="rotate(180 392 -124)"
-                fill={color2}
+            </filter>
+            <filter
+              id="filter1_f_403_33"
+              x="270"
+              y="-537"
+              width="784"
+              height="784"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
-            </g>
-            <g filter="url(#filter3_f_403_33)">
-              <circle
-                cx="893"
-                cy="-107"
-                r="238"
-                transform="rotate(180 893 -107)"
-                fill={color1}
+              <feGaussianBlur
+                stdDeviation="77"
+                result="effect1_foregroundBlur_403_33"
               />
-            </g>
-            <g filter="url(#filter4_f_403_33)">
-              <circle
-                cx="697"
-                cy="-145"
-                r="238"
-                transform="rotate(180 697 -145)"
-                fill={color3}
+            </filter>
+            <filter
+              id="filter2_f_403_33"
+              x="0"
+              y="-516"
+              width="784"
+              height="784"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
-            </g>
-            <defs>
-              <filter
-                id="filter0_f_403_33"
-                x="319"
-                y="-447"
-                width="784"
-                height="784"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="77"
-                  result="effect1_foregroundBlur_403_33"
-                />
-              </filter>
-              <filter
-                id="filter1_f_403_33"
-                x="270"
-                y="-537"
-                width="784"
-                height="784"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="77"
-                  result="effect1_foregroundBlur_403_33"
-                />
-              </filter>
-              <filter
-                id="filter2_f_403_33"
-                x="0"
-                y="-516"
-                width="784"
-                height="784"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="77"
-                  result="effect1_foregroundBlur_403_33"
-                />
-              </filter>
-              <filter
-                id="filter3_f_403_33"
-                x="501"
-                y="-499"
-                width="784"
-                height="784"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="77"
-                  result="effect1_foregroundBlur_403_33"
-                />
-              </filter>
-              <filter
-                id="filter4_f_403_33"
-                x="305"
-                y="-537"
-                width="784"
-                height="784"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="77"
-                  result="effect1_foregroundBlur_403_33"
-                />
-              </filter>
-              <linearGradient
-                id="paint0_linear_403_33"
-                x1="711"
-                y1="-293"
-                x2="711"
-                y2="183"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color={color1} />
-                <stop offset="1" stop-color={color2} />
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_403_33"
-                x1="662"
-                y1="-383"
-                x2="662"
-                y2="93"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color={color3} />
-                <stop offset="1" stop-color={color1} />
-              </linearGradient>
-              <linearGradient
-                id="paint2_linear_403_33"
-                x1="697"
-                y1="-383"
-                x2="697"
-                y2="93"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color={color2} />
-                <stop offset="1" stop-color={color3} />
-              </linearGradient>
-            </defs>
-          </svg>
-          {/* {loading && (
+              <feGaussianBlur
+                stdDeviation="77"
+                result="effect1_foregroundBlur_403_33"
+              />
+            </filter>
+            <filter
+              id="filter3_f_403_33"
+              x="501"
+              y="-499"
+              width="784"
+              height="784"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
+              />
+              <feGaussianBlur
+                stdDeviation="77"
+                result="effect1_foregroundBlur_403_33"
+              />
+            </filter>
+            <filter
+              id="filter4_f_403_33"
+              x="305"
+              y="-537"
+              width="784"
+              height="784"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
+              />
+              <feGaussianBlur
+                stdDeviation="77"
+                result="effect1_foregroundBlur_403_33"
+              />
+            </filter>
+            <linearGradient
+              id="paint0_linear_403_33"
+              x1="711"
+              y1="-293"
+              x2="711"
+              y2="183"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color={color1} />
+              <stop offset="1" stop-color={color2} />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_403_33"
+              x1="662"
+              y1="-383"
+              x2="662"
+              y2="93"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color={color3} />
+              <stop offset="1" stop-color={color1} />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_403_33"
+              x1="697"
+              y1="-383"
+              x2="697"
+              y2="93"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color={color2} />
+              <stop offset="1" stop-color={color3} />
+            </linearGradient>
+          </defs>
+        </svg>
+        {/* {loading && (
             <Box component="p" sx={{ fontSize: "5em", color: "#000" }}>
               Loading...
             </Box>
           )} */}
-          <Container>
-            <div className="homesec">
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <div className="herotxt">
-                    <div>
-                      <h3>EtherEasel</h3>
-                      <h1>{heading}</h1>
-                      <p>{description}</p>
-                      <Button>GO TO NFTS</Button>
-                    </div>
+        <Container>
+          <div className="homesec">
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <div className="herotxt">
+                  <div>
+                    <h3>EtherEasel</h3>
+                    <h1>{heading}</h1>
+                    <p>{description}</p>
+                    <Button>GO TO NFTS</Button>
                   </div>
-                </Grid>
-                <Grid item xs={6}>
-                  <div className="heroimgs">
-                    <div className="img">
-                      <Image src={firstimg} alt="" />
-                    </div>
-                    <div className="img">
-                      <Image src={firstimg} alt="" />
-                    </div>
-                  </div>
-                </Grid>
+                </div>
               </Grid>
-            </div>
-          </Container>
-        </HomepagePreview>
-      </Templatepage>
-    </Main>
+              <Grid item xs={6}>
+                <div className="heroimgs">
+                  <div className="img">
+                    <Image src={firstimg} alt="" />
+                  </div>
+                  <div className="img">
+                    <Image src={firstimg} alt="" />
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+        </Container>
+      </HomepagePreview>
+    </>
   );
 }
 

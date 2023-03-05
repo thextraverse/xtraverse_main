@@ -21,15 +21,6 @@ import { useUserAuth } from "../../configfile/UserAuthContext";
 import Template from "../../pages/dashboard/createproject";
 import TemplateHeader from "../../components/template/TemplateHeader";
 
-const Main = styled.div`
-  background: #fff;
-  height: 150vh;
-`;
-const Templatepage = styled.div`
-  background: #fff;
-  padding: 0px;
-  position: relative;
-`;
 const HomepagePreview = styled.div`
   background: #fff;
   padding: 0px;
@@ -198,144 +189,142 @@ function pixelVault() {
   }, [emailData]);
 
   return (
-    <Main>
-      <Templatepage>
-        <TemplateHeader />
-        <HomepagePreview>
-          {/* svg  */}
-          <svg
-            className="svg1"
-            width="661"
-            height="661"
-            viewBox="0 0 661 661"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g filter="url(#filter0_f_315_3)">
-              <circle
-                cx="330.443"
-                cy="330.443"
-                r="279.89"
-                transform="rotate(-78.9249 330.443 330.443)"
-                fill="url(#paint0_linear_315_3)"
+    <>
+      <TemplateHeader />
+      <HomepagePreview>
+        {/* svg  */}
+        <svg
+          className="svg1"
+          width="661"
+          height="661"
+          viewBox="0 0 661 661"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g filter="url(#filter0_f_315_3)">
+            <circle
+              cx="330.443"
+              cy="330.443"
+              r="279.89"
+              transform="rotate(-78.9249 330.443 330.443)"
+              fill="url(#paint0_linear_315_3)"
+            />
+          </g>
+          <defs>
+            <filter
+              id="filter0_f_315_3"
+              x="0.5"
+              y="0.500366"
+              width="659.886"
+              height="659.885"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
               />
-            </g>
-            <defs>
-              <filter
-                id="filter0_f_315_3"
-                x="0.5"
-                y="0.500366"
-                width="659.886"
-                height="659.885"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="25"
-                  result="effect1_foregroundBlur_315_3"
-                />
-              </filter>
-              <linearGradient
-                id="paint0_linear_315_3"
-                x1="330.443"
-                y1="50.5531"
-                x2="330.443"
-                y2="610.333"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color={color1} />
-                <stop offset="1" stop-color={color2} stop-opacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <svg
-            className="svg2"
-            width="661"
-            height="661"
-            viewBox="0 0 661 661"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g filter="url(#filter0_f_315_3)">
-              <circle
-                cx="330.443"
-                cy="330.443"
-                r="279.89"
-                transform="rotate(-78.9249 330.443 330.443)"
-                fill="url(#paint0_linear_315_3)"
+              <feGaussianBlur
+                stdDeviation="25"
+                result="effect1_foregroundBlur_315_3"
               />
-            </g>
-            <defs>
-              <filter
-                id="filter0_f_315_3"
-                x="0.5"
-                y="0.500366"
-                width="659.886"
-                height="659.885"
-                filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
-              >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feBlend
-                  mode="normal"
-                  in="SourceGraphic"
-                  in2="BackgroundImageFix"
-                  result="shape"
-                />
-                <feGaussianBlur
-                  stdDeviation="25"
-                  result="effect1_foregroundBlur_315_3"
-                />
-              </filter>
-              <linearGradient
-                id="paint0_linear_315_3"
-                x1="330.443"
-                y1="50.5531"
-                x2="330.443"
-                y2="610.333"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color={color3} />
-                <stop offset="1" stop-color={color1} stop-opacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          {/* {loading && (
+            </filter>
+            <linearGradient
+              id="paint0_linear_315_3"
+              x1="330.443"
+              y1="50.5531"
+              x2="330.443"
+              y2="610.333"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color={color1} />
+              <stop offset="1" stop-color={color2} stop-opacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <svg
+          className="svg2"
+          width="661"
+          height="661"
+          viewBox="0 0 661 661"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g filter="url(#filter0_f_315_3)">
+            <circle
+              cx="330.443"
+              cy="330.443"
+              r="279.89"
+              transform="rotate(-78.9249 330.443 330.443)"
+              fill="url(#paint0_linear_315_3)"
+            />
+          </g>
+          <defs>
+            <filter
+              id="filter0_f_315_3"
+              x="0.5"
+              y="0.500366"
+              width="659.886"
+              height="659.885"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="BackgroundImageFix"
+                result="shape"
+              />
+              <feGaussianBlur
+                stdDeviation="25"
+                result="effect1_foregroundBlur_315_3"
+              />
+            </filter>
+            <linearGradient
+              id="paint0_linear_315_3"
+              x1="330.443"
+              y1="50.5531"
+              x2="330.443"
+              y2="610.333"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color={color3} />
+              <stop offset="1" stop-color={color1} stop-opacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        {/* {loading && (
             <Box component="p" sx={{ fontSize: "5em", color: "#000" }}>
               Loading...
             </Box>
           )} */}
-          <div className="homesec">
-            <div className="herosec">
-              <div className="herotxt">
-                <h3>PixelVault</h3>
-                <h1>{heading}</h1>
-                <p>{description}</p>
-                <Button>GO TO NFTS</Button>
+        <div className="homesec">
+          <div className="herosec">
+            <div className="herotxt">
+              <h3>PixelVault</h3>
+              <h1>{heading}</h1>
+              <p>{description}</p>
+              <Button>GO TO NFTS</Button>
+            </div>
+            <div className="heroimgs">
+              <div className="img">
+                <Image src={firstimg} alt="" />
               </div>
-              <div className="heroimgs">
-                <div className="img">
-                  <Image src={firstimg} alt="" />
-                </div>
-                <div className="img">
-                  <Image src={firstimg} alt="" />
-                </div>
-                <div className="img">
-                  <Image src={firstimg} alt="" />
-                </div>
+              <div className="img">
+                <Image src={firstimg} alt="" />
+              </div>
+              <div className="img">
+                <Image src={firstimg} alt="" />
               </div>
             </div>
           </div>
-        </HomepagePreview>
-      </Templatepage>
-    </Main>
+        </div>
+      </HomepagePreview>
+    </>
   );
 }
 

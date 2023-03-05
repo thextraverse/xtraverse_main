@@ -22,7 +22,16 @@ import { useUserAuth } from "../../configfile/UserAuthContext";
 import CryptoCanvas from "../../theme/CryptoCanvas";
 import EtherEasel from "../../theme/EtherEasel";
 import PixelVault from "../../theme/PixelVault";
-
+const Main = styled.div`
+  background: #fff;
+  height: 150vh;
+  overflow-x: hidden;
+`;
+const Templatepage = styled.div`
+  background: #fff;
+  padding: 0px;
+  position: relative;
+`;
 function TemplateIndex() {
   const { user, logOut } = useUserAuth();
   // console.log(user.email);
@@ -61,7 +70,13 @@ function TemplateIndex() {
   } else if (tempalteId === "PixelVault") {
     selectedTemplate = <PixelVault />;
   }
-  return <>{selectedTemplate}</>;
+  return (
+    <>
+      <Main>
+        <Templatepage>{selectedTemplate}</Templatepage>
+      </Main>
+    </>
+  );
 }
 
 export default TemplateIndex;

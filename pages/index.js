@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import styled from "@emotion/styled";
 import { Box } from "@mui/system";
-import Login from "../components/auth/SignIn";
+import Signin from "../components/auth/sign-in";
 const Main = styled.main`
   background: rgb(31, 31, 31);
   padding: 0px;
@@ -150,7 +150,7 @@ export default function Home() {
               Xtraverse streamlines the production of NFT projects by <br />{" "}
               equipping your agency with what it needs to scale without limits
             </p>
-            <Login />
+            <Signin />
           </Box>
         </Herosec>
       </Main>

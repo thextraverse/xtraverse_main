@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import logo from "../../components/images/logo.svg";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { Box } from "@mui/system";
-import Signup from "./SignUp";
+import Signup from "./sign-up";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import Alert from "@mui/material/Alert";
 import { Span, Form, Hr, GoogleBtn, Btn, SignSec } from "./singin.styled";
@@ -20,7 +20,7 @@ import {
   where,
 } from "firebase/firestore";
 import { auth, db } from "../../configfile/firebaseConfig";
-function Login() {
+function Signin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -185,4 +185,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signin;

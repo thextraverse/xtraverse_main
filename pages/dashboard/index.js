@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../components/images/logo.svg";
 import { Box } from "@mui/system";
-import CreateProject from "../../components/dashboard/CreateProject";
+import CreateProject from "../../components/dashboard/create-project";
 
 const Main = styled.main`
   background: #303030;

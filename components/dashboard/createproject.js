@@ -8,7 +8,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import prjctImg1 from "../images/project1.png";
-import { drawerWidth } from "./SideBar";
+import { drawerWidth } from "./side-bar";
 import {
   InitializeProject,
   H1,

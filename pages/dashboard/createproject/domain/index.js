@@ -1,14 +1,17 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import Sidebar, {
+  drawerWidth,
+} from "../../../../components/dashboard/side-bar";
+import Stepnav from "../../../../components/dashboard/step-nav";
 import { IoIosAddCircle, IoIosArrowDropright } from "react-icons/io";
 import { useRouter } from "next/router";
 import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
-import Sidebar, { drawerWidth } from "../../../../components/dashboard/sidebar";
-import Stepnav from "../../../../components/dashboard/stepnav";
+
 import {
   FormInput,
   Form,

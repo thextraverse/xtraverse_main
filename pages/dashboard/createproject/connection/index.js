@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
+import Sidebar, {
+  drawerWidth,
+} from "../../../../components/dashboard/side-bar";
+import Stepnav from "../../../../components/dashboard/step-nav";
 import stripe from "../../../../components/images/stripe.svg";
 import facebook from "../../../../components/images/facebook.svg";
 import godaddy from "../../../../components/images/godaddy.svg";
@@ -13,8 +17,7 @@ import unstoppable from "../../../../components/images/unstoppable.svg";
 import tiktok from "../../../../components/images/tiktok.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Sidebar, { drawerWidth } from "../../../../components/dashboard/sidebar";
-import Stepnav from "../../../../components/dashboard/stepnav";
+
 import {
   Connectionsec,
   Button,

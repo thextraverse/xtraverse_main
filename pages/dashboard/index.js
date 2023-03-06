@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Sidebar from "../../components/dashboard/SideBar";
+import Sidebar from "../../components/dashboard/side-bar";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../components/images/logo.svg";

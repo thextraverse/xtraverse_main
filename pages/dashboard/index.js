@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Sidebar from "../../components/dashboard/side-bar";
+import Sidebar from "../../components/dashboard/sidebar/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../components/images/logo.svg";
@@ -22,7 +22,7 @@ export default function layout() {
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar />
+        <Sidebar activeBtn={1} />
         <CreateProject />
       </Dashboardsc>
     </Main>

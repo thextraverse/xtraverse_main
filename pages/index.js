@@ -128,7 +128,6 @@ export default function Home() {
             <Bgblur2></Bgblur2>
             <Bgblur3></Bgblur3>
           </Bgblur>
-
           <Box
             sx={{
               position: "relative",

@@ -3,7 +3,7 @@ import Head from "next/head";
 import styled from "@emotion/styled";
 import Sidebar, {
   drawerWidth,
-} from "../../../../components/dashboard/side-bar";
+} from "../../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../../components/dashboard/step-nav";
 import { IoIosAddCircle, IoIosArrowDropright } from "react-icons/io";
 import { useRouter } from "next/router";
@@ -47,7 +47,7 @@ function Domain() {
       </Head>
 
       <Main>
-        <Sidebar />
+        <Sidebar activeBtn={1} />
         <Box
           sx={{
             width: { lg: `calc(100% - ${drawerWidth}px)` },

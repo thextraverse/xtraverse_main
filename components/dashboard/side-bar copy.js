@@ -12,7 +12,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { FiHome } from "react-icons/fi";
 import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
+// import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
@@ -26,9 +26,59 @@ import Link from "next/link";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { async } from "@firebase/util";
 import { Router } from "next/router";
-export const drawerWidth = 240;
+import dashboard from "../images/icons/home.png";
+import project from "../images/icons/project.png";
+import community from "../images/icons/users.png";
+import launch from "../images/icons/launch.png";
+import { Menu } from "antd";
 import { Ul, SearchBox } from "./dashboard.styled";
+import settings from "../images/icons/settings.png";
+// import {
+//   AppstoreOutlined,
+//   ContainerOutlined,
+//   MenuFoldOutlined,
+//   PieChartOutlined,
+//   MailOutlined,
+//   SettingOutlined,
+// } from "@ant-design/icons";
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
+const items = [
+  getItem("Project", "sub1", <Image src={project} alt="project" />, [
+    getItem("Option 1", "1"),
+    getItem("Option 2", "2"),
+    getItem("Option 3", "3"),
+    getItem("Option 4", "4"),
+  ]),
+];
+// submenu keys of first level
+const rootSubmenuKeys = ["sub1"];
+
+export const drawerWidth = 300;
+
 function Sidebar(props) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const [openKeys, setOpenKeys] = useState(["sub1"]);
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
   const { user, logOut } = useUserAuth();
   // console.log(user);
   // logout
@@ -57,61 +107,89 @@ function Sidebar(props) {
     setMobileOpen(!mobileOpen);
   };
   const drawer = (
-    <Box
-      sx={{
-        boxSizing: "border-box",
-        width: "90%",
-        background: "#252525",
-        borderRadius: "10px",
-        height: "95%",
-        margin: "auto",
-        marginTop: "6%",
-        color: "#000",
-      }}
-    >
-      <Ul>
-        <li>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "left",
-              padding: "0px 15px",
-              margin: "20px 0px",
-            }}
-          >
-            <Link href="/">
-              <Image src={logo} alt="" className="sideBarlogo" />
-            </Link>
-          </Box>
-        </li>
+    <>
+      <Box
+        sx={{
+          boxSizing: "border-box",
+          width: "90%",
+          background: "#252525",
+          borderRadius: "10px",
+          height: "95%",
+          margin: "auto",
+          marginTop: "6%",
+          color: "#000",
+        }}
+      >
+        <Ul>
+          <li>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "0px 15px",
+                margin: "20px 0px 40px",
+              }}
+            >
+              <Link href="/">
+                <Image src={logo} alt="" className="sideBarlogo" />
+              </Link>
+            </Box>
+          </li>
 
-        <li>
-          <a href="#">
-            <FiHome />
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <BsGrid1X2 />
+          <li>
+            <a href="#">
+              <Image src={dashboard} alt="dashboard" />
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <div
+              className={
+                isOpen
+                  ? "dropdown-menu-container active"
+                  : "dropdown-menu-container"
+              }
+            >
+              <button className="dropdown-menu-toggle" onClick={handleToggle}>
+                Menu
+              </button>
 
-            <p>Project</p>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <FiHome />
-            <p>Community</p>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <FiHome />
-            <p>Launch</p>
-          </a>
-        </li>
-      </Ul>
-    </Box>
+              <ul className="dropdown-menu-list">
+                <li className="dropdown-menu-item">Item 1</li>
+                <li className="dropdown-menu-item">Item 2</li>
+                <li className="dropdown-menu-item">Item 3</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#">
+              <Menu
+                mode="inline"
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}
+                className="project-menu"
+                style={{
+                  width: 256,
+                }}
+                items={items}
+              />
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <Image src={community} alt="community" />
+              <p>Community</p>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <Image src={launch} alt="launch" />
+              <p>Launch</p>
+            </a>
+          </li>
+        </Ul>
+      </Box>
+    </>
   );
   // console.log(user.photoURL);
   const container =
@@ -192,7 +270,7 @@ function Sidebar(props) {
                 </IconButton>
               </Tooltip>
             </Box>
-            <Menu
+            {/* <Menu
               anchorEl={anchorEl}
               id="account-menu"
               open={open}
@@ -252,7 +330,7 @@ function Sidebar(props) {
                 </ListItemIcon>
                 Logout
               </MenuItem>
-            </Menu>
+            </Menu> */}
           </Box>
         </Toolbar>
       </AppBar>
@@ -300,7 +378,7 @@ function Sidebar(props) {
           }}
           open
         >
-          {drawer}
+          kire
         </Drawer>
       </div>
     </>

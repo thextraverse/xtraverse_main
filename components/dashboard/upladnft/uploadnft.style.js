@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Form = styled.form`
   width: 100%;
   color: rgba(255, 255, 255, 0.6);
-
+  padding: 35px;
   &.domainForm {
     label {
       display: block;

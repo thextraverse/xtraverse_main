@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../../../components/dashboard/side-bar";
+import Sidebar from "../../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../../components/dashboard/step-nav";
 import { Box } from "@mui/system";
 import { db } from "../../../../configfile/firebaseConfig";
@@ -83,7 +83,7 @@ function UploadNftindex() {
   }
   return (
     <Main>
-      <Sidebar />
+      <Sidebar activeBtn={4} />
       <Box
         sx={{
           width: { lg: `calc(100% - ${drawerWidth}px)` },

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Grid, Box } from "@mui/material";
 import Sidebar, {
   drawerWidth,
-} from "../../../../components/dashboard/side-bar";
+} from "../../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../../components/dashboard/step-nav";
 import stripe from "../../../../components/images/stripe.svg";
 import facebook from "../../../../components/images/facebook.svg";
@@ -31,7 +31,7 @@ function Connection() {
   const router = useRouter();
   return (
     <Main>
-      <Sidebar />
+      <Sidebar activeBtn={1} />
       <Box
         sx={{
           width: { lg: `calc(100% - ${drawerWidth}px)` },

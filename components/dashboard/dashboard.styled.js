@@ -1,5 +1,52 @@
 import styled from "@emotion/styled";
-
+export const Aside = styled.aside`
+  position: fixed;
+  height: 95vh;
+  top: 2.5vh;
+  width: 70px;
+  background: #252525;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .logo {
+    padding: 25px 0px 15px;
+    width: 100%;
+    cursor: pointer;
+    span {
+      width: 100% !important;
+      img {
+        object-fit: cover;
+      }
+    }
+  }
+  .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+    background: #fff !important;
+    color: #000;
+  }
+  > ul {
+    width: 100%;
+    height: 100%;
+    background: #252525;
+    position: relative;
+    padding: 5px;
+    .ant-menu-item-selected {
+      border-radius: 12px;
+      background: #323232 !important;
+    }
+    li {
+      &:last-of-type {
+        position: absolute;
+        bottom: 10px;
+      }
+      svg {
+        transform: translate(-5px, 5px);
+        padding: 1px;
+      }
+    }
+  }
+`;
 export const InitializeProject = styled.div`
   width: 350px;
   gap: 50px;
@@ -133,18 +180,28 @@ export const Ul = styled.ul`
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 8px 15px;
-    border-radius: 5px;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 15px;
     color: #000;
     font-weight: 500;
     color: #fff;
+    transition: all 0.3s;
+    font-size: 1.1em;
+    .ant-menu {
+      background: transparent;
+    }
+    .ant-menu-submenu-title {
+      height: auto;
+      padding: 0px !important;
+      margin: 0px;
+      color: #fff;
+    }
     svg {
       font-size: 1.4em;
     }
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: #000;
+      background-color: #323232;
     }
   }
 `;

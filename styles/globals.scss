@@ -5,7 +5,6 @@
   margin: 0;
   font-family: "Open Sans", sans-serif;
 }
-
 /* font-family: 'Inter', sans-serif;
 
 font-family: 'Open Sans', sans-serif; */
@@ -22,18 +21,15 @@ body {
   transform: translate(-50%, -50%) !important;
   /* top: 110% !important; */
 }
-
 .slick-next {
   top: 95% !important;
   left: 54% !important;
   transform: translate(-50%, -50%) !important;
   /* top: 110% !important; */
 }
-
 .slick-slider {
   height: 60vh !important;
 }
-
 .slick-list {
   position: relative;
   display: block;
@@ -42,40 +38,32 @@ body {
   padding: 0;
   height: 85% !important;
 }
-
 .slick-track {
   height: 100% !important;
 }
-
 .slick-slide {
   border: 3px solid rgba(255, 255, 255, 0.6) !important;
   height: 100% !important;
 }
-
 .slick-slide > div {
   width: 100%;
   height: 100% !important;
 }
-
 .slick-slide > div span {
   width: 100% !important;
   height: 100% !important;
 }
-
 .slick-slide img {
   width: 100%;
   height: 100% !important;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
-
 .slick-prev::before,
 .slick-next::before {
   font-size: 32px !important;
   opacity: 0.6 !important;
   color: white;
 }
-
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
   border-right: none !important;
-}/*# sourceMappingURL=globals.css.map */
+}

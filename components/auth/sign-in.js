@@ -69,7 +69,7 @@ function Signin() {
       );
       if (querySnapshot.docs.length > 0) {
         // User exists in Firestore, sign them in without creating a new collection
-        router.push("/dashboard");
+        router.push("/info");
       } else {
         // User doesn't exist in Firestore, create a new collection for them
         await addDoc(userDataCollectionRef, {
@@ -77,7 +77,7 @@ function Signin() {
           Provider: result.user.providerData[0].providerId,
           Email: result.user.email,
         });
-        router.push("/dashboard");
+        router.push("/info");
       }
     } catch (err) {
       setError(err.message);
@@ -93,9 +93,9 @@ function Signin() {
         }}
       >
         <Btn>Contact Sales</Btn>
-        <Btn onClick={handleClickOpen}>Start Building</Btn>
+        <Btn onClick={handleGoogleSignIn}>Start Building</Btn>
       </Box>
-      <Dialog
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -121,14 +121,14 @@ function Signin() {
               <Image src={logo} alt="logo" />
             </Box>
 
-            {/* google signin button */}
+            //  google signin button
             <GoogleBtn onClick={handleGoogleSignIn}>
               <AiFillGoogleCircle />
               <span>Sign in with Google</span>
             </GoogleBtn>
             <Hr></Hr>
 
-            {/* form for signin */}
+          //  form for signin 
             <Form onSubmit={handleSubmit}>
               {error && <Alert severity="error">{error}</Alert>}
               <Box
@@ -174,13 +174,13 @@ function Signin() {
             </Span>
           </SignSec>
         </DialogContent>
-      </Dialog>
-      <Signup
+      </Dialog> 
+       <Signup
         signuphandleClickOpen={signuphandleClickOpen}
         signuphandleClose={signuphandleClose}
         signInhandleClickOpen={handleClickOpen}
         signupOpen={signupOpen}
-      />
+      /> */}
     </>
   );
 }

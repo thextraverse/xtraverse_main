@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
@@ -9,7 +9,9 @@ import Image from "next/image";
 import template1 from "../../../components/images/theme/cryptocanvas.png";
 import template2 from "../../../components/images/theme/ethereasel.png";
 import template4 from "../../../components/images/theme/pixelvault.png";
-import Sidebar, { drawerWidth } from "../../../components/dashboard/side-bar";
+import Sidebar, {
+  drawerWidth,
+} from "../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../components/dashboard/step-nav";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
@@ -29,6 +31,7 @@ import {
   where,
   doc,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
 import Swal from "sweetalert2";
@@ -79,7 +82,6 @@ const SlderTemplatesc = styled.div`
 `;
 const SliderSec = styled.div`
   width: 90%;
-  object-fit: cover;
   span {
     text-align: center;
     display: block;
@@ -99,8 +101,23 @@ const SliderSec = styled.div`
     }
   }
 `;
-
+const SelectTemplate = styled.div`
+  .image {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    span {
+      width: 100%;
+      height: 100% !important;
+    }
+    img {
+      object-fit: contain;
+    }
+  }
+`;
 function Template() {
+  const [activeImage, setActiveImage] = useState(false);
+  const [imageChange, setImageChange] = useState();
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
@@ -143,7 +160,7 @@ function Template() {
           });
           if (
             MySwal.fire({
-              title: <strong>Thanks for selecting</strong>,
+              title: <strong>Thanks for updating</strong>,
               icon: "success",
             })
           );
@@ -154,7 +171,7 @@ function Template() {
           });
           if (
             MySwal.fire({
-              title: <strong>Thanks for uploading</strong>,
+              title: <strong>Thanks for selecting</strong>,
               icon: "success",
             })
           );
@@ -166,10 +183,10 @@ function Template() {
       console.log("No documents found.");
     }
   };
-
+  // console.log(imageChange);
   return (
     <Main>
-      <Sidebar />
+      <Sidebar activeBtn={4} />
       <Box
         sx={{
           width: { lg: `calc(100% - ${drawerWidth}px)` },
@@ -187,6 +204,51 @@ function Template() {
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={6} md={4.5}>
+                {/* select template part */}
+                <SelectTemplate>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6} md={6}>
+                      <div
+                        className={activeImage ? "active image" : "image"}
+                        onClick={() => {
+                          setImageChange(template1);
+                          handleDataSubmit("CryptoCanvas");
+                          setActiveImage(true);
+                        }}
+                      >
+                        {template1 ? (
+                          <Image src={template1} alt="Picture of the author" />
+                        ) : (
+                          <Image src={template2} alt="Picture of the author" />
+                        )}
+                      </div>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <div
+                        className={activeImage ? "active image" : "image"}
+                        onClick={() => {
+                          setImageChange(template1);
+                          handleDataSubmit("EtherEasel");
+                          setActiveImage(true);
+                        }}
+                      >
+                        <Image src={template2} alt="Picture of the author" />
+                      </div>
+                    </Grid>
+                    <Grid item xs={6} md={6}>
+                      <div
+                        className={activeImage ? "active image" : "image"}
+                        onClick={() => {
+                          setImageChange(template4);
+                          handleDataSubmit("PixelVault");
+                          setActiveImage(true);
+                        }}
+                      >
+                        <Image src={template4} alt="Picture of the author" />
+                      </div>
+                    </Grid>
+                  </Grid>
+                </SelectTemplate>
                 <div className="TitleTxt">
                   <div>
                     <span>Step 3</span>
@@ -199,7 +261,8 @@ function Template() {
                 </div>
               </Grid>
               <Grid item xs={6} md={7.5}>
-                <SliderSec>
+                <Image src={imageChange} alt="image chnage" />
+                {/* <SliderSec>
                   <Slider {...settings}>
                     <Box
                       sx={{
@@ -301,7 +364,7 @@ function Template() {
                     </Box>
                   </Slider>
                   <span>More templates to come!</span>
-                </SliderSec>
+                </SliderSec> */}
               </Grid>
             </Grid>
           </Box>

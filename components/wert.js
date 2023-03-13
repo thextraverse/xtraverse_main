@@ -1,9 +1,21 @@
 import React from 'react';
 import WertWidget from '@wert-io/widget-initializer';
 
+
+
 class WertModule extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      wertOptions: {
+        partner_id: '{{01GTHWYNY9KCEM27GPDJCS11Q6}}',
+        listeners: {
+          loaded: () => console.log('loaded'),
+        },
+        // Other Wert options...
+      },
+    };
 
     const defaultContainerId = 'wert-module';
     const wertWidget = new WertWidget({

@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
-import React from "react";
 export const Main = styled.main`
   background: #303030;
-  padding: 30px;
+  margin-top: 125px;
+  /* 252525 */
+  /* 303030 */
+  /* padding: 30px; */
   .activeDot {
     display: flex;
     gap: 8px;
@@ -26,6 +28,25 @@ export const Form = styled.form`
   width: 100%;
   color: rgba(255, 255, 255, 0.6);
   padding: 35px;
+  .hero-type {
+    border: 2px solid #4f4f4f;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px;
+    cursor: pointer;
+    height: 140px;
+    span {
+      width: 100% !important;
+      height: 100% !important;
+      img {
+        width: 100% !important;
+        object-fit: cover;
+      }
+    }
+    &.active {
+      border: 2px solid #71dd37;
+    }
+  }
   .header-type {
     width: 100%;
     border: 2px solid #4f4f4f;
@@ -62,12 +83,14 @@ export const Form = styled.form`
         color: #000;
       }
     }
-    input {
+    input,
+    textarea {
       padding: 15px 15px;
       border: none;
       border-radius: 10px;
       margin: 5px 0px 20px;
       background: #252525;
+      outline: none;
       @media screen and (max-width: 1400px) {
         padding: 10px 10px;
         margin: 5px 0px 15px;
@@ -85,6 +108,24 @@ export const Form = styled.form`
       padding: 10px 0px;
     }
   }
+  .selectColorType {
+    position: relative;
+    .picColor {
+      position: fixed;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      input {
+        padding: 0;
+        margin: 0px;
+        background: #fff !important;
+      }
+    }
+  }
   .inputsc {
     position: relative;
     border: 2px dashed #4f4f4f;
@@ -95,6 +136,25 @@ export const Form = styled.form`
     border-radius: 10px;
     margin-bottom: 20px;
     background: #252525;
+    &.btninputsc {
+      padding: 0px;
+      margin-bottom: 5px;
+    }
+    button {
+      border: none;
+      color: #fff;
+      font-weight: 400;
+      display: flex;
+      gap: 5px;
+      padding: 0px;
+      width: 100%;
+      cursor: pointer;
+      padding: 15px 20px;
+
+      svg {
+        font-size: 2em;
+      }
+    }
     @media screen and (max-width: 1400px) {
       padding: 10px 10px;
       margin-bottom: 10px;
@@ -157,13 +217,93 @@ export const Form = styled.form`
     resize: none;
     height: 100px;
   }
+  .colorPallete {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #252525;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    margin: 5px 0px;
+    .dflex {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .pastecolor {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .selectColor {
+      position: relative;
+      input {
+        width: 20px;
+        height: 20px;
+        top: 0px;
+        position: absolute;
+        background: transparent;
+        opacity: 0;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+  .royalties {
+    display: grid;
+    grid-template-columns: 90% auto;
+    gap: 8px;
+    margin-top: 7px;
+    button {
+      height: 50px;
+      font-size: 1.5em;
+      color: #000;
+      font-weight: 600;
+      svg {
+        transform: scale(1.4);
+      }
+    }
+  }
+  .roayltiesinput {
+    position: relative;
+    input {
+      height: 50px;
+      margin-top: 0px;
+    }
+    .parcentage {
+      position: absolute;
+      top: 15%;
+      right: 10px;
+      height: 30px;
+      width: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      svg {
+        font-size: 1em;
+        font-weight: 800;
+        color: #fff;
+      }
+    }
+  }
+`;
+export const EditorInputSec = styled.div`
+  position: fixed;
+  width: 580px;
+  height: 88vh;
+  z-index: 9;
+  background: #303030;
+  padding: 5px 20px;
+  overflow-x: hidden;
+
+  /* border-right: 1px solid #fff; */
 `;
 export const PageEditorFrom = styled.div`
   background: #303030;
   border: 2px solid #4f4f4f;
   border-radius: 16px;
-  height: 85vh;
-  overflow-x: hidden;
   .page-editor-form {
     position: relative;
     height: auto;
@@ -177,21 +317,16 @@ export const PageEditorFrom = styled.div`
   .page-editor-content-input {
     background-color: #303030;
     max-height: 0;
-    overflow-x: hidden;
-    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
     border-radius: 10px;
     li {
       padding: 10px 20px;
     }
   }
-  .activesvg {
-    transition: all 0.3s;
-  }
+
   .page-editor-form.active {
-    transition: all 0.3s;
     .page-editor-content-input {
-      max-height: 100vh; /* or whatever max height you want to set */
-      transition: max-height 0.3s ease-in-out;
+      max-height: 100%; /* or whatever max height you want to set */
     }
 
     .activesvg {
@@ -217,62 +352,230 @@ export const PageEditorFrom = styled.div`
   .dropdown-menu-item:hover {
     background-color: #f2f2f2;
   }
+  .typslction {
+    button {
+      background: #252525;
+      text-align: left;
+      padding: 10px;
+      display: block;
+      margin: 0px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #fff;
+    }
+    p {
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
 `;
 export const HomepagePreview = styled.div`
   background: #20142d;
-  padding: 0px;
-  border-radius: 5px;
+  width: 90%;
+  margin: 10px;
+  margin-left: auto;
   height: 100%;
   position: relative;
   overflow: hidden;
 
   .homesec {
     position: relative;
+    aspect-ratio: 16/9;
+    &.descriptionsc {
+      .herosec {
+      }
+      span {
+        background: linear-gradient(to bottom, #ff00ea, #2600fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        display: block;
+      }
+      p {
+        font-size: 0.9em;
+        color: #7b7583;
+      }
+      h5 {
+        font-weight: 600;
+        text-align: left;
+      }
+      .herosec.destype1 {
+        text-align: right;
+        h5 {
+          text-align: right;
+        }
+      }
+    }
+    .GrdntBox {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+      border-radius: 9.675px;
+      margin: 0px 10px;
+    }
+  }
+  .overlaybg {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
     z-index: 2;
+  }
+  .bgimage {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    span {
+      width: 100% !important;
+      height: 100% !important;
+      img {
+        object-fit: cover;
+      }
+    }
   }
   .headersc {
     display: flex;
     justify-content: space-between;
     padding: 15px;
-
-    .logo {
-      width: 30px;
-      height: 25px;
-      img {
-        object-fit: cover;
-      }
+    position: relative;
+    z-index: 4;
+  }
+  .headerbtn {
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-weight: 600;
+      margin: 0px 5px;
+      padding: 7px 15px;
+      border-radius: 50px;
+      color: #fff;
+      text-transform: capitalize;
     }
-    .headerbtn {
-      button {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 0.85em;
-        font-weight: 600;
-        margin: 0px 5px;
-        color: #fff;
-        &:last-child {
-          background: #000;
-        }
-      }
+    .waitLstBtn {
+      text-transform: capitalize;
+
+      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+    }
+  }
+  .waitLstBtn {
+    border: none;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 7px 15px;
+    border-radius: 50px;
+    margin: 0px 5px;
+    color: #fff;
+    text-transform: capitalize;
+
+    background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+  }
+  .logo {
+    width: 30px;
+    height: 25px;
+    img {
+      object-fit: cover;
     }
   }
   .herosec {
-    display: grid;
-    place-items: center;
-    place-content: center;
-    text-align: center;
-    width: 75%;
     margin: auto;
     padding: 25px 0px 10px;
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .MuiGrid-container {
+      height: 100%;
+    }
+    .grdntsc {
+      display: flex;
+      align-items: center;
+      padding: 10px 0px;
+    }
+
+    &.hero3,
+    &.destype3 {
+      padding: 0px 210px;
+      display: grid;
+      place-content: center;
+      h1 {
+        font-size: 4em;
+        line-height: 120%;
+      }
+      p {
+        padding: 20px 0px;
+      }
+    }
+    &.destype1,
+    &.destype2 {
+      .heroImg {
+        padding: 50px 30px;
+      }
+    }
+    &.hero1 {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      p {
+        font-size: 0.8em;
+        padding: 15px 0px;
+      }
+    }
+    &.hero2 {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      p {
+        font-size: 0.8em;
+        padding: 15px 0px;
+      }
+    }
+    &.hero2,
+    &.destype2 {
+      display: grid;
+      grid-template-columns: 50% auto;
+      width: 85%;
+      margin: auto;
+      .herotxt {
+        text-align: start;
+      }
+    }
+    &.hero1,
+    &.destype1 {
+      display: grid;
+      grid-template-columns: 50% auto;
+      direction: rtl;
+      width: 90%;
+      margin: auto;
+      .herotxt {
+        h1,
+        p {
+          text-align: right;
+        }
+      }
+    }
     h1,
     p,
     span {
-      color: #000;
       font-weight: 600;
     }
     h1 {
       font-size: 3em;
+      line-height: 120%;
       font-weight: 800;
       @media screen and (max-width: 1400px) {
         font-size: 2.5em;
@@ -280,7 +583,6 @@ export const HomepagePreview = styled.div`
     }
     p {
       font-size: 1em;
-      color: rgba(0, 0, 0, 0.65);
       @media screen and (max-width: 1400px) {
         font-size: 0.7em;
       }
@@ -288,43 +590,24 @@ export const HomepagePreview = styled.div`
     button {
       color: #000;
       margin: 10px 0px;
-      border: 2px solid #000;
-      font-size: 0.75em;
       padding: 8px 40px;
+      padding: 7px 15px;
+      border-radius: 50px;
+      margin: 0px 5px;
+      text-transform: capitalize;
+      color: #fff;
+      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
     }
   }
-  .heroimgs {
-    display: flex;
-    position: relative;
+
+  .herotxt {
     height: 100%;
-    width: 100%;
-    margin-top: 20px;
-    @media screen and (max-width: 1400px) {
-      margin-top: 10px;
-    }
-    .img {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translate(-50%, 10%);
-      width: 160px;
-      height: 220px;
-      object-fit: cover;
-      @media screen and (max-width: 1200px) {
-        width: 120px;
-        height: 150px;
-      }
-      &:nth-of-type(1) {
-        transform: translate(-120%, 14%) rotate(-15deg);
-        z-index: 2;
-      }
-      &:nth-of-type(2) {
-        z-index: 1;
-        transform: translate(-50%, 3%) rotate(-5deg);
-      }
-      &:nth-of-type(3) {
-        transform: translate(20%, 10%) rotate(15deg);
-      }
-    }
+    display: grid;
+    place-content: center;
+  }
+  .heroImg {
+    height: 100%;
+    display: grid;
+    padding: 50px 0px;
   }
 `;

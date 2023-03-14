@@ -22,8 +22,8 @@ export default function layout() {
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar activeBtn={1} />
-        <CreateProject />
+        <Sidebar activeBtn={1} heading={"Dashboard"} />
+        {/* <CreateProject /> */}
       </Dashboardsc>
     </Main>
   );

@@ -44,6 +44,10 @@ import {
 } from "@ant-design/icons";
 
 export const drawerWidth = 120;
+const Hr = styled.hr`
+  width: calc(100% - 170px);
+  margin-left: auto;
+`;
 function getItem(label, key, icon, link, children) {
   return {
     key,
@@ -57,14 +61,14 @@ function getItem(label, key, icon, link, children) {
     ),
   };
 }
-function getItemAgain(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
+// function getItemAgain(label, key, icon, children) {
+//   return {
+//     key,
+//     icon,
+//     children,
+//     label,
+//   };
+// }
 const items = [
   getItem(
     "Dashboards",
@@ -86,9 +90,9 @@ const items = [
     </svg>,
     "dashboard"
   ),
-  getItemAgain(
+  getItem(
     "Project",
-    "sub1",
+    "2",
     <svg
       width="24"
       height="24"
@@ -125,15 +129,37 @@ const items = [
         stroke-linejoin="round"
       />
     </svg>,
-    [
-      getItem("Website", "4", "", "dashboard/createproject"),
-      getItem("Marketplace", "5", "", "dashboard/createproject/uploadnfts"),
-      getItem("Community", "6", "", "dashboard/createproject/edithomepage"),
-    ]
+    // [
+    //   getItem("Website", "4", "", "dashboard/createproject"),
+    //   getItem("Marketplace", "5", "", "dashboard/createproject/uploadnfts"),
+    //   getItem("Community", "6", "", "dashboard/createproject/edithomepage"),
+    // ]
+    "/project"
+  ),
+
+  getItem(
+    "Marketplace",
+    "3",
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 8V8C5 7.06812 5 6.60218 5.15224 6.23463C5.35523 5.74458 5.74458 5.35523 6.23463 5.15224C6.60218 5 7.06812 5 8 5H13.8C14.9201 5 15.4802 5 15.908 5.21799C16.2843 5.40973 16.5903 5.71569 16.782 6.09202C17 6.51984 17 7.0799 17 8.2V14C17 14.9319 17 15.3978 16.8478 15.7654C16.6448 16.2554 16.2554 16.6448 15.7654 16.8478C15.3978 17 14.9319 17 14 17V17M9 4V4C9 3.06812 9 2.60218 9.15224 2.23463C9.35523 1.74458 9.74458 1.35523 10.2346 1.15224C10.6022 1 11.0681 1 12 1H17.8C18.9201 1 19.4802 1 19.908 1.21799C20.2843 1.40973 20.5903 1.71569 20.782 2.09202C21 2.51984 21 3.0799 21 4.2V10C21 10.9319 21 11.3978 20.8478 11.7654C20.6448 12.2554 20.2554 12.6448 19.7654 12.8478C19.3978 13 18.9319 13 18 13V13M4.2 21H9.8C10.9201 21 11.4802 21 11.908 20.782C12.2843 20.5903 12.5903 20.2843 12.782 19.908C13 19.4802 13 18.9201 13 17.8V12.2C13 11.0799 13 10.5198 12.782 10.092C12.5903 9.71569 12.2843 9.40973 11.908 9.21799C11.4802 9 10.9201 9 9.8 9H4.2C3.0799 9 2.51984 9 2.09202 9.21799C1.71569 9.40973 1.40973 9.71569 1.21799 10.092C1 10.5198 1 11.0799 1 12.2V17.8C1 18.9201 1 19.4802 1.21799 19.908C1.40973 20.2843 1.71569 20.5903 2.09202 20.782C2.51984 21 3.07989 21 4.2 21Z"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>,
+    "project/editMarketplace"
   ),
   getItem(
-    "Launch",
-    "2",
+    "Community",
+    "4",
     <svg
       width="24"
       height="24"
@@ -142,18 +168,38 @@ const items = [
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M5.5 10.5L2 7.9999L3.07801 6.92193C3.96351 6.03644 4.40627 5.5937 4.93021 5.31387C5.39405 5.06614 5.90218 4.91229 6.42554 4.86114C7.01671 4.80336 7.63069 4.92616 8.85865 5.17177L10.4995 5.49997M18.4995 13.5L18.8279 15.1408C19.0737 16.3689 19.1966 16.983 19.1389 17.5743C19.0878 18.0977 18.9339 18.6059 18.6862 19.0698C18.4063 19.5939 17.9635 20.0367 17.0778 20.9224L16.0002 22L13.5002 18.5M6.99951 16.9998L8.99936 15M17.002 8.99951C17.002 10.1041 16.1065 10.9995 15.002 10.9995C13.8974 10.9995 13.002 10.1041 13.002 8.99951C13.002 7.89494 13.8974 6.99951 15.002 6.99951C16.1065 6.99951 17.002 7.89494 17.002 8.99951ZM17.1987 2L16.6498 2C15.6714 2 15.1821 2 14.7218 2.11053C14.3136 2.20853 13.9234 2.37016 13.5655 2.58949C13.1618 2.83688 12.8159 3.18282 12.1241 3.87469L6.9992 9C5.90878 10.0905 5.36357 10.6358 5.07213 11.2239C4.51761 12.343 4.51764 13.6569 5.0722 14.776C5.36367 15.3642 5.9089 15.9094 6.99936 16.9998V16.9998C8.0899 18.0904 8.63517 18.6357 9.22337 18.9271C10.3425 19.4817 11.6565 19.4817 12.7756 18.9271C13.3638 18.6356 13.909 18.0903 14.9995 16.9997L20.1243 11.8745C20.8161 11.1827 21.1619 10.8368 21.4093 10.4331C21.6286 10.0753 21.7902 9.6851 21.8881 9.27697C21.9987 8.81664 21.9987 8.32749 21.9987 7.34918L21.9987 6.8C21.9987 5.11984 21.9987 4.27976 21.6717 3.63803C21.3841 3.07354 20.9251 2.6146 20.3606 2.32698C19.7189 2 18.8788 2 17.1987 2Z"
+        d="M15 10C17.2091 10 19 8.20914 19 6C19 3.79086 17.2091 2 15 2M17 22H19.8C21.5673 22 23 20.5673 23 18.8V18.8C23 16.149 20.851 14 18.2 14H17M12 6C12 8.20914 10.2091 10 8 10C5.79086 10 4 8.20914 4 6C4 3.79086 5.79086 2 8 2C10.2091 2 12 3.79086 12 6ZM4.2 22H11.8C13.5673 22 15 20.5673 15 18.8V18.8C15 16.149 12.851 14 10.2 14H5.8C3.14903 14 1 16.149 1 18.8V18.8C1 20.5673 2.43269 22 4.2 22Z"
         stroke="white"
         stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
     </svg>,
-    "dashboard/createproject/domain"
+    "project/editMarketplace"
+  ),
+  getItem(
+    "Launch",
+    "5",
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.5 9.5L1 6.9999L2.07801 5.92193C2.96351 5.03644 3.40627 4.5937 3.93021 4.31387C4.39405 4.06614 4.90218 3.91229 5.42554 3.86114C6.01671 3.80336 6.63069 3.92616 7.85865 4.17177L9.49951 4.49997M17.4995 12.5L17.8279 14.1408C18.0737 15.3689 18.1966 15.983 18.1389 16.5743C18.0878 17.0977 17.9339 17.6059 17.6862 18.0698C17.4063 18.5939 16.9635 19.0367 16.0778 19.9224L15.0002 21L12.5002 17.5M5.99951 15.9998L7.99936 14M16.002 7.99951C16.002 9.10408 15.1065 9.99951 14.002 9.99951C12.8974 9.99951 12.002 9.10408 12.002 7.99951C12.002 6.89494 12.8974 5.99951 14.002 5.99951C15.1065 5.99951 16.002 6.89494 16.002 7.99951ZM16.1987 0.999997L15.6498 0.999997C14.6714 0.999998 14.1821 0.999998 13.7218 1.11053C13.3136 1.20853 12.9234 1.37016 12.5655 1.58949C12.1618 1.83688 11.8159 2.18282 11.1241 2.87469L5.9992 8C4.90878 9.0905 4.36357 9.63576 4.07213 10.2239C3.51761 11.343 3.51764 12.6569 4.0722 13.776C4.36367 14.3642 4.9089 14.9094 5.99936 15.9998V15.9998C7.0899 17.0904 7.63517 17.6357 8.22337 17.9271C9.34251 18.4817 10.6565 18.4817 11.7756 17.9271C12.3638 17.6356 12.909 17.0903 13.9995 15.9997L19.1243 10.8745C19.8161 10.1827 20.1619 9.83679 20.4093 9.43313C20.6286 9.07526 20.7902 8.6851 20.8881 8.27697C20.9987 7.81664 20.9987 7.32749 20.9987 6.34918L20.9987 5.8C20.9987 4.11984 20.9987 3.27976 20.6717 2.63803C20.3841 2.07354 19.9251 1.6146 19.3606 1.32698C18.7189 0.999997 17.8788 0.999997 16.1987 0.999997Z"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>,
+    "project/launch"
   ),
   getItem(
     "Setting",
-    "3",
+    "4",
     <svg
       width="24"
       height="24"
@@ -180,7 +226,7 @@ const items = [
   ),
 ];
 
-function Sidebar({ activeBtn }) {
+function Sidebar({ activeBtn, heading }) {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -228,16 +274,24 @@ function Sidebar({ activeBtn }) {
       <AppBar
         position="fixed"
         sx={{
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          background: "#aaa0",
+          width: { lg: "calc(100% - 100px)" },
+          background: "#303030",
           backdropFilter: "blur(10px)",
+          borderBottom: "2px solid #252525",
           color: "#000",
-          borderBottom: "2px solid #212121",
           boxShadow: "0px 0px 0px transparent",
-          ml: { sm: `${drawerWidth}px` },
+          paddingLeft: "50px",
+          // ml: { sm: `${drawerWidth}px` },
+          position: "fixed",
         }}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "5px 0px",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -248,8 +302,13 @@ function Sidebar({ activeBtn }) {
             <MenuIcon />
           </IconButton>
           <Box
+            component="h2"
+            sx={{ fontSize: "1.8em", fontWeight: "600", color: "#fff" }}
+          >
+            {heading}
+          </Box>
+          <Box
             sx={{
-              width: "100%",
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
@@ -300,40 +359,33 @@ function Sidebar({ activeBtn }) {
           </Box>
         </Toolbar>
       </AppBar>
-      <div
-        component="nav"
-        sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
-        }}
-      >
-        <Aside>
-          {/* <Button
-            type="primary"
-            onClick={toggleCollapsed}
-            style={{
-              marginBottom: 16,
-            }}
-          >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </Button> */}
 
+      <Aside>
+        {/* <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          style={{
+            marginBottom: 16,
+          }}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button> */}
+        <div className="nav">
           <Link href="/">
             <div className="logo">
               <Image src={logo} alt="logo" />
             </div>
           </Link>
-
           <Menu
             defaultSelectedKeys={[active]}
-            defaultOpenKeys={["sub1"]}
+            // defaultOpenKeys={["sub1"]}
             mode="inline"
             theme="dark"
             inlineCollapsed={true}
             items={items}
           />
-        </Aside>
-      </div>
+        </div>
+      </Aside>
     </>
   );
 }

@@ -5,14 +5,15 @@ import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid";
 import { IoMdCloudUpload } from "react-icons/io";
-import { Form } from "../homepage.styled";
 import { RiTicketLine } from "react-icons/ri";
-import { HomepagePreview } from "../edithomepage.style";
-import firstimg from "../../../images/project1.png";
+import firstimg from "../../images/project1.png";
 import { useRouter } from "next/router";
-import { AiOutlinePlus } from "react-icons/ai";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
-import { auth, db, storage } from "../../../../configfile/firebaseConfig";
+import { AiOutlinePlus } from "react-icons/ai";
 import {
   ref,
   uploadBytes,
@@ -29,25 +30,33 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
-import headerType1 from "../../../../components/images/templatepage/header1.svg";
-import headerType2 from "../../../../components/images/templatepage/header2.svg";
-function EditHeader(props) {
+import { Form } from "../../dashboard/edithome/homepage.styled";
+import { HomepagePreview } from "../../dashboard/edithome/edithomepage.style";
+import { db, auth, storage } from "../../../configfile/firebaseConfig";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
+function MarketPlaceGeneral(props) {
   const {
-    waitlistInput,
-    setWaitlistInput,
-    renderNewBtn,
-    handleAddInput,
-    headerType,
-    setHeaderType,
-    uploadLogo,
-    editHeroName,
-    editHeroScript,
+    handleNext,
+    selectedImage,
+    setNftName,
+    nftName,
+    nftdescription,
+    setNftDescript,
     handleImageChange,
+    setTags,
+    setNftCollectionName,
+    nftCollectionName,
+    nftPrice,
+    setNftPrice,
+    nftMindBtn,
+    setNftMindBtn,
+    nftType,
+    setNftType,
+    handleImgUpload,
   } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
@@ -220,42 +229,75 @@ function EditHeader(props) {
                 ""
               )}
             </Box>
-
             <Grid xs={12}>
-              <Box
+              <Box>
+                <span>Name of NFT</span>
+                <input
+                  type="text"
+                  placeholder="Ex: Draken"
+                  onChange={(e) => setNftName(e.target.value)}
+                />
+              </Box>
+            </Grid>
+            <Grid xs={12}>
+              <Box sx={{}}>
+                <span>Collection Name</span>
+                <input
+                  onChange={(e) => setNftCollectionName(e.target.value)}
+                  type="text"
+                  placeholder="EX: Green Gremlins"
+                />
+              </Box>
+            </Grid>
+            <Grid xs={12}>
+              <Box sx={{ margin: "15px 0px" }}>
+                <span>Description </span>
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  placeholder="Ex: DRK is the first of its kind..."
+                  onChange={(e) => setNftDescript(e.target.value)}
+                ></textarea>
+              </Box>
+            </Grid>
+            <Grid xs={12}>
+              <FormControl
+                fullWidth
                 sx={{
-                  display: "grid",
-                  gridTemplateColumns: "50% auto",
-                  gap: "15px",
+                  border: "2px solid #fff",
+                  borderRadius: "10px",
+                  color: "#000",
                 }}
               >
-                <div
-                  className={
-                    headerType === "header1"
-                      ? "header-type active"
-                      : "header-type"
-                  }
-                  onClick={() => setHeaderType("header1")}
+                <InputLabel
+                  id="demo-simple-select-label"
+                  sx={{ color: "#fff", fontWeight: "600" }}
                 >
-                  <Image src={headerType1} alt="header-type1" />
-                </div>
-
-                <div
-                  className={
-                    headerType === "header2"
-                      ? "header-type active"
-                      : "header-type"
-                  }
-                  onClick={() => setHeaderType("header2")}
+                  Type
+                </InputLabel>
+                <Select
+                  labelId="demo-select-small"
+                  id="demo-select-small"
+                  value={nftType}
+                  sx={{ color: "#fff" }}
+                  label="Age"
+                  onChange={(e) => setNftType(e.target.value)}
                 >
-                  <Image src={headerType2} alt="header-type2" />
-                </div>
-              </Box>
+                  <MenuItem value={"Waitlist"} sx={{ color: "#000" }}>
+                    <em>Waitlist</em>
+                  </MenuItem>
+                  <MenuItem value={"Whitelist"} sx={{ color: "#000" }}>
+                    Whitelist
+                  </MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
             <Grid xs={12}>
               <Box
                 sx={{
-                  marginTop: "15px",
+                  marginTop: "0px",
                 }}
               >
                 <div className="inputsc">
@@ -266,33 +308,50 @@ function EditHeader(props) {
                     accept="image/*"
                   />
                   <span>
-                    <IoMdCloudUpload />
-                    Upload Logo
+                    <svg
+                      width="25"
+                      height="24"
+                      viewBox="0 0 25 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_217_16463)">
+                        <path
+                          d="M3.7 18C2.38484 17.235 1.5 15.8051 1.5 14.1674C1.5 12.1053 2.90285 10.3727 4.80122 9.88197C4.80041 9.83571 4.8 9.78935 4.8 9.7429C4.8 5.46661 8.24741 2 12.5 2C16.1211 2 19.1584 4.51348 19.9806 7.90009C22.0395 8.69955 23.5 10.7089 23.5 13.0613C23.5 14.8707 22.6359 16.4772 21.3 17.4862M12.5 22V13M12.5 13L9 16.5M12.5 13L16 16.5"
+                          stroke="white"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_217_16463">
+                          <rect
+                            width="24"
+                            height="24"
+                            fill="white"
+                            transform="translate(0.5)"
+                          />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    Upload NFT
                   </span>
                 </div>
               </Box>
             </Grid>
             <Grid xs={12}>
-              {renderNewBtn}
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  onClick={handleAddInput}
-                  sx={{
-                    color: "#fff",
-                    textTransform: "capitalize",
-                    display: "flex",
-
-                    gap: "8px",
-                    fontSize: "1.1em",
-                  }}
-                >
-                  <AiOutlinePlus
-                    style={{
-                      fontSize: "1.3em",
-                    }}
-                  />
-                  Add more Button
-                </Button>
+              <Box
+                sx={{
+                  gap: "10px",
+                }}
+              >
+                <span>Button</span>
+                <input
+                  onChange={(e) => setNftMindBtn(e.target.value)}
+                  type="text"
+                  placeholder="Add your button"
+                />
               </Box>
             </Grid>
           </Grid>
@@ -302,4 +361,4 @@ function EditHeader(props) {
   );
 }
 
-export default EditHeader;
+export default MarketPlaceGeneral;

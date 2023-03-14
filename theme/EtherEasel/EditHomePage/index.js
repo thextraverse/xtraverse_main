@@ -6,76 +6,287 @@ import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
-
 import demoimg from "../../../components/images/blacklogo.svg";
-
-import CryptoCanvaSEdithero from "./EditHero";
-
-function EtherEaselEditHome() {
-  const [index, setIndex] = useState(0);
-  const [formId, setFormId] = useState(null);
-
-  //! Edit hero
-  // blur color
-  const [blur1, setBlur1] = useState("#1EA573");
-  const [blur2, setBlur2] = useState("#97C35E");
-  const [blur3, setBlur3] = useState("#20BC83");
-  const [homeLogo, setHomeLogo] = useState(demoimg);
-  const [uploadLogo, setUploadLogo] = useState(demoimg);
-
-  const handleImageChange = (event) => {
-    const imageFile = event.target.files[0];
-    setHomeLogo(URL.createObjectURL(imageFile));
-    setUploadLogo(imageFile);
-  };
-  const [editHeroName, setEditHeroName] = useState("Robo Gremlins");
-  const [editHeroScript, setEditHeroScript] = useState(
-    "Our Fancy Shamncy NFT Project is the king of all fancy shamncy NFT projects. And we are sworn enemies of Gary v."
-  );
-  const handleNext = () => {
-    setIndex(index === layouts.length - 1 ? 0 : index + 1);
-  };
-  const handlePrev = () => {
-    setIndex(index === 0 ? layouts.length - 1 : index - 1);
-  };
-  const layouts = [
-    <CryptoCanvaSEdithero
-      handleNext={handleNext}
-      setHomeLogo={setHomeLogo}
-      homeLogo={homeLogo}
-      uploadLogo={uploadLogo}
-      editHeroName={editHeroName}
-      setEditHeroName={setEditHeroName}
-      editHeroScript={editHeroScript}
-      setEditHeroScript={setEditHeroScript}
-      handleImageChange={handleImageChange}
-      blur1={blur1}
-      blur2={blur2}
-      blur3={blur3}
-      setBlur1={setBlur1}
-      setBlur2={setBlur2}
-      setBlur3={setBlur3}
-      formId={formId}
-      setFormId={setFormId}
-      key="1"
-    />,
-    // <Editfeature handleNext={handleNext} key="3" />,
-    // <Editwaitlist handleNext={handleNext} key="4" />,
-    // <EditFAQ handleNext={handleNext} key="5" />,
-    // <Editfooter handleNext={handleNext} key="6" />,
-  ];
+import { HomepagePreview } from "../../../components/dashboard/edithome/homepage.styled";
+import { Grid } from "@mui/joy";
+function EtherEaselEditHome({
+  homeLogo,
+  homeBg,
+  desBg,
+  headerType,
+  heroType,
+  desType,
+  heroButton,
+  editHeroHeading,
+  heroOverlayColor,
+  editHeroSubtext,
+  menuInput,
+  waitlistInput,
+  desOverlayColor,
+  desSubHeading,
+  desHeading,
+  desSubtext,
+}) {
   return (
     <>
-      {layouts[index]}
-      {/* <ul className="activeDot">
-        <li className={index === 0 ? "active" : ""}></li>
-        <li className={index === 1 ? "active" : ""}></li>
-        <li className={index === 2 ? "active" : ""}></li>
-        <li className={index === 3 ? "active" : ""}></li>
-        <li className={index === 4 ? "active" : ""}></li>
-        <li className={index === 5 ? "active" : ""}></li>
-        <li className={index === 6 ? "active" : ""}></li>
-      </ul> */}
+      <HomepagePreview>
+        EtherEaselEditHome
+        <div className="homesec">
+          {/* header */}
+          {headerType != "header2" ? (
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: "4",
+                padding: "15px",
+              }}
+            >
+              <Grid container spacing={2}>
+                <Grid item xs={2.5}>
+                  <div className="logo">
+                    <Image
+                      src={homeLogo}
+                      alt="logo"
+                      width={100}
+                      height={100}
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={7}>
+                  <div className="headerbtn">
+                    {Object.keys(menuInput).map((key) => (
+                      <button key={key}>{menuInput[key]}</button>
+                    ))}
+                  </div>
+                </Grid>
+                <Grid item xs={2.5}>
+                  <Button className="waitLstBtn">{waitlistInput}</Button>
+                </Grid>
+              </Grid>
+            </Box>
+          ) : (
+            <div className="headersc">
+              <div className="logo">
+                <Image
+                  src={homeLogo}
+                  alt="logo"
+                  width={100}
+                  height={100}
+                  style={{ width: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div className="headerbtn">
+                {Object.keys(menuInput).map((key) => (
+                  <button key={key}>{menuInput[key]}</button>
+                ))}
+                <Button className="waitLstBtn">{waitlistInput}</Button>
+              </div>
+            </div>
+          )}
+
+          {/* herosection */}
+          {heroType === "hero3" ? (
+            <div className="herosec hero3">
+              <div className="herotxt">
+                <h1>{editHeroHeading}</h1>
+                <p>{editHeroSubtext}</p>
+                <Box
+                  sx={{
+                    width: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  <Button
+                    sx={{
+                      width: "fit-content",
+                    }}
+                  >
+                    {heroButton}
+                  </Button>
+                </Box>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={
+                heroType === "hero2" ? "herosec hero2" : "herosec hero1"
+              }
+            >
+              <div className="herotxt">
+                <h1>{editHeroHeading}</h1>
+                <p>{editHeroSubtext}</p>
+                <Box
+                  sx={{
+                    width: "100%",
+                    textAlign: "start",
+                  }}
+                >
+                  <Button
+                    sx={{
+                      width: "fit-content",
+                    }}
+                  >
+                    {heroButton}
+                  </Button>
+                </Box>
+              </div>
+              <div className="heroImg">
+                {homeBg ? (
+                  <Image
+                    src={homeBg}
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src="/images/templatePage/homeimgpreview.png"
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+          {heroType === "hero3" ? (
+            <div className="bgimage">
+              {homeBg ? (
+                <Image
+                  src={homeBg}
+                  alt="home background image"
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                <Image
+                  src="/images/templatePage/homeimgpreview.svg"
+                  alt="home background image"
+                  width={100}
+                  height={100}
+                />
+              )}
+            </div>
+          ) : (
+            ""
+          )}
+          <Box
+            component="div"
+            className="overlaybg"
+            sx={{ background: `${heroOverlayColor}` }}
+          ></Box>
+        </div>
+        {/* description section */}
+        <div className="homesec descriptionsc">
+          {desType === "destype3" ? (
+            <div className="herosec destype3">
+              <div className="herotxt">
+                <span>{desSubHeading}</span>
+                <h1>{desHeading}</h1>
+                <p>{desSubtext}</p>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div className="grdntsc">
+                    <div className="GrdntBox"></div>
+                    <h5>
+                      Collections Indexed <br /> every 5mins
+                    </h5>
+                  </div>
+
+                  <div className="grdntsc">
+                    <div className="GrdntBox"></div>
+                    <h5>
+                      Difference in Floor <br /> & Estimated Value
+                    </h5>
+                  </div>
+                </Box>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={
+                desType === "destype2" ? "herosec destype2" : "herosec destype1"
+              }
+            >
+              <div className="herotxt">
+                <span>{desSubHeading}</span>
+                <h1>{desHeading}</h1>
+                <p>{desSubtext}</p>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <div className="grdntsc">
+                      <div className="GrdntBox"></div>
+                      <h5>
+                        Collections Indexed <br /> every 5mins
+                      </h5>
+                    </div>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <div className="grdntsc">
+                      <div className="GrdntBox"></div>
+                      <h5>
+                        Difference in Floor <br /> & Estimated Value
+                      </h5>
+                    </div>
+                  </Grid>
+                </Grid>
+              </div>
+              <div className="heroImg">
+                {desBg ? (
+                  <Image
+                    src={desBg}
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src="/images/templatePage/descriptionblock.png"
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+          {desType === "destype3" ? (
+            <div className="bgimage">
+              {desBg ? (
+                <Image
+                  src={desBg}
+                  alt="home background image"
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                <Image
+                  src="/images/templatePage/hdescriptionblock.svg"
+                  alt="home background image"
+                  width={100}
+                  height={100}
+                />
+              )}
+            </div>
+          ) : (
+            ""
+          )}
+          <Box
+            component="div"
+            className="overlaybg"
+            sx={{ background: `${desOverlayColor}` }}
+          ></Box>
+        </div>
+      </HomepagePreview>
     </>
   );
 }

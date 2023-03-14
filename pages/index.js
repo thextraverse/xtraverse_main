@@ -113,6 +113,20 @@ const Heading = styled.div`
 const H1 = styled.h1`
   padding-left: 50px;
 `;
+export const XtraverseContainer = styled.div`
+  @media screen and (min-width: 1200px) {
+    width: 1200px;
+    margin: auto;
+  }
+  @media screen and (min-width: 1536px) {
+    width: 1500px;
+    margin: auto;
+  }
+  @media screen and (min-width: 1840px) {
+    width: 1750px;
+    margin: auto;
+  }
+`;
 export default function Home() {
   return (
     <>

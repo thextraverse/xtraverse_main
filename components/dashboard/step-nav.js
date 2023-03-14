@@ -58,7 +58,7 @@ function Stepnav() {
       label: "03 Edit Website /",
     },
     {
-      href: "/project/editWebsite",
+      href: "/project/launch",
       label: "04 Launch",
     },
   ];

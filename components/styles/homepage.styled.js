@@ -64,7 +64,23 @@ export const Form = styled.form`
       }
     }
   }
-
+  .BtnLinksc {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    button {
+      width: 100%;
+      background: #252525;
+      padding: 15px 0px;
+      border-radius: 15px;
+      &.active {
+        border: 2px solid #04fcbc;
+      }
+      svg {
+        transform: scale(1.6);
+      }
+    }
+  }
   &.forminput {
     .dltBtn {
       width: 35px;
@@ -107,6 +123,15 @@ export const Form = styled.form`
       line-height: 120%;
       padding: 10px 0px;
     }
+  }
+  .grndBrdr {
+    width: 100%;
+    padding: 15px;
+    background: #252525;
+    border-radius: 10px;
+    color: #fff;
+    border: 2px solid #04fcbc;
+    margin-bottom: 18px;
   }
   .selectColorType {
     position: relative;
@@ -292,22 +317,46 @@ export const Form = styled.form`
 export const EditorInputSec = styled.div`
   position: fixed;
   width: 580px;
-  height: 88vh;
+  height: 85vh;
   z-index: 9;
   background: #303030;
-  padding: 5px 20px;
+  padding: 0px 20px 20px 20px;
   overflow-x: hidden;
 
   /* border-right: 1px solid #fff; */
 `;
+
 export const PageEditorFrom = styled.div`
   background: #303030;
   border: 2px solid #4f4f4f;
   border-radius: 16px;
+
   .page-editor-form {
     position: relative;
     height: auto;
     border-bottom: 2px solid #4f4f4f;
+    transition: 0.2s;
+    &.active {
+      .page-editor-form-btn {
+        background: #04fcbc;
+        color: #303030;
+        border-radius: 0px;
+      }
+      &:first-of-type {
+        .page-editor-form-btn {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+      }
+      .visibility {
+        svg {
+          color: #303030;
+        }
+      }
+    }
+    &:last-of-type {
+      border-bottom: none;
+    }
   }
   .page-editor-heading-btn {
     background-color: #303030;
@@ -319,14 +368,19 @@ export const PageEditorFrom = styled.div`
     max-height: 0;
     overflow: hidden;
     border-radius: 10px;
+    transition: max-height 0.3s ease-in-out;
     li {
       padding: 10px 20px;
     }
   }
 
   .page-editor-form.active {
+    transition: max-height 0.5s ease-in-out;
+
     .page-editor-content-input {
-      max-height: 100%; /* or whatever max height you want to set */
+      transition: max-height 0.5s ease-in-out;
+
+      max-height: 300vh; /* or whatever max height you want to set */
     }
 
     .activesvg {
@@ -340,6 +394,7 @@ export const PageEditorFrom = styled.div`
       position: absolute;
       right: 50px;
       top: 25%;
+      display: none;
       cursor: pointer;
     }
   }
@@ -360,6 +415,9 @@ export const PageEditorFrom = styled.div`
       display: block;
       margin: 0px;
       border-radius: 10px;
+      &.active {
+        border: 2px solid #04fcbc;
+      }
     }
 
     h2 {
@@ -369,6 +427,27 @@ export const PageEditorFrom = styled.div`
       font-weight: 500;
       text-transform: capitalize;
     }
+  }
+  .ant-space-item {
+    width: 100%;
+  }
+
+  .ant-select-selector {
+    height: 50px !important;
+    background: #252525 !important;
+    border: none !important;
+    margin: 5px 0px 25px;
+  }
+  .ant-select-selection-item {
+    display: flex;
+    align-items: center;
+  }
+  label {
+    font-weight: 500;
+    font-size: 1rem;
+    /* identical to box height */
+
+    color: #b1b1b1;
   }
 `;
 export const HomepagePreview = styled.div`

@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid";
 import { IoMdCloudUpload } from "react-icons/io";
-import { Form } from "../homepage.styled";
+import { Form } from "../../../styles/homepage.styled";
 import { RiTicketLine } from "react-icons/ri";
 import { HomepagePreview } from "../edithomepage.style";
 import firstimg from "../../../images/project1.png";

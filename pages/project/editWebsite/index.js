@@ -6,6 +6,8 @@ import Sidebar, {
 } from "../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../components/dashboard/step-nav";
 import { db, storage } from "../../../configfile/firebaseConfig";
+import { AiOutlineEye } from "react-icons/ai";
+
 import { v4 } from "uuid";
 import {
   query,
@@ -30,8 +32,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import Edithero from "../../../components/dashboard/edithome/EditHero";
-import EditHeader from "../../../components/dashboard/edithome/header/EditHeader";
+import Edithero from "../../../components/project/editWebsite/EditHero";
+import EditHeader from "../../../components/project/editWebsite/header/EditHeader";
 import demoimg from "../../../components/images/blacklogo.svg";
 import firstimg from "../../../components/images/project1.png";
 import Image from "next/image";
@@ -42,12 +44,13 @@ import {
   Main,
   PageEditorFrom,
   EditorInputSec,
-} from "../../../components/dashboard/edithome/homepage.styled";
-import EditDescription from "../../../components/dashboard/edithome/EditDescriptionBlock";
+} from "../../../components/styles/homepage.styled";
+import EditDescription from "../../../components/project/editWebsite/EditDescriptionBlock";
 import CryptoCanvasEditHome from "../../../theme/CryptoCanvas/EditHomePage";
 import EtherEaselEditHome from "../../../theme/EtherEasel/EditHomePage";
 import PixelVaultEditHome from "../../../theme/PixelVault/EditHomePage";
 import { XtraverseContainer } from "../..";
+import { BtnContainer } from "../../../components/styles/uploadnft.style";
 function EditHomePageindex() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
@@ -426,7 +429,7 @@ function EditHomePageindex() {
       <Main>
         <Stepnav />
         <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={2} />
+          <Sidebar activeBtn={4} />
           <Box
             sx={{
               marginLeft: "auto",
@@ -607,7 +610,34 @@ function EditHomePageindex() {
                       textAlign: "center",
                     }}
                   >
-                    <Button onClick={handleDataSubmit}>Publish</Button>
+                    <BtnContainer>
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.4035 2.37412 8.8944 3.03947 7.55556"
+                          stroke="#8A8A8E"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          gap: "20px",
+                        }}
+                      >
+                        <Button onClick={handleDataSubmit}>Publish</Button>
+                        <Button onClick={handleDataSubmit}>
+                          See full preview <AiOutlineEye />
+                        </Button>
+                      </Box>
+                    </BtnContainer>
                     {tempalteId === "CryptoCanvas" ? (
                       <CryptoCanvasEditHome
                         homeLogo={homeLogo}

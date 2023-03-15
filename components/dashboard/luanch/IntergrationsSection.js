@@ -1012,7 +1012,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={discord} />
+                <Image src={discord} alt="discord" />
               </Box>
 
               <Box

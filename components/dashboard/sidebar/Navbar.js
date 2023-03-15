@@ -221,7 +221,7 @@ const items = [
   ),
   getItem(
     "Setting",
-    "7",
+    "/",
     <svg
       width="24"
       height="24"

@@ -208,9 +208,9 @@ function DomainType({ handleNext, domain, setDomain }) {
         <Grid container>
           <Grid xs={12}>
             <Box sx={{}}>
-              <h1>You're all set!</h1>
+              <h1>You are all set!</h1>
               <p className="allset" style={{ textAlign: "left" }}>
-                We &apos; ll scan for your domain name and provision an SSL
+                We will scan for your domain name and provision an SSL
                 certificate automatically for free. Usually DNS propagation
                 happens quickly. However, in the worst case, it may take up to
                 24 hours.

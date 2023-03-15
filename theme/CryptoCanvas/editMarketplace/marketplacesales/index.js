@@ -72,19 +72,21 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
                   </div>
                 </Box>
 
-                <a target="_blank" href={waitlistBtn.link}>
-                  <Button
-                    className="waitLstBtn"
-                    sx={{
-                      transform: "translateY(20px)",
-                      background:
-                        "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%)",
-                      color: "#fff",
-                    }}
-                  >
-                    {waitlistBtn.button}
-                  </Button>
-                </a>
+                <Link href={waitlistBtn.link}>
+                  <a target="_blank">
+                    <Button
+                      className="waitLstBtn"
+                      sx={{
+                        transform: "translateY(20px)",
+                        background:
+                          "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%)",
+                        color: "#fff",
+                      }}
+                    >
+                      {waitlistBtn.button}
+                    </Button>
+                  </a>
+                </Link>
               </Box>
             ) : (
               <div className="headersc">
@@ -247,31 +249,34 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
             <Image src={selectedVideo} width={100} height={100} />
           </div>
           <p>{addStory}</p>
-          <a href={featureBtn.link} target="_blank">
-            <Button
-              type="submit"
-              sx={{
-                background: "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                borderRadius: "8px",
-                color: "#000",
-                fontSize: ".9em",
-                textTransform: "capitalize",
-                padding: "8px 25px",
-                transition: "0.3s",
-                fontWeight: "500",
-                margin: "10px 0px",
-                display: "inline-flex",
-
-                "&:hover ": {
+          <Link href={featureBtn.link}>
+            <a target="_blank">
+              <Button
+                type="submit"
+                sx={{
                   background:
-                    "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                  cursor: "pointer",
-                },
-              }}
-            >
-              {featureBtn.button}
-            </Button>
-          </a>
+                    "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                  borderRadius: "8px",
+                  color: "#000",
+                  fontSize: ".9em",
+                  textTransform: "capitalize",
+                  padding: "8px 25px",
+                  transition: "0.3s",
+                  fontWeight: "500",
+                  margin: "10px 0px",
+                  display: "inline-flex",
+
+                  "&:hover ": {
+                    background:
+                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                    cursor: "pointer",
+                  },
+                }}
+              >
+                {featureBtn.button}
+              </Button>
+            </a>
+          </Link>
         </div>
       </PreviewBox>
       <PreviewBox>
@@ -317,29 +322,31 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
 
             <p>{projectBio}</p>
             <Box>
-              <a href={projectBtn.link} target="_blank">
-                <Button
-                  sx={{
-                    background:
-                      "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                    borderRadius: "8px",
-                    color: "#000",
-                    fontSize: ".9em",
-                    textTransform: "capitalize",
-                    padding: "8px 25px",
-                    transition: "0.3s",
-                    fontWeight: "500",
-                    margin: "10px 0px",
-                    "&:hover ": {
+              <Link href={projectBtn.link}>
+                <a target="_blank">
+                  <Button
+                    sx={{
                       background:
-                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  {projectBtn.button}
-                </Button>
-              </a>
+                        "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                      borderRadius: "8px",
+                      color: "#000",
+                      fontSize: ".9em",
+                      textTransform: "capitalize",
+                      padding: "8px 25px",
+                      transition: "0.3s",
+                      fontWeight: "500",
+                      margin: "10px 0px",
+                      "&:hover ": {
+                        background:
+                          "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    {projectBtn.button}
+                  </Button>
+                </a>
+              </Link>
             </Box>
           </div>
         </div>

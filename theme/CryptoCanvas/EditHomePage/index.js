@@ -83,14 +83,16 @@ function CryptoCanvasEditHome({
                     </div>
                   </Box>
 
-                  <a target="_blank" href={waitlistBtn.link}>
-                    <Button
-                      className="waitLstBtn"
-                      sx={{ background: btnBgColor }}
-                    >
-                      {waitlistBtn.button}
-                    </Button>
-                  </a>
+                  <Link href={waitlistBtn.link}>
+                    <a target="_blank">
+                      <Button
+                        className="waitLstBtn"
+                        sx={{ background: btnBgColor }}
+                      >
+                        {waitlistBtn.button}
+                      </Button>
+                    </a>
+                  </Link>
                 </Box>
               </Box>
             ) : (
@@ -113,14 +115,16 @@ function CryptoCanvasEditHome({
                       : ""}
                   </ul>
 
-                  <a target="_blank" href={waitlistBtn.link}>
-                    <Button
-                      className="waitLstBtn"
-                      sx={{ background: btnBgColor }}
-                    >
-                      {waitlistBtn.button}
-                    </Button>
-                  </a>
+                  <Link href={waitlistBtn.link}>
+                    <a target="_blank">
+                      <Button
+                        className="waitLstBtn"
+                        sx={{ background: btnBgColor }}
+                      >
+                        {waitlistBtn.button}
+                      </Button>
+                    </a>
+                  </Link>
                 </div>
               </div>
             )}

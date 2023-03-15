@@ -11,8 +11,7 @@ import { useRouter } from "next/router";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-
+import { Select, Space } from "antd";
 import { AiOutlinePlus } from "react-icons/ai";
 import {
   ref,
@@ -34,7 +33,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
-import { Form } from "../../dashboard/edithome/homepage.styled";
+import { Form } from "../../styles/homepage.styled";
 import { HomepagePreview } from "../../dashboard/edithome/edithomepage.style";
 import { db, auth, storage } from "../../../configfile/firebaseConfig";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
@@ -263,35 +262,31 @@ function MarketPlaceGeneral(props) {
               </Box>
             </Grid>
             <Grid xs={12}>
-              <FormControl
-                fullWidth
-                sx={{
-                  border: "2px solid #fff",
-                  borderRadius: "10px",
-                  color: "#000",
-                }}
-              >
-                <InputLabel
-                  id="demo-simple-select-label"
-                  sx={{ color: "#fff", fontWeight: "600" }}
-                >
-                  Type
-                </InputLabel>
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={nftType}
-                  sx={{ color: "#fff" }}
-                  label="Age"
-                  onChange={(e) => setNftType(e.target.value)}
-                >
-                  <MenuItem value={"Waitlist"} sx={{ color: "#000" }}>
-                    <em>Waitlist</em>
-                  </MenuItem>
-                  <MenuItem value={"Whitelist"} sx={{ color: "#000" }}>
-                    Whitelist
-                  </MenuItem>
-                </Select>
+              <FormControl fullWidth sx={{}}>
+                <span htmlFor="fundType">Add utility</span>
+                <Space wrap>
+                  <Select
+                    defaultValue="lucy"
+                    style={{
+                      width: "100%",
+                    }}
+                    // onChange={handleChange}
+                    options={[
+                      {
+                        value: "jack",
+                        label: "Jack",
+                      },
+                      {
+                        value: "lucy",
+                        label: "Lucy",
+                      },
+                      {
+                        value: "Yiminghe",
+                        label: "yiminghe",
+                      },
+                    ]}
+                  />
+                </Space>
               </FormControl>
             </Grid>
             <Grid xs={12}>
@@ -337,6 +332,28 @@ function MarketPlaceGeneral(props) {
                     </svg>
                     Upload NFT
                   </span>
+                </div>
+              </Box>
+            </Grid>
+            <Grid xs={12}>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: "50% auto",
+                  gap: "10px",
+                }}
+              >
+                <div>
+                  <span>Price</span>
+                  <input
+                    onChange={(e) => setNftPrice(e.target.value)}
+                    type="number"
+                    placeholder=""
+                  />
+                </div>
+                <div>
+                  <span>Chain</span>
+                  <input type="text" placeholder="" />
                 </div>
               </Box>
             </Grid>

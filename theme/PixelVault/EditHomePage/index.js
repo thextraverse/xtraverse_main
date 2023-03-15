@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import demoimg from "../../../components/images/blacklogo.svg";
-import { HomepagePreview } from "../../../components/dashboard/edithome/homepage.styled";
+import { HomepagePreview } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 function PixelVaultEditHome({
   homeLogo,

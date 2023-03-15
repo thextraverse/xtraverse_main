@@ -9,7 +9,7 @@ import { RiTicketLine } from "react-icons/ri";
 import { HomepagePreview } from "./edithomepage.style";
 import firstimg from "../../images/project1.png";
 import { useRouter } from "next/router";
-import { Form } from "./homepage.styled";
+import { Form } from "../../styles/homepage.styled";
 import { RiDeleteBinLine } from "react-icons/ri";
 import ColorPicker from "react-best-gradient-color-picker";
 import { auth, db, storage } from "../../../configfile/firebaseConfig";

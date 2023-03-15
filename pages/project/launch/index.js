@@ -47,7 +47,7 @@ function Launch() {
       </Head>
 
       <Main>
-        <Sidebar activeBtn={5} />
+        <Sidebar activeBtn={6} />
         <Stepnav />
         <Box
           sx={{

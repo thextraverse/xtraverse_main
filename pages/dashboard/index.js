@@ -23,6 +23,18 @@ export default function layout() {
     <Main>
       <Dashboardsc>
         <Sidebar activeBtn={1} heading={"Dashboard"} />
+        <Box
+          sx={{
+            display: "grid",
+            placeItems: "center",
+
+            height: "100vh",
+            width: "100%",
+          }}
+        >
+          <h1>Hey don't ignore me, I'm the dashboard</h1>
+        </Box>
+
         {/* <CreateProject /> */}
       </Dashboardsc>
     </Main>

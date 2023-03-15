@@ -35,21 +35,15 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaPercent } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
 
-function MarketPlaceFeatures(props) {
+function MarketPlaceProjectBio(props) {
   const {
-    handleVideoChange,
-    setAddStory,
-    handleServiceAdd,
-    handleServiceChange,
-    royaltiesList,
-    featureBtn,
-    setFeatureBtn,
-    setVideoTitle,
-    tokenType,
-    setTokenType,
-    mintType,
-    setMintType,
-    handleButtonChange,
+    setPrjctBioCollection,
+    setProjectBio,
+    setProjectBioStory,
+    handleProjectBtnChange,
+    projectBtn,
+    prjctSelectedVideo,
+    handlePrjctBioVideoChange,
   } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
@@ -225,69 +219,13 @@ function MarketPlaceFeatures(props) {
             </Box>
 
             <Grid xs={12}>
-              <div className="typslction">
-                <Box sx={{ marginBottom: "10px" }}>
-                  <span>Token type</span>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "50% auto",
-                      gap: "15px",
-                      marginTop: "5px",
-                    }}
-                  >
-                    <Button
-                      onClick={(e) => setTokenType("ERC-721A")}
-                      className={tokenType === "ERC-721A" ? "active" : ""}
-                    >
-                      <h2>ERC-721A</h2>
-                      <p>Each unique token only has one owner.</p>
-                    </Button>
-                    <Button
-                      onClick={(e) => setTokenType("RC-1155")}
-                      className={tokenType === "RC-1155" ? "active" : ""}
-                    >
-                      <h2>ERC-1155</h2>
-                      <p>Each token is unique to multiple owner.</p>
-                    </Button>
-                  </Box>
-                </Box>
-                <Box sx={{ marginBottom: "10px" }}>
-                  <span>Mint type</span>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "50% auto",
-                      gap: "15px",
-                      marginTop: "5px",
-                    }}
-                  >
-                    <Button
-                      onClick={(e) => setMintType("Regular")}
-                      className={mintType === "Regular" ? "active" : ""}
-                    >
-                      <h2>Regular</h2>
-                      <p>You pay gas fees</p>
-                    </Button>
-                    <Button
-                      onClick={(e) => setMintType("Lazy")}
-                      className={mintType === "Lazy" ? "active" : ""}
-                    >
-                      <h2>Lazy</h2>
-                      <p>Buyer pay gas fees</p>
-                    </Button>
-                  </Box>
-                </Box>
-              </div>
-            </Grid>
-            <Grid xs={12}>
               <Box>
                 <div className="inputsc">
                   <input
                     type="file"
                     placeholder="video upload"
-                    onChange={handleVideoChange}
-                    accept="video/mp4,video/x-m4v,video/*,image/*"
+                    onChange={handlePrjctBioVideoChange}
+                    accept="video/mp4,video/x-m4v,video/*"
                   />
                   <span>
                     <svg
@@ -305,69 +243,38 @@ function MarketPlaceFeatures(props) {
                         stroke-linejoin="round"
                       />
                     </svg>
-                    Upload Content
+                    Upload Video
                   </span>
                 </div>
               </Box>
             </Grid>
             <Grid xs={12}>
-              <Box>
-                <span>Heading</span>
+              <Box sx={{}}>
+                <span>Collection Name</span>
                 <input
+                  onChange={(e) => setPrjctBioCollection(e.target.value)}
                   type="text"
-                  placeholder="Draken's Origin"
-                  onChange={(e) => setVideoTitle(e.target.value)}
+                  placeholder="EX: Green Gremlins"
                 />
               </Box>
             </Grid>
             <Grid xs={12}>
               <Box>
-                <span>Add Story </span>
+                <span>Add Story</span>
+                <input
+                  onChange={(e) => setProjectBioStory(e.target.value)}
+                  type="text"
+                  placeholder="Add your story"
+                />
+              </Box>
+            </Grid>
+            <Grid xs={12}>
+              <Box>
+                <span>Project Bio </span>
                 <textarea
-                  onChange={(e) => setAddStory(e.target.value)}
-                  placeholder="Add your "
+                  onChange={(e) => setProjectBio(e.target.value)}
+                  placeholder="Project Bio "
                 />
-              </Box>
-            </Grid>
-            <Grid xs={12}>
-              <Box>
-                {royaltiesList.map((singleService, index) => (
-                  <div key={index} className="services">
-                    <span>Royalties</span>
-                    <div className="royalties">
-                      <div className="roayltiesinput">
-                        <input
-                          type="text"
-                          placeholder="Enter Wallet Address"
-                          name="royalties"
-                          value={singleService.service}
-                          onChange={(e) => handleServiceChange(e, index)}
-                        />
-
-                        <div className="parcentage">
-                          <PercentIcon />
-                        </div>
-                      </div>
-                      <Button onClick={handleServiceAdd}>
-                        <svg
-                          width="24"
-                          height="25"
-                          viewBox="0 0 24 25"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M8 12.5H12M12 12.5H16M12 12.5V8.5M12 12.5V16.5M11.6 22.5H12.4C15.7603 22.5 17.4405 22.5 18.7239 21.846C19.8529 21.2708 20.7708 20.3529 21.346 19.2239C22 17.9405 22 16.2603 22 12.9V12.1C22 8.73969 22 7.05953 21.346 5.77606C20.7708 4.64708 19.8529 3.7292 18.7239 3.15396C17.4405 2.5 15.7603 2.5 12.4 2.5H11.6C8.23969 2.5 6.55953 2.5 5.27606 3.15396C4.14708 3.7292 3.2292 4.64708 2.65396 5.77606C2 7.05953 2 8.73969 2 12.1V12.9C2 16.2603 2 17.9405 2.65396 19.2239C3.2292 20.3529 4.14708 21.2708 5.27606 21.846C6.55953 22.5 8.23969 22.5 11.6 22.5Z"
-                            stroke="white"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </Button>
-                    </div>
-                  </div>
-                ))}
               </Box>
             </Grid>
             <Grid xs={12}>
@@ -378,9 +285,9 @@ function MarketPlaceFeatures(props) {
               >
                 <span>Button</span>
                 <input
-                  onChange={(e) => handleButtonChange(e)}
+                  onChange={(e) => handleProjectBtnChange(e)}
                   type="text"
-                  value={featureBtn.button}
+                  value={projectBtn.button}
                   placeholder="e.g View on Marketplace"
                   name="button"
                 />
@@ -471,8 +378,8 @@ function MarketPlaceFeatures(props) {
                         }}
                       >
                         <input
-                          onChange={(e) => handleButtonChange(e)}
-                          value={featureBtn.link}
+                          onChange={(e) => handleProjectBtnChange(e)}
+                          value={projectBtn.link}
                           name="link"
                           id="link"
                           type="text"
@@ -523,4 +430,4 @@ function MarketPlaceFeatures(props) {
   );
 }
 
-export default MarketPlaceFeatures;
+export default MarketPlaceProjectBio;

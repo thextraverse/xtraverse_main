@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { FiHome } from "react-icons/fi";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 // import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -31,16 +31,14 @@ import project from "../../images/icons/project.png";
 import community from "../../images/icons/users.png";
 import launch from "../../images/icons/launch.png";
 import { Ul, SearchBox, Aside } from "../dashboard.styled";
-import { Button, Menu } from "antd";
 import settings from "../../images/icons/settings.png";
+import { Avatar, Menu, Dropdown } from "antd";
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuUnfoldOutlined,
+  UserOutlined,
+  SolutionOutlined,
+  LockOutlined,
+  TranslationOutlined,
+  PoweroffOutlined,
 } from "@ant-design/icons";
 
 export const drawerWidth = 120;
@@ -155,7 +153,7 @@ const items = [
         stroke-linejoin="round"
       />
     </svg>,
-    "project/editMarketplace"
+    "project/editMarketplace/marketplaceSalespage"
   ),
   getItem(
     "Website",
@@ -292,6 +290,43 @@ function Sidebar({ activeBtn, heading }) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const UserProfile = () => {
+    return (
+      <>
+        {user.photoURL ? (
+          <Image
+            src={user.photoURL}
+            alt="User Profile Picture"
+            width={100}
+            height={100}
+          />
+        ) : (
+          "M"
+        )}
+      </>
+    );
+  };
+
+  const widgetMenu = (
+    <Menu>
+      <Menu.Item>
+        <SolutionOutlined className="icon" />
+        profile
+      </Menu.Item>
+      <Menu.Item>
+        <LockOutlined className="icon" />
+        change password
+      </Menu.Item>
+      <Menu.Item>
+        <TranslationOutlined className="icon" />
+        change language
+      </Menu.Item>
+      <Menu.Item onClick={handleLogout}>
+        <PoweroffOutlined className="icon" />
+        sign out
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
@@ -344,7 +379,7 @@ function Sidebar({ activeBtn, heading }) {
               <input type="text" placeholder="Search..." />
             </SearchBox>
             <Box>
-              <Tooltip title="Account settings">
+              {/* <Tooltip title="Account settings">
                 <IconButton
                   onClick={handleProfileDropdown}
                   size="small"
@@ -378,7 +413,10 @@ function Sidebar({ activeBtn, heading }) {
                     )}
                   </Avatar>
                 </IconButton>
-              </Tooltip>
+              </Tooltip> */}
+              <Dropdown overlay={widgetMenu} placement="bottomRight">
+                <Avatar icon={<UserProfile />} />
+              </Dropdown>
             </Box>
           </Box>
         </Toolbar>

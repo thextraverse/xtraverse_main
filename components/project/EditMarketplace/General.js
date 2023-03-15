@@ -11,8 +11,9 @@ import { useRouter } from "next/router";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import { Select, Space } from "antd";
+// import { Select, Space } from "antd";
 import { AiOutlinePlus } from "react-icons/ai";
+import Select from "react-select";
 import {
   ref,
   uploadBytes,
@@ -34,7 +35,6 @@ import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import { Form } from "../../styles/homepage.styled";
-import { HomepagePreview } from "../../dashboard/edithome/edithomepage.style";
 import { db, auth, storage } from "../../../configfile/firebaseConfig";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
 function MarketPlaceGeneral(props) {
@@ -53,8 +53,7 @@ function MarketPlaceGeneral(props) {
     setNftPrice,
     nftMindBtn,
     setNftMindBtn,
-    nftType,
-    setNftType,
+    handleSelectUtility,
     handleImgUpload,
   } = props;
   const MySwal = withReactContent(Swal);
@@ -184,7 +183,45 @@ function MarketPlaceGeneral(props) {
       }
     );
   };
+  const options = [
+    { value: "Waitlist", label: "Waitlist" },
+    { value: "Whitelist", label: "Whitelist" },
+  ];
 
+  const colorStyles = {
+    control: (styles, state) => ({
+      ...styles,
+      backgroundColor: "#252525",
+      color: "#fff",
+      border: "transparent",
+      // borderColor: state.isFocused ? "#04fcbc" : "transparent",
+      // "&:hover": {
+      //   borderColor: state.isFocused ? "#04fcbc" : styles.borderColor,
+      // },
+      padding: "10px 0px",
+      margin: "10px 0px",
+      "& input": {
+        color: "#fff !important",
+      },
+    }),
+    highlight: (styles, state) => ({
+      ...styles,
+      backgroundColor: "yellow",
+      color: "#fff",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: "#000",
+      backgroundColor: state.isSelected ? "#04fcbc" : "#fff",
+      "&:active": {
+        backgroundColor: "blue",
+      },
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: "white", // Change this to your desired color
+    }),
+  };
   return (
     <>
       <Box
@@ -235,6 +272,7 @@ function MarketPlaceGeneral(props) {
                   type="text"
                   placeholder="Ex: Draken"
                   onChange={(e) => setNftName(e.target.value)}
+                  required
                 />
               </Box>
             </Grid>
@@ -245,6 +283,7 @@ function MarketPlaceGeneral(props) {
                   onChange={(e) => setNftCollectionName(e.target.value)}
                   type="text"
                   placeholder="EX: Green Gremlins"
+                  required
                 />
               </Box>
             </Grid>
@@ -258,18 +297,24 @@ function MarketPlaceGeneral(props) {
                   rows="10"
                   placeholder="Ex: DRK is the first of its kind..."
                   onChange={(e) => setNftDescript(e.target.value)}
+                  required
                 ></textarea>
               </Box>
             </Grid>
             <Grid xs={12}>
               <FormControl fullWidth sx={{}}>
                 <span htmlFor="fundType">Add utility</span>
-                <Space wrap>
+                <Select
+                  styles={colorStyles}
+                  options={options}
+                  isSearchable={true}
+                  onChange={handleSelectUtility}
+                />
+                {/* <Space wrap>
                   <Select
                     defaultValue="lucy"
-                    style={{
-                      width: "100%",
-                    }}
+                    style={{ width: "100%", color: "#fff" }}
+                    bordered={false}
                     // onChange={handleChange}
                     options={[
                       {
@@ -286,7 +331,7 @@ function MarketPlaceGeneral(props) {
                       },
                     ]}
                   />
-                </Space>
+                </Space> */}
               </FormControl>
             </Grid>
             <Grid xs={12}>
@@ -349,11 +394,12 @@ function MarketPlaceGeneral(props) {
                     onChange={(e) => setNftPrice(e.target.value)}
                     type="number"
                     placeholder=""
+                    required
                   />
                 </div>
                 <div>
                   <span>Chain</span>
-                  <input type="text" placeholder="" />
+                  <input type="text" placeholder="" required />
                 </div>
               </Box>
             </Grid>
@@ -368,6 +414,7 @@ function MarketPlaceGeneral(props) {
                   onChange={(e) => setNftMindBtn(e.target.value)}
                   type="text"
                   placeholder="Add your button"
+                  required
                 />
               </Box>
             </Grid>

@@ -129,7 +129,12 @@ export default function Project() {
   const router = useRouter();
   const { user } = useUserAuth();
   const uniqueId = v4();
-  const emailData = user.email;
+  let emailData = null;
+  if (user !== null && user.email) {
+    emailData = user.email;
+  } else if (typeof window !== "undefined") {
+    router.push("/");
+  }
 
   const [ProjectCoverImg, setProjectCoverImg] = useState();
   const [upldPrjctCover, setUpldPrjctCover] = useState("");
@@ -161,8 +166,8 @@ export default function Project() {
   };
   console.log(founderList);
 
-  const handleDataSubmit = async () => {
-    event.preventDefault();
+  const handleDataSubmit = async (e) => {
+    e.preventDefault();
     const imageRef = ref(storage, `images/${upldPrjctCover.name + v4()}`);
 
     // Upload the files to Firebase storage
@@ -225,7 +230,7 @@ export default function Project() {
       } else {
         alert("No documents found.");
       }
-      router.push("/project/selectProject");
+      router.push("/project/editMarketplace");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");

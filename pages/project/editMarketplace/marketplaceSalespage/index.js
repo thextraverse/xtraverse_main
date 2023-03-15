@@ -4,16 +4,17 @@ import { Box } from "@mui/system";
 import { AiOutlineEye } from "react-icons/ai";
 import Sidebar, {
   drawerWidth,
-} from "../../../components/dashboard/sidebar/Navbar";
-import Stepnav from "../../../components/dashboard/step-nav";
-import { db, storage } from "../../../configfile/firebaseConfig";
+} from "../../../../components/dashboard/sidebar/Navbar";
+import Stepnav from "../../../../components/dashboard/step-nav";
+import { db, storage } from "../../../../configfile/firebaseConfig";
 import { BsPlusCircle } from "react-icons/bs";
 import { v4 } from "uuid";
 import { RiTicketLine } from "react-icons/ri";
-import blueStatus from "../../../components/images/editwebsite/blue.png";
-import yellowStatus from "../../../components/images/editwebsite/yellowStatus.png";
-import nftPreviewimg from "../../../components/images/templatepage/uploadNft.png";
-import Predviewimg from "../../../components/images/templatepage/preivewimg.png";
+import blueStatus from "../../../../components/images/editwebsite/blue.png";
+import yellowStatus from "../../../../components/images/editwebsite/yellowStatus.png";
+import nftPreviewimg from "../../../../components/images/templatepage/uploadNft.png";
+import Predviewimg from "../../../../components/images/templatepage/preivewimg.png";
+// import projectBioVideo from "../../../../components/images/video/xtraverse.mp4";
 import {
   query,
   addDoc,
@@ -30,7 +31,7 @@ import {
   uploadBytesResumable,
   UploadTask,
 } from "firebase/storage";
-import { useUserAuth } from "../../../configfile/UserAuthContext";
+import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import { Button, Container, Grid } from "@mui/material";
 import { RiDeleteBinLine } from "react-icons/ri";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -45,23 +46,25 @@ import {
   Main,
   PageEditorFrom,
   EditorInputSec,
-} from "../../../components/styles/homepage.styled";
+} from "../../../../components/styles/homepage.styled";
 
-import { XtraverseContainer } from "../..";
-import MarketPlaceGeneral from "../../../components/project/EditMarketplace/General";
-import MarketPlaceFeatures from "../../../components/project/EditMarketplace/Features";
+import { XtraverseContainer } from "../../..";
+import MarketPlaceGeneral from "../../../../components/project/EditMarketplace/General";
+import MarketPlaceFeatures from "../../../../components/project/EditMarketplace/Features";
 import {
   PreviewBox,
   MarketPlaceDataPreview,
   BtnContainer,
-} from "../../../components/styles/uploadnft.style";
+} from "../../../../components/styles/uploadnft.style";
 
-import MarketPlaceProjectBio from "../../../components/project/EditMarketplace/ProjectBio";
+import MarketPlaceProjectBio from "../../../../components/project/EditMarketplace/ProjectBio";
 import Link from "next/link";
-import MarketPlaceClosing from "../../../components/project/EditMarketplace/Closing";
-import CryptoCanvasEditMarketPlace from "../../../theme/CryptoCanvas/editMarketplace";
+import MarketPlaceClosing from "../../../../components/project/EditMarketplace/Closing";
+import CryptoCanvasEditMarketPlace from "../../../../theme/CryptoCanvas/editMarketplace";
+import CryptoCanvasEditMarketPlaceSalespage from "../../../../theme/CryptoCanvas/editMarketplace/marketplacesales";
 import { useRouter } from "next/router";
-function EditHomePageindex() {
+function EditMarketPlaceSalesindex() {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
     if (index === activeIndex) {
@@ -92,7 +95,7 @@ function EditHomePageindex() {
   };
   console.log("nftType", utility);
   // console.log(tokenType, mintType);
-  const [imageupload, setImageUpload] = useState();
+  const [imageupload, setImageUpload] = useState(nftPreviewimg);
   const [selectedImage, setSelectedImage] = useState(nftPreviewimg);
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -116,7 +119,7 @@ function EditHomePageindex() {
   };
   console.log(featureBtn);
 
-  const [uploadVideoUrl, setUploadVideoUrl] = useState(null);
+  const [uploadVideoUrl, setUploadVideoUrl] = useState(Predviewimg);
   const [selectedVideo, setSelectedVideo] = useState(Predviewimg);
 
   const handleVideoChange = (event) => {
@@ -126,7 +129,6 @@ function EditHomePageindex() {
   };
 
   const [royaltiesList, setRoyaltiesList] = useState([{ founder: "" }]);
-
   const handleServiceChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...royaltiesList];
@@ -143,6 +145,7 @@ function EditHomePageindex() {
     setRoyaltiesList([...royaltiesList, { founder: "" }]);
   };
   //! for project bio
+
   const [prjctBioCollection, setPrjctBioCollection] = useState("Robois");
   const [projectBio, setProjectBio] = useState(
     "DRK is the first of its kind. Bringing AAA quality to the #NFT world with mythical creatures inside virtual realtiy space.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum. "
@@ -156,8 +159,12 @@ function EditHomePageindex() {
     SetProjectBtn({ ...projectBtn, [e.target.name]: e.target.value });
   };
 
-  const [prjctUploadVideoUrl, setPrjctUploadVideoUrl] = useState(null);
-  const [prjctSelectedVideo, setPrjctSelectedVideo] = useState(Predviewimg);
+  const [prjctUploadVideoUrl, setPrjctUploadVideoUrl] = useState(
+    "/video/xtraverse.mp4"
+  );
+  const [prjctSelectedVideo, setPrjctSelectedVideo] = useState(
+    "/video/xtraverse.mp4"
+  );
 
   const handlePrjctBioVideoChange = (event) => {
     const videoFile = event.target.files[0];
@@ -166,29 +173,29 @@ function EditHomePageindex() {
   };
 
   //! for Closing layout
-  const [closingTopTxt, setClosingTopTxt] = useState(
-    "Welcome to Robo Gremlins"
-  );
-  const [closingHeader, setClosingHeader] = useState("Congratulations");
-  const [closingSubtexxt, setClosingSubtexxt] = useState(
-    " Book a call with an onboarding manager to unlock full benefits. "
-  );
-  const [closingBtn, setClosingBtn] = useState({
-    button: "Book a Call",
-    link: "",
-  });
-  const handleClosingBtnChange = (e) => {
-    setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
-  };
+  //   const [closingTopTxt, setClosingTopTxt] = useState(
+  //     "Welcome to Robo Gremlins"
+  //   );
+  //   const [closingHeader, setClosingHeader] = useState("Congratulations");
+  //   const [closingSubtexxt, setClosingSubtexxt] = useState(
+  //     " Book a call with an onboarding manager to unlock full benefits. "
+  //   );
+  //   const [closingBtn, setClosingBtn] = useState({
+  //     button: "Book a Call",
+  //     link: "",
+  //   });
+  //   const handleClosingBtnChange = (e) => {
+  //     setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
+  //   };
 
-  const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(null);
-  const [closingSelectedVideo, setClosingSelectedVideo] = useState(Predviewimg);
+  //   const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(null);
+  //   const [closingSelectedVideo, setClosingSelectedVideo] = useState(Predviewimg);
 
-  const handleClosingBioVideoChange = (event) => {
-    const videoFile = event.target.files[0];
-    setClosingSelectedVideo(URL.createObjectURL(videoFile));
-    setClosingUploadVideoUrl(videoFile);
-  };
+  //   const handleClosingBioVideoChange = (event) => {
+  //     const videoFile = event.target.files[0];
+  //     setClosingSelectedVideo(URL.createObjectURL(videoFile));
+  //     setClosingUploadVideoUrl(videoFile);
+  //   };
 
   //!  upload section
   const uniqueId = v4();
@@ -199,7 +206,7 @@ function EditHomePageindex() {
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
-  const router = useRouter();
+
   // console.log("logo", storeLogo);
   // console.log("bg", storeBgImg);
   // console.log("bg", desBgStore);
@@ -207,106 +214,106 @@ function EditHomePageindex() {
   const handleDataSubmit = async () => {
     // const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
     // const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
-    // const generealimageRef = ref(
-    //   storage,
-    //   `images/nft${imageupload.name + v4()}`
-    // );
-    // const featurefilesRef = ref(
-    //   storage,
-    //   `images/nft${uploadVideoUrl.name + v4()}`
-    // );
-    // const projectBioVideoRef = ref(
-    //   storage,
-    //   `images/nft${prjctUploadVideoUrl.name + v4()}`
-    // );
+    const generealimageRef = ref(
+      storage,
+      `images/nft${imageupload.name + v4()}`
+    );
+    const featurefilesRef = ref(
+      storage,
+      `images/nft${uploadVideoUrl.name + v4()}`
+    );
+    const projectBioVideoRef = ref(
+      storage,
+      `images/nft${prjctUploadVideoUrl.name + v4()}`
+    );
     // const closingVideoRef = ref(
     //   storage,
     //   `video/${closingUploadVideoUrl.name + v4()}`
     // );
 
-    // // imageSnapshot, videoSnapshot
-    // // Upload the files to Firebase storage
-    // const [
-    //   generalimageSnapshot,
-    //   featuresimageSnapshot,
-    //   projectsVideoSnapshot,
-    //   closingVideoSnapshot,
-    // ] = await Promise.all([
-    //   uploadBytesResumable(generealimageRef, imageupload),
-    //   uploadBytesResumable(featurefilesRef, uploadVideoUrl),
-    //   uploadBytesResumable(projectBioVideoRef, prjctUploadVideoUrl),
-    //   uploadBytesResumable(closingVideoRef, closingUploadVideoUrl),
-    // ]);
-    // // Track upload progress for image
-    // let logoimageUploadProgress = 0;
-    // const generalfilesUploadTask = uploadBytesResumable(
-    //   generealimageRef,
-    //   imageupload
-    // );
-    // generalfilesUploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     logoimageUploadProgress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //     console.log(`Image Upload Progress: ${logoimageUploadProgress}%`);
-    //     setImageUploadProgrees(logoimageUploadProgress);
-    //     setUploadProgress(logoimageUploadProgress);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     console.log("Image upload complete.");
-    //   }
-    // );
+    // imageSnapshot, videoSnapshot
+    // Upload the files to Firebase storage
+    const [
+      generalimageSnapshot,
+      featuresimageSnapshot,
+      projectsVideoSnapshot,
+      closingVideoSnapshot,
+    ] = await Promise.all([
+      uploadBytesResumable(generealimageRef, imageupload),
+      uploadBytesResumable(featurefilesRef, uploadVideoUrl),
+      uploadBytesResumable(projectBioVideoRef, prjctUploadVideoUrl),
+      //   uploadBytesResumable(closingVideoRef, closingUploadVideoUrl),
+    ]);
+    // Track upload progress for image
+    let logoimageUploadProgress = 0;
+    const generalfilesUploadTask = uploadBytesResumable(
+      generealimageRef,
+      imageupload
+    );
+    generalfilesUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        logoimageUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${logoimageUploadProgress}%`);
+        setImageUploadProgrees(logoimageUploadProgress);
+        setUploadProgress(logoimageUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
 
-    // let bgimageUploadProgress = 0;
-    // const featurefilesUploadTask = uploadBytesResumable(
-    //   featurefilesRef,
-    //   uploadVideoUrl
-    // );
-    // featurefilesUploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     bgimageUploadProgress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //     console.log(`Image Upload Progress: ${bgimageUploadProgress}%`);
-    //     setImageUploadProgrees(bgimageUploadProgress);
-    //     setUploadProgress(bgimageUploadProgress);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     console.log("Image upload complete.");
-    //   }
-    // );
-    // let projectBioUploadProgress = 0;
-    // const projectBioUploadTask = uploadBytesResumable(
-    //   projectBioVideoRef,
-    //   prjctUploadVideoUrl
-    // );
-    // projectBioUploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     projectBioUploadProgress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //     console.log(`Image Upload Progress: ${projectBioUploadProgress}%`);
-    //     setImageUploadProgrees(projectBioUploadProgress);
-    //     setUploadProgress(projectBioUploadProgress);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     console.log("Image upload complete.");
-    //   }
-    // );
+    let bgimageUploadProgress = 0;
+    const featurefilesUploadTask = uploadBytesResumable(
+      featurefilesRef,
+      uploadVideoUrl
+    );
+    featurefilesUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        bgimageUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${bgimageUploadProgress}%`);
+        setImageUploadProgrees(bgimageUploadProgress);
+        setUploadProgress(bgimageUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
+    let projectBioUploadProgress = 0;
+    const projectBioUploadTask = uploadBytesResumable(
+      projectBioVideoRef,
+      prjctUploadVideoUrl
+    );
+    projectBioUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        projectBioUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${projectBioUploadProgress}%`);
+        setImageUploadProgrees(projectBioUploadProgress);
+        setUploadProgress(projectBioUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
 
-    // let closingUploadProgress = 0;
+    let closingUploadProgress = 0;
     // const closingUploadTask = uploadBytesResumable(
     //   closingVideoRef,
     //   closingUploadVideoUrl
@@ -329,114 +336,123 @@ function EditHomePageindex() {
     //   }
     // );
 
-    // // Wait for all the files to finish uploading
-    // await Promise.all([
-    //   generalfilesUploadTask,
-    //   featurefilesUploadTask,
-    //   projectBioUploadTask,
-    //   closingUploadTask,
-    //   // desimageUploadTask,
-    // ]);
-    // // Get the download URLs for the files
-    // // const [logoimageUrl, herobgimageUrl, desibgimageUrl] = await Promise.all([
-    // const [
-    //   generalimageUrl,
-    //   featuresimageUrl,
-    //   projectBioVideoUrl,
-    //   closingVideoUrl,
-    // ] = await Promise.all([
-    //   getDownloadURL(generalimageSnapshot.ref),
-    //   getDownloadURL(featuresimageSnapshot.ref),
-    //   getDownloadURL(projectsVideoSnapshot.ref),
-    //   getDownloadURL(closingVideoSnapshot.ref),
-    // ]);
+    // Wait for all the files to finish uploading
+    await Promise.all([
+      generalfilesUploadTask,
+      featurefilesUploadTask,
+      projectBioUploadTask,
+      //   closingUploadTask,
+      // desimageUploadTask,
+    ]);
+    // Get the download URLs for the files
+    // const [logoimageUrl, herobgimageUrl, desibgimageUrl] = await Promise.all([
+    const [
+      generalimageUrl,
+      featuresimageUrl,
+      projectBioVideoUrl,
+      //   closingVideoUrl,
+    ] = await Promise.all([
+      getDownloadURL(generalimageSnapshot.ref),
+      getDownloadURL(featuresimageSnapshot.ref),
+      getDownloadURL(projectsVideoSnapshot.ref),
+      //   getDownloadURL(closingVideoSnapshot.ref),
+    ]);
 
-    // try {
-    //   const usersRef = collection(db, "Users");
-    //   const q = query(usersRef, where("Email", "==", emailData));
-    //   const querySnapshot = await getDocs(q);
+    try {
+      const usersRef = collection(db, "Users");
+      const q = query(usersRef, where("Email", "==", emailData));
+      const querySnapshot = await getDocs(q);
 
-    //   if (!querySnapshot.empty) {
-    //     const autoId = querySnapshot.docs[0].id;
-    //     console.log(`AutoId: ${autoId}`);
-    //     try {
-    //       const userDataCollectionRef = collection(
-    //         db,
-    //         "Users",
-    //         autoId,
-    //         "marketplaceData"
-    //       );
-    //       const querySnapshot = await getDocs(userDataCollectionRef);
+      if (!querySnapshot.empty) {
+        const autoId = querySnapshot.docs[0].id;
+        console.log(`AutoId: ${autoId}`);
+        try {
+          const userDataCollectionRef = collection(
+            db,
+            "Users",
+            autoId,
+            "marketplaceData"
+          );
+          const querySnapshot = await getDocs(userDataCollectionRef);
 
-    //       if (!querySnapshot.empty) {
-    //         // User data exists in database, update the existing document
-    //         const docId = querySnapshot.docs[0].id;
-    //         // console.log(`DocId: ${docId}`);
-    //         const docRef = doc(userDataCollectionRef, docId);
-    //         await updateDoc(docRef, {
-    //           nftImg: generalimageUrl,
-    //           featuresImg: featuresimageUrl,
+          if (!querySnapshot.empty) {
+            // User data exists in database, update the existing document
+            const docId = querySnapshot.docs[0].id;
+            // console.log(`DocId: ${docId}`);
+            const docRef = doc(userDataCollectionRef, docId);
+            await updateDoc(docRef, {
+              NftGeneralData: {
+                nftImg: generalimageUrl,
+                nftName: nftName,
+                collectionName: nftCollectionName,
+                nftDescription: addNftDescript,
+                utility: utility,
+                nftPrice: nftPrice,
+                nftMintBtn: nftMindBtn,
+              },
+              NftFeaturesData: {
+                featuresImg: featuresimageUrl,
+                TokenType: tokenType,
+                minType: mintType,
+                royaltiesList: royaltiesList,
+                featureBtn: featureBtn,
+                videoTitle: videoTitle,
+                addStory: addStory,
+              },
+              NftProjecBio: {
+                projectBioVideo: projectBioVideoUrl,
+                prjctBioCollection: prjctBioCollection,
+                projectBio: projectBio,
+                projectBioStory: projectBioStory,
+                projectBtn: projectBtn,
+              },
+            });
+            if (
+              MySwal.fire({
+                title: <strong>Uploaded</strong>,
+                icon: "success",
+              })
+            );
+          } else {
+            // User data does not exist in database, create a new document
+            await addDoc(userDataCollectionRef, {
+              nftImg: generalimageUrl,
+              featuresImg: featuresimageUrl,
 
-    //           collectionName: nftCollectionName,
-    //           nftName: nftName,
-    //           nftDescription: addNftDescript,
-    //           nftPrice: nftPrice,
-    //           nftMintBtn: nftMindBtn,
-    //           utility: utility,
-    //           TokenType: tokenType,
-    //           minType: mintType,
-    //           videoTitle: videoTitle,
-    //           addStory: addStory,
-    //           featureBtn: featureBtn,
-    //           royaltiesList: royaltiesList,
-    //           projectBioVideo: projectBioVideoUrl,
-    //           closingVideo: closingVideoUrl,
-    //         });
-    //         if (
-    //           MySwal.fire({
-    //             title: <strong>Uploaded</strong>,
-    //             icon: "success",
-    //           })
-    //         );
-    //       } else {
-    //         // User data does not exist in database, create a new document
-    //         await addDoc(userDataCollectionRef, {
-    //           nftImg: generalimageUrl,
-    //           featuresImg: featuresimageUrl,
+              collectionName: nftCollectionName,
+              nftName: nftName,
+              nftDescription: addNftDescript,
+              nftPrice: nftPrice,
+              nftMintBtn: nftMindBtn,
+              utility: utility,
+              TokenType: tokenType,
+              minType: mintType,
+              videoTitle: videoTitle,
+              addStory: addStory,
+              royaltiesList: royaltiesList,
+              projectBioVideo: projectBioVideoUrl,
+              closingVideo: closingVideoUrl,
+            });
+            if (
+              MySwal.fire({
+                title: <strong>Uploaded</strong>,
+                icon: "success",
+              })
+            );
+          }
+        } catch (error) {
+          console.error("Error updating document:", error);
+        }
+      } else {
+        console.log("No documents found.");
+      }
 
-    //           collectionName: nftCollectionName,
-    //           nftName: nftName,
-    //           nftDescription: addNftDescript,
-    //           nftPrice: nftPrice,
-    //           nftMintBtn: nftMindBtn,
-    //           utility: utility,
-    //           TokenType: tokenType,
-    //           minType: mintType,
-    //           videoTitle: videoTitle,
-    //           addStory: addStory,
-    //           royaltiesList: royaltiesList,
-    //           projectBioVideo: projectBioVideoUrl,
-    //           closingVideo: closingVideoUrl,
-    //         });
-    //         if (
-    //           MySwal.fire({
-    //             title: <strong>Uploaded</strong>,
-    //             icon: "success",
-    //           })
-    //         );
-    //       }
-    //     } catch (error) {
-    //       console.error("Error updating document:", error);
-    //     }
-    //   } else {
-    //     console.log("No documents found.");
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting form: ", error);
-    //   alert("Error submitting form. Please try again later.");
-    // }
-    // setUploadProgress("");
-    router.push("/project/editMarketplace/marketplaceSalespage");
+      router.push("/project/editMarketplace/thankyouPage");
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+      alert("Error submitting form. Please try again later.");
+    }
+    setUploadProgress("");
   };
   const [tempalteId, setTempalteId] = useState();
   const queryUser = collection(db, "Users");
@@ -484,7 +500,7 @@ function EditHomePageindex() {
           >
             <XtraverseContainer>
               <Grid container spacing={2}>
-                <Grid item xs={4}>
+                <Grid item lg={3} xl={4}>
                   <EditorInputSec>
                     <PageEditorFrom>
                       <div className="editorform">
@@ -511,7 +527,7 @@ function EditHomePageindex() {
                                 textTransform: "capitalize",
                               }}
                             >
-                              <span>General</span>
+                              <span>Offer General</span>
                               <KeyboardArrowDownIcon className="activesvg" />
                             </Button>
                             <div className="visibility">
@@ -560,7 +576,7 @@ function EditHomePageindex() {
                                 textTransform: "capitalize",
                               }}
                             >
-                              <span>Features</span>
+                              <span>Offer Features</span>
                               <KeyboardArrowDownIcon className="activesvg" />
                             </Button>
                             <div className="visibility">
@@ -609,7 +625,7 @@ function EditHomePageindex() {
                                 textTransform: "capitalize",
                               }}
                             >
-                              <span>Project Bio</span>
+                              <span>NFt Project Bio</span>
                               <KeyboardArrowDownIcon className="activesvg" />
                             </Button>
                             <div className="visibility">
@@ -629,50 +645,6 @@ function EditHomePageindex() {
                                 handlePrjctBioVideoChange
                               }
                               key="2"
-                            />
-                          </div>
-                        </div>
-                        {/* Closing */}
-                        <div
-                          className={
-                            activeIndex === 3
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => handleToggle(3)}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Closing</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-                          </div>
-
-                          <div className="page-editor-content-input">
-                            <MarketPlaceClosing
-                              setClosingTopTxt={setClosingTopTxt}
-                              setClosingHeader={setClosingHeader}
-                              setClosingSubtexxt={setClosingSubtexxt}
-                              setClosingBtn={setClosingBtn}
-                              closingBtn={closingBtn}
-                              handleClosingBtnChange={handleClosingBtnChange}
-                              handleClosingVideoChange={
-                                handleClosingBioVideoChange
-                              }
-                              key="3"
                             />
                           </div>
                         </div>
@@ -736,7 +708,7 @@ function EditHomePageindex() {
                     </Box>
                   </EditorInputSec>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item lg={9} xl={8}>
                   <Box
                     sx={{
                       background: "#252525",
@@ -774,7 +746,7 @@ function EditHomePageindex() {
                     </BtnContainer>
 
                     <MarketPlaceDataPreview>
-                      <CryptoCanvasEditMarketPlace
+                      <CryptoCanvasEditMarketPlaceSalespage
                         nftCollectionName={nftCollectionName}
                         nftName={nftName}
                         blueStatus={blueStatus}
@@ -791,11 +763,11 @@ function EditHomePageindex() {
                         projectBioStory={projectBioStory}
                         prjctBioCollection={prjctBioCollection}
                         projectBio={projectBio}
-                        closingTopTxt={closingTopTxt}
-                        closingHeader={closingHeader}
-                        closingSubtexxt={closingSubtexxt}
-                        closingSelectedVideo={closingSelectedVideo}
-                        closingBtn={closingBtn}
+                        // closingTopTxt={closingTopTxt}
+                        // closingHeader={closingHeader}
+                        // closingSubtexxt={closingSubtexxt}
+                        // closingSelectedVideo={closingSelectedVideo}
+                        // closingBtn={closingBtn}
                         projectBtn={projectBtn}
                       />
                     </MarketPlaceDataPreview>
@@ -811,4 +783,4 @@ function EditHomePageindex() {
   );
 }
 
-export default EditHomePageindex;
+export default EditMarketPlaceSalesindex;

@@ -28,7 +28,6 @@ import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import { Form } from "../../styles/homepage.styled";
-import { HomepagePreview } from "../../dashboard/edithome/edithomepage.style";
 import { db, auth, storage } from "../../../configfile/firebaseConfig";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
 import { FaCloudUploadAlt } from "react-icons/fa";

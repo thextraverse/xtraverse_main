@@ -9,7 +9,7 @@ const StepBar = styled.div`
   background: #303030;
   width: 100%;
   position: fixed;
-  top: 65px;
+  top: 60px;
   z-index: 9;
   left: 0px;
 `;
@@ -17,13 +17,49 @@ const Ul = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-between;
-  padding: 10px 0px;
+  padding: 15px 0px;
   width: 580px;
   margin: auto;
+  .key {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    background: #252525;
+  }
   li {
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 105%;
+      transform: translate(0%, -50%);
+      width: 40%;
+      height: 4px;
+      background: #252525;
+    }
+    &.active {
+      /* color: rgba(255, 255, 255.1); */
+      a {
+        color: #04fcbc;
+      }
+      .key {
+        background: #04fcbc;
+        color: #252525;
+      }
+      &::after {
+        background: #04fcbc;
+      }
+    }
     span {
       font-size: 1.5em;
     }
@@ -34,43 +70,54 @@ const Ul = styled.ul`
     padding: 5px 0px;
     display: block;
     font-size: 0.95em;
-    font-weight: 500;
-    &.active {
-      color: rgba(255, 255, 255.1);
-      font-weight: 700;
-    }
+    font-weight: 600;
   }
 `;
 
 function Stepnav() {
   const router = useRouter();
   const navItems = [
+    // {
+    //   href: "/project/selectProject",
+    //   label: "01 Select Template /",
+    // },
     {
-      href: "/project/selectProject",
-      label: "01 Select Template /",
+      href: [
+        // "/project/editMarketplace",
+        "/project/editMarketplace/marketplaceSalespage",
+        "/project/editMarketplace/thankyouPage",
+      ],
+      label: " Edit Marketplace ",
+      key: "01",
+    },
+
+    {
+      href: ["/project/editWebsite"],
+      label: " Edit Website ",
+      key: "02",
     },
     {
-      href: "/project/editMarketplace",
-      label: "02 Edit Marketplace /",
-    },
-    {
-      href: "/project/editWebsite",
-      label: "03 Edit Website /",
-    },
-    {
-      href: "/project/launch",
-      label: "04 Launch",
+      href: ["/project/launch"],
+      label: " Launch",
+      key: "03",
     },
   ];
   return (
     <StepBar>
       <Ul>
         {navItems.map((item, index) => (
-          <li key={index}>
-            <Link href={item.href}>
-              <a className={router.pathname === item.href ? "active" : ""}>
-                {item.label}
-              </a>
+          <li
+            key={index}
+            className={
+              Array.isArray(item.href) && item.href.includes(router.pathname)
+                ? "active"
+                : ""
+            }
+          >
+            <span className="key">{item.key}</span>
+
+            <Link href={Array.isArray(item.href) ? item.href[0] : item.href}>
+              <a>{item.label}</a>
             </Link>
             {/* <Box sx={{ width: "100%", height: "2px" }}></Box> */}
           </li>

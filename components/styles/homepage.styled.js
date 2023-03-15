@@ -44,7 +44,7 @@ export const Form = styled.form`
       }
     }
     &.active {
-      border: 2px solid #71dd37;
+      border: 2px solid #04fcbc;
     }
   }
   .header-type {
@@ -55,7 +55,7 @@ export const Form = styled.form`
     cursor: pointer;
     height: 50px;
     &.active {
-      border: 2px solid #71dd37;
+      border: 2px solid #04fcbc;
     }
     span {
       width: 100% !important;
@@ -322,20 +322,43 @@ export const EditorInputSec = styled.div`
   background: #303030;
   padding: 0px 20px 20px 20px;
   overflow-x: hidden;
+  @media screen and (min-width: 1200px) {
+    width: 400px;
+    margin: auto;
+    left: 85px;
+  }
+  @media screen and (min-width: 1536px) {
+    width: 492px;
+    margin: auto;
+    left: inherit;
+  }
+  @media screen and (min-width: 1840px) {
+    width: 580px;
+    margin: auto;
+    left: inherit;
+  }
 
   /* border-right: 1px solid #fff; */
 `;
 
 export const PageEditorFrom = styled.div`
   background: #303030;
-  border: 2px solid #4f4f4f;
   border-radius: 16px;
-
+  .editorform {
+    border: 2px solid #4f4f4f;
+    border-radius: 16px;
+  }
+  .theme {
+    border: 2px solid #4f4f4f;
+    border-radius: 16px;
+    margin: 0px 0px 20px 0px;
+  }
   .page-editor-form {
     position: relative;
     height: auto;
     border-bottom: 2px solid #4f4f4f;
     transition: 0.2s;
+
     &.active {
       .page-editor-form-btn {
         background: #04fcbc;
@@ -428,20 +451,6 @@ export const PageEditorFrom = styled.div`
       text-transform: capitalize;
     }
   }
-  .ant-space-item {
-    width: 100%;
-  }
-
-  .ant-select-selector {
-    height: 50px !important;
-    background: #252525 !important;
-    border: none !important;
-    margin: 5px 0px 25px;
-  }
-  .ant-select-selection-item {
-    display: flex;
-    align-items: center;
-  }
   label {
     font-weight: 500;
     font-size: 1rem;
@@ -451,7 +460,6 @@ export const PageEditorFrom = styled.div`
   }
 `;
 export const HomepagePreview = styled.div`
-  background: #20142d;
   width: 90%;
   margin: 10px;
   margin-left: auto;
@@ -525,8 +533,13 @@ export const HomepagePreview = styled.div`
     z-index: 4;
   }
   .headerbtn {
+    ul {
+      li {
+        display: inline-block;
+        padding: 10px 10px;
+      }
+    }
     button {
-      background: transparent;
       border: none;
       cursor: pointer;
       font-size: 0.85em;
@@ -539,8 +552,7 @@ export const HomepagePreview = styled.div`
     }
     .waitLstBtn {
       text-transform: capitalize;
-
-      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+      /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
     }
   }
   .waitLstBtn {
@@ -554,7 +566,7 @@ export const HomepagePreview = styled.div`
     color: #fff;
     text-transform: capitalize;
 
-    background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+    /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
   }
   .logo {
     width: 30px;
@@ -675,7 +687,7 @@ export const HomepagePreview = styled.div`
       margin: 0px 5px;
       text-transform: capitalize;
       color: #fff;
-      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+      /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
     }
   }
 

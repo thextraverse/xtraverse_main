@@ -6,6 +6,17 @@ import logo from "../../components/images/logo.svg";
 import { Box } from "@mui/system";
 import CreateProject from "../../components/dashboard/create-project";
 
+import React from "react";
+
+import { Avatar, Menu, Dropdown } from "antd";
+import {
+  UserOutlined,
+  SolutionOutlined,
+  LockOutlined,
+  TranslationOutlined,
+  PoweroffOutlined,
+} from "@ant-design/icons";
+
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -18,6 +29,26 @@ const Dashboardsc = styled.div`
   position: relative;
 `;
 
+const widgetMenu = (
+  <Menu>
+    <Menu.Item>
+      <SolutionOutlined className="icon" />
+      profile
+    </Menu.Item>
+    <Menu.Item>
+      <LockOutlined className="icon" />
+      change password
+    </Menu.Item>
+    <Menu.Item>
+      <TranslationOutlined className="icon" />
+      change language
+    </Menu.Item>
+    <Menu.Item>
+      <PoweroffOutlined className="icon" />
+      sign out
+    </Menu.Item>
+  </Menu>
+);
 export default function layout() {
   return (
     <Main>
@@ -33,6 +64,10 @@ export default function layout() {
           }}
         >
           <h1>Hey don't ignore me, I'm the dashboard</h1>
+
+          <Dropdown overlay={widgetMenu} placement="bottomRight">
+            <Avatar icon={<UserOutlined />} />
+          </Dropdown>
         </Box>
 
         {/* <CreateProject /> */}

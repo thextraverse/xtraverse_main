@@ -51,6 +51,9 @@ import EtherEaselEditHome from "../../../theme/EtherEasel/EditHomePage";
 import PixelVaultEditHome from "../../../theme/PixelVault/EditHomePage";
 import { XtraverseContainer } from "../..";
 import { BtnContainer } from "../../../components/styles/uploadnft.style";
+import ThemeSettings from "../../../components/project/editWebsite/ThemeSettings";
+import { color } from "framer-motion";
+import Link from "next/link";
 function EditHomePageindex() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
@@ -65,8 +68,19 @@ function EditHomePageindex() {
   const [imgUrl, setImgUrl] = useState();
 
   const [formId, setFormId] = useState(null);
+  //! Theme settings
+  const [typographySelect, setTypographySelect] = useState();
+  const [websiteBgColorPopup, setWebsiteBgColorPopup] = useState(false);
+  const [websiteBgColor, setWebsiteBgColor] = useState(
+    "linear-gradient(190deg, rgba(2,0,36,0.38) 0%, RGBA(97, 0, 255, 0.46) 100%)"
+  );
+  const [btnBgColorPopup, setBtnBgColorPopup] = useState(false);
+  const [btnBgColor, setBtnBgColor] = useState(
+    "linear-gradient(25deg, rgba(38, 0, 252, 1) 0%, rgba(255, 0, 234, 1) 100%)"
+  );
+  console.log("btnColor", btnBgColor);
   //! Edit header
-  const [headerType, setHeaderType] = useState();
+  const [headerType, setHeaderType] = useState("header1");
   const storeHeaderType = headerType;
   // for upload logo
   const [homeLogo, setHomeLogo] = useState(demoimg);
@@ -77,60 +91,19 @@ function EditHomePageindex() {
     setHomeLogo(URL.createObjectURL(imageFile));
     setUploadLogo(imageFile);
   };
-  // waitlist button
-  const [waitlistInput, setWaitlistInput] = useState("Waitlist");
-  const [numInputs, setNumInputs] = useState(3);
-  const [menuInput, setMenuInput] = useState({
-    input1: "Home",
-    input2: "About",
-    input3: "Collection",
+  const [waitlistBtn, setWaitlistBtn] = useState({
+    button: "Waitlist",
+    link: "",
   });
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setMenuInput({ ...menuInput, [name]: value });
-  };
-  const handleAddInput = () => {
-    setNumInputs(numInputs + 1);
-    setMenuInput({ ...menuInput, [`input${numInputs + 1}`]: "" });
-  };
-  const handleDeleteInput = (index) => {
-    setMenuInput((prevMenuInput) => {
-      const updatedMenuInput = { ...prevMenuInput };
-      delete updatedMenuInput[`input${index}`];
-      return updatedMenuInput;
-    });
-    setNumInputs(numInputs - 1);
+
+  const handleWaitlistBtnChange = (e) => {
+    setWaitlistBtn({ ...waitlistBtn, [e.target.name]: e.target.value });
   };
 
-  const renderInputs = () => {
-    const inputs = [];
-    for (let i = 1; i <= numInputs; i++) {
-      inputs.push(
-        <Box sx={{}}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "end",
-            }}
-          >
-            <span>Menu {i}</span>
-            <div className="dltBtn" onClick={() => handleDeleteInput(i)}>
-              <RiDeleteBinLine />
-            </div>
-          </Box>
-          <input
-            key={i}
-            type="text"
-            name={`input${i}`}
-            value={menuInput[`input${i}`]}
-            onChange={handleInputChange}
-          />
-        </Box>
-      );
-    }
-    return inputs;
-  };
+  const [menuNav, setMenuNav] = useState();
+  console.log(menuNav);
+  // waitlist button
+  const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
   //! Edit hero
   const [heroType, setHeroType] = useState("hero3");
@@ -160,6 +133,18 @@ function EditHomePageindex() {
     "linear-gradient(190deg, rgba(2,0,36,0.38) 0%, RGBA(97, 0, 255, 0.46) 100%)"
   );
 
+  const [browseClctionBtn, setBrowseClctionBtn] = useState({
+    button: "Browse Collection",
+    link: "",
+  });
+
+  const handleBrowseClctionBtn = (e) => {
+    setBrowseClctionBtn({
+      ...browseClctionBtn,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   //! Edit Description
   const [desType, setDesType] = useState("destype2");
   const desTypeStore = desType;
@@ -184,7 +169,7 @@ function EditHomePageindex() {
   // const [heroButton, setHeroButton] = useState("Browse collection");
 
   const [showDesColorPopup, setShowDesColorPopup] = useState(false);
-  const [desOverlayColor, setDesOverlayColor] = useState("#20132D");
+  const [desOverlayColor, setDesOverlayColor] = useState("");
 
   //!  upload section
   const uniqueId = v4();
@@ -324,7 +309,7 @@ function EditHomePageindex() {
             db,
             "Users",
             autoId,
-            "newCollection"
+            "editWebsite"
           );
           const querySnapshot = await getDocs(userDataCollectionRef);
 
@@ -334,23 +319,34 @@ function EditHomePageindex() {
             // console.log(`DocId: ${docId}`);
             const docRef = doc(userDataCollectionRef, docId);
             await updateDoc(docRef, {
-              logoImage: logoimageUrl,
-              heroBgImage: herobgimageUrl,
-              desBgImage: desibgimageUrl,
+              header: {
+                logoImage: logoimageUrl,
+                navbarType: storeHeaderType,
+                waitlistBtn: waitlistBtn,
+                menuNav: menuNav,
+              },
+              hero: {
+                heroBgImage: herobgimageUrl,
+                heroButton: heroButton,
+                heroHeading: editHeroHeading,
+                heroOverlay: heroOverlayColor,
+                heroSubtext: editHeroSubtext,
+                heroBlockType: heroTypeStore,
+              },
+              descriptionBlock: {
+                DesBlockType: desTypeStore,
+                desOverlay: desOverlayColor,
+                desSubtitle: desSubHeading,
+                desscriptHeading: desHeading,
+                descriptionSubtext: desSubtext,
+                desBgImage: desibgimageUrl,
+              },
+              themeSetting: {
+                websiteBgColor: websiteBgColor,
+                btnBgColor: btnBgColor,
+                TypographyData: typographySelect,
+              },
               id: uniqueId,
-              navbarType: storeHeaderType,
-              heroButton: heroButton,
-              heroHeading: editHeroHeading,
-              heroOverlay: heroOverlayColor,
-              heroSubtext: editHeroSubtext,
-              menuInput: menuInput,
-              waitlistInput: waitlistInput,
-              heroBlockType: heroTypeStore,
-              DesBlockType: desTypeStore,
-              desOverlay: desOverlayColor,
-              desSubtitle: desSubHeading,
-              desscriptHeading: desHeading,
-              descriptionSubtext: desSubtext,
             });
             if (
               MySwal.fire({
@@ -361,23 +357,33 @@ function EditHomePageindex() {
           } else {
             // User data does not exist in database, create a new document
             await addDoc(userDataCollectionRef, {
-              logoImage: logoimageUrl,
-              heroBgImage: herobgimageUrl,
-              desBgImage: desibgimageUrl,
+              header: {
+                logoImage: logoimageUrl,
+                navbarType: storeHeaderType,
+                waitlistBtn: waitlistBtn,
+                menuNav: menuNav,
+              },
+              hero: {
+                heroBgImage: herobgimageUrl,
+                heroButton: heroButton,
+                heroHeading: editHeroHeading,
+                heroOverlay: heroOverlayColor,
+                heroSubtext: editHeroSubtext,
+                heroBlockType: heroTypeStore,
+              },
+              descriptionBlock: {
+                DesBlockType: desTypeStore,
+                desOverlay: desOverlayColor,
+                desSubtitle: desSubHeading,
+                desscriptHeading: desHeading,
+                descriptionSubtext: desSubtext,
+                desBgImage: desibgimageUrl,
+              },
+              themeSetting: {
+                websiteBgColor: websiteBgColor,
+                btnBgColor: btnBgColor,
+              },
               id: uniqueId,
-              navbarType: storeHeaderType,
-              heroButton: heroButton,
-              heroHeading: editHeroHeading,
-              heroOverlay: heroOverlayColor,
-              heroSubtext: editHeroSubtext,
-              menuInput: menuInput,
-              waitlistInput: waitlistInput,
-              heroBlockType: heroTypeStore,
-              DesBlockType: desTypeStore,
-              desOverlay: desOverlayColor,
-              desSubtitle: desSubHeading,
-              desscriptHeading: desHeading,
-              descriptionSubtext: desSubtext,
             });
             if (
               MySwal.fire({
@@ -445,18 +451,20 @@ function EditHomePageindex() {
               <Grid container spacing={2}>
                 <Grid item xs={4}>
                   <EditorInputSec>
-                    <Box sx={{ width: "100%", height: "100px" }}></Box>
                     <PageEditorFrom
                       onClick={() => {
                         setShowColorPopup(false);
                         setShowDesColorPopup(false);
+                        setWebsiteBgColorPopup(false);
+                        setBtnBgColorPopup(false);
                       }}
                     >
+                      {/* theme settings */}
                       <div
                         className={
                           activeIndex === 0
-                            ? "page-editor-form active"
-                            : "page-editor-form"
+                            ? "page-editor-form theme active"
+                            : "page-editor-form theme"
                         }
                       >
                         <div className="btn-flex">
@@ -475,7 +483,7 @@ function EditHomePageindex() {
                               textTransform: "capitalize",
                             }}
                           >
-                            <span>Header Navigation</span>
+                            <span>Theme settings</span>
                             <KeyboardArrowDownIcon className="activesvg" />
                           </Button>
                           <div className="visibility">
@@ -485,117 +493,173 @@ function EditHomePageindex() {
                           {/* <VisibilityIcon className="visible" /> */}
                         </div>
                         <div className="page-editor-content-input">
-                          <EditHeader
-                            waitlistInput={waitlistInput}
-                            setWaitlistInput={setWaitlistInput}
-                            menuInput={menuInput}
-                            handleInputChange={handleInputChange}
-                            renderNewBtn={renderInputs()}
-                            handleAddInput={handleAddInput}
+                          <ThemeSettings
+                            setTypographySelect={setTypographySelect}
+                            websiteBgColorPopup={websiteBgColorPopup}
+                            setWebsiteBgColorPopup={setWebsiteBgColorPopup}
+                            websiteBgColor={websiteBgColor}
+                            setWebsiteBgColor={setWebsiteBgColor}
                             headerType={headerType}
                             setHeaderType={setHeaderType}
                             uploadLogo={uploadLogo}
                             handleImageChange={handleLogoChange}
+                            btnBgColorPopup={btnBgColorPopup}
+                            setBtnBgColorPopup={setBtnBgColorPopup}
+                            btnBgColor={btnBgColor}
+                            setBtnBgColor={setBtnBgColor}
                             key="1"
                           />
                         </div>
                       </div>
-                      <div
-                        className={
-                          activeIndex === 1
-                            ? "page-editor-form active"
-                            : "page-editor-form"
-                        }
-                      >
-                        <div className="btn-flex">
-                          <Button
-                            className="page-editor-form-btn"
-                            onClick={() => handleToggle(1)}
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              color: "#fff",
-                              padding: "15px",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <span>Hero</span>
-                            <KeyboardArrowDownIcon className="activesvg" />
-                          </Button>
-                          <div className="visibility">
-                            <VisibilityOffIcon /> <VisibilityIcon />
+                      <div className="editorform">
+                        {/* header navigation */}
+                        <div
+                          className={
+                            activeIndex === 3
+                              ? "page-editor-form active"
+                              : "page-editor-form"
+                          }
+                        >
+                          <div className="btn-flex">
+                            <Button
+                              className="page-editor-form-btn"
+                              onClick={() => {
+                                handleToggle(3);
+                                setShowColorPopup(false);
+                              }}
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                color: "#fff",
+                                padding: "15px",
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              <span>Header Navigation</span>
+                              <KeyboardArrowDownIcon className="activesvg" />
+                            </Button>
+                            <div className="visibility">
+                              <VisibilityOffIcon /> <VisibilityIcon />
+                            </div>
+
+                            {/* <VisibilityIcon className="visible" /> */}
+                          </div>
+                          <div className="page-editor-content-input">
+                            <EditHeader
+                              menuNav={menuNav}
+                              setMenuNav={setMenuNav}
+                              waitlistBtn={waitlistBtn}
+                              handleWaitlistBtnChange={handleWaitlistBtnChange}
+                              headerType={headerType}
+                              setHeaderType={setHeaderType}
+                              uploadLogo={uploadLogo}
+                              handleImageChange={handleLogoChange}
+                              key="1"
+                            />
                           </div>
                         </div>
+                        {/* hero */}
+                        <div
+                          className={
+                            activeIndex === 2
+                              ? "page-editor-form active"
+                              : "page-editor-form"
+                          }
+                        >
+                          <div className="btn-flex">
+                            <Button
+                              className="page-editor-form-btn"
+                              onClick={() => handleToggle(2)}
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                color: "#fff",
+                                padding: "15px",
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              <span>Hero</span>
+                              <KeyboardArrowDownIcon className="activesvg" />
+                            </Button>
+                            <div className="visibility">
+                              <VisibilityOffIcon /> <VisibilityIcon />
+                            </div>
+                          </div>
 
-                        <div className="page-editor-content-input">
-                          <Edithero
-                            heroType={heroType}
-                            setHeroType={setHeroType}
-                            setHomeLogo={setHomeLogo}
-                            editHeroName={editHeroHeading}
-                            setEditHeroName={setEditHeroHeading}
-                            editHeroScript={editHeroSubtext}
-                            setEditHeroScript={setEditHeroSubtext}
-                            handleImageChange={handleHomeImageChange}
-                            setHeroButton={setHeroButton}
-                            heroOverlayColor={heroOverlayColor}
-                            setHeroOverlayColor={setHeroOverlayColor}
-                            showColorPopup={showColorPopup}
-                            setShowColorPopup={setShowColorPopup}
-                            formId={formId}
-                            setFormId={setFormId}
-                            key="1"
-                          />
-                        </div>
-                      </div>
-                      <div
-                        className={
-                          activeIndex === 2
-                            ? "page-editor-form active"
-                            : "page-editor-form"
-                        }
-                      >
-                        <div className="btn-flex">
-                          <Button
-                            className="page-editor-form-btn"
-                            onClick={() => handleToggle(2)}
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              color: "#fff",
-                              padding: "15px",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <span>Description Block</span>
-                            <KeyboardArrowDownIcon className="activesvg" />
-                          </Button>
-                          <div className="visibility">
-                            <VisibilityOffIcon /> <VisibilityIcon />
+                          <div className="page-editor-content-input">
+                            <Edithero
+                              browseClctionBtn={browseClctionBtn}
+                              handleBrowseClctionBtn={handleBrowseClctionBtn}
+                              heroType={heroType}
+                              setHeroType={setHeroType}
+                              setHomeLogo={setHomeLogo}
+                              editHeroName={editHeroHeading}
+                              setEditHeroName={setEditHeroHeading}
+                              editHeroScript={editHeroSubtext}
+                              setEditHeroScript={setEditHeroSubtext}
+                              handleImageChange={handleHomeImageChange}
+                              setHeroButton={setHeroButton}
+                              heroOverlayColor={heroOverlayColor}
+                              setHeroOverlayColor={setHeroOverlayColor}
+                              showColorPopup={showColorPopup}
+                              setShowColorPopup={setShowColorPopup}
+                              formId={formId}
+                              setFormId={setFormId}
+                              key="1"
+                            />
                           </div>
                         </div>
+                        {/* Description Block */}
+                        <div
+                          className={
+                            activeIndex === 4
+                              ? "page-editor-form active"
+                              : "page-editor-form"
+                          }
+                        >
+                          <div className="btn-flex">
+                            <Button
+                              className="page-editor-form-btn"
+                              onClick={() => handleToggle(4)}
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                color: "#fff",
+                                padding: "15px",
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              <span>Description Block</span>
+                              <KeyboardArrowDownIcon className="activesvg" />
+                            </Button>
+                            <div className="visibility">
+                              <VisibilityOffIcon /> <VisibilityIcon />
+                            </div>
+                          </div>
 
-                        <div className="page-editor-content-input">
-                          <EditDescription
-                            desType={desType}
-                            setDesType={setDesType}
-                            setDesHeading={setDesHeading}
-                            setDesSubtext={setDesSubtext}
-                            setDesSubHeading={setDesSubHeading}
-                            editHeroScript={editHeroSubtext}
-                            setEditHeroScript={setEditHeroSubtext}
-                            handleDesImageChange={handleDesImageChange}
-                            setHeroButton={setHeroButton}
-                            desOverlayColor={desOverlayColor}
-                            setDesOverlayColor={setDesOverlayColor}
-                            showDesColorPopup={showDesColorPopup}
-                            setShowDesColorPopup={setShowDesColorPopup}
-                            formId={formId}
-                            setFormId={setFormId}
-                            key="1"
-                          />
+                          <div className="page-editor-content-input">
+                            <EditDescription
+                              desType={desType}
+                              setDesType={setDesType}
+                              setDesHeading={setDesHeading}
+                              setDesSubtext={setDesSubtext}
+                              setDesSubHeading={setDesSubHeading}
+                              editHeroScript={editHeroSubtext}
+                              setEditHeroScript={setEditHeroSubtext}
+                              handleDesImageChange={handleDesImageChange}
+                              setHeroButton={setHeroButton}
+                              desOverlayColor={desOverlayColor}
+                              setDesOverlayColor={setDesOverlayColor}
+                              showDesColorPopup={showDesColorPopup}
+                              setShowDesColorPopup={setShowDesColorPopup}
+                              formId={formId}
+                              setFormId={setFormId}
+                              key="1"
+                            />
+                          </div>
                         </div>
                       </div>
                     </PageEditorFrom>
@@ -633,69 +697,32 @@ function EditHomePageindex() {
                         }}
                       >
                         <Button onClick={handleDataSubmit}>Publish</Button>
-                        <Button onClick={handleDataSubmit}>
+                        <Button>
                           See full preview <AiOutlineEye />
                         </Button>
                       </Box>
                     </BtnContainer>
-                    {tempalteId === "CryptoCanvas" ? (
-                      <CryptoCanvasEditHome
-                        homeLogo={homeLogo}
-                        homeBg={homeBg}
-                        desBg={desBg}
-                        headerType={headerType}
-                        heroType={heroType}
-                        desType={desType}
-                        heroButton={heroButton}
-                        editHeroHeading={editHeroHeading}
-                        heroOverlayColor={heroOverlayColor}
-                        editHeroSubtext={editHeroSubtext}
-                        menuInput={menuInput}
-                        waitlistInput={waitlistInput}
-                        desOverlayColor={desOverlayColor}
-                        desSubHeading={desSubHeading}
-                        desHeading={desHeading}
-                        desSubtext={desSubtext}
-                      />
-                    ) : tempalteId === "EtherEasel" ? (
-                      <EtherEaselEditHome
-                        homeLogo={homeLogo}
-                        homeBg={homeBg}
-                        desBg={desBg}
-                        headerType={headerType}
-                        heroType={heroType}
-                        desType={desType}
-                        heroButton={heroButton}
-                        editHeroHeading={editHeroHeading}
-                        heroOverlayColor={heroOverlayColor}
-                        editHeroSubtext={editHeroSubtext}
-                        menuInput={menuInput}
-                        waitlistInput={waitlistInput}
-                        desOverlayColor={desOverlayColor}
-                        desSubHeading={desSubHeading}
-                        desHeading={desHeading}
-                        desSubtext={desSubtext}
-                      />
-                    ) : (
-                      <PixelVaultEditHome
-                        homeLogo={homeLogo}
-                        homeBg={homeBg}
-                        desBg={desBg}
-                        headerType={headerType}
-                        heroType={heroType}
-                        desType={desType}
-                        heroButton={heroButton}
-                        editHeroHeading={editHeroHeading}
-                        heroOverlayColor={heroOverlayColor}
-                        editHeroSubtext={editHeroSubtext}
-                        menuInput={menuInput}
-                        waitlistInput={waitlistInput}
-                        desOverlayColor={desOverlayColor}
-                        desSubHeading={desSubHeading}
-                        desHeading={desHeading}
-                        desSubtext={desSubtext}
-                      />
-                    )}
+                    <CryptoCanvasEditHome
+                      browseClctionBtn={browseClctionBtn}
+                      menuNav={menuNav}
+                      waitlistBtn={waitlistBtn}
+                      homeLogo={homeLogo}
+                      homeBg={homeBg}
+                      desBg={desBg}
+                      headerType={headerType}
+                      heroType={heroType}
+                      desType={desType}
+                      heroButton={heroButton}
+                      editHeroHeading={editHeroHeading}
+                      heroOverlayColor={heroOverlayColor}
+                      editHeroSubtext={editHeroSubtext}
+                      desOverlayColor={desOverlayColor}
+                      desSubHeading={desSubHeading}
+                      desHeading={desHeading}
+                      desSubtext={desSubtext}
+                      websiteBgColor={websiteBgColor}
+                      btnBgColor={btnBgColor}
+                    />
                   </Box>
                 </Grid>
               </Grid>

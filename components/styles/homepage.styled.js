@@ -466,7 +466,21 @@ export const HomepagePreview = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
-
+  &.templatePreview {
+    width: 100%;
+    margin: 0px;
+    overflow-x: inherit;
+    .homesec {
+      aspect-ratio: inherit;
+      height: 100vh;
+      .herotxt {
+        text-align: center;
+      }
+      .herosec {
+        height: 80%;
+      }
+    }
+  }
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
@@ -533,7 +547,13 @@ export const HomepagePreview = styled.div`
     z-index: 4;
   }
   .headerbtn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     ul {
+      a {
+        color: #fff;
+      }
       li {
         display: inline-block;
         padding: 10px 10px;
@@ -700,5 +720,146 @@ export const HomepagePreview = styled.div`
     height: 100%;
     display: grid;
     padding: 50px 0px;
+  }
+`;
+export const LaucnhWrapper = styled.div`
+  width: 90%;
+  margin: auto;
+`;
+export const Step = styled.div`
+  text-align: center;
+  color: #fff;
+  h1 {
+    font-weight: 600;
+    color: #fff;
+    font-size: 2.2em;
+    padding: 15px 0px;
+  }
+`;
+
+export const LuanchForm = styled.form`
+  &.manageDomain {
+    input,
+    textarea {
+      text-align: center;
+    }
+    p,
+    h1 {
+      text-align: center;
+    }
+  }
+  input,
+  textarea {
+    padding: 15px 15px;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    background: #252525;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+  }
+  span {
+    color: #fff;
+    font-weight: 400;
+    font-size: 0.9em;
+  }
+  h5 {
+    font-size: 1.1em;
+  }
+  p {
+    color: #fff;
+    font-weight: 400;
+    padding: 5px 0px;
+    &.instruction {
+      line-height: 150%;
+      font-size: 1.05em;
+    }
+    &.allset {
+      line-height: 160%;
+    }
+  }
+  @media screen and (max-width: 1400px) {
+    input,
+    textarea {
+      font-size: 0.9em;
+    }
+    p {
+      &.instruction {
+        font-size: 1em;
+      }
+      &.allset {
+        line-height: 150%;
+      }
+    }
+  }
+`;
+export const ActiveDot = styled.div`
+  padding: 10px 0px;
+  .activeDot {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 30px 0px;
+    li {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      list-style: none;
+      background: transparent;
+      border: 2px solid #fff;
+      transition: all 0.3s;
+      &.active {
+        border: 2px solid #04fcbc;
+
+        background: #04fcbc;
+      }
+    }
+  }
+`;
+
+export const Connectionsec = styled.div`
+  width: 670px;
+  margin: auto;
+  h1 {
+    text-align: center;
+    margin: 5px 0px 20px;
+    color: #fff;
+  }
+  .img {
+    width: 60px;
+  }
+  .cntpara {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    p {
+      color: #6c6c6c;
+      font-weight: 600;
+      font-size: 1.2em;
+      span {
+        color: #888787;
+        font-size: 0.9em;
+      }
+    }
+  }
+  .process {
+    padding: 15px 20px;
+    background: #252525;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    margin: 10px 0px;
+    border-radius: 10px;
+    button {
+      width: 150px;
+      svg {
+        font-size: 1.5em;
+        color: #04fcbc;
+      }
+    }
   }
 `;

@@ -6,8 +6,12 @@ import ItemAcivity from "../../../../components/project/EditMarketplace/ItemActi
 import { PreviewBox } from "../../../../components/styles/uploadnft.style";
 function CryptoCanvasEditMarketPlaceSalespage(props) {
   const {
+    menuNav,
+    homeLogo,
     nftCollectionName,
     nftName,
+    headerType,
+    waitlistBtn,
     blueStatus,
     addNftDescript,
     yellowStatus,
@@ -23,27 +27,105 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
     prjctBioCollection,
     projectBio,
     projectBtn,
-    closingTopTxt,
-    closingHeader,
-    closingSubtexxt,
-    closingSelectedVideo,
-    closingBtn,
   } = props;
 
   return (
     <>
       <PreviewBox>
         <div className="Preivewgrid">
+          <div className="offerheader">
+            {/* header */}
+            {headerType != "header2" ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "20px",
+                  }}
+                >
+                  <div className="logo">
+                    <Image
+                      src={homeLogo}
+                      alt="logo"
+                      width={100}
+                      height={100}
+                      style={{
+                        width: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                  <div className="headerbtn">
+                    <ul>
+                      {menuNav
+                        ? menuNav.map((item, index) => (
+                            <li key={index}>{item.button}</li>
+                          ))
+                        : ""}
+                    </ul>
+                  </div>
+                </Box>
+
+                <a target="_blank" href={waitlistBtn.link}>
+                  <Button
+                    className="waitLstBtn"
+                    sx={{
+                      transform: "translateY(20px)",
+                      background:
+                        "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%)",
+                      color: "#fff",
+                    }}
+                  >
+                    {waitlistBtn.button}
+                  </Button>
+                </a>
+              </Box>
+            ) : (
+              <div className="headersc">
+                <div className="logo">
+                  <Image
+                    src={homeLogo}
+                    alt="logo"
+                    width={100}
+                    height={100}
+                    style={{ width: "100%", objectFit: "cover" }}
+                  />
+                </div>
+                <div className="headerbtn">
+                  <ul>
+                    {menuNav
+                      ? menuNav.map((item, index) => (
+                          <li key={index}>{item.button}</li>
+                        ))
+                      : ""}
+                  </ul>
+
+                  <Link href={waitlistBtn.link}>
+                    <a target="_blank">
+                      <Button
+                        className="waitLstBtn"
+                        sx={{
+                          background:
+                            "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%)",
+                          color: "#fff",
+                        }}
+                      >
+                        {waitlistBtn.button}
+                      </Button>
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="previewtxt">
-            {/* <Box
-                            component="p"
-                            sx={{
-                              fontWeight: "800",
-                              color: "crimson !important",
-                            }}
-                          >
-                            CryptoCanvas
-                          </Box> */}
             <span>
               1 of 10 {nftCollectionName}{" "}
               <svg
@@ -66,38 +148,18 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
               </svg>
             </span>
             <h1>{nftName}</h1>
-            <Box
-              sx={{
-                display: "flex",
-                gap: "5px",
-                padding: "5px 0px",
-              }}
-            >
+            <div className="ownerdv">
               <Image src={blueStatus} />
-              <Box component="span" sx={{ color: "#303030" }}>
-                By
-              </Box>
-              <Box component="p" sx={{ color: "#fff", fontWeight: "600" }}>
-                Alexander
-              </Box>
-            </Box>
+              <p className="p"> By</p>
+              <p>Phillip</p>
+            </div>
             <p>{addNftDescript}</p>
 
-            <Box
-              sx={{
-                display: "flex",
-                gap: "5px",
-                padding: "15px 0px 0px",
-              }}
-            >
-              <Image src={yellowStatus} />
-              <Box component="span" sx={{ color: "#303030" }}>
-                Owned By
-              </Box>
-              <Box component="p" sx={{ color: "#fff", fontWeight: "600" }}>
-                Phillip
-              </Box>
-            </Box>
+            <div className="ownerdv">
+              <Image src={yellowStatus} width={20} height={20} />
+              <p className="p">Owned By</p>
+              <p>Phillip</p>
+            </div>
 
             <Box
               sx={{
@@ -185,7 +247,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
             <Image src={selectedVideo} width={100} height={100} />
           </div>
           <p>{addStory}</p>
-          <Link href={featureBtn.link}>
+          <a href={featureBtn.link} target="_blank">
             <Button
               type="submit"
               sx={{
@@ -209,7 +271,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
             >
               {featureBtn.button}
             </Button>
-          </Link>
+          </a>
         </div>
       </PreviewBox>
       <PreviewBox>
@@ -255,7 +317,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
 
             <p>{projectBio}</p>
             <Box>
-              <Link href={projectBtn.link}>
+              <a href={projectBtn.link} target="_blank">
                 <Button
                   sx={{
                     background:
@@ -277,7 +339,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
                 >
                   {projectBtn.button}
                 </Button>
-              </Link>
+              </a>
             </Box>
           </div>
         </div>

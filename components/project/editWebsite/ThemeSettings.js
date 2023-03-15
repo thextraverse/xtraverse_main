@@ -386,7 +386,7 @@ function ThemeSettings(props) {
                 options={options2}
                 isSearchable={true}
                 defaultValue={{ value: "H2", label: "H2" }}
-                onChange={handleH1Utility}
+                onChange={handleH2Utility}
               />
               <Select
                 styles={colorStyles}

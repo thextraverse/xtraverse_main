@@ -92,7 +92,7 @@ function EditHomePageindex() {
     setUploadLogo(imageFile);
   };
   const [waitlistBtn, setWaitlistBtn] = useState({
-    button: "Waitlist",
+    button: "Collection",
     link: "",
   });
 
@@ -180,10 +180,11 @@ function EditHomePageindex() {
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
-
-  console.log("logo", storeLogo);
-  console.log("bg", storeBgImg);
-  console.log("bg", desBgStore);
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
+  // console.log("logo", storeLogo);
+  // console.log("bg", storeBgImg);
+  // console.log("bg", desBgStore);
 
   const handleDataSubmit = async () => {
     // const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);

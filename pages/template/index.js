@@ -25,10 +25,14 @@ import PixelVault from "../../theme/PixelVault";
 import CryptoCanvasEditHome from "../../theme/CryptoCanvas/EditHomePage";
 import { HomepagePreview } from "../../components/styles/homepage.styled";
 import { H1 } from "../../components/dashboard/dashboard.styled";
+import { Grid } from "@mui/joy";
+import { XtraverseContainer } from "../../pages/index";
+import logos from "../../components/images/blacklogo.svg";
+import heroimg from "../../components/images/editwebsite/heroimg.png";
+import features from "../../components/images/editwebsite/features.svg";
 const Main = styled.div`
-  background: #fff;
-  height: 150vh;
-  overflow-x: hidden;
+  background: #252525;
+  height: 100%;
 `;
 const Templatepage = styled.div`
   background: #fff;
@@ -79,23 +83,113 @@ function TemplateIndex() {
       <Main>
         <Templatepage>
           {tempalteId &&
-            (console.log(tempalteId.header),
+            (console.log(tempalteId),
             (
-              <h1>
-                {tempalteId.header.navbarType}
+              // {tempalteId.header.navbarType},
+              // {tempalteId.themeSetting.websiteBgColor},
 
-                <HomepagePreview>
-                  {/* <Box sx={{ background: websiteBgColor }}> */}
-                  {/* CryptoCanvas */}
+              <HomepagePreview className="templatePreview">
+                <Box
+                  sx={{
+                    background: tempalteId.themeSetting.websiteBgColor,
+                  }}
+                >
+                  <div className="homesec">
+                    {/* header */}
+                    <div className="headersc">
+                      <div className="logo">
+                        <Image
+                          src={logos}
+                          alt="logo"
+                          width={100}
+                          height={100}
+                          style={{
+                            width: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </div>
+                      <div className="headerbtn">
+                        <ul>
+                          <li>
+                            <a href="#">Home</a>
+                          </li>
+                          <li>
+                            <a href="#">About </a>
+                          </li>
+                          <li>
+                            <a href="#">Blog</a>
+                          </li>
+                          <li>
+                            <a href="#">Collection</a>
+                          </li>
+                          <li>
+                            <a href="#">Roadmap</a>
+                          </li>
+                          <li>
+                            <a href="#">How it works</a>
+                          </li>
+                        </ul>
+                        <a target="_blank">
+                          <Button
+                            className="waitLstBtn"
+                            sx={{
+                              background: tempalteId.themeSetting.btnBgColor,
+                            }}
+                          >
+                            {tempalteId.header.waitlistBtn.button}
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                    {/* herosection */}
+                    <div className="herosec hero3">
+                      <div className="herotxt">
+                        <h1>{tempalteId.hero.heroHeading}</h1>
+                        <p>{tempalteId.hero.heroSubtext}</p>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            textAlign: "center",
+                          }}
+                        >
+                          <Button
+                            sx={{
+                              width: "fit-content",
+                              background: tempalteId.themeSetting.btnBgColor,
+                            }}
+                          >
+                            {tempalteId.hero.heroButton}
+                          </Button>
+                        </Box>
+                      </div>
+                    </div>
 
+                    <div className="bgimage">
+                      <Image src={heroimg} alt="home background image" />
+                    </div>
+
+                    <Box
+                      component="div"
+                      className="overlaybg"
+                      sx={{
+                        background: "rgba(32, 19, 45, 1)",
+                        opacity: 0.8,
+                      }}
+                    ></Box>
+                  </div>
                   {/* description section */}
-                  {/* <div className="homesec descriptionsc">
-                    {desType === "destype3" ? (
+                  <div className="homesec descriptionsc">
+                    {tempalteId.descriptionBlock.DesBlockType === "destype3" ? (
                       <div className="herosec destype3">
                         <div className="herotxt">
-                          <span>{desSubHeading}</span>
-                          <h1>{desHeading}</h1>
-                          <p>{desSubtext}</p>
+                          <span>{tempalteId.descriptionBlock.desSubtitle}</span>
+                          <h1>
+                            {tempalteId.descriptionBlock.desscriptHeading}
+                          </h1>
+                          <p>
+                            {tempalteId.descriptionBlock.descriptionSubtext}
+                          </p>
 
                           <Box
                             sx={{
@@ -122,15 +216,21 @@ function TemplateIndex() {
                     ) : (
                       <div
                         className={
-                          desType === "destype2"
+                          tempalteId.descriptionBlock.DesBlockType ===
+                          "destype2"
                             ? "herosec destype2"
                             : "herosec destype1"
                         }
                       >
                         <div className="herotxt">
-                          <span>{desSubHeading}</span>
-                          <h1>{desHeading}</h1>
-                          <p>{desSubtext}</p>
+                          <span>{tempalteId.descriptionBlock.desSubtitle}</span>
+                          <h1>
+                            {tempalteId.descriptionBlock.desscriptHeading}
+                          </h1>
+                          <p>
+                            {tempalteId.descriptionBlock.descriptionSubtext}
+                          </p>
+
                           <Grid container spacing={2}>
                             <Grid item xs={6}>
                               <div className="grdntsc">
@@ -151,27 +251,13 @@ function TemplateIndex() {
                           </Grid>
                         </div>
                         <div className="heroImg">
-                          {desBg ? (
-                            <Image
-                              src={desBg}
-                              alt="home background image"
-                              width={100}
-                              height={100}
-                            />
-                          ) : (
-                            <Image
-                              src="/images/templatePage/descriptionblock.png"
-                              alt="home background image"
-                              width={100}
-                              height={100}
-                            />
-                          )}
+                          <Image src={features} alt="home background image" />
                         </div>
                       </div>
                     )}
-                    {desType === "destype3" ? (
+                    {tempalteId.descriptionBlock.DesBlockType === "destype3" ? (
                       <div className="bgimage">
-                        {desBg ? (
+                        {tempalteId.descriptionBlock.DesBlockType ? (
                           // <Image
                           //   src={desBg}
                           //   alt="home background image"
@@ -180,12 +266,7 @@ function TemplateIndex() {
                           // />
                           ""
                         ) : (
-                          <Image
-                            src="/images/templatePage/hdescriptionblock.svg"
-                            alt="home background image"
-                            width={100}
-                            height={100}
-                          />
+                          <Image src={features} alt="home background image" />
                         )}
                       </div>
                     ) : (
@@ -194,12 +275,13 @@ function TemplateIndex() {
                     <Box
                       component="div"
                       className="overlaybg"
-                      sx={{ background: `${desOverlayColor}` }}
+                      sx={{
+                        background: tempalteId.descriptionBlock.desOverlay,
+                      }}
                     ></Box>
-                  </div> */}
-                  {/* </Box> */}
-                </HomepagePreview>
-              </h1>
+                  </div>
+                </Box>
+              </HomepagePreview>
             ))}
         </Templatepage>
       </Main>

@@ -117,7 +117,8 @@ function SelectProject() {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
-
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
   const emailData = user.email;
   console.log(emailData);
 

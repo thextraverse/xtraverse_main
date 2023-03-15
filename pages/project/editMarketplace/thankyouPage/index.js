@@ -117,7 +117,8 @@ function EditMarketPlaceSalesindex() {
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
-
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
   // console.log("logo", storeLogo);
   // console.log("bg", storeBgImg);
   // console.log("bg", desBgStore);

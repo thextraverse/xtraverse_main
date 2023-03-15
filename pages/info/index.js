@@ -168,8 +168,8 @@ function Info() {
   const [websiteName, setWebsiteName] = useState("");
   const { user } = useUserAuth();
   const emailData = user.email;
-  console.log(emailData);
-  console.log(user);
+  // user !== null && user.email && (emailData = user.email);
+  // user === null && router.push("/");
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     // Check if user already exists in database

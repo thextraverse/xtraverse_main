@@ -5,14 +5,13 @@ import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid";
 import { IoMdCloudUpload } from "react-icons/io";
-import { Form } from "../../../styles/homepage.styled";
+import { Form } from "../../styles/homepage.styled";
 import { RiTicketLine } from "react-icons/ri";
-import { HomepagePreview } from "../edithomepage.style";
-import firstimg from "../../../images/project1.png";
 import { useRouter } from "next/router";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { auth, db, storage } from "../../../../configfile/firebaseConfig";
+import { db, auth, storage } from "../../../configfile/firebaseConfig";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 import { BsPlusCircle } from "react-icons/bs";
 import Select from "react-select";
 import {
@@ -31,13 +30,13 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { useUserAuth } from "../../../../configfile/UserAuthContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
-import headerType1 from "../../../../components/images/templatepage/header1.svg";
-import headerType2 from "../../../../components/images/templatepage/header2.svg";
+import headerType1 from "../../../components/images/templatepage/header1.svg";
+import headerType2 from "../../../components/images/templatepage/header2.svg";
+
 const options1 = [
   { value: "Home", label: "Home", link: "home" },
   { value: "About", label: "About", link: "about" },
@@ -91,7 +90,7 @@ const colorStyles = {
     overflowY: "auto",
   }),
 };
-function EditHeader(props) {
+function MarketPlaceHeader(props) {
   const {
     headerType,
     setHeaderType,
@@ -571,4 +570,4 @@ function EditHeader(props) {
   );
 }
 
-export default EditHeader;
+export default MarketPlaceHeader;

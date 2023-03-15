@@ -130,11 +130,9 @@ export default function Project() {
   const { user } = useUserAuth();
   const uniqueId = v4();
   let emailData = null;
-  if (user !== null && user.email) {
-    emailData = user.email;
-  } else if (typeof window !== "undefined") {
-    router.push("/");
-  }
+
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
 
   const [ProjectCoverImg, setProjectCoverImg] = useState();
   const [upldPrjctCover, setUpldPrjctCover] = useState("");
@@ -230,7 +228,7 @@ export default function Project() {
       } else {
         alert("No documents found.");
       }
-      router.push("/project/editMarketplace");
+      router.push("/project/editMarketplace/marketplaceSalespage");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");

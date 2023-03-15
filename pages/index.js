@@ -152,9 +152,9 @@ export default function Home() {
               <h1>
                 Instanly <span>Launch</span>
               </h1>
-              <H1>
+              <h1>
                 And <span>Manage</span> your
-              </H1>
+              </h1>
               <h1>
                 Next <span>NFT Project</span>
               </h1>

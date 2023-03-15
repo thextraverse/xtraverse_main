@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { AiOutlineEye } from "react-icons/ai";
+import demoimg from "../../../../components/images/blacklogo.svg";
+
 import Sidebar, {
   drawerWidth,
 } from "../../../../components/dashboard/sidebar/Navbar";
@@ -63,6 +65,7 @@ import MarketPlaceClosing from "../../../../components/project/EditMarketplace/C
 import CryptoCanvasEditMarketPlace from "../../../../theme/CryptoCanvas/editMarketplace";
 import CryptoCanvasEditMarketPlaceSalespage from "../../../../theme/CryptoCanvas/editMarketplace/marketplacesales";
 import { useRouter } from "next/router";
+import MarketPlaceHeader from "../../../../components/project/EditMarketplace/MarketPlaceHeader";
 function EditMarketPlaceSalesindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -78,6 +81,31 @@ function EditMarketPlaceSalesindex() {
   const [imgUrl, setImgUrl] = useState();
 
   const [formId, setFormId] = useState(null);
+  //! Edit header
+  const [headerType, setHeaderType] = useState("header1");
+  const storeHeaderType = headerType;
+  // for upload logo
+  const [homeLogo, setHomeLogo] = useState(demoimg);
+  const [uploadLogo, setUploadLogo] = useState(demoimg);
+  const [storeLogo, setStoreLogo] = useState();
+  const handleLogoChange = (event) => {
+    const imageFile = event.target.files[0];
+    setHomeLogo(URL.createObjectURL(imageFile));
+    setUploadLogo(imageFile);
+  };
+  const [waitlistBtn, setWaitlistBtn] = useState({
+    button: "Collection",
+    link: "",
+  });
+
+  const handleWaitlistBtnChange = (e) => {
+    setWaitlistBtn({ ...waitlistBtn, [e.target.name]: e.target.value });
+  };
+
+  const [menuNav, setMenuNav] = useState();
+  console.log(menuNav);
+  // waitlist button
+  const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
   //! nft details name, collection name,price, chain utitlity, tag
 
@@ -226,6 +254,8 @@ function EditMarketPlaceSalesindex() {
       storage,
       `images/nft${prjctUploadVideoUrl.name + v4()}`
     );
+    const logoimageRef = ref(storage, `images/nft${uploadLogo.name + v4()}`);
+
     // const closingVideoRef = ref(
     //   storage,
     //   `video/${closingUploadVideoUrl.name + v4()}`
@@ -237,15 +267,17 @@ function EditMarketPlaceSalesindex() {
       generalimageSnapshot,
       featuresimageSnapshot,
       projectsVideoSnapshot,
-      closingVideoSnapshot,
+      logoimageSnapshot,
     ] = await Promise.all([
       uploadBytesResumable(generealimageRef, imageupload),
       uploadBytesResumable(featurefilesRef, uploadVideoUrl),
       uploadBytesResumable(projectBioVideoRef, prjctUploadVideoUrl),
+      uploadBytesResumable(logoimageRef, uploadLogo),
+
       //   uploadBytesResumable(closingVideoRef, closingUploadVideoUrl),
     ]);
     // Track upload progress for image
-    let logoimageUploadProgress = 0;
+    let generalimageUploadProgress = 0;
     const generalfilesUploadTask = uploadBytesResumable(
       generealimageRef,
       imageupload
@@ -253,12 +285,12 @@ function EditMarketPlaceSalesindex() {
     generalfilesUploadTask.on(
       "state_changed",
       (snapshot) => {
-        logoimageUploadProgress = Math.round(
+        generalimageUploadProgress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-        console.log(`Image Upload Progress: ${logoimageUploadProgress}%`);
-        setImageUploadProgrees(logoimageUploadProgress);
-        setUploadProgress(logoimageUploadProgress);
+        console.log(`Image Upload Progress: ${generalimageUploadProgress}%`);
+        setImageUploadProgrees(generalimageUploadProgress);
+        setUploadProgress(generalimageUploadProgress);
       },
       (error) => {
         console.log(error);
@@ -313,7 +345,27 @@ function EditMarketPlaceSalesindex() {
       }
     );
 
-    let closingUploadProgress = 0;
+    // Track upload progress for image
+    let logoimageUploadProgress = 0;
+    const logoimageUploadTask = uploadBytesResumable(logoimageRef, uploadLogo);
+    logoimageUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        logoimageUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${logoimageUploadProgress}%`);
+        setImageUploadProgrees(logoimageUploadProgress);
+        setUploadProgress(logoimageUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
+    // let closingUploadProgress = 0;
     // const closingUploadTask = uploadBytesResumable(
     //   closingVideoRef,
     //   closingUploadVideoUrl
@@ -341,6 +393,7 @@ function EditMarketPlaceSalesindex() {
       generalfilesUploadTask,
       featurefilesUploadTask,
       projectBioUploadTask,
+      logoimageUploadTask,
       //   closingUploadTask,
       // desimageUploadTask,
     ]);
@@ -350,11 +403,13 @@ function EditMarketPlaceSalesindex() {
       generalimageUrl,
       featuresimageUrl,
       projectBioVideoUrl,
+      logoimageUrl,
       //   closingVideoUrl,
     ] = await Promise.all([
       getDownloadURL(generalimageSnapshot.ref),
       getDownloadURL(featuresimageSnapshot.ref),
       getDownloadURL(projectsVideoSnapshot.ref),
+      getDownloadURL(logoimageSnapshot.ref),
       //   getDownloadURL(closingVideoSnapshot.ref),
     ]);
 
@@ -381,6 +436,12 @@ function EditMarketPlaceSalesindex() {
             // console.log(`DocId: ${docId}`);
             const docRef = doc(userDataCollectionRef, docId);
             await updateDoc(docRef, {
+              Nftheader: {
+                logoImage: logoimageUrl,
+                navbarType: storeHeaderType,
+                waitlistBtn: waitlistBtn,
+                menuNav: menuNav,
+              },
               NftGeneralData: {
                 nftImg: generalimageUrl,
                 nftName: nftName,
@@ -416,22 +477,37 @@ function EditMarketPlaceSalesindex() {
           } else {
             // User data does not exist in database, create a new document
             await addDoc(userDataCollectionRef, {
-              nftImg: generalimageUrl,
-              featuresImg: featuresimageUrl,
-
-              collectionName: nftCollectionName,
-              nftName: nftName,
-              nftDescription: addNftDescript,
-              nftPrice: nftPrice,
-              nftMintBtn: nftMindBtn,
-              utility: utility,
-              TokenType: tokenType,
-              minType: mintType,
-              videoTitle: videoTitle,
-              addStory: addStory,
-              royaltiesList: royaltiesList,
-              projectBioVideo: projectBioVideoUrl,
-              closingVideo: closingVideoUrl,
+              Nftheader: {
+                logoImage: logoimageUrl,
+                navbarType: storeHeaderType,
+                waitlistBtn: waitlistBtn,
+                menuNav: menuNav,
+              },
+              NftGeneralData: {
+                nftImg: generalimageUrl,
+                nftName: nftName,
+                collectionName: nftCollectionName,
+                nftDescription: addNftDescript,
+                utility: utility,
+                nftPrice: nftPrice,
+                nftMintBtn: nftMindBtn,
+              },
+              NftFeaturesData: {
+                featuresImg: featuresimageUrl,
+                TokenType: tokenType,
+                minType: mintType,
+                royaltiesList: royaltiesList,
+                featureBtn: featureBtn,
+                videoTitle: videoTitle,
+                addStory: addStory,
+              },
+              NftProjecBio: {
+                projectBioVideo: projectBioVideoUrl,
+                prjctBioCollection: prjctBioCollection,
+                projectBio: projectBio,
+                projectBioStory: projectBioStory,
+                projectBtn: projectBtn,
+              },
             });
             if (
               MySwal.fire({
@@ -504,7 +580,7 @@ function EditMarketPlaceSalesindex() {
                   <EditorInputSec>
                     <PageEditorFrom>
                       <div className="editorform">
-                        {/* general */}
+                        {/* header */}
                         <div
                           className={
                             activeIndex === 0
@@ -517,6 +593,53 @@ function EditMarketPlaceSalesindex() {
                               className="page-editor-form-btn"
                               onClick={() => {
                                 handleToggle(0);
+                              }}
+                              sx={{
+                                width: "100%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                color: "#fff",
+                                padding: "15px",
+                                textTransform: "capitalize",
+                              }}
+                            >
+                              <span>Offer Header</span>
+                              <KeyboardArrowDownIcon className="activesvg" />
+                            </Button>
+                            <div className="visibility">
+                              <VisibilityOffIcon /> <VisibilityIcon />
+                            </div>
+
+                            {/* <VisibilityIcon className="visible" /> */}
+                          </div>
+                          <div className="page-editor-content-input">
+                            <MarketPlaceHeader
+                              menuNav={menuNav}
+                              setMenuNav={setMenuNav}
+                              waitlistBtn={waitlistBtn}
+                              handleWaitlistBtnChange={handleWaitlistBtnChange}
+                              headerType={headerType}
+                              setHeaderType={setHeaderType}
+                              uploadLogo={uploadLogo}
+                              handleImageChange={handleLogoChange}
+                              key="1"
+                            />
+                          </div>
+                        </div>
+
+                        {/* general */}
+                        <div
+                          className={
+                            activeIndex === 1
+                              ? "page-editor-form active"
+                              : "page-editor-form"
+                          }
+                        >
+                          <div className="btn-flex">
+                            <Button
+                              className="page-editor-form-btn"
+                              onClick={() => {
+                                handleToggle(1);
                               }}
                               sx={{
                                 width: "100%",
@@ -558,7 +681,7 @@ function EditMarketPlaceSalesindex() {
                         {/* features */}
                         <div
                           className={
-                            activeIndex === 1
+                            activeIndex === 2
                               ? "page-editor-form active"
                               : "page-editor-form"
                           }
@@ -566,7 +689,7 @@ function EditMarketPlaceSalesindex() {
                           <div className="btn-flex">
                             <Button
                               className="page-editor-form-btn"
-                              onClick={() => handleToggle(1)}
+                              onClick={() => handleToggle(2)}
                               sx={{
                                 width: "100%",
                                 display: "flex",
@@ -607,7 +730,7 @@ function EditMarketPlaceSalesindex() {
                         {/* project bio */}
                         <div
                           className={
-                            activeIndex === 2
+                            activeIndex === 3
                               ? "page-editor-form active"
                               : "page-editor-form"
                           }
@@ -615,7 +738,7 @@ function EditMarketPlaceSalesindex() {
                           <div className="btn-flex">
                             <Button
                               className="page-editor-form-btn"
-                              onClick={() => handleToggle(2)}
+                              onClick={() => handleToggle(3)}
                               sx={{
                                 width: "100%",
                                 display: "flex",
@@ -625,7 +748,7 @@ function EditMarketPlaceSalesindex() {
                                 textTransform: "capitalize",
                               }}
                             >
-                              <span>NFt Project Bio</span>
+                              <span>Offer Project Bio</span>
                               <KeyboardArrowDownIcon className="activesvg" />
                             </Button>
                             <div className="visibility">
@@ -749,6 +872,7 @@ function EditMarketPlaceSalesindex() {
                       <CryptoCanvasEditMarketPlaceSalespage
                         nftCollectionName={nftCollectionName}
                         nftName={nftName}
+                        waitlistBtn={waitlistBtn}
                         blueStatus={blueStatus}
                         addNftDescript={addNftDescript}
                         yellowStatus={yellowStatus}
@@ -763,11 +887,9 @@ function EditMarketPlaceSalesindex() {
                         projectBioStory={projectBioStory}
                         prjctBioCollection={prjctBioCollection}
                         projectBio={projectBio}
-                        // closingTopTxt={closingTopTxt}
-                        // closingHeader={closingHeader}
-                        // closingSubtexxt={closingSubtexxt}
-                        // closingSelectedVideo={closingSelectedVideo}
-                        // closingBtn={closingBtn}
+                        menuNav={menuNav}
+                        headerType={headerType}
+                        homeLogo={homeLogo}
                         projectBtn={projectBtn}
                       />
                     </MarketPlaceDataPreview>

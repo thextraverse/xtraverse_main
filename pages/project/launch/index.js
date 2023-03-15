@@ -1,31 +1,59 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import styled from "@emotion/styled";
-import Sidebar, {
-  drawerWidth,
-} from "../../../components/dashboard/sidebar/Navbar";
+import Sidebar from "../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../components/dashboard/step-nav";
 import { IoIosAddCircle, IoIosArrowDropright } from "react-icons/io";
 import { useRouter } from "next/router";
 import { BsPlusLg } from "react-icons/bs";
 import Image from "next/image";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
-
+import websitepreview from "../../../components/images/editwebsite/websitepreview.png";
+import tiktok from "../../../components/images/icons/_TikTok.png";
+import twitter from "../../../components/images/icons/_Twitter.png";
+import facebook from "../../../components/images/icons/_Facebook.png";
+import snapchat from "../../../components/images/icons/_Snapchat.png";
+import team from "../../../components/images/team.svg";
+import { BsCheck2All } from "react-icons/bs";
 import {
-  FormInput,
   Form,
-  Wrapper,
+  LaucnhWrapper,
   Step,
-  EditHomesc,
-} from "../../../components/dashboard/domain/domain.styled";
+  LuanchForm,
+  ActiveDot,
+  Connectionsec,
+} from "../../../components/styles/homepage.styled";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
 `;
+const Launchsc = styled.div`
+  width: 1100px;
+  margin: auto;
+  .launchimgbox {
+    display: grid;
+    place-content: center;
+    background: #9f56e9;
+    height: 100%;
+    span {
+      width: 100% !important;
+      transform: scale(1.1);
+    }
+  }
+`;
 function Launch() {
   const [index, setIndex] = useState(0);
-  const [step, setStep] = useState("Step 1");
+  // const [step, setStep] = useState("Step 1");
+  const [domain, setDomain] = useState();
+  const [subdomain, setSubDomain] = useState();
+  const { user } = useUserAuth();
+  const router = useRouter();
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
+  const [activeTab, setActiveTab] = useState(0);
+  console.log(domain);
   const handleNext = () => {
     setIndex(index === layouts.length - 1 ? 0 : index + 1);
   };
@@ -33,10 +61,20 @@ function Launch() {
     setIndex(index === 0 ? layouts.length - 1 : index - 1);
   };
   const layouts = [
-    <DomainSelection handleNext={handleNext} key="1" />,
+    <DomainSelection
+      handleNext={handleNext}
+      key="1"
+      setDomain={setDomain}
+      domain={domain}
+    />,
     <DomainType handleNext={handleNext} key="2" />,
-    <AllSet handleNext={handleNext} key="3" />,
-    <ManageDomains key="4" />,
+    <ManageDomains
+      ManageDomains
+      handleNext={handleNext}
+      handlePrev={handlePrev}
+      key="3"
+    />,
+    <AllSet key="4" />,
   ];
   return (
     <>
@@ -47,11 +85,10 @@ function Launch() {
       </Head>
 
       <Main>
-        <Sidebar activeBtn={6} />
+        <Sidebar activeBtn={2} />
         <Stepnav />
         <Box
           sx={{
-            width: { lg: `calc(100% - ${drawerWidth}px)` },
             marginLeft: "auto",
             background: "transparent",
             height: "100vh",
@@ -60,365 +97,421 @@ function Launch() {
             alignItems: "center",
           }}
         >
-          <EditHomesc>
-            <Wrapper>
-              <Step>
-                <span>Step 5</span>
-                <h1> Domain Configuration</h1>
-              </Step>
-              {layouts[index]}
-              <ul className="activeDot">
-                <li className={index === 0 ? "active" : ""}></li>
-                <li className={index === 1 ? "active" : ""}></li>
-                <li className={index === 2 ? "active" : ""}></li>
-                <li className={index === 3 ? "active" : ""}></li>
-              </ul>
-            </Wrapper>
-          </EditHomesc>
+          <Launchsc>
+            {layouts[index] !== layouts[3] ? (
+              <>
+                <Step>
+                  <h1> Domain Configuration</h1>
+                </Step>
+                <Grid container>
+                  <Grid item md={6}>
+                    <div className="launchimgbox">
+                      <Image src={websitepreview} />
+                    </div>
+                  </Grid>
+                  <Grid item md={6}>
+                    <LaucnhWrapper>{layouts[index]}</LaucnhWrapper>
+                  </Grid>
+                </Grid>
+                <ActiveDot>
+                  <ul className="activeDot">
+                    <li className={index === 0 ? "active" : ""}></li>
+                    <li className={index === 1 ? "active" : ""}></li>
+                    <li className={index === 2 ? "active" : ""}></li>
+                    <li className={index === 3 ? "active" : ""}></li>
+                  </ul>
+                </ActiveDot>
+              </>
+            ) : (
+              layouts[3]
+            )}
+          </Launchsc>
         </Box>
       </Main>
     </>
   );
 }
 // Domain Selection
-function DomainSelection({ handleNext }) {
+function DomainSelection({
+  handleNext,
+  setDomain,
+  domain,
+  subdomain,
+  setSubDomain,
+}) {
   return (
     <>
-      <Form className="domainForm">
-        <Box
-          sx={{
-            margin: "25px 0px",
-          }}
-        >
-          <Box
-            sx={{
-              margin: "25px 0px",
-            }}
-          >
-            <label htmlFor="">Live subdomain</label>
-            <span>
-              You can share this live site with your client until domain is
-              setup.
-            </span>
-            <FormInput>
+      <LuanchForm>
+        <Grid container>
+          <Grid xs={12}>
+            <Box sx={{}}>
+              <p>Type</p>
+              <input type="text" placeholder="e.g View On Marketplace" />
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Name</p>
+              <input type="text" placeholder="Add your domain" />
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Value</p>
               <input
+                onChange={(e) => setDomain(e.target.value)}
                 type="text"
-                required
-                placeholder="
-                veefriendskiller.youragency.io
-              "
+                placeholder="Add your domain"
               />
-
-              <IoIosArrowDropright className="rotateSvg" />
-            </FormInput>
-          </Box>
-          <Box>
-            <label htmlFor="">Add your domain (not required)</label>
-
-            <FormInput>
-              <input
-                type="text"
-                required
-                placeholder="
-                clientsdomain.com
-              "
-              />
-
-              <IoIosArrowDropright />
-            </FormInput>
-          </Box>
-        </Box>
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <h5>Instruction</h5>
+              <p className="instruction">
+                Head over to your DNS provider (website that controls your
+                domain name) and add a CNAME record with the above values.
+              </p>
+            </Box>
+          </Grid>
+        </Grid>
         <Button
+          onClick={handleNext}
           sx={{
-            background: "transparent",
-            border: "2px solid #fff",
             width: "100%",
-            display: "block",
-            padding: "15px ",
+            background: "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+            borderRadius: "8px",
             color: "#000",
-            margin: "15px 0px",
-            borderRadius: "10px",
-            color: "#fff",
-            "&:hover": {
-              background: "#fff",
-              color: "#000",
+            fontSize: "1.2em",
+            textTransform: "capitalize",
+            padding: "8px 0px",
+            transition: "0.3s",
+            fontWeight: "500",
+            margin: "10px 0px",
+            "&:hover ": {
+              background: "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+              cursor: "pointer",
             },
           }}
-          onClick={handleNext}
         >
-          Next
+          I added the records
         </Button>
-      </Form>
+      </LuanchForm>
     </>
   );
 }
 // DomainType
-function DomainType({ handleNext }) {
+function DomainType({ handleNext, domain, setDomain }) {
   return (
     <>
-      <Form className="DomainTypeForm">
-        <Box
-          sx={{
-            padding: "50px 0px 30px",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Type:</span>
-            <input type="text" placeholder="A" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Name:</span>
-            <input type="text" placeholder="@" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            <span>Value:</span>
-            <input type="text" placeholder="76.76.21.21" />
-          </Box>
-        </Box>
+      <LuanchForm className="manageDomain">
+        <Grid container>
+          <Grid xs={12}>
+            <Box sx={{}}>
+              <h1>You're all set!</h1>
+              <p className="allset" style={{ textAlign: "left" }}>
+                We’ll scan for your domain name and provision an SSL certificate
+                automatically for free. Usually DNS propagation happens quickly.
+                However, in the worst case, it may take up to 24 hours.
+              </p>
+            </Box>
+          </Grid>
 
-        <span style={{ fontWeight: "600" }}>Instuctions:</span>
-        <p>
-          Head over to your DNS provider (website that controls your domain
-          name) and add a CNAME record with the above values.
-        </p>
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Domain</p>
+              <input value={domain} type="text" placeholder="Add your domain" />
+            </Box>
+          </Grid>
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Subdomain</p>
+              <input type="text" placeholder="Add your domain" />
+            </Box>
+          </Grid>
+        </Grid>
         <Button
           onClick={handleNext}
           sx={{
-            background: "transparent",
-            border: "2px solid #fff",
             width: "100%",
-            display: "block",
-            padding: "12px ",
+            background: "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+            borderRadius: "8px",
             color: "#000",
-            margin: "15px 0px",
-            color: "#fff",
-            "&:hover": {
-              background: "#fff",
-              color: "#000",
+            fontSize: "1.2em",
+            textTransform: "capitalize",
+            padding: "8px 0px",
+            transition: "0.3s",
+            fontWeight: "500",
+            margin: "10px 0px",
+            "&:hover ": {
+              background: "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+              cursor: "pointer",
             },
           }}
         >
-          I added the records
+          Manage Domain
         </Button>
-      </Form>
+      </LuanchForm>
     </>
   );
 }
 // Check all set
-function AllSet({ handleNext }) {
+function ManageDomains({ handleNext, handlePrev }) {
   return (
     <>
-      <Form className="DomainTypeForm">
+      <LuanchForm>
+        <Grid container>
+          <Grid xs={12}>
+            <Box sx={{}}>
+              <h5>Manage Domains</h5>
+              <p
+                className="allset"
+                style={{ textAlign: "left", paddingTop: "12px" }}
+              >
+                If you’ve added the CNAME record and you don’t see the status of
+                your domain as “configured” after 24 hours, we recommend you
+                contacting your DNS provider’s support team to ensure you’ve
+                added the CNAME record correctly.
+              </p>
+            </Box>
+          </Grid>
+
+          <Grid xs={12}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Domain</p>
+              <input
+                onChange={(e) => setHeroButton(e.target.value)}
+                type="text"
+                placeholder="Add your domain"
+              />
+            </Box>
+          </Grid>
+
+          <Grid xs={6}>
+            <Box sx={{ padding: "8px 0px" }}>
+              <p>Status:</p>
+              <h5>Not Confused</h5>
+            </Box>
+          </Grid>
+        </Grid>
+
         <Box
           sx={{
-            textAlign: "center",
-            fontSize: "1.2em",
-            padding: "30px 0px 0px",
-          }}
-        >
-          <p>You are all set!</p>
-        </Box>
-
-        <p>
-          We’ll scan for your domain name and provision an SSL certificate
-          automatically for free. Usually DNS propagation happens quickly.
-          However, in the worst case, it may take up to 24 hours.
-        </p>
-
-        <Box
-          sx={{
-            padding: "20px 0px 20px",
-          }}
-        >
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "22% auto",
-              alignItems: "center",
-              gap: "5px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Domain:</span>
-            <input type="text" placeholder="tonyferguson.io" />
-          </Box>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "22% auto",
-              alignItems: "center",
-              gap: "5px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Subdomain:</span>
-            <input type="text" placeholder="tonyferguson.xtraverse.com" />
-          </Box>
-        </Box>
-
-        <Button
-          onClick={handleNext}
-          sx={{
-            background: "transparent",
-            border: "2px solid #fff",
+            display: "grid",
+            gridTemplateColumns: "50% auto",
             width: "100%",
-            display: "block",
-            padding: "12px ",
-            color: "#000",
-            margin: "15px 0px",
-            color: "#fff",
-            "&:hover": {
-              background: "#fff",
-              color: "#000",
-            },
-          }}
-        >
-          I added the records
-        </Button>
-      </Form>
-    </>
-  );
-}
-// Manage domains
-function ManageDomains() {
-  const router = useRouter();
-
-  return (
-    <>
-      <Form className="DomainTypeForm">
-        <Box
-          sx={{
-            textAlign: "center",
-            fontSize: "1.2em",
-            padding: "30px 0px 0px",
-          }}
-        >
-          <p>Manage domains</p>
-        </Box>
-
-        <p>
-          If you’ve added the CNAME record and you don’t see the status of your
-          domain as “configured” after 24 hours, we recommend you contacting
-          your DNS provider’s support team to ensure you’ve added the CNAME
-          record correctly.
-        </p>
-
-        <Box
-          sx={{
-            padding: "20px 0px 20px",
-          }}
-        >
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "22% auto",
-              alignItems: "center",
-              gap: "5px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Domain:</span>
-            <input type="text" placeholder="tonyferguson.io" />
-          </Box>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "22% auto",
-              alignItems: "center",
-              gap: "5px",
-              borderBottom: "2px solid #fff",
-            }}
-          >
-            <span>Status:</span>
-            <input type="text" placeholder="Not configured" />
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
             gap: "10px",
           }}
         >
           <Button
+            onClick={handlePrev}
             sx={{
-              background: "transparent",
-              border: "2px solid #fff",
               width: "100%",
-              display: "block",
-              padding: "15px ",
+              background: "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+              borderRadius: "8px",
               color: "#000",
-              margin: "15px 0px",
-              color: "#fff",
-              borderRadius: "10px",
-              "&:hover": {
-                background: "#fff",
-                color: "#000",
-              },
-            }}
-          >
-            Refresh
-          </Button>
-          <Button
-            sx={{
-              background: "transparent",
-              border: "2px solid #fff",
-              width: "100%",
-              display: "block",
-              padding: "15px ",
-              color: "#000",
-              margin: "15px 0px",
-              color: "#fff",
-              borderRadius: "10px",
-              "&:hover": {
-                background: "#fff",
-                color: "#000",
+              fontSize: "1.2em",
+              textTransform: "capitalize",
+              padding: "8px 0px",
+              transition: "0.3s",
+              fontWeight: "500",
+              margin: "10px 0px",
+              "&:hover ": {
+                background: "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                cursor: "pointer",
               },
             }}
           >
             Remove
           </Button>
-        </Box>
-        <Button
-          onClick={() => router.push("/template")}
-          sx={{
-            background: "#fff",
-            border: "2px solid #fff",
-            width: "100%",
-            display: "block",
-            padding: "15px ",
-            color: "#000",
-            margin: "15px 0px",
-            color: "#000",
-            borderRadius: "10px",
-            "&:hover": {
-              background: "transparent",
+          <Button
+            onClick={handleNext}
+            sx={{
+              width: "100%",
+              background: "#252525",
+              borderRadius: "8px",
               color: "#fff",
-            },
-          }}
-        >
-          Complete
-        </Button>
-      </Form>
+              fontSize: "1.2em",
+              textTransform: "capitalize",
+              padding: "8px 0px",
+              transition: "0.3s",
+              fontWeight: "500",
+              border: "2px solid #04fcbc",
+              margin: "10px 0px",
+            }}
+          >
+            Go live
+          </Button>
+        </Box>
+      </LuanchForm>
+    </>
+  );
+}
+// Manage domains
+function AllSet({ handlePrev }) {
+  const router = useRouter();
+  const [connections, setConnections] = useState({});
+  console.log(connections);
+  const handleConnect = (buttonId, value, name) => {
+    setConnections((prevConnections) => ({
+      ...prevConnections,
+      [buttonId]: true,
+      [value]: name,
+    }));
+  };
+  return (
+    <>
+      <Connectionsec>
+        <h1>You’re all set!</h1>
+        <Box sx={{ borderRadius: "10px" }}>
+          <div className="process">
+            <div className="cntpara">
+              <div className="img">
+                <Image src={twitter} alt="" />
+              </div>
+            </div>
+            <div className="cntpara">
+              <p>Twitter page & ads for project</p>
+            </div>
+            <Button
+              onClick={() => handleConnect("button1", "key-1", "Twitter")}
+              sx={{
+                width: "100%",
+                background: "#252525",
+                borderRadius: "8px",
+                color: `${connections["button1"] ? "#04fcbc" : "#fff"}`,
+                fontSize: "1.2em",
+                textTransform: "capitalize",
+                padding: "6px 10px",
+                transition: "0.3s",
+                fontWeight: "500",
+                border: `2px solid ${
+                  connections["button1"] ? "#252525" : "#04fcbc"
+                }`,
+                margin: "10px 0px",
+              }}
+            >
+              {connections["button1"] ? (
+                <>
+                  Connected <BsCheck2All />
+                </>
+              ) : (
+                "Connect"
+              )}
+            </Button>
+          </div>
+          <div className="process">
+            <div className="cntpara">
+              <div className="img">
+                <Image src={tiktok} alt="" />
+              </div>
+            </div>
+            <div className="cntpara">
+              <p>Earn money with tiktok</p>
+            </div>
+            <Button
+              onClick={() => handleConnect("button2", "key-2", "Tiktok")}
+              sx={{
+                width: "100%",
+                background: "#252525",
+                borderRadius: "8px",
+                color: `${connections["button2"] ? "#04fcbc" : "#fff"}`,
+                fontSize: "1.2em",
+                textTransform: "capitalize",
+                padding: "6px 10px",
+                transition: "0.3s",
+                fontWeight: "500",
+                border: `2px solid ${
+                  connections["button2"] ? "#252525" : "#04fcbc"
+                }`,
+                margin: "10px 0px",
+              }}
+            >
+              {connections["button2"] ? (
+                <>
+                  Connected <BsCheck2All />
+                </>
+              ) : (
+                "Connect"
+              )}
+            </Button>
+          </div>
+
+          <div className="process">
+            <div className="cntpara">
+              <div className="img">
+                <Image src={facebook} alt="" />
+              </div>
+            </div>
+            <div className="cntpara">
+              <p>Facebook leads</p>
+            </div>
+            <Button
+              onClick={() => handleConnect("button3", "key-1", "Facebook")}
+              sx={{
+                width: "100%",
+                background: "#252525",
+                borderRadius: "8px",
+                color: ` ${connections["button3"] ? "#04fcbc" : "#fff"}`,
+                fontSize: "1.2em",
+                textTransform: "capitalize",
+                padding: "6px 10px",
+                transition: "0.3s",
+                fontWeight: "500",
+                border: `2px solid ${
+                  connections["button3"] ? "#252525" : "#04fcbc"
+                }`,
+                margin: "10px 0px",
+              }}
+            >
+              {connections["button3"] ? (
+                <>
+                  Connected <BsCheck2All />
+                </>
+              ) : (
+                "Connect"
+              )}
+            </Button>
+          </div>
+
+          <div className="process">
+            <div className="cntpara">
+              <div className="img">
+                <Image src={snapchat} alt="" />
+              </div>
+            </div>
+            <div className="cntpara">
+              <p> Add filter and impress everyone</p>
+            </div>
+            <Button
+              onClick={() => handleConnect("button4", "key-1", "Facebook")}
+              sx={{
+                width: "100%",
+                background: "#252525",
+                borderRadius: "8px",
+                color: `${connections["button4"] ? "#04fcbc" : "#fff"}`,
+                fontSize: "1.2em",
+                textTransform: "capitalize",
+                padding: "6px 10px",
+                transition: "0.3s",
+                fontWeight: "500",
+                border: `2px solid ${
+                  connections["button4"] ? "#252525" : "#04fcbc"
+                }`,
+                margin: "10px 0px",
+              }}
+            >
+              {connections["button4"] ? (
+                <>
+                  Connected <BsCheck2All />
+                </>
+              ) : (
+                "Connect"
+              )}
+            </Button>
+          </div>
+        </Box>
+      </Connectionsec>
     </>
   );
 }

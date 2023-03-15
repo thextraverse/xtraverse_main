@@ -197,7 +197,7 @@ const items = [
         stroke-linejoin="round"
       />
     </svg>,
-    "project/editMarketplace"
+    "/community"
   ),
   getItem(
     "Launch",
@@ -217,7 +217,7 @@ const items = [
         stroke-linejoin="round"
       />
     </svg>,
-    "project/launch"
+    "launch"
   ),
   getItem(
     "Setting",
@@ -293,7 +293,7 @@ function Sidebar({ activeBtn, heading }) {
   const UserProfile = () => {
     return (
       <>
-        {user.photoURL ? (
+        {user && user.photoURL ? (
           <Image
             src={user.photoURL}
             alt="User Profile Picture"

@@ -6,15 +6,16 @@ import Sidebar, {
 } from "../../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../../components/dashboard/step-nav";
 import stripe from "../../../../components/images/stripe.svg";
-import facebook from "../../../../components/images/facebook.svg";
 import godaddy from "../../../../components/images/godaddy.svg";
 import discord from "../../../../components/images/discord.svg";
 import team from "../../../../components/images/team.svg";
 import apex from "../../../../components/images/apex.svg";
 import ipfs from "../../../../components/images/ipfs.svg";
-import twitter from "../../../../components/images/twitter.svg";
 import unstoppable from "../../../../components/images/unstoppable.svg";
 import tiktok from "../../../../components/images/tiktok.svg";
+import twitter from "../../../../components/images/twitter.svg";
+import facebook from "../../../../components/images/facebook.svg";
+
 import Image from "next/image";
 import { useRouter } from "next/router";
 

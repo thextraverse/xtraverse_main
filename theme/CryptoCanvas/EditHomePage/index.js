@@ -47,8 +47,19 @@ function CryptoCanvasEditHome({
                   padding: "15px",
                 }}
               >
-                <Grid container spacing={2}>
-                  <Grid item xs={2.5}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "20px",
+                    }}
+                  >
                     <div className="logo">
                       <Image
                         src={homeLogo}
@@ -61,8 +72,6 @@ function CryptoCanvasEditHome({
                         }}
                       />
                     </div>
-                  </Grid>
-                  <Grid item xs={7}>
                     <div className="headerbtn">
                       <ul>
                         {menuNav
@@ -72,20 +81,17 @@ function CryptoCanvasEditHome({
                           : ""}
                       </ul>
                     </div>
-                  </Grid>
-                  <Grid item xs={2.5}>
-                    <Link href={waitlistBtn.link}>
-                      <a target="_blank">
-                        <Button
-                          className="waitLstBtn"
-                          sx={{ background: btnBgColor }}
-                        >
-                          {waitlistBtn.button}
-                        </Button>
-                      </a>
-                    </Link>
-                  </Grid>
-                </Grid>
+                  </Box>
+
+                  <a target="_blank" href={waitlistBtn.link}>
+                    <Button
+                      className="waitLstBtn"
+                      sx={{ background: btnBgColor }}
+                    >
+                      {waitlistBtn.button}
+                    </Button>
+                  </a>
+                </Box>
               </Box>
             ) : (
               <div className="headersc">
@@ -107,16 +113,14 @@ function CryptoCanvasEditHome({
                       : ""}
                   </ul>
 
-                  <Link href={waitlistBtn.link}>
-                    <a target="_blank">
-                      <Button
-                        className="waitLstBtn"
-                        sx={{ background: btnBgColor }}
-                      >
-                        {waitlistBtn.button}
-                      </Button>
-                    </a>
-                  </Link>
+                  <a target="_blank" href={waitlistBtn.link}>
+                    <Button
+                      className="waitLstBtn"
+                      sx={{ background: btnBgColor }}
+                    >
+                      {waitlistBtn.button}
+                    </Button>
+                  </a>
                 </div>
               </div>
             )}

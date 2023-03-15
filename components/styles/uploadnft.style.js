@@ -248,12 +248,54 @@ export const PreviewBox = styled.div`
       background: #252525 !important;
     }
   }
+  .ownerdv {
+    width: 210px;
+    display: grid;
+    grid-template-columns: 20% 40% auto;
+    padding: 10px 0px;
+    p {
+      font-weight: 700;
+      &.p {
+        color: #8a8a8e;
+      }
+    }
+    span {
+      width: 30px !important;
+      height: 30px !important;
+    }
+  }
   .Preivewgrid {
     height: 100%;
     width: 100%;
     align-items: center;
     display: grid;
     grid-template-columns: 50% auto;
+    position: relative;
+    padding-top: 80px;
+    .offerheader {
+      position: absolute;
+      top: -50px;
+      width: 100%;
+      left: 0px;
+    }
+    .headerbtn {
+      ul {
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        align-items: center;
+      }
+    }
+    .headersc {
+      display: flex;
+      justify-content: space-between;
+      .headerbtn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 25px;
+      }
+    }
   }
   .previewtxt {
     text-align: left;

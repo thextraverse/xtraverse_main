@@ -50,8 +50,8 @@ function Launch() {
   const [subdomain, setSubDomain] = useState();
   const { user } = useUserAuth();
   const router = useRouter();
-  user !== null && user.email && (emailData = user.email);
-  user === null && router.push("/");
+  // user !== null && user.email && (emailData = user.email);
+  // user === null && router.push("/");
   const [activeTab, setActiveTab] = useState(0);
   console.log(domain);
   const handleNext = () => {

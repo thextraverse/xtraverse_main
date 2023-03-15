@@ -111,24 +111,12 @@ function TemplateIndex() {
                       </div>
                       <div className="headerbtn">
                         <ul>
-                          <li>
-                            <a href="#">Home</a>
-                          </li>
-                          <li>
-                            <a href="#">About </a>
-                          </li>
-                          <li>
-                            <a href="#">Blog</a>
-                          </li>
-                          <li>
-                            <a href="#">Collection</a>
-                          </li>
-                          <li>
-                            <a href="#">Roadmap</a>
-                          </li>
-                          <li>
-                            <a href="#">How it works</a>
-                          </li>
+                          <li>Home</li>
+                          <li>About</li>
+                          <li>Blog</li>
+                          <li>Collection</li>
+                          <li>Roadmap</li>
+                          <li>How it works</li>
                         </ul>
                         <a target="_blank">
                           <Button

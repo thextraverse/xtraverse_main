@@ -67,7 +67,7 @@ function Signin() {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     if (emailData) {
-      router.push("/project");
+      router.push("/dashboard");
     } else {
       try {
         const result = await googleSignUp();
@@ -81,7 +81,7 @@ function Signin() {
           );
           if (querySnapshot.docs.length > 0) {
             // User exists in Firestore, sign them in without creating a new collection
-            router.push("/info");
+            router.push("/dashboard");
           } else {
             // User doesn't exist in Firestore, create a new collection for them
             await addDoc(userDataCollectionRef, {
@@ -89,7 +89,7 @@ function Signin() {
               Provider: result.user.providerData[0].providerId,
               Email: result.user.email,
             });
-            router.push("/info");
+            router.push("/dashboard");
           }
         } else {
           // Handle the case where result.user is null

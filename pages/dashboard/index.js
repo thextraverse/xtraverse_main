@@ -11,6 +11,8 @@ import CustomTableContainer from "../../components/dashboard/home/CustomTableCon
 import { Dashboardsc } from "../../components/styles/dashboard.styled";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { Router, useRouter } from "next/router";
+import React, { useState } from "react";
+import axios from "axios";
 
 const Main = styled.main`
   background: #303030;
@@ -38,6 +40,32 @@ export default function Dashboard() {
   let emailData = null;
   user !== null && user.email && (emailData = user.email);
   user === null && router.push("/");
+
+  const apiKey =
+    "3b8758c81cbc23211b0bbe7d19d0ffe28be08a7fe2a837208569b5e07bab36c7d7ff09d48b1f2a37c5e9d412207c48f20520a07bc1edfcf8eb53f77230688374"; // Replace with your API key
+  const clientId = "cli_050544150fc8a4b11d976a73";
+  const [username, setUsername] = useState("");
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://matrix.sbapis.com/b/twitter/statistics?token=${apiKey}&query=${username}&clientid=${clientId}`
+      );
+      setData(response.data);
+      setError(null);
+    } catch (error) {
+      setData(null);
+      setError(error.message);
+    }
+  };
+  // https://matrix.sbapis.com/b/twitter/statistics?query=USERNAME&clientid=cli_050544150fc8a4b11d976a73&token=3b8758c81cbc23211b0bbe7d19d0ffe28be08a7fe2a837208569b5e07bab36c7d7ff09d48b1f2a37c5e9d412207c48f20520a07bc1edfcf8eb53f77230688374
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchData();
+  };
+  console.log(data);
   return (
     <Main>
       <Dashboardsc>
@@ -51,6 +79,32 @@ export default function Dashboard() {
           <Grid item xs={12}></Grid>
           <Grid item xs={12}></Grid>
           <DasboardContainer>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="username">Enter the Twitter username:</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required
+              />
+              <button type="submit">Fetch Data</button>
+            </form>
+
+            <div>
+              {data && (
+                <>
+                  <h2>
+                    {data.user_display_name} (@{data.user_name})
+                  </h2>
+                  <p>Followers: {data.followers}</p>
+                  <p>Following: {data.following}</p>
+                  <p>Tweets: {data.tweets}</p>
+                  {/* Add more data points as needed */}
+                </>
+              )}
+              {error && <p>Error fetching data: {error}</p>}
+            </div>
             <Grid item xs={12}>
               <Grid container spacing={1.3}>
                 <Grid item xs={1.25}></Grid>

@@ -306,9 +306,9 @@ export default function CustomTableContainer() {
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
                 <span style={{ marginRight: "14px" }}>
-                  <Image src={metamsk} />
+                  <Image src={metamsk} alt="" />
                 </span>
-                <Image src={coinbase} />
+                <Image src={coinbase} alt="" />
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
@@ -424,9 +424,9 @@ function ModalLeftData({ showData }) {
         <p>Wallet</p>
         <div>
           <span style={{ marginRight: "14px" }}>
-            <Image src={metamsk} />
+            <Image src={metamsk} alt="" />
           </span>
-          <Image src={coinbase} />
+          <Image src={coinbase} alt="" />
         </div>
       </div>
     </ModalLeftDataDiv>
@@ -482,7 +482,7 @@ function ModalRightData({ showData }) {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <div className="last-cont">
-              <Image src={twitter} />
+              <Image src={twitter} alt="" />
               <div>
                 <h4>12K</h4>
                 <p>Followers</p>
@@ -492,7 +492,7 @@ function ModalRightData({ showData }) {
 
           <Grid item xs={6}>
             <div className="last-cont">
-              <Image src={money} />
+              <Image src={money} alt="" />
               <div>
                 <h4>12K</h4>
                 <p>Followers</p>

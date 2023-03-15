@@ -132,5 +132,7 @@ const data = [
     Date: ["1y", <DateIcon />],
   },
 ];
-const ItemAcivity = () => <Table columns={columns} dataSource={data} />;
+const ItemAcivity = () => (
+  <Table columns={columns} dataSource={data} key={data.key} />
+);
 export default ItemAcivity;

@@ -267,7 +267,12 @@ export default function Project() {
                   <p>Upload project cover</p>
                   {ProjectCoverImg && (
                     <div className="img">
-                      <Image src={ProjectCoverImg} width={100} height={100} />
+                      <Image
+                        src={ProjectCoverImg}
+                        width={100}
+                        height={100}
+                        alt="projectCover"
+                      />
                     </div>
                   )}
                 </div>

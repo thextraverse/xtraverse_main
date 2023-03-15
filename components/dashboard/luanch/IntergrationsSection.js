@@ -442,7 +442,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={faceInsta} />
+                <Image src={faceInsta} alt="" />
               </Box>
 
               <Box
@@ -728,7 +728,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={rainbow} />
+                <Image src={rainbow} alt="" />
               </Box>
 
               <Box
@@ -799,7 +799,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={tiktok} />
+                <Image src={tiktok} alt="" />
               </Box>
 
               <Box
@@ -870,7 +870,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={snapchat} />
+                <Image src={snapchat} alt="" />
               </Box>
 
               <Box
@@ -941,7 +941,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={twitter} />
+                <Image src={twitter} alt="" />
               </Box>
 
               <Box
@@ -1083,7 +1083,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={reddit} />
+                <Image src={reddit} alt="" />
               </Box>
 
               <Box
@@ -1154,7 +1154,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={zappier} />
+                <Image src={zappier} alt="" />
               </Box>
 
               <Box
@@ -1225,7 +1225,7 @@ export function IntergrationSec() {
                   display: "flex",
                 }}
               >
-                <Image src={website} />
+                <Image src={website} alt="" />
               </Box>
 
               <Box

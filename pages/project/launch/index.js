@@ -106,7 +106,7 @@ function Launch() {
                 <Grid container>
                   <Grid item md={6}>
                     <div className="launchimgbox">
-                      <Image src={websitepreview} />
+                      <Image src={websitepreview} alt="website preview" />
                     </div>
                   </Grid>
                   <Grid item md={6}>
@@ -210,9 +210,10 @@ function DomainType({ handleNext, domain, setDomain }) {
             <Box sx={{}}>
               <h1>You're all set!</h1>
               <p className="allset" style={{ textAlign: "left" }}>
-                We’ll scan for your domain name and provision an SSL certificate
-                automatically for free. Usually DNS propagation happens quickly.
-                However, in the worst case, it may take up to 24 hours.
+                We &apos; ll scan for your domain name and provision an SSL
+                certificate automatically for free. Usually DNS propagation
+                happens quickly. However, in the worst case, it may take up to
+                24 hours.
               </p>
             </Box>
           </Grid>
@@ -367,7 +368,7 @@ function AllSet({ handlePrev }) {
           <div className="process">
             <div className="cntpara">
               <div className="img">
-                <Image src={twitter} alt="" />
+                <Image src={twitter} alt="twitter" />
               </div>
             </div>
             <div className="cntpara">
@@ -403,7 +404,7 @@ function AllSet({ handlePrev }) {
           <div className="process">
             <div className="cntpara">
               <div className="img">
-                <Image src={tiktok} alt="" />
+                <Image src={tiktok} alt="tik" />
               </div>
             </div>
             <div className="cntpara">
@@ -440,7 +441,7 @@ function AllSet({ handlePrev }) {
           <div className="process">
             <div className="cntpara">
               <div className="img">
-                <Image src={facebook} alt="" />
+                <Image src={facebook} alt="facebook" />
               </div>
             </div>
             <div className="cntpara">
@@ -477,7 +478,7 @@ function AllSet({ handlePrev }) {
           <div className="process">
             <div className="cntpara">
               <div className="img">
-                <Image src={snapchat} alt="" />
+                <Image src={snapchat} alt="snapchat" />
               </div>
             </div>
             <div className="cntpara">

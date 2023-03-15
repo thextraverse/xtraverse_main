@@ -100,8 +100,8 @@ export default function Dashboard() {
                     {/*top card section*/}
                     <Grid item xs={12}>
                       <Grid container spacing={2}>
-                        {[1, 2, 3, 4, 5, 6].map((itm) => (
-                          <Grid item xs={2}>
+                        {[1, 2, 3, 4, 5, 6].map((itm, index) => (
+                          <Grid item xs={2} key={index}>
                             <TopCard />
                           </Grid>
                         ))}

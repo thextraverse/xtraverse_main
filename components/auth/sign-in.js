@@ -20,6 +20,7 @@ import {
   where,
 } from "firebase/firestore";
 import { auth, db } from "../../configfile/firebaseConfig";
+
 function Signin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -29,7 +30,11 @@ function Signin() {
   const [error, setError] = useState("");
   const { loginAuth, googleSignUp, user, data } = useUserAuth();
   const userDataCollectionRef = collection(db, "Users");
-
+  let emailData = null;
+  if (user !== null && user.email) {
+    emailData = user.email;
+  }
+  console.log(emailData);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -61,28 +66,42 @@ function Signin() {
 
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
-    try {
-      const result = await googleSignUp();
-      const userDataCollectionRef = collection(db, "Users");
-      const querySnapshot = await getDocs(
-        query(userDataCollectionRef, where("Email", "==", result.user.email))
-      );
-      if (querySnapshot.docs.length > 0) {
-        // User exists in Firestore, sign them in without creating a new collection
-        router.push("/info");
-      } else {
-        // User doesn't exist in Firestore, create a new collection for them
-        await addDoc(userDataCollectionRef, {
-          Uid: result.user.uid,
-          Provider: result.user.providerData[0].providerId,
-          Email: result.user.email,
-        });
-        router.push("/info");
+    if (emailData) {
+      router.push("/dashboard");
+    } else {
+      try {
+        const result = await googleSignUp();
+        const userDataCollectionRef = collection(db, "Users");
+        if (result.user !== null) {
+          const querySnapshot = await getDocs(
+            query(
+              userDataCollectionRef,
+              where("Email", "==", result.user.email)
+            )
+          );
+          if (querySnapshot.docs.length > 0) {
+            // User exists in Firestore, sign them in without creating a new collection
+            router.push("/dashboard");
+          } else {
+            // User doesn't exist in Firestore, create a new collection for them
+            await addDoc(userDataCollectionRef, {
+              Uid: result.user.uid,
+              Provider: result.user.providerData[0].providerId,
+              Email: result.user.email,
+            });
+            router.push("/dashboard");
+          }
+        } else {
+          // Handle the case where result.user is null
+          // For example, display an error message to the user
+          setError("Sign-in failed. Please try again.");
+        }
+      } catch (err) {
+        setError(err.message);
       }
-    } catch (err) {
-      setError(err.message);
     }
   };
+
   return (
     <>
       <Box

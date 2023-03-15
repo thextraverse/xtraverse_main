@@ -129,7 +129,10 @@ export default function Project() {
   const router = useRouter();
   const { user } = useUserAuth();
   const uniqueId = v4();
-  const emailData = user.email;
+  let emailData = null;
+
+  user !== null && user.email && (emailData = user.email);
+  user === null && router.push("/");
 
   const [ProjectCoverImg, setProjectCoverImg] = useState();
   const [upldPrjctCover, setUpldPrjctCover] = useState("");
@@ -161,8 +164,8 @@ export default function Project() {
   };
   console.log(founderList);
 
-  const handleDataSubmit = async () => {
-    event.preventDefault();
+  const handleDataSubmit = async (e) => {
+    e.preventDefault();
     const imageRef = ref(storage, `images/${upldPrjctCover.name + v4()}`);
 
     // Upload the files to Firebase storage
@@ -225,7 +228,7 @@ export default function Project() {
       } else {
         alert("No documents found.");
       }
-      router.push("/project/selectProject");
+      router.push("/project/editMarketplace/marketplaceSalespage");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -264,7 +267,12 @@ export default function Project() {
                   <p>Upload project cover</p>
                   {ProjectCoverImg && (
                     <div className="img">
-                      <Image src={ProjectCoverImg} width={100} height={100} />
+                      <Image
+                        src={ProjectCoverImg}
+                        width={100}
+                        height={100}
+                        alt="projectCover"
+                      />
                     </div>
                   )}
                 </div>

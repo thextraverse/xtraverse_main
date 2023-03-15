@@ -64,73 +64,76 @@ const Star = () => {
   );
 };
 
-const columns = [
-  {
-    title: "Event",
-    dataIndex: "Event",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Form",
-    dataIndex: "Form",
-    key: "Form",
-  },
-  {
-    title: "To",
-    dataIndex: "To",
-    key: "To",
-  },
-  {
-    title: "Qty",
-    dataIndex: "Qty",
-    key: "Qty",
-  },
-  {
-    title: "Amount",
-    dataIndex: "Amount",
-    key: "Amount",
-    render: (text) => <a>{text}</a>,
-  },
+// const columns = [
+//   {
+//     title: "Event",
+//     dataIndex: "Event",
+//     key: "name",
+//     render: (text) => <a>{text}</a>,
+//   },
+//   {
+//     title: "Form",
+//     dataIndex: "Form",
+//     key: "Form",
+//   },
+//   {
+//     title: "To",
+//     dataIndex: "To",
+//     key: "To",
+//   },
+//   {
+//     title: "Qty",
+//     dataIndex: "Qty",
+//     key: "Qty",
+//   },
+//   {
+//     title: "Amount",
+//     dataIndex: "Amount",
+//     key: "Amount",
+//     render: (text) => <a>{text}</a>,
+//   },
 
-  {
-    title: "Date",
-    dataIndex: "Date",
-    key: "Date",
-    render: (text) => <a>{text}</a>,
-  },
-];
-const data = [
-  {
-    key: "1",
-    Event: [<Star />, "Minted"],
-    Form: "0xbgh...Efb",
-    To: "0xb45...rtg",
-    Qty: "1",
-    Amount: [<AmountIcon />, "9 ETH"],
-    Date: ["1y", <DateIcon />],
-  },
-  {
-    key: "2",
-    Event: [<Star />, "Minted"],
+//   {
+//     title: "Date",
+//     dataIndex: "Date",
+//     key: "Date",
+//     render: (text) => <a>{text}</a>,
+//   },
+// ];
+// const data = [
+//   {
+//     key: "1",
+//     Event: [<Star />, "Minted"],
+//     Form: "0xbgh...Efb",
+//     To: "0xb45...rtg",
+//     Qty: "1",
+//     Amount: [<AmountIcon />, "9 ETH"],
+//     Date: ["1y", <DateIcon />],
+//   },
+//   {
+//     key: "2",
+//     Event: [<Star />, "Minted"],
 
-    Form: "0xbgh...Efb",
-    To: "0xb45...rtg",
-    Qty: "1",
-    Amount: [<AmountIcon />, "9 ETH"],
-    Date: ["1y", <DateIcon />],
-  },
+//     Form: "0xbgh...Efb",
+//     To: "0xb45...rtg",
+//     Qty: "1",
+//     Amount: [<AmountIcon />, "9 ETH"],
+//     Date: ["1y", <DateIcon />],
+//   },
 
-  {
-    key: "3",
-    Event: [<Star />, "Minted"],
+//   {
+//     key: "3",
+//     Event: [<Star />, "Minted"],
 
-    Form: "0xbgh...Efb",
-    Qty: "1",
-    To: "0xb45...rtg",
-    Amount: [<AmountIcon />, "9 ETH"],
-    Date: ["1y", <DateIcon />],
-  },
-];
-const ItemAcivity = () => <Table columns={columns} dataSource={data} />;
+//     Form: "0xbgh...Efb",
+//     Qty: "1",
+//     To: "0xb45...rtg",
+//     Amount: [<AmountIcon />, "9 ETH"],
+//     Date: ["1y", <DateIcon />],
+//   },
+// ];
+const ItemAcivity = () => (
+  // <Table columns={columns} dataSource={data} key={data.key} />
+  <></>
+);
 export default ItemAcivity;

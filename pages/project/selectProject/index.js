@@ -117,7 +117,8 @@ function SelectProject() {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
-
+  // user !== null && user.email && (emailData = user.email);
+  // user === null && router.push("/");
   const emailData = user.email;
   console.log(emailData);
 
@@ -223,7 +224,6 @@ function SelectProject() {
                   <Image src={template4} alt="Picture of the author" />
                 </div>
               </div>
-              {/* <Link href="/dashboard/createproject/uploadnfts"> */}
               <Button
                 onClick={handleDataSubmit}
                 sx={{
@@ -259,7 +259,7 @@ function SelectProject() {
                 }}
               >
                 <h1>{activeImage}</h1>
-                <Link href=".template">
+                <Link href="/template">
                   <a>
                     See Full Preview <HiOutlineEye />
                   </a>

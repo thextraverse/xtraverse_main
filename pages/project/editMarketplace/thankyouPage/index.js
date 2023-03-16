@@ -272,179 +272,167 @@ function EditMarketPlaceSalesindex() {
         <Stepnav />
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={3} />
-          <Box
-            sx={{
-              marginLeft: "auto",
-              background: "#303030",
-              height: "100%",
-              display: "grid",
-              gridTemplateColumns: "100%",
-              alignItems: "center",
-              paddingLeft: "110px",
-            }}
-          >
-            <XtraverseContainer>
-              <Grid container spacing={2}>
-                <Grid item lg={3} xl={4}>
-                  <EditorInputSec>
-                    <PageEditorFrom>
-                      <div className="editorform">
-                        {/* Closing */}
-                        <div
-                          className={
-                            activeIndex === 0
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => handleToggle(0)}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Thank you page</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-                          </div>
-
-                          <div className="page-editor-content-input">
-                            <MarketPlaceClosing
-                              setClosingTopTxt={setClosingTopTxt}
-                              setClosingHeader={setClosingHeader}
-                              setClosingSubtexxt={setClosingSubtexxt}
-                              setClosingBtn={setClosingBtn}
-                              closingBtn={closingBtn}
-                              handleClosingBtnChange={handleClosingBtnChange}
-                              handleClosingVideoChange={
-                                handleClosingBioVideoChange
-                              }
-                              key="3"
-                            />
+          <XtraverseContainer>
+            <Grid container spacing={2}>
+              <Grid lg={4} xl={4}>
+                <EditorInputSec>
+                  <PageEditorFrom>
+                    <div className="editorform">
+                      {/* Closing */}
+                      <div
+                        className={
+                          activeIndex === 0
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(0)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Thank you page</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
                           </div>
                         </div>
-                      </div>
-                    </PageEditorFrom>
-                    <Box
-                      sx={{
-                        display: "grid",
-                        gridTemplateColumns: "50% auto",
-                        gap: "10px",
-                      }}
-                    >
-                      <Link href="/project">
-                        <Button
-                          sx={{
-                            width: "100%",
-                            background: "#252525",
-                            borderRadius: "8px",
-                            color: "#fff",
-                            fontSize: "1.2em",
-                            textTransform: "capitalize",
-                            border: "2px solid #04FCBC",
-                            padding: "8px 0px",
-                            fontWeight: "500",
-                            margin: "10px 0px",
-                            "&:hover ": {
-                              background:
-                                "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                              color: "#000",
-                              cursor: "pointer",
-                            },
-                          }}
-                        >
-                          Back
-                        </Button>
-                      </Link>
 
+                        <div className="page-editor-content-input">
+                          <MarketPlaceClosing
+                            setClosingTopTxt={setClosingTopTxt}
+                            setClosingHeader={setClosingHeader}
+                            setClosingSubtexxt={setClosingSubtexxt}
+                            setClosingBtn={setClosingBtn}
+                            closingBtn={closingBtn}
+                            handleClosingBtnChange={handleClosingBtnChange}
+                            handleClosingVideoChange={
+                              handleClosingBioVideoChange
+                            }
+                            key="3"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </PageEditorFrom>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: "50% auto",
+                      gap: "10px",
+                    }}
+                  >
+                    <Link href="/project">
                       <Button
-                        onClick={handleDataSubmit}
                         sx={{
                           width: "100%",
-                          background:
-                            "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                          background: "#252525",
                           borderRadius: "8px",
-                          color: "#000",
+                          color: "#fff",
                           fontSize: "1.2em",
                           textTransform: "capitalize",
+                          border: "2px solid #04FCBC",
                           padding: "8px 0px",
-                          transition: "0.3s",
                           fontWeight: "500",
                           margin: "10px 0px",
                           "&:hover ": {
                             background:
                               "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                            color: "#000",
                             cursor: "pointer",
                           },
                         }}
                       >
-                        Next
+                        Back
+                      </Button>
+                    </Link>
+
+                    <Button
+                      onClick={handleDataSubmit}
+                      sx={{
+                        width: "100%",
+                        background:
+                          "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                        borderRadius: "8px",
+                        color: "#000",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        "&:hover ": {
+                          background:
+                            "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                          cursor: "pointer",
+                        },
+                      }}
+                    >
+                      Next
+                    </Button>
+                  </Box>
+                </EditorInputSec>
+              </Grid>
+              <Grid lg={8} xl={8}>
+                <Box
+                  sx={{
+                    background: "#252525",
+                    padding: "3px",
+                    width: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  <BtnContainer>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.4035 2.37412 8.8944 3.03947 7.55556"
+                        stroke="#8A8A8E"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "20px",
+                      }}
+                    >
+                      <Button>
+                        See full preview <AiOutlineEye />
                       </Button>
                     </Box>
-                  </EditorInputSec>
-                </Grid>
-                <Grid item lg={3} xl={8}>
-                  <Box
-                    sx={{
-                      background: "#252525",
-                      padding: "3px",
-                      width: "100%",
-                      textAlign: "center",
-                    }}
-                  >
-                    <BtnContainer>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.4035 2.37412 8.8944 3.03947 7.55556"
-                          stroke="#8A8A8E"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          gap: "20px",
-                        }}
-                      >
-                        <Button>
-                          See full preview <AiOutlineEye />
-                        </Button>
-                      </Box>
-                    </BtnContainer>
+                  </BtnContainer>
 
-                    <MarketPlaceDataPreview>
-                      <CryptoCanvasEditMarketPlaceThanksyou
-                        closingTopTxt={closingTopTxt}
-                        closingHeader={closingHeader}
-                        closingSubtexxt={closingSubtexxt}
-                        closingSelectedVideo={closingSelectedVideo}
-                        closingBtn={closingBtn}
-                      />
-                    </MarketPlaceDataPreview>
-                  </Box>
-                </Grid>
+                  <MarketPlaceDataPreview>
+                    <CryptoCanvasEditMarketPlaceThanksyou
+                      closingTopTxt={closingTopTxt}
+                      closingHeader={closingHeader}
+                      closingSubtexxt={closingSubtexxt}
+                      closingSelectedVideo={closingSelectedVideo}
+                      closingBtn={closingBtn}
+                    />
+                  </MarketPlaceDataPreview>
+                </Box>
               </Grid>
-            </XtraverseContainer>
-            {/* {selectedTemplate} */}
-          </Box>
+            </Grid>
+          </XtraverseContainer>
+          {/* {selectedTemplate} */}
         </Box>
       </Main>
     </>

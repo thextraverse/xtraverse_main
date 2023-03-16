@@ -5,13 +5,58 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRouter } from "next/router";
 import { Box } from "@mui/system";
+import { useState, useEffect } from "react";
+import { Button, message, Steps, theme } from "antd";
 const StepBar = styled.div`
   background: #303030;
   width: 100%;
   position: fixed;
-  top: 60px;
+  top: 65px;
   z-index: 9;
   left: 0px;
+  padding: 10px;
+  .ant-steps.ant-steps-horizontal.css-dev-only-do-not-override-1me4733.ant-steps-label-horizontal {
+    width: calc(100% - 300px);
+    margin: auto;
+  }
+  .ant-steps-item-icon {
+    background: #fff !important;
+    border-color: #fff !important;
+  }
+  .ant-steps-item-title {
+    color: #fff !important;
+    &::after {
+      background: #8a8a8e !important;
+    }
+  }
+  .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
+    .ant-steps-item-icon {
+      background: #04fcbc !important;
+      border-color: #04fcbc !important;
+      .ant-steps-icon {
+        color: #303030 !important;
+        font-weight: 600 !important;
+      }
+    }
+    .ant-steps-item-title {
+      color: #04fcbc !important;
+      &::after {
+        background: #04fcbc !important;
+      }
+    }
+  }
+  .ant-steps-item.ant-steps-item-finish {
+    .ant-steps-item-title {
+      color: #04fcbc !important;
+    }
+    .ant-steps-item-icon {
+      border-color: #04fcbc !important;
+      background: #04fcbc !important;
+    }
+    .ant-steps-icon {
+      color: #fff;
+    }
+  }
 `;
 const Ul = styled.ul`
   display: flex;
@@ -73,56 +118,127 @@ const Ul = styled.ul`
     font-weight: 600;
   }
 `;
-
 function Stepnav() {
   const router = useRouter();
-  const navItems = [
-    // {
-    //   href: "/project/selectProject",
-    //   label: "01 Select Template /",
-    // },
+  //   href: [
+  //     "/project/editMarketplace/marketplaceSalespage",
+  //     "/project/editMarketplace/thankyouPage",
+  //   ],
+  //   label: " Edit Marketplace ",
+  //   key: "01",
+  // },
+
+  // {
+  //
+  //   label: " Edit Website ",
+  //   key: "02",
+  // },
+  // {
+  //
+  //   label: " Launch",
+  //   key: "03",
+  // },
+  const steps = [
     {
+      title: "Edit Marketplace",
+      content: "Edit Marketplace",
       href: [
-        // "/project/editMarketplace",
         "/project/editMarketplace/marketplaceSalespage",
         "/project/editMarketplace/thankyouPage",
       ],
-      label: " Edit Marketplace ",
-      key: "01",
     },
-
     {
+      title: "Edit Website",
+      content: "Second-content",
       href: ["/project/editWebsite"],
-      label: " Edit Website ",
-      key: "02",
     },
     {
+      title: "Launch",
+      content: "Last-content",
       href: ["/project/launch"],
-      label: " Launch",
-      key: "03",
     },
   ];
+  const { token } = theme.useToken();
+  const [current, setCurrent] = useState(0);
+  const next = () => {
+    setCurrent(current + 1);
+    const nextStep = steps[current + 1];
+    const currentRoute = router.route;
+    const nextRoute =
+      currentRoute === nextStep.href[0] ? nextStep.href[1] : nextStep.href[0];
+    router.push(nextRoute);
+  };
+  const prev = () => {
+    if (current > 0) {
+      setCurrent(current - 1);
+      router.push(steps[current - 1].href[0]);
+    }
+  };
+  const items = steps.map((item) => ({
+    key: item.title,
+    title: item.title,
+  }));
+  const contentStyle = {
+    lineHeight: "260px",
+    textAlign: "center",
+    color: token.colorTextTertiary,
+    backgroundColor: token.colorFillAlter,
+    borderRadius: token.borderRadiusLG,
+    border: `1px dashed ${token.colorBorder}`,
+    marginTop: 16,
+  };
+  useEffect(() => {
+    const storedStep = localStorage.getItem("currentStep");
+    if (storedStep) {
+      setCurrent(parseInt(storedStep, 10));
+    }
+    const handleRouteChange = (url) => {
+      const matchingStep = steps.findIndex((step) => step.href.includes(url));
+      if (matchingStep !== -1) {
+        setCurrent(matchingStep);
+      }
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
   return (
-    <StepBar>
-      <Ul>
-        {navItems.map((item, index) => (
-          <li
-            key={index}
-            className={
-              Array.isArray(item.href) && item.href.includes(router.pathname)
-                ? "active"
-                : ""
-            }
+    <StepBar
+      sx={{
+        padding: "100px 200px",
+      }}
+    >
+      <Steps current={current} items={items} />
+      {/* <div
+        style={{
+          marginTop: 24,
+        }}
+      >
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            Next
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button
+            type="primary"
+            onClick={() => message.success("Processing complete!")}
           >
-            <span className="key">{item.key}</span>
-
-            <Link href={Array.isArray(item.href) ? item.href[0] : item.href}>
-              <a>{item.label}</a>
-            </Link>
-            {/* <Box sx={{ width: "100%", height: "2px" }}></Box> */}
-          </li>
-        ))}
-      </Ul>
+            Done
+          </Button>
+        )}
+        {current > 0 && (
+          <Button
+            style={{
+              margin: "0 8px",
+            }}
+            onClick={() => prev()}
+          >
+            Previous
+          </Button>
+        )}
+      </div> */}
     </StepBar>
   );
 }

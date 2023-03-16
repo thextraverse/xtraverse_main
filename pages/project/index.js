@@ -47,13 +47,13 @@ const Dashboardsc = styled.div`
 `;
 const Initialize = styled.div`
   width: 800px;
-  margin: auto;
-  margin-top: 20vh;
   gap: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  margin: auto;
   .uploadProject {
     width: 100%;
     background: #252525;

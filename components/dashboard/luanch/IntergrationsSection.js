@@ -12,7 +12,7 @@ import discord from "../../images/icons/_Discord.png";
 import reddit from "../../images/icons/_Reddit.png";
 import zappier from "../../images/icons/zapier-logo_black.png";
 import faceInsta from "../../images/icons/faceInsta.png";
-import website from "../../images/icons/d_Discord.png";
+import website from "../../images/icons/domain.png";
 import Image from "next/image";
 import { Domain } from "@mui/icons-material";
 const IntegrationCard = styled.div`
@@ -94,16 +94,7 @@ const colorStyles = {
 };
 
 export function IntergrationSec() {
-  const [utilities, setUtilities] = useState({
-    analyticsAcc1: "",
-    analyticsAcc2: "",
-    mccAccountId: "",
-    gogleBusinessPage: "",
-    FbMsgPage: "",
-    wert: "",
-    comet: "",
-    rainbow: "",
-  });
+  const [utilities, setUtilities] = useState({});
   console.log(utilities);
 
   const handleAnalytics1Account = (selectedOption) => {

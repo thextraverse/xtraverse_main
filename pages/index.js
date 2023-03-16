@@ -115,7 +115,7 @@ const H1 = styled.h1`
 `;
 export const XtraverseContainer = styled.div`
   @media screen and (min-width: 1200px) {
-    width: 1200px;
+    width: 1150px;
     margin: auto;
   }
   @media screen and (min-width: 1536px) {

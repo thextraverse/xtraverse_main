@@ -48,6 +48,9 @@ const StepBar = styled.div`
   .ant-steps-item.ant-steps-item-finish {
     .ant-steps-item-title {
       color: #04fcbc !important;
+      &::after {
+        background: #04fcbc !important;
+      }
     }
     .ant-steps-item-icon {
       border-color: #04fcbc !important;
@@ -202,6 +205,7 @@ function Stepnav() {
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <StepBar

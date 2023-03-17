@@ -36,7 +36,7 @@ import { useRouter } from "next/router";
 
 const Main = styled.main`
   background: #303030;
-  padding: 30px;
+  padding: 0px;
   height: 100%;
   color: #fff;
 `;

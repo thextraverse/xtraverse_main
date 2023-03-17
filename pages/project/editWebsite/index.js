@@ -81,31 +81,6 @@ function EditHomePageindex() {
     "linear-gradient(25deg, rgba(38, 0, 252, 1) 0%, rgba(255, 0, 234, 1) 100%)"
   );
   console.log("btnColor", btnBgColor);
-  //! Edit header
-  const [headerType, setHeaderType] = useState("header1");
-  const storeHeaderType = headerType;
-  // for upload logo
-  const [homeLogo, setHomeLogo] = useState(demoimg);
-  const [uploadLogo, setUploadLogo] = useState(demoimg);
-  const [storeLogo, setStoreLogo] = useState();
-  const handleLogoChange = (event) => {
-    const imageFile = event.target.files[0];
-    setHomeLogo(URL.createObjectURL(imageFile));
-    setUploadLogo(imageFile);
-  };
-  const [waitlistBtn, setWaitlistBtn] = useState({
-    button: "Collection",
-    link: "",
-  });
-
-  const handleWaitlistBtnChange = (e) => {
-    setWaitlistBtn({ ...waitlistBtn, [e.target.name]: e.target.value });
-  };
-
-  const [menuNav, setMenuNav] = useState();
-  console.log(menuNav);
-  // waitlist button
-  const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
   //! Edit hero
   const [heroType, setHeroType] = useState("hero3");
@@ -137,7 +112,7 @@ function EditHomePageindex() {
 
   const [browseClctionBtn, setBrowseClctionBtn] = useState({
     button: "Browse Collection",
-    link: "",
+    link: "www.demo.com",
   });
 
   const handleBrowseClctionBtn = (e) => {
@@ -178,7 +153,8 @@ function EditHomePageindex() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
-  const { user } = useUserAuth();
+  const { user, headerMenuData, headerLogo, headermenu, navbarType } =
+    useUserAuth();
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -191,7 +167,7 @@ function EditHomePageindex() {
   const handleDataSubmit = async () => {
     // const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
     // const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
-    const logoimageRef = ref(storage, `images/nft${uploadLogo.name + v4()}`);
+    const logoimageRef = ref(storage, `images/nft${headerLogo.name + v4()}`);
     const bgimageRef = ref(storage, `images/nft${uploadHomeBg.name + v4()}`);
     const desimageRef = ref(storage, `images/nft${uploadDesBg.name + v4()}`);
 
@@ -324,9 +300,9 @@ function EditHomePageindex() {
             await updateDoc(docRef, {
               header: {
                 logoImage: logoimageUrl,
-                navbarType: storeHeaderType,
-                waitlistBtn: waitlistBtn,
-                menuNav: menuNav,
+                navbarType: navbarType,
+                waitlistBtn: headermenu,
+                menuNav: headerMenuData,
               },
               hero: {
                 heroBgImage: herobgimageUrl,
@@ -492,10 +468,6 @@ function EditHomePageindex() {
                           setWebsiteBgColorPopup={setWebsiteBgColorPopup}
                           websiteBgColor={websiteBgColor}
                           setWebsiteBgColor={setWebsiteBgColor}
-                          headerType={headerType}
-                          setHeaderType={setHeaderType}
-                          uploadLogo={uploadLogo}
-                          handleImageChange={handleLogoChange}
                           btnBgColorPopup={btnBgColorPopup}
                           setBtnBgColorPopup={setBtnBgColorPopup}
                           btnBgColor={btnBgColor}
@@ -505,53 +477,6 @@ function EditHomePageindex() {
                       </div>
                     </div>
                     <div className="editorform">
-                      {/* header navigation */}
-                      <div
-                        className={
-                          activeIndex === 3
-                            ? "page-editor-form active"
-                            : "page-editor-form"
-                        }
-                      >
-                        <div className="btn-flex">
-                          <Button
-                            className="page-editor-form-btn"
-                            onClick={() => {
-                              handleToggle(3);
-                              setShowColorPopup(false);
-                            }}
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              color: "#fff",
-                              padding: "15px",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <span>Header Navigation</span>
-                            <KeyboardArrowDownIcon className="activesvg" />
-                          </Button>
-                          <div className="visibility">
-                            <VisibilityOffIcon /> <VisibilityIcon />
-                          </div>
-
-                          {/* <VisibilityIcon className="visible" /> */}
-                        </div>
-                        <div className="page-editor-content-input">
-                          <EditHeader
-                            menuNav={menuNav}
-                            setMenuNav={setMenuNav}
-                            waitlistBtn={waitlistBtn}
-                            handleWaitlistBtnChange={handleWaitlistBtnChange}
-                            headerType={headerType}
-                            setHeaderType={setHeaderType}
-                            uploadLogo={uploadLogo}
-                            handleImageChange={handleLogoChange}
-                            key="1"
-                          />
-                        </div>
-                      </div>
                       {/* hero */}
                       <div
                         className={
@@ -587,7 +512,6 @@ function EditHomePageindex() {
                             handleBrowseClctionBtn={handleBrowseClctionBtn}
                             heroType={heroType}
                             setHeroType={setHeroType}
-                            setHomeLogo={setHomeLogo}
                             editHeroName={editHeroHeading}
                             setEditHeroName={setEditHeroHeading}
                             editHeroScript={editHeroSubtext}
@@ -753,12 +677,8 @@ function EditHomePageindex() {
                   </BtnContainer>
                   <CryptoCanvasEditHome
                     browseClctionBtn={browseClctionBtn}
-                    menuNav={menuNav}
-                    waitlistBtn={waitlistBtn}
-                    homeLogo={homeLogo}
                     homeBg={homeBg}
                     desBg={desBg}
-                    headerType={headerType}
                     heroType={heroType}
                     desType={desType}
                     heroButton={heroButton}

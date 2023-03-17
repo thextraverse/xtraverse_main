@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
-
+export const HeaderSection = styled.div`
+  position: relative;
+`;
 export const Aside = styled.aside`
   position: fixed;
   height: 100vh;
@@ -10,6 +12,7 @@ export const Aside = styled.aside`
   z-index: 9999;
   display: grid;
   place-content: center;
+
   .nav {
     display: flex;
     flex-direction: column;
@@ -59,6 +62,45 @@ export const Aside = styled.aside`
         }
       }
     }
+  }
+`;
+export const ProfileDropdown = styled.div`
+  background: #252525;
+  padding: 15px 20px;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #04fcbc50;
+  /* display: none; */
+  /* .notifyInfo{
+    display: ;
+  } */
+  &.notifcationsbar {
+    width: 350px;
+  }
+  &.cryptoDropdwonw {
+    span {
+      color: #e4f12e;
+      font-size: 0.7em;
+    }
+    p {
+      font-size: 1.3em;
+      line-height: 100%;
+    }
+  }
+  h1 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #fff;
+  }
+  span {
+    font-size: 1.1em;
+    color: #8a8a8e;
+  }
+  p {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #fff;
+    /* padding: 12px 0px; */
   }
 `;
 export const InitializeProject = styled.div`

@@ -13,6 +13,10 @@ import {
 const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState("");
+  const [headerMenuData, setHeaderMenuData] = useState("");
+  const [headerLogo, setHeaderLogo] = useState();
+  const [headermenu, setHeadermenu] = useState();
+  const [navbarType, setNavbarType] = useState("header1");
   function signUpAuth(email, password, confirmpassword) {
     return createUserWithEmailAndPassword(
       auth,
@@ -47,6 +51,14 @@ export function UserAuthContextProvider({ children }) {
         loginAuth,
         logOut,
         googleSignUp,
+        headerMenuData,
+        setHeaderMenuData,
+        headerLogo,
+        setHeaderLogo,
+        headermenu,
+        setHeadermenu,
+        navbarType,
+        setNavbarType,
       }}
     >
       {children}

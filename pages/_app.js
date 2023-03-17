@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
       bodyClass = "css-edtw23plc2st";
       break;
     default:
-      bodyClass = "justbody";
+      bodyClass = "";
       break;
   }
 

@@ -30,7 +30,7 @@ import dashboard from "../../images/icons/home.png";
 import project from "../../images/icons/project.png";
 import community from "../../images/icons/users.png";
 import launch from "../../images/icons/launch.png";
-import { Ul, SearchBox, Aside } from "../dashboard.styled";
+import { Ul, SearchBox, Aside, ProfileDropdown } from "../dashboard.styled";
 import settings from "../../images/icons/settings.png";
 import { Avatar, Menu, Dropdown } from "antd";
 import {
@@ -40,6 +40,10 @@ import {
   TranslationOutlined,
   PoweroffOutlined,
 } from "@ant-design/icons";
+import { AiFillProfile } from "react-icons/ai";
+import ProfileDropdownlayout from "./profile-dropdown";
+import CyptoDropdownSec from "./cypto-dropdown";
+import NotificationDropdownlayout from "./notification-dropdown";
 
 export const drawerWidth = 120;
 const Hr = styled.hr`
@@ -247,7 +251,55 @@ const items = [
     "dashboard/createproject/connection"
   ),
 ];
-
+const ProfileIcons = () => {
+  return (
+    <>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4 18.8C4 16.149 6.14903 14 8.8 14H15.2C17.851 14 20 16.149 20 18.8V18.8C20 20.5673 18.5673 22 16.8 22H7.2C5.43269 22 4 20.5673 4 18.8V18.8Z"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M16 6C16 8.20914 14.2091 10 12 10C9.79086 10 8 8.20914 8 6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6Z"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </>
+  );
+};
+const QnaIcons = () => {
+  return (
+    <>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 10.5V10C10 8.89543 10.8954 8 12 8C13.1046 8 14 8.89543 14 10V10.1213C14 10.6839 13.7765 11.2235 13.3787 11.6213L12 13M12.5 16C12.5 16.2761 12.2761 16.5 12 16.5C11.7239 16.5 11.5 16.2761 11.5 16M12.5 16C12.5 15.7239 12.2761 15.5 12 15.5C11.7239 15.5 11.5 15.7239 11.5 16M12.5 16H11.5M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+          stroke="white"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </>
+  );
+};
 function Sidebar({ activeBtn, heading }) {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
@@ -264,14 +316,8 @@ function Sidebar({ activeBtn, heading }) {
   // console.log(user);
   // logout
   const router = useRouter();
-  const handleLogout = () => {
-    try {
-      router.push("/");
-      logOut();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState();
   // console.log(user);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -290,43 +336,6 @@ function Sidebar({ activeBtn, heading }) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const UserProfile = () => {
-    return (
-      <>
-        {user && user.photoURL ? (
-          <Image
-            src={user.photoURL}
-            alt="User Profile Picture"
-            width={100}
-            height={100}
-          />
-        ) : (
-          "M"
-        )}
-      </>
-    );
-  };
-
-  const widgetMenu = (
-    <Menu>
-      <Menu.Item>
-        <SolutionOutlined className="icon" />
-        profile
-      </Menu.Item>
-      <Menu.Item>
-        <LockOutlined className="icon" />
-        change password
-      </Menu.Item>
-      <Menu.Item>
-        <TranslationOutlined className="icon" />
-        change language
-      </Menu.Item>
-      <Menu.Item onClick={handleLogout}>
-        <PoweroffOutlined className="icon" />
-        sign out
-      </Menu.Item>
-    </Menu>
-  );
 
   return (
     <>
@@ -360,10 +369,7 @@ function Sidebar({ activeBtn, heading }) {
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            component="h2"
-            sx={{ fontSize: "1.8em", fontWeight: "600", color: "#fff" }}
-          >
+          <Box sx={{ fontSize: "2.4em", fontWeight: "500", color: "#fff" }}>
             {heading}
           </Box>
           <Box
@@ -374,49 +380,18 @@ function Sidebar({ activeBtn, heading }) {
               gap: "12px",
             }}
           >
+            <Box>
+              <CyptoDropdownSec />
+            </Box>
             <SearchBox>
               <GoSearch />
               <input type="text" placeholder="Search..." />
             </SearchBox>
             <Box>
-              {/* <Tooltip title="Account settings">
-                <IconButton
-                  onClick={handleProfileDropdown}
-                  size="small"
-                  sx={{ ml: 2 }}
-                  aria-controls={open ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  <Avatar sx={{ width: 32, height: 32 }}>n</Avatar>
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Account settings">
-                <IconButton
-                  onClick={handleProfileDropdown}
-                  size="small"
-                  sx={{ ml: 2 }}
-                  aria-controls={open ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  <Avatar sx={{ width: 32, height: 32 }}>
-                    {user.photoURL ? (
-                      <Image
-                        src={user.photoURL}
-                        alt="User Profile Picture"
-                        width={100}
-                        height={100}
-                      />
-                    ) : (
-                      "M"
-                    )}
-                  </Avatar>
-                </IconButton>
-              </Tooltip> */}
-              <Dropdown overlay={widgetMenu} placement="bottomRight">
-                <Avatar icon={<UserProfile />} />
-              </Dropdown>
+              <NotificationDropdownlayout />
+            </Box>
+            <Box>
+              <ProfileDropdownlayout />
             </Box>
           </Box>
         </Toolbar>

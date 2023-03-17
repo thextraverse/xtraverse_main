@@ -5,7 +5,7 @@ export const Dashboardsc = styled.div`
 
   h2 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   p {

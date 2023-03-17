@@ -168,20 +168,15 @@ function Info() {
   const [websiteName, setWebsiteName] = useState("");
   const { user } = useUserAuth();
   const emailData = user.email;
-  // user !== null && user.email && (emailData = user.email);
-  // user === null && router.push("/");
+
   const handleDataSubmit = async (e) => {
     e.preventDefault();
-    // Check if user already exists in database
     const usersRef = collection(db, "Users");
     const querySnapshot = await getDocs(
       query(usersRef, where("Email", "==", emailData))
     );
 
     if (!querySnapshot.empty) {
-      //   const autoId = querySnapshot.docs[0].id;
-      //   console.log(`AutoId: ${autoId}`);
-      //   console.log(autoId);
       try {
         if (!querySnapshot.empty) {
           // User data exists in database, update the existing document

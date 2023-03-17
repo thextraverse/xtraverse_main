@@ -212,6 +212,13 @@ export const PreviewBox = styled.div`
   height: 100%;
   width: 100%;
   padding: 50px 20px;
+  .logo {
+    width: 30px;
+    height: 30px;
+    img {
+      object-fit: contain;
+    }
+  }
   .ant-pagination {
     display: none;
   }
@@ -272,9 +279,10 @@ export const PreviewBox = styled.div`
     grid-template-columns: 50% auto;
     position: relative;
     padding-top: 80px;
+
     .offerheader {
       position: absolute;
-      top: -50px;
+      top: -8px;
       width: 100%;
       left: 0px;
     }

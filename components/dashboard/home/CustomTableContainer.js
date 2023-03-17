@@ -16,10 +16,10 @@ export default function CustomTableContainer() {
 
   const rows = [
     createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 1),
-    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 1),
-    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 1),
-    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 1),
-    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 1),
+    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 2),
+    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 3),
+    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 4),
+    createData("Pudgy Penguin", 120, 120, 0.5, 0.99, 0.99, 78, 86.0, 5),
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function CustomTableContainer() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.op}
               sx={{
                 "&:last-child td, &:last-child th": { border: 0 },
               }}

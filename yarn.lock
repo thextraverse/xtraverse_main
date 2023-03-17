@@ -1471,6 +1471,11 @@
     "@typescript-eslint/types" "5.51.0"
     eslint-visitor-keys "^3.3.0"
 
+"@wert-io/widget-initializer@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@wert-io/widget-initializer/-/widget-initializer-2.0.3.tgz#6d885b32569cd150f0f466f1340cb4eb8c2d6742"
+  integrity sha512-y9jR388c6EvcAKlw2g3VgxCQAlfKvgowqlzlXtJt/sQBmkLHReH8R5m1JNFqE2g5fXCapQXUof/OB1znJOVXOw==
+
 abortcontroller-polyfill@^1.7.3:
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.5.tgz#6738495f4e901fbb57b6c0611d0c75f76c485bed"

@@ -68,6 +68,17 @@ import { useRouter } from "next/router";
 import MarketPlaceHeader from "../../../../components/project/EditMarketplace/MarketPlaceHeader";
 function EditMarketPlaceSalesindex() {
   const router = useRouter();
+  const {
+    user,
+    headerMenuData,
+    setHeaderMenuData,
+    headerLogo,
+    setHeaderLogo,
+    headermenu,
+    setHeadermenu,
+    navbarType,
+    setNavbarType,
+  } = useUserAuth();
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
     if (index === activeIndex) {
@@ -95,7 +106,7 @@ function EditMarketPlaceSalesindex() {
   };
   const [waitlistBtn, setWaitlistBtn] = useState({
     button: "Collection",
-    link: "",
+    link: "www.demo.com",
   });
 
   const handleWaitlistBtnChange = (e) => {
@@ -103,7 +114,11 @@ function EditMarketPlaceSalesindex() {
   };
 
   const [menuNav, setMenuNav] = useState();
-  console.log(menuNav);
+  setHeaderMenuData(menuNav);
+  setHeaderLogo(homeLogo);
+  setHeadermenu(waitlistBtn);
+  setNavbarType(headerType);
+
   // waitlist button
   const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
@@ -230,7 +245,7 @@ function EditMarketPlaceSalesindex() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
-  const { user } = useUserAuth();
+
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -569,54 +584,54 @@ function EditMarketPlaceSalesindex() {
               <Grid lg={4} xl={4}>
                 <EditorInputSec>
                   <PageEditorFrom>
-                    <div className="editorform">
-                      {/* header */}
-                      <div
-                        className={
-                          activeIndex === 0
-                            ? "page-editor-form active"
-                            : "page-editor-form"
-                        }
-                      >
-                        <div className="btn-flex">
-                          <Button
-                            className="page-editor-form-btn"
-                            onClick={() => {
-                              handleToggle(0);
-                            }}
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              color: "#fff",
-                              padding: "15px",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <span>Offer Header</span>
-                            <KeyboardArrowDownIcon className="activesvg" />
-                          </Button>
-                          <div className="visibility">
-                            <VisibilityOffIcon /> <VisibilityIcon />
-                          </div>
+                    {/* header */}
+                    <div
+                      className={
+                        activeIndex === 0
+                          ? "page-editor-form theme active"
+                          : "page-editor-form theme"
+                      }
+                    >
+                      <div className="btn-flex">
+                        <Button
+                          className="page-editor-form-btn"
+                          onClick={() => {
+                            handleToggle(0);
+                          }}
+                          sx={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            color: "#fff",
+                            padding: "15px",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          <span>Header</span>
+                          <KeyboardArrowDownIcon className="activesvg" />
+                        </Button>
+                        <div className="visibility">
+                          <VisibilityOffIcon /> <VisibilityIcon />
+                        </div>
 
-                          {/* <VisibilityIcon className="visible" /> */}
-                        </div>
-                        <div className="page-editor-content-input">
-                          <MarketPlaceHeader
-                            menuNav={menuNav}
-                            setMenuNav={setMenuNav}
-                            waitlistBtn={waitlistBtn}
-                            handleWaitlistBtnChange={handleWaitlistBtnChange}
-                            headerType={headerType}
-                            setHeaderType={setHeaderType}
-                            uploadLogo={uploadLogo}
-                            handleImageChange={handleLogoChange}
-                            key="1"
-                          />
-                        </div>
+                        {/* <VisibilityIcon className="visible" /> */}
                       </div>
+                      <div className="page-editor-content-input">
+                        <MarketPlaceHeader
+                          menuNav={menuNav}
+                          setMenuNav={setMenuNav}
+                          waitlistBtn={waitlistBtn}
+                          handleWaitlistBtnChange={handleWaitlistBtnChange}
+                          headerType={headerType}
+                          setHeaderType={setHeaderType}
+                          uploadLogo={uploadLogo}
+                          handleImageChange={handleLogoChange}
+                          key="1"
+                        />
+                      </div>
+                    </div>
 
+                    <div className="editorform">
                       {/* general */}
                       <div
                         className={

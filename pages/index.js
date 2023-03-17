@@ -38,11 +38,7 @@ const Bgblur1 = styled.div`
   position: absolute;
   width: 40rem;
   height: 36rem;
-  background: linear-gradient(
-    131.27deg,
-    rgb(238, 8, 173) 26.63%,
-    rgb(247, 14, 93) 100.47%
-  );
+  background: linear-gradient(180deg, #195f64 0%, #06e9fe 100%);
   filter: blur(6rem);
   border-radius: 50%;
   transform: translate(-30vw, -25rem);

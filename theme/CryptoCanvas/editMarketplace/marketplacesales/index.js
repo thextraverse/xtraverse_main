@@ -77,7 +77,6 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
                     <Button
                       className="waitLstBtn"
                       sx={{
-                        transform: "translateY(20px)",
                         background:
                           "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%)",
                         color: "#fff",

@@ -18,7 +18,8 @@ import { Router, useRouter } from "next/router";
 import React, { useState, PureComponent } from "react";
 import axios from "axios";
 import WertIntergration from "../../components/api/WertIntergration";
-
+import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
+import EngagementsChart from "../../components/dashboard/charts/engagements";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -73,8 +74,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
-import EngagementsChart from "../../components/dashboard/charts/engagements";
 
 const data = [
   { date: "2023-03-17", followers: 5273, following: 5838, post: 435 },

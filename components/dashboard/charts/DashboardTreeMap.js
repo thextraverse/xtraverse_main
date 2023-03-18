@@ -96,9 +96,6 @@ const TreeMapLayout = () => {
         toolbar: {
           show: false,
         },
-        sparkline: {
-          enabled: false,
-        },
         animations: {
           enabled: true,
           easing: "linear",
@@ -110,77 +107,11 @@ const TreeMapLayout = () => {
         background: "transparent",
         foreColor: "#333",
       },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        width: [5, 7, 5],
-        curve: "smooth",
-        dashArray: [0, 0, 0], // here we define the dash array
-        gradient: {
-          shade: "dark",
-          type: "vertical",
-          shadeIntensity: 0.5,
-          gradientToColors: ["#008000", "#0000ff", "#ff0000"],
-          inverseColors: false,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 50, 100],
-        },
-      },
-      // title: {
-      //   text: "Page Statistics",
-      //   align: "left",
-      //   style: {
-      //     color: "red",
-      //   },
-      // },
-      legend: {
-        labels: {
-          colors: ["#ffffff"],
-        },
-        tooltipHoverFormatter: function (val, opts) {
-          return (
-            val +
-            " - " +
-            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-            ""
-          );
-        },
-      },
-      markers: {
-        size: 6,
-        hover: {
-          sizeOffset: 6,
-        },
-      },
-      yaxis: [
-        {
-          labels: {
-            style: {
-              colors: "#fff", // set the text color of x-axis labels
-              border: {
-                color: "#fff", // set the border color of x-axis labels
-              },
-            },
-          },
-        },
-        {
-          show: false,
-        },
-        {
-          opposite: true,
-          show: false,
-        },
-      ],
-      xaxis: {
-        labels: {
-          style: {
-            colors: "#fff", // set the text color of x-axis labels
-            border: {
-              color: "#fff", // set the border color of x-axis labels
-            },
-          },
+      title: {
+        text: "Most viewer location",
+        align: "center",
+        style: {
+          color: "#fff",
         },
       },
       tooltip: {

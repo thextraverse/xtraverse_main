@@ -152,7 +152,14 @@ export const ActivityCharts = styled.div`
   background: #252525;
   position: relative;
   overflow: hidden;
-
+  .apexcharts-menu {
+    background: #000;
+    color: #fff;
+    &:hover {
+      background: #000;
+      color: #000;
+    }
+  }
   &.mixed {
     &::before {
       content: "";

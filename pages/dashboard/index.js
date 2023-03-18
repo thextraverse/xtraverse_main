@@ -26,6 +26,7 @@ import DashboardPieChart from "../../components/dashboard/charts/DashboardPieCha
 import ChartText from "../../components/dashboard/charts/ChartText";
 import DashboardGradientDonut from "../../components/dashboard/charts/GradientDonutChart";
 import DashboardRadialBarChart from "../../components/dashboard/charts/RadialBarChart";
+import DashboardMultipleYAxis from "../../components/dashboard/charts/DashboardMultipleYChart";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -609,6 +610,11 @@ export default function Dashboard() {
                                 <Grid item xs={12}>
                                   <ActivityCharts className="mixed">
                                     <ChartText />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardMultipleYAxis />
                                   </ActivityCharts>
                                 </Grid>
                               </Grid>

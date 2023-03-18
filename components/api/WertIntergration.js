@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-
-function WertIntergration({ wertApiKey }) {
-  useEffect(() => {
-    if (!window.WERT) {
-      const script = document.createElement("script");
-      script.src = "https://widget.wert.io/sdk.js";
-      script.async = true;
-      document.body.appendChild(script);
-
-      script.onload = () => {
-        if (window.WERT) {
-          window.WERT("init", wertApiKey);
-        }
-      };
-    } else {
-      window.WERT("init", wertApiKey);
-    }
-  }, [wertApiKey]);
+import { WidgetInitializer } from "@wert-io/widget-initializer";
+import { Button } from "@mui/material";
+function WertIntergration() {
+  // useEffect(() => {
+  //   const widgetInitializer = new WidgetInitializer(apiKey);
+  //   widgetInitializer.init();
+  // }, [apiKey]);
 
   return (
     <div>
-      <div className="wert-nft-module" data-type="grid" data-width="100%"></div>
+      <div className="wert-nft-module" data-type="grid" data-width="100%">
+        <Button>CLick to see how wert work</Button>
+      </div>
     </div>
   );
 }

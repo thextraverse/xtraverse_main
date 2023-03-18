@@ -223,7 +223,7 @@ function MarketPlaceFeatures(props) {
               )}
             </Box>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <div className="typslction">
                 <Box sx={{ marginBottom: "10px" }}>
                   <span>Offer type</span>
@@ -279,7 +279,7 @@ function MarketPlaceFeatures(props) {
                 </Box>
               </div>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <div className="inputsc">
                   <input
@@ -290,18 +290,17 @@ function MarketPlaceFeatures(props) {
                   />
                   <span>
                     <svg
-                      width="24"
-                      height="24"
+                      width="1em"
+                      height="1em"
                       viewBox="0 0 24 24"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M3.2 18C1.88484 17.235 1 15.8051 1 14.1674C1 12.1053 2.40285 10.3727 4.30122 9.88197C4.30041 9.83571 4.3 9.78935 4.3 9.7429C4.3 5.46661 7.74741 2 12 2C15.6211 2 18.6584 4.51348 19.4806 7.90009C21.5395 8.69955 23 10.7089 23 13.0613C23 14.8707 22.1359 16.4772 20.8 17.4862M12 22V13M12 13L8.5 16.5M12 13L15.5 16.5"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d="M3.2 18A4.427 4.427 0 011 14.167a4.422 4.422 0 013.301-4.285l-.001-.14C4.3 5.468 7.747 2 12 2c3.621 0 6.658 2.513 7.48 5.9A5.532 5.532 0 0123 13.061c0 1.81-.864 3.416-2.2 4.425M12 22v-9m0 0l-3.5 3.5M12 13l3.5 3.5"
+                        stroke="#fff"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                     Upload Content
@@ -309,7 +308,7 @@ function MarketPlaceFeatures(props) {
                 </div>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Heading</span>
                 <input
@@ -319,7 +318,7 @@ function MarketPlaceFeatures(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Add Story </span>
                 <textarea
@@ -328,7 +327,7 @@ function MarketPlaceFeatures(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 {royaltiesList.map((singleService, index) => (
                   <div key={index} className="services">
@@ -349,18 +348,17 @@ function MarketPlaceFeatures(props) {
                       </div>
                       <Button onClick={handleServiceAdd}>
                         <svg
-                          width="24"
-                          height="25"
+                          width="1em"
+                          height="1em"
                           viewBox="0 0 24 25"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M8 12.5H12M12 12.5H16M12 12.5V8.5M12 12.5V16.5M11.6 22.5H12.4C15.7603 22.5 17.4405 22.5 18.7239 21.846C19.8529 21.2708 20.7708 20.3529 21.346 19.2239C22 17.9405 22 16.2603 22 12.9V12.1C22 8.73969 22 7.05953 21.346 5.77606C20.7708 4.64708 19.8529 3.7292 18.7239 3.15396C17.4405 2.5 15.7603 2.5 12.4 2.5H11.6C8.23969 2.5 6.55953 2.5 5.27606 3.15396C4.14708 3.7292 3.2292 4.64708 2.65396 5.77606C2 7.05953 2 8.73969 2 12.1V12.9C2 16.2603 2 17.9405 2.65396 19.2239C3.2292 20.3529 4.14708 21.2708 5.27606 21.846C6.55953 22.5 8.23969 22.5 11.6 22.5Z"
-                            stroke="white"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            d="M8 12.5h4m0 0h4m-4 0v-4m0 4v4m-.4 6h.8c3.36 0 5.04 0 6.324-.654a6 6 0 002.622-2.622C22 17.94 22 16.26 22 12.9v-.8c0-3.36 0-5.04-.654-6.324a6 6 0 00-2.622-2.622C17.44 2.5 15.76 2.5 12.4 2.5h-.8c-3.36 0-5.04 0-6.324.654a6 6 0 00-2.622 2.622C2 7.06 2 8.74 2 12.1v.8c0 3.36 0 5.04.654 6.324a6 6 0 002.622 2.622c1.284.654 2.964.654 6.324.654z"
+                            stroke="#fff"
+                            strokeWidth={1.5}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
                       </Button>
@@ -369,7 +367,7 @@ function MarketPlaceFeatures(props) {
                 ))}
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   gap: "10px",
@@ -397,18 +395,17 @@ function MarketPlaceFeatures(props) {
                     }}
                   >
                     <svg
-                      width="17"
-                      height="17"
+                      width="1em"
+                      height="1em"
                       viewBox="0 0 17 17"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M8.86085 12.9989L8.38706 13.4877C7.07874 14.8374 4.95753 14.8374 3.64921 13.4877C2.34089 12.138 2.34089 9.94968 3.64921 8.59996L4.77901 7.43442C5.98669 6.18853 7.94473 6.18853 9.15241 7.43442L9.33464 7.62241M8.47509 4.00106L8.94887 3.51229C10.2572 2.16257 12.3784 2.16257 13.6867 3.51229C14.995 4.862 14.995 7.05032 13.6867 8.40004L12.5569 9.56558C11.3492 10.8115 9.39121 10.8115 8.18353 9.56558L8.0013 9.37759"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d="M8.86 12.999l-.473.489a3.278 3.278 0 01-4.738 0c-1.308-1.35-1.308-3.538 0-4.888l1.13-1.166a3.026 3.026 0 014.373 0l.183.188m-.86-3.62l.474-.49a3.278 3.278 0 014.738 0c1.308 1.35 1.308 3.538 0 4.888l-1.13 1.166a3.026 3.026 0 01-4.373 0L8 9.378"
+                        stroke="#fff"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </Button>
@@ -420,18 +417,17 @@ function MarketPlaceFeatures(props) {
                     }}
                   >
                     <svg
-                      width="16"
-                      height="17"
+                      width="1em"
+                      height="1em"
                       viewBox="0 0 16 17"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M9.33203 1.83325H9.66536V1.83325C10.5947 1.83325 11.0593 1.83325 11.4457 1.91011C13.0325 2.22574 14.2729 3.46613 14.5885 5.05289C14.6654 5.43929 14.6654 5.90394 14.6654 6.83325V10.1666C14.6654 11.0959 14.6654 11.5606 14.5885 11.9469C14.2729 13.5337 13.0325 14.7741 11.4457 15.0897C11.0593 15.1666 10.5947 15.1666 9.66536 15.1666V15.1666H9.33203M1.33203 8.49992H9.33203M9.33203 8.49992L6.66536 5.83325M9.33203 8.49992L6.66536 11.1666"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d="M9.332 1.833h.333v0c.93 0 1.394 0 1.78.077a4 4 0 013.143 3.143c.077.386.077.85.077 1.78v3.334c0 .929 0 1.394-.076 1.78a4 4 0 01-3.143 3.143c-.387.077-.851.077-1.78.077v0h-.334m-8-6.667h8m0 0L6.665 5.833M9.332 8.5l-2.667 2.667"
+                        stroke="#fff"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </Button>
@@ -443,18 +439,17 @@ function MarketPlaceFeatures(props) {
                     }}
                   >
                     <svg
-                      width="17"
-                      height="17"
+                      width="1em"
+                      height="1em"
                       viewBox="0 0 17 17"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M1.66797 3.16659V10.3666C1.66797 12.0467 1.66797 12.8868 1.99495 13.5286C2.28257 14.093 2.74151 14.552 3.306 14.8396C3.94773 15.1666 4.78781 15.1666 6.46797 15.1666H10.2013C11.8815 15.1666 12.7215 15.1666 13.3633 14.8396C13.9278 14.552 14.3867 14.093 14.6743 13.5286C15.0013 12.8868 15.0013 12.0467 15.0013 10.3666V9.29992C15.0013 7.61976 15.0013 6.77968 14.6743 6.13795C14.3867 5.57346 13.9278 5.11452 13.3633 4.8269C12.7215 4.49992 11.8815 4.49992 10.2013 4.49992H8.33464M15.0013 7.83325H14.668C13.5634 7.83325 12.668 8.72868 12.668 9.83325V9.83325C12.668 10.9378 13.5634 11.8333 14.668 11.8333H15.0013M11.668 4.49992L11.588 4.39325C10.884 3.45459 10.532 2.98526 10.0859 2.64676C9.69076 2.34695 9.24334 2.12324 8.76643 1.98703C8.22796 1.83325 7.6413 1.83325 6.46797 1.83325H3.0013C2.26492 1.83325 1.66797 2.43021 1.66797 3.16659V3.16659C1.66797 3.90296 2.26492 4.49992 3.0013 4.49992H11.668Z"
-                        stroke="white"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        d="M1.668 3.167v7.2c0 1.68 0 2.52.327 3.162a3 3 0 001.311 1.31c.642.328 1.482.328 3.162.328h3.733c1.68 0 2.52 0 3.162-.327a3 3 0 001.311-1.311c.327-.642.327-1.482.327-3.162V9.3c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.31-1.311C12.72 4.5 11.881 4.5 10.2 4.5H8.335M15 7.833h-.333a2 2 0 00-2 2v0a2 2 0 002 2h.333M11.668 4.5l-.08-.107c-.704-.938-1.056-1.408-1.502-1.746a4 4 0 00-1.32-.66c-.538-.154-1.125-.154-2.298-.154H3.001c-.736 0-1.333.597-1.333 1.334v0c0 .736.597 1.333 1.333 1.333h8.667z"
+                        stroke="#fff"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </Button>

@@ -11,14 +11,15 @@ const StepBar = styled.div`
   background: #303030;
   width: 100%;
   position: fixed;
-  top: 65px;
+  top: 66px;
   z-index: 9;
   left: 0px;
   padding: 10px;
-  .ant-steps.ant-steps-horizontal.css-dev-only-do-not-override-1me4733.ant-steps-label-horizontal {
+  .stebarwrap {
     width: calc(100% - 300px);
     margin: auto;
   }
+
   .ant-steps-item-icon {
     background: #fff !important;
     border-color: #fff !important;
@@ -163,20 +164,20 @@ function Stepnav() {
   ];
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
-  const next = () => {
-    setCurrent(current + 1);
-    const nextStep = steps[current + 1];
-    const currentRoute = router.route;
-    const nextRoute =
-      currentRoute === nextStep.href[0] ? nextStep.href[1] : nextStep.href[0];
-    router.push(nextRoute);
-  };
-  const prev = () => {
-    if (current > 0) {
-      setCurrent(current - 1);
-      router.push(steps[current - 1].href[0]);
-    }
-  };
+  // const next = () => {
+  //   setCurrent(current + 1);
+  //   const nextStep = steps[current + 1];
+  //   const currentRoute = router.route;
+  //   const nextRoute =
+  //     currentRoute === nextStep.href[0] ? nextStep.href[1] : nextStep.href[0];
+  //   router.push(nextRoute);
+  // };
+  // const prev = () => {
+  //   if (current > 0) {
+  //     setCurrent(current - 1);
+  //     router.push(steps[current - 1].href[0]);
+  //   }
+  // };
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
@@ -208,13 +209,10 @@ function Stepnav() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <StepBar
-      sx={{
-        padding: "100px 200px",
-      }}
-    >
-      <Steps current={current} items={items} />
-      {/* <div
+    <StepBar>
+      <div className="stebarwrap">
+        <Steps current={current} items={items} />
+        {/* <div
         style={{
           marginTop: 24,
         }}
@@ -243,6 +241,7 @@ function Stepnav() {
           </Button>
         )}
       </div> */}
+      </div>
     </StepBar>
   );
 }

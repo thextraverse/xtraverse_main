@@ -15,6 +15,9 @@ import faceInsta from "../../images/icons/faceInsta.png";
 import website from "../../images/icons/domain.png";
 import Image from "next/image";
 import { Domain } from "@mui/icons-material";
+import axios from "axios";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
+
 const IntegrationCard = styled.div`
   background: #212121;
   border-radius: 10px;
@@ -22,6 +25,16 @@ const IntegrationCard = styled.div`
   margin: 10px;
   height: 420px;
   position: relative;
+  .searchAccount {
+    input {
+      padding: 10px 10px;
+      width: 100%;
+      background: #303030;
+      border: none;
+      font-size: 1.1em;
+      color: #fff;
+    }
+  }
   .absluteBtn {
     position: absolute;
     bottom: 10px;
@@ -93,9 +106,10 @@ const colorStyles = {
   }),
 };
 
-export function IntergrationSec() {
+export function IntergrationSec({ setTwitterData }) {
   const [utilities, setUtilities] = useState({});
   console.log(utilities);
+  const { user } = useUserAuth();
 
   const handleAnalytics1Account = (selectedOption) => {
     setUtilities((prevState) => ({
@@ -188,6 +202,35 @@ export function IntergrationSec() {
     { value: "Accoutn 2", label: "Account 2" },
     { value: "Accoutn 3", label: "Account 3" },
   ];
+
+  const apiKey =
+    "3b8758c81cbc23211b0bbe7d19d0ffe28be08a7fe2a837208569b5e07bab36c7d7ff09d48b1f2a37c5e9d412207c48f20520a07bc1edfcf8eb53f77230688374"; // Replace with your API key
+  const clientId = "cli_050544150fc8a4b11d976a73";
+  const [username, setUsername] = useState("");
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://matrix.sbapis.com/b/twitter/statistics?token=${apiKey}&query=${username}&clientid=${clientId}`
+      );
+      setData(response.data);
+      setError(null);
+    } catch (error) {
+      setData(null);
+      setError(error.message);
+    }
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetchData();
+    setUsername("");
+  };
+  console.log(data);
+  console.log(username);
+  data && setTwitterData(data);
+
   return (
     <>
       <Grid container>
@@ -938,53 +981,62 @@ export function IntergrationSec() {
               <Box
                 component="span"
                 sx={{
-                  color: "#04FCBC ",
+                  color: data ? "#04FCBC" : "#b5b5b5",
                   fontWeight: "500",
                   display: "flex",
                   alignItems: "center",
                   gap: "5px",
                 }}
               >
-                Connected{" "}
-                <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                {data ? "Connected" : "connect"}
+
+                {data && (
+                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                )}
               </Box>
             </Box>
             <div className="content">
-              <p>Twitter Account (admin@xtraverse.com)</p>
-              <p>Selected Other account</p>
-              <Select
-                styles={colorStyles}
-                options={options8}
-                isSearchable={true}
-                onChange={handleRainbow}
-                placeholder="Select account"
-              />
-
-              <Button
-                className="absluteBtn"
-                sx={{
-                  width: "100%",
-                  borderRadius: "8px",
-                  color: "#fff",
-                  border: "2px solid #04FCBC",
-                  fontSize: "1em",
-                  textTransform: "capitalize",
-                  padding: "5px 0px",
-                  transition: "0.3s",
-                  fontWeight: "500",
-                  margin: "10px 0px",
-                  display: "flex",
-                  gap: "20px",
-                  "&:hover ": {
-                    color: "#000",
+              <p>Twitter Account (@{data && data.data.id.username})</p>
+              <p>Enter the Twitter username:</p>
+              <form onSubmit={handleSubmit} className="searchAccount">
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  required
+                  placeholder="@ElonMask"
+                />
+                <Button
+                  className="absluteBtn"
+                  type="submit"
+                  sx={{
+                    width: "100%",
+                    borderRadius: "8px",
                     background:
+                      data &&
                       "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                Connect
-              </Button>
+                    color: "#fff",
+                    border: "2px solid #04FCBC",
+                    fontSize: "1em",
+                    textTransform: "capitalize",
+                    padding: "5px 0px",
+                    transition: "0.3s",
+                    fontWeight: "500",
+                    margin: "10px 0px",
+                    display: "flex",
+                    gap: "20px",
+                    "&:hover ": {
+                      color: "#000",
+                      background:
+                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Connect
+                </Button>
+              </form>
             </div>
           </IntegrationCard>
         </Grid>

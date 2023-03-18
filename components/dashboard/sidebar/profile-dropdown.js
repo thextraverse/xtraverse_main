@@ -27,19 +27,13 @@ const Hr = styled.hr`
 const LogoutIcon = () => {
   return (
     <>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
         <path
-          d="M10 2H9.5H8.4C6.15979 2 5.03968 2 4.18404 2.43597C3.43139 2.81947 2.81947 3.43139 2.43597 4.18404C2 5.03968 2 6.15979 2 8.4V15.6C2 17.8402 2 18.9603 2.43597 19.816C2.81947 20.5686 3.43139 21.1805 4.18404 21.564C5.03968 22 6.15979 22 8.4 22H9.5H10M10 12H22M22 12L18 8M22 12L18 16"
-          stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          d="M10 2H8.4c-2.24 0-3.36 0-4.216.436a4 4 0 00-1.748 1.748C2 5.04 2 6.16 2 8.4v7.2c0 2.24 0 3.36.436 4.216a4 4 0 001.748 1.748C5.04 22 6.16 22 8.4 22H10m0-10h12m0 0l-4-4m4 4l-4 4"
+          stroke="#fff"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </>
@@ -48,26 +42,13 @@ const LogoutIcon = () => {
 const ProfileIcons = () => {
   return (
     <>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
         <path
-          d="M4 18.8C4 16.149 6.14903 14 8.8 14H15.2C17.851 14 20 16.149 20 18.8V18.8C20 20.5673 18.5673 22 16.8 22H7.2C5.43269 22 4 20.5673 4 18.8V18.8Z"
-          stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <path
-          d="M16 6C16 8.20914 14.2091 10 12 10C9.79086 10 8 8.20914 8 6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6Z"
-          stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          d="M4 18.8A4.8 4.8 0 018.8 14h6.4a4.8 4.8 0 014.8 4.8v0a3.2 3.2 0 01-3.2 3.2H7.2A3.2 3.2 0 014 18.8v0zM16 6a4 4 0 11-8 0 4 4 0 018 0z"
+          stroke="#fff"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </>
@@ -76,19 +57,13 @@ const ProfileIcons = () => {
 const QnaIcons = () => {
   return (
     <>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
         <path
-          d="M10 10.5V10C10 8.89543 10.8954 8 12 8C13.1046 8 14 8.89543 14 10V10.1213C14 10.6839 13.7765 11.2235 13.3787 11.6213L12 13M12.5 16C12.5 16.2761 12.2761 16.5 12 16.5C11.7239 16.5 11.5 16.2761 11.5 16M12.5 16C12.5 15.7239 12.2761 15.5 12 15.5C11.7239 15.5 11.5 15.7239 11.5 16M12.5 16H11.5M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-          stroke="white"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          d="M10 10.5V10a2 2 0 114 0v.121c0 .563-.223 1.102-.621 1.5L12 13m.5 3a.5.5 0 01-1 0m1 0a.5.5 0 00-1 0m1 0h-1M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"
+          stroke="#fff"
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </>
@@ -237,14 +212,9 @@ function ProfileDropdownlayout() {
               margin: "10px 0px",
               display: "flex",
               gap: "20px",
-              "&:hover ": {
-                color: "#fff",
-                background: "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                cursor: "pointer",
-              },
             }}
           >
-            <LogoutIcon /> Login
+            <LogoutIcon /> Logout
           </Button>
         </ProfileDropdown>
       </Menu>

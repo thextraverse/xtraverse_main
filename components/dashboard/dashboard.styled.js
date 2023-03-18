@@ -33,6 +33,12 @@ export const Aside = styled.aside`
         }
       }
     }
+    .ant-menu-item {
+      margin: 15px 5px;
+    }
+    .ant-menu-item-icon {
+      font-size: 1.8em !important;
+    }
     .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
       background: #fff !important;
       color: #000;
@@ -78,6 +84,18 @@ export const ProfileDropdown = styled.div`
     width: 350px;
   }
   &.cryptoDropdwonw {
+    .crytpDetails {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0px;
+      .image {
+        width: 40px;
+        span {
+          width: 30px !important;
+          height: 30px !important;
+        }
+      }
+    }
     span {
       color: #e4f12e;
       font-size: 0.7em;

@@ -11,10 +11,11 @@ import CustomTableContainer from "../../components/dashboard/home/CustomTableCon
 import {
   Dashboardsc,
   TopCardDiv,
+  ActivityCharts,
 } from "../../components/styles/dashboard.styled";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { Router, useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, PureComponent } from "react";
 import axios from "axios";
 import WertIntergration from "../../components/api/WertIntergration";
 
@@ -61,38 +62,42 @@ const DasboardContainer = styled.div`
     margin: auto;
   }
 `;
+
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
+import EngagementsChart from "../../components/dashboard/charts/engagements";
+
+const data = [
+  { date: "2023-03-17", followers: 5273, following: 5838, post: 435 },
+  { date: "2023-03-18", followers: 273, following: 538, post: 55 },
+  { date: "2023-03-19", followers: 5223, following: 5838, post: 435 },
+  { date: "2023-03-20", followers: 5273, following: 5838, post: 435 },
+  { date: "2023-03-21", followers: 5273, following: 5838, post: 435 },
+];
+
 export default function Dashboard() {
-  const { user } = useUserAuth();
+  const { user, twitterData } = useUserAuth();
   const router = useRouter();
   let emailData = null;
   user !== null && user.email && (emailData = user.email);
   user === null && router.push("/");
 
-  const apiKey =
-    "3b8758c81cbc23211b0bbe7d19d0ffe28be08a7fe2a837208569b5e07bab36c7d7ff09d48b1f2a37c5e9d412207c48f20520a07bc1edfcf8eb53f77230688374"; // Replace with your API key
-  const clientId = "cli_050544150fc8a4b11d976a73";
-  const [username, setUsername] = useState("");
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://matrix.sbapis.com/b/twitter/statistics?token=${apiKey}&query=${username}&clientid=${clientId}`
-      );
-      setData(response.data);
-      setError(null);
-    } catch (error) {
-      setData(null);
-      setError(error.message);
-    }
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetchData();
-  };
-  console.log(data);
-  const wertApiKey = "your-wert-api-key";
+  const wertApiKey = "";
+  const transformedData = data.map((item) => ({
+    name: item.date,
+    followers: item.followers,
+    following: item.following,
+    post: item.post,
+  }));
   return (
     <Main>
       <Dashboardsc>
@@ -107,18 +112,7 @@ export default function Dashboard() {
           <Grid item xs={12}></Grid>
           <Grid item xs={12}></Grid>
           <DasboardContainer>
-            <form onSubmit={handleSubmit} className="searchAccount">
-              <label htmlFor="username">Enter the Twitter username:</label>
-              <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                required
-              />
-              <button type="submit">Submit</button>
-            </form>
-            <WertIntergration wertApiKey={wertApiKey} />
+            {/* <WertIntergration wertApiKey={wertApiKey} /> */}
             <div></div>
             <Grid item xs={12}>
               <Grid container spacing={1.3}>
@@ -168,8 +162,47 @@ export default function Dashboard() {
                     </Grid>
                     {/*top card section*/}
                     <Grid item xs={12}>
+                      <ActivityCharts>
+                        <ActivityChart twitterData={twitterData} />
+
+                        {/* <ResponsiveContainer width="100%" height="100%">
+                          <LineChart
+                            width={500}
+                            height={300}
+                            style={{ backgroundColor: "#f5f5f5" }}
+                            data={transformedData}
+                            margin={{
+                              top: 5,
+                              right: 30,
+                              left: 20,
+                              bottom: 5,
+                            }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <Tooltip />
+                            <Line
+                              type="monotone"
+                              dataKey="followers"
+                              stroke="#8884d8"
+                              activeDot={{ r: 8 }}
+                            />
+                            <Line
+                              type="monotone"
+                              dataKey="following"
+                              stroke="#82ca9d"
+                            />
+                            <Line
+                              type="monotone"
+                              dataKey="post"
+                              stroke="#f00"
+                            />
+                          </LineChart>
+                        </ResponsiveContainer> */}
+                      </ActivityCharts>
+
                       <Grid container spacing={2}>
-                        {data && (
+                        {twitterData && (
                           <>
                             <Grid item xs={2}>
                               <TopCardDiv>
@@ -182,7 +215,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.daily[0].followers}
+                                    {twitterData &&
+                                      twitterData.data.daily[0].followers}
                                   </h2>
 
                                   <div
@@ -198,17 +232,16 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
 
@@ -235,7 +268,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.daily[0].following}
+                                    {twitterData &&
+                                      twitterData.data.daily[0].following}
                                   </h2>
 
                                   <div
@@ -251,17 +285,16 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
 
@@ -288,7 +321,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.statistics.total.tweets}
+                                    {twitterData &&
+                                      twitterData.data.statistics.total.tweets}
                                   </h2>
 
                                   <div
@@ -304,17 +338,16 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
 
@@ -344,7 +377,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.daily[0].favorites}
+                                    {twitterData &&
+                                      twitterData.data.daily[0].favorites}
                                   </h2>
 
                                   <div
@@ -360,17 +394,16 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
 
@@ -400,7 +433,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.daily[0].favorites}
+                                    {twitterData &&
+                                      twitterData.data.daily[0].favorites}
                                   </h2>
 
                                   <div
@@ -416,17 +450,16 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
 
@@ -456,7 +489,8 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {data && data.data.daily[0].favorites}
+                                    {twitterData &&
+                                      twitterData.data.daily[0].favorites}
                                   </h2>
 
                                   <div
@@ -472,20 +506,18 @@ export default function Dashboard() {
                                     }}
                                   >
                                     <svg
-                                      width="10"
-                                      height="10"
+                                      width="1em"
+                                      height="1em"
                                       viewBox="0 0 10 10"
                                       fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
                                     >
                                       <path
-                                        d="M1 9L9 1M9 1V6.5M9 1H3.5"
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
                                         stroke="#71DD37"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                       />
                                     </svg>
-
                                     <span
                                       style={{
                                         marginLeft: "6px",
@@ -495,10 +527,7 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>
-                                  {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
-                                </span>
+                                <span>21 new followers today</span>
                               </TopCardDiv>
                             </Grid>
                           </>
@@ -536,6 +565,11 @@ export default function Dashboard() {
                                 </Grid>
                                 <Grid item xs={6}>
                                   <EngagementsRight />
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts>
+                                    <EngagementsChart />
+                                  </ActivityCharts>
                                 </Grid>
                               </Grid>
                             </Grid>

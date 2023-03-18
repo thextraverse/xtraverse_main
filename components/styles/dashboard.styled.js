@@ -145,3 +145,27 @@ export const CommunityDiv = styled.div`
     text-align: center;
   }
 `;
+export const ActivityCharts = styled.div`
+  border-radius: 15px;
+  width: 100%;
+  padding: 50px 20px;
+  background: #252525;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 302px;
+    height: 252px;
+    top: -40px;
+    left: -32px;
+    opacity: 0.2;
+    filter: blur(60px);
+    pointer-events: none;
+    background: #04fcbc;
+  }
+  .apexcharts-tooltip {
+    background: #f3f3f3 !important;
+    color: #252525;
+  }
+`;

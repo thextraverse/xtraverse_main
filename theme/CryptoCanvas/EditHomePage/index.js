@@ -13,13 +13,10 @@ import Link from "next/link";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
 function CryptoCanvasEditHome({
   menuNav,
-  homeLogo,
   homeBg,
   desBg,
-  headerType,
   heroType,
   desType,
-  heroButton,
   editHeroHeading,
   heroOverlayColor,
   editHeroSubtext,
@@ -29,7 +26,6 @@ function CryptoCanvasEditHome({
   desSubtext,
   websiteBgColor,
   btnBgColor,
-  waitlistBtn,
   browseClctionBtn,
 }) {
   console.log(menuNav);

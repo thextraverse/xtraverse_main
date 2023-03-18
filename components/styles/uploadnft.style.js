@@ -420,7 +420,12 @@ export const BtnContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 15px;
-  padding: 15px 5px 15px 15px;
+  padding: 20px 5px 15px 15px;
+  width: 92%;
+  margin-left: auto;
+  svg {
+    font-size: 1.5em;
+  }
   button {
     text-transform: capitalize;
     color: #fff;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 // const { twitterData } = useUserAuth;
-const EngagementsChart = () => {
+const EngageChart = () => {
   const objectData = {
     data: {
       daily: [
@@ -54,12 +54,7 @@ const EngagementsChart = () => {
         type: "bar",
         height: 350,
       },
-      toolbar: {
-        show: false,
-      },
-      sparkline: {
-        enabled: false,
-      },
+
       animations: {
         enabled: true,
         easing: "linear",
@@ -138,6 +133,9 @@ const EngagementsChart = () => {
       grid: {
         borderColor: "transparent",
       },
+      toolbar: {
+        show: false, // hide the download PNG and SVG buttons
+      },
     },
   });
 
@@ -153,4 +151,4 @@ const EngagementsChart = () => {
   );
 };
 
-export default EngagementsChart;
+export default EngageChart;

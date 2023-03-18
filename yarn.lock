@@ -1692,7 +1692,7 @@ antd@^5.3.0:
     scroll-into-view-if-needed "^3.0.3"
     throttle-debounce "^5.0.0"
 
-apexcharts@^3.18.0:
+apexcharts@^3.18.0, apexcharts@^3.37.1:
   version "3.37.1"
   resolved "https://registry.npmjs.org/apexcharts/-/apexcharts-3.37.1.tgz"
   integrity sha512-fmQ5Updeb/LASl+S1+mIxXUFxzY0Fa7gexfCs4o+OPP9f2NEBNjvybOtPrah44N4roK7U5o5Jis906QeEQu0cA==

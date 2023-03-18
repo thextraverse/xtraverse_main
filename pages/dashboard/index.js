@@ -19,6 +19,7 @@ import React, { useState, PureComponent } from "react";
 import axios from "axios";
 import WertIntergration from "../../components/api/WertIntergration";
 import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
+import EngageChart from "../../components/dashboard/charts/EngagementChart";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -554,7 +555,9 @@ export default function Dashboard() {
                                   <EngagementsRight />
                                 </Grid>
                                 <Grid item xs={12}>
-                                  <ActivityCharts></ActivityCharts>
+                                  <ActivityCharts>
+                                    <EngageChart />
+                                  </ActivityCharts>
                                 </Grid>
                               </Grid>
                             </Grid>

@@ -20,6 +20,12 @@ import axios from "axios";
 import WertIntergration from "../../components/api/WertIntergration";
 import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
 import EngageChart from "../../components/dashboard/charts/EngagementChart";
+import MixedChartsLayout from "../../components/dashboard/charts/MixedCharts";
+import TreeMapLayout from "../../components/dashboard/charts/DashboardTreeMap";
+import DashboardPieChart from "../../components/dashboard/charts/DashboardPieChart";
+import ChartText from "../../components/dashboard/charts/ChartText";
+import DashboardGradientDonut from "../../components/dashboard/charts/GradientDonutChart";
+import DashboardRadialBarChart from "../../components/dashboard/charts/RadialBarChart";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -564,6 +570,48 @@ export default function Dashboard() {
 
                             <Grid item xs={6}>
                               <Community />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Grid
+                            container
+                            spacing={2}
+                            style={{ height: "100%" }}
+                          >
+                            <Grid item xs={12}>
+                              <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <MixedChartsLayout />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <TreeMapLayout />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardGradientDonut />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardPieChart />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardRadialBarChart />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <ChartText />
+                                  </ActivityCharts>
+                                </Grid>
+                              </Grid>
                             </Grid>
                           </Grid>
                         </Grid>

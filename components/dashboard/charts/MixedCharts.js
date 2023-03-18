@@ -5,17 +5,17 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 // const { twitterData } = useUserAuth;
-const ActivityChart = () => {
+const MixedChartsLayout = () => {
   const objectData = {
     data: {
       daily: [
         { date: "18-3-2023", followers: 4344, following: 5343, tweets: 42 },
-        { date: "19-3-2023", followers: 5344, following: 1343, tweets: 18 },
+        { date: "19-3-2023", followers: 5344, following: 4543, tweets: 18 },
         { date: "20-3-2023", followers: 6344, following: 3343, tweets: 30 },
-        { date: "21-3-2023", followers: 4344, following: 1343, tweets: 5 },
+        { date: "21-3-2023", followers: 4344, following: 4443, tweets: 5 },
         { date: "22-3-2023", followers: 2344, following: 6343, tweets: 10 },
         { date: "23-3-2023", followers: 1344, following: 4343, tweets: 20 },
-        { date: "24-3-2023", followers: 8344, following: 343, tweets: 15 },
+        { date: "24-3-2023", followers: 8344, following: 4343, tweets: 15 },
         { date: "25-3-2023", followers: 3344, following: 2343, tweets: 35 },
       ],
       general: {
@@ -34,6 +34,7 @@ const ActivityChart = () => {
     series: [
       {
         name: "Follwers",
+        type: "column",
         data: objectData.data.daily.map((item) => ({
           x: item.date,
           y: item.followers,
@@ -41,6 +42,7 @@ const ActivityChart = () => {
       },
       {
         name: "Follwing",
+        type: "area",
         data: objectData.data.daily.map((item) => ({
           x: item.date,
           y: item.following,
@@ -48,6 +50,7 @@ const ActivityChart = () => {
       },
       {
         name: "Tweets",
+        type: "line",
         data: objectData.data.daily.map((item) => ({
           x: item.date,
           y: item.tweets,
@@ -105,6 +108,11 @@ const ActivityChart = () => {
       //     color: "red",
       //   },
       // },
+      plotOptions: {
+        bar: {
+          columnWidth: "50%",
+        },
+      },
       legend: {
         labels: {
           colors: ["#ffffff"],
@@ -119,7 +127,7 @@ const ActivityChart = () => {
         },
       },
       markers: {
-        size: 6,
+        size: 0,
         hover: {
           sizeOffset: 6,
         },
@@ -151,6 +159,17 @@ const ActivityChart = () => {
               color: "#fff", // set the border color of x-axis labels
             },
           },
+        },
+      },
+      fill: {
+        opacity: [0.85, 0.25, 1],
+        gradient: {
+          inverseColors: false,
+          shade: "light",
+          type: "vertical",
+          opacityFrom: 0.85,
+          opacityTo: 0.55,
+          stops: [0, 100, 100, 100],
         },
       },
       tooltip: {
@@ -196,4 +215,4 @@ const ActivityChart = () => {
   );
 };
 
-export default ActivityChart;
+export default MixedChartsLayout;

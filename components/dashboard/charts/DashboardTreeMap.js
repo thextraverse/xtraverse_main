@@ -5,7 +5,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 });
 
 // const { twitterData } = useUserAuth;
-const ActivityChart = () => {
+const TreeMapLayout = () => {
   const objectData = {
     data: {
       daily: [
@@ -33,25 +33,60 @@ const ActivityChart = () => {
   const [chartData, setChartData] = useState({
     series: [
       {
-        name: "Follwers",
-        data: objectData.data.daily.map((item) => ({
-          x: item.date,
-          y: item.followers,
-        })),
-      },
-      {
-        name: "Follwing",
-        data: objectData.data.daily.map((item) => ({
-          x: item.date,
-          y: item.following,
-        })),
-      },
-      {
-        name: "Tweets",
-        data: objectData.data.daily.map((item) => ({
-          x: item.date,
-          y: item.tweets,
-        })),
+        data: [
+          {
+            x: "New Delhi",
+            y: 218,
+          },
+          {
+            x: "Kolkata",
+            y: 149,
+          },
+          {
+            x: "Mumbai",
+            y: 184,
+          },
+          {
+            x: "Ahmedabad",
+            y: 55,
+          },
+          {
+            x: "Bangaluru",
+            y: 84,
+          },
+          {
+            x: "Pune",
+            y: 31,
+          },
+          {
+            x: "Chennai",
+            y: 70,
+          },
+          {
+            x: "Jaipur",
+            y: 30,
+          },
+          {
+            x: "Surat",
+            y: 44,
+          },
+          {
+            x: "Hyderabad",
+            y: 68,
+          },
+          {
+            x: "Lucknow",
+            y: 28,
+          },
+          {
+            x: "Indore",
+            y: 19,
+          },
+          {
+            x: "Kanpur",
+            y: 29,
+          },
+        ],
       },
     ],
     options: {
@@ -74,11 +109,6 @@ const ActivityChart = () => {
 
         background: "transparent",
         foreColor: "#333",
-        events: {
-          mounted: function (chartContext, config) {
-            console.log(chartContext);
-          },
-        },
       },
       dataLabels: {
         enabled: false,
@@ -178,6 +208,12 @@ const ActivityChart = () => {
           },
         ],
       },
+      plotOptions: {
+        treemap: {
+          distributed: true,
+          enableShades: false,
+        },
+      },
       grid: {
         borderColor: "transparent",
       },
@@ -189,11 +225,11 @@ const ActivityChart = () => {
       <ReactApexChart
         options={chartData.options}
         series={chartData.series}
-        type="line"
+        type="treemap"
         height={350}
       />
     </div>
   );
 };
 
-export default ActivityChart;
+export default TreeMapLayout;

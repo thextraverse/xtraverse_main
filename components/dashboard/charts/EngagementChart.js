@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-  ssr: false,
-});
-
+const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 // const { twitterData } = useUserAuth;
-const EngageChart = () => {
+
+const EngageChart = ({ twitterData }) => {
   const objectData = {
     data: {
       daily: [
-        { date: "18-3-2023", followers: 4344, following: 5343, tweets: 42 },
-        { date: "19-3-2023", followers: 5344, following: 1343, tweets: 200 },
-        { date: "20-3-2023", followers: 6344, following: 3343, tweets: 50 },
-        { date: "21-3-2023", followers: 4344, following: 1343, tweets: 30 },
+        { date: "18-3-2023", followers: 4344, following: 5343, tweets: 142 },
+        { date: "19-3-2023", followers: 5344, following: 1343, tweets: 458 },
+        { date: "20-3-2023", followers: 6344, following: 3343, tweets: 1020 },
       ],
       general: {
         created_at: "thu may 27 21:26:25",
@@ -25,6 +22,7 @@ const EngageChart = () => {
       },
     },
   };
+
   const [chartData, setChartData] = useState({
     series: [
       {
@@ -50,22 +48,26 @@ const EngageChart = () => {
       },
     ],
     options: {
-      toolbar: {
-        show: false,
-      },
       chart: {
-        type: "bar",
         height: 350,
-      },
-
-      animations: {
-        enabled: true,
-        easing: "linear",
-        dynamicAnimation: {
-          speed: 1000,
+        type: "bar",
+        toolbar: {
+          show: false,
         },
-      },
+        sparkline: {
+          enabled: false,
+        },
+        animations: {
+          enabled: true,
+          easing: "linear",
+          dynamicAnimation: {
+            speed: 1000,
+          },
+        },
 
+        background: "transparent",
+        foreColor: "#333",
+      },
       plotOptions: {
         bar: {
           horizontal: false,
@@ -77,49 +79,19 @@ const EngageChart = () => {
         enabled: false,
       },
       stroke: {
-        show: true,
-        width: 2,
-        colors: ["transparent"],
+        width: [5, 7, 5],
+        curve: "smooth",
+        dashArray: [0, 0, 0], // here we define the dash array
+        color: "transparent",
       },
-      xaxis: {
-        labels: {
-          style: {
-            colors: "#fff", // set the text color of x-axis labels
-            border: {
-              color: "#fff", // set the border color of x-axis labels
-            },
-          },
-        },
-      },
-      yaxis: [
-        {
-          labels: {
-            style: {
-              colors: "#fff", // set the text color of x-axis labels
-              border: {
-                color: "#fff", // set the border color of x-axis labels
-              },
-            },
-          },
-        },
-        {
-          show: false,
-        },
-        {
-          opposite: true,
-          show: false,
-        },
-      ],
-      fill: {
-        opacity: 1,
-      },
-      tooltip: {
-        y: {
-          formatter: function (val) {
-            return "$ " + val + " thousands";
-          },
-        },
-      },
+      // title: {
+      //   text: "Page Statistics",
+      //   align: "left",
+      //   style: {
+      //     color: "red",
+      //   },
+      // },
+
       legend: {
         labels: {
           colors: ["#ffffff"],
@@ -133,48 +105,53 @@ const EngageChart = () => {
           );
         },
       },
+      markers: {
+        size: 0,
+        hover: {
+          sizeOffset: 6,
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#fff", // set the text color of x-axis labels
+            border: {
+              color: "#fff", // set the border color of x-axis labels
+            },
+          },
+        },
+      },
+      xaxis: {
+        labels: {
+          style: {
+            colors: "#fff", // set the text color of x-axis labels
+            border: {
+              color: "#fff", // set the border color of x-axis labels
+            },
+          },
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            // return "$ " + val + " thousands";
+            return "$ " + val + " thousands";
+          },
+        },
+      },
       grid: {
         borderColor: "transparent",
       },
-      toolbar: {
-        show: true,
-        offsetX: 0,
-        offsetY: 0,
-        tools: {
-          download: true,
-          selection: true,
-          zoom: true,
-          zoomin: true,
-          zoomout: true,
-          pan: true,
-          // reset: true | '<img src="/static/icons/reset.png" width="20">',
-          customIcons: [],
-        },
-        export: {
-          csv: {
-            filename: undefined,
-            columnDelimiter: ",",
-            headerCategory: "category",
-            headerValue: "value",
-            dateFormatter(timestamp) {
-              return new Date(timestamp).toDateString();
-            },
-          },
-          svg: {
-            filename: undefined,
-          },
-          png: {
-            filename: undefined,
-          },
-        },
-        autoSelected: "zoom",
-      },
+      colors: ["#ffffff", "#04fcbc", "#FEB019"],
     },
   });
 
   return (
     <div id="chart">
-      <ReactApexChart
+      <ApexCharts
         options={chartData.options}
         series={chartData.series}
         type="bar"

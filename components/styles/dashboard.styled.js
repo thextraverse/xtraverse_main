@@ -152,6 +152,24 @@ export const ActivityCharts = styled.div`
   background: #252525;
   position: relative;
   overflow: hidden;
+
+  &.mixed {
+    &::before {
+      content: "";
+      width: 100%;
+      top: 0%;
+      left: 40%;
+      opacity: 0.2;
+      filter: blur(60px);
+      pointer-events: none;
+      background: linear-gradient(
+        to right,
+        #04fcbc,
+        rgb(251, 215, 134),
+        #04fcbc
+      );
+    }
+  }
   &::before {
     content: "";
     position: absolute;

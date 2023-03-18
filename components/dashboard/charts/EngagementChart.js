@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+const ReactApexChart = dynamic(() => import("react apex-charts"), {
+  ssr: false,
+});
+
 // const { twitterData } = useUserAuth;
 const EngageChart = () => {
   const objectData = {
@@ -134,14 +138,44 @@ const EngageChart = () => {
         borderColor: "transparent",
       },
       toolbar: {
-        show: false, // hide the download PNG and SVG buttons
+        show: true,
+        offsetX: 0,
+        offsetY: 0,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          // reset: true | '<img src="/static/icons/reset.png" width="20">',
+          customIcons: [],
+        },
+        export: {
+          csv: {
+            filename: undefined,
+            columnDelimiter: ",",
+            headerCategory: "category",
+            headerValue: "value",
+            dateFormatter(timestamp) {
+              return new Date(timestamp).toDateString();
+            },
+          },
+          svg: {
+            filename: undefined,
+          },
+          png: {
+            filename: undefined,
+          },
+        },
+        autoSelected: "zoom",
       },
     },
   });
 
   return (
     <div id="chart">
-      <ApexCharts
+      <ReactApexChart
         options={chartData.options}
         series={chartData.series}
         type="bar"

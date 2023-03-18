@@ -118,7 +118,7 @@ const ActivityChart = ({ twitterData }) => {
         },
       },
       markers: {
-        size: 0,
+        size: 6,
         hover: {
           sizeOffset: 6,
         },

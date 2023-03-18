@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import ItemAcivity from "../../../../components/project/EditMarketplace/ItemActivity";
 import { PreviewBox } from "../../../../components/styles/uploadnft.style";
-function CryptoCanvasEditMarketPlaceThanksyou(props) {
+function CryptoCanvasEditMarketPlaceSalePage(props) {
   const { closingHeader, closingSubtexxt } = props;
 
   return (
@@ -19,4 +19,4 @@ function CryptoCanvasEditMarketPlaceThanksyou(props) {
   );
 }
 
-export default CryptoCanvasEditMarketPlaceThanksyou;
+export default CryptoCanvasEditMarketPlaceSalePage;

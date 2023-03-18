@@ -58,7 +58,7 @@ const DashboardRadialBarChart = () => {
       //     stops: [0, 400, 405, 90, 100],
       //   },
       // },
-      colors: ["#f9ff21", "#00d1ff", "#ff5959", "#000"],
+      colors: ["#f9ff21", "#00d1ff", "#ff5959", "#22eaaa"],
     },
   });
 

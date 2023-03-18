@@ -80,8 +80,43 @@ export const ProfileDropdown = styled.div`
   /* .notifyInfo{
     display: ;
   } */
+  .buttonsc {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .notifyInfo {
+    display: grid;
+    grid-template-columns: 80% auto;
+    margin: 10px 0px;
+    .img {
+      width: 50px;
+      height: 30px;
+      background: #8a8a8e;
+      margin-right: 10px;
+    }
+    p {
+      font-size: 1em;
+    }
+    span {
+      font-size: 0.8em;
+    }
+    .infowrap {
+      display: flex;
+    }
+  }
   &.notifcationsbar {
     width: 350px;
+    h1 {
+      font-size: 1em;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #04fcbc;
+      margin-top: 10px;
+    }
   }
   &.cryptoDropdwonw {
     .crytpDetails {

@@ -256,14 +256,14 @@ export const PreviewBox = styled.div`
     }
   }
   .ownerdv {
-    width: 210px;
-    display: grid;
-    grid-template-columns: 20% 40% auto;
+    display: flex;
     padding: 10px 0px;
+    gap: 5px;
     p {
       font-weight: 700;
       &.p {
         color: #8a8a8e;
+        width: initial;
       }
     }
     span {

@@ -171,23 +171,22 @@ function NotificationDropdownlayout() {
             }}
           >
             <h1>Notifications</h1>
-            <Box sx={{ display: "flex", gap: "10px" }}>
+            <div className="buttonsc">
               <Button
                 sx={{
-                  borderRadius: "8px",
                   color: "#fff",
-                  border: "2px solid #04FCBC",
-                  fontSize: "1em",
+                  border: "2px solid #fff",
+                  fontSize: ".9em",
                   textTransform: "capitalize",
-                  padding: "5px 5px",
-                  height: "100px",
+                  padding: "10px 10px",
+                  height: "35px",
                   transition: "0.3s",
                   fontWeight: "400",
+                  borderRadius: "50px",
+                  cursor: "pointer",
                   "&:hover ": {
-                    color: "#fff",
-                    background:
-                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    cursor: "pointer",
+                    color: "#000",
+                    background: "#fff",
                   },
                 }}
               >
@@ -196,55 +195,59 @@ function NotificationDropdownlayout() {
               <Button
                 sx={{
                   width: "100%",
-                  borderRadius: "8px",
                   color: "#fff",
-                  border: "2px solid #04FCBC",
+                  border: "2px solid #fff",
                   fontSize: "1em",
                   textTransform: "capitalize",
-                  padding: "10px 0px",
+                  padding: "10px 10px",
                   transition: "0.3s",
                   fontWeight: "500",
-                  margin: "10px 0px",
                   display: "flex",
                   gap: "20px",
+                  height: "35px",
+                  borderRadius: "50px",
                   "&:hover ": {
-                    color: "#fff",
-                    background:
-                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    cursor: "pointer",
+                    color: "#000",
+                    background: "#fff",
                   },
                 }}
               >
                 Unread
               </Button>
-            </Box>
+            </div>
           </Box>
-          <div className="notifyInfo">
-            <Box>
-              <div className="img"></div>
-              <div className="details">
-                <p>Annelies Pauline is now following you</p>
-                <span>Sep 30 at 19:30</span>
+          <div>
+            <div className="notifyInfo">
+              <div className="infowrap">
+                <div className="img"></div>
+                <div className="details">
+                  <p>Annelies Pauline is now following you</p>
+                  <span>Sep 30 at 19:30</span>
+                </div>
               </div>
-            </Box>
+              <div className="dot"></div>
+            </div>
+            <div className="notifyInfo">
+              <div className="infowrap">
+                <div className="img"></div>
+                <div className="details">
+                  <p>Annelies Pauline is now following you</p>
+                  <span>Sep 30 at 19:30</span>
+                </div>
+              </div>
+              <div className="dot"></div>
+            </div>
+            <div className="notifyInfo">
+              <div className="infowrap">
+                <div className="img"></div>
+                <div className="details">
+                  <p>Annelies Pauline is now following you</p>
+                  <span>Sep 30 at 19:30</span>
+                </div>
+              </div>
+              <div className="dot"></div>
+            </div>
           </div>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "15px 0px",
-            }}
-          >
-            <Box>
-              <h1>289</h1>
-              <span>Followers</span>
-            </Box>
-            <Box>
-              <h1>88</h1>
-              <span>Followers</span>
-            </Box>
-          </Box>
         </ProfileDropdown>
       </Menu>
     </>

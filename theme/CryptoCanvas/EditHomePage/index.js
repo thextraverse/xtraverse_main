@@ -10,15 +10,13 @@ import demoimg from "../../../components/images/blacklogo.svg";
 import { HomepagePreview } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 function CryptoCanvasEditHome({
   menuNav,
-  homeLogo,
   homeBg,
   desBg,
-  headerType,
   heroType,
   desType,
-  heroButton,
   editHeroHeading,
   heroOverlayColor,
   editHeroSubtext,
@@ -28,10 +26,12 @@ function CryptoCanvasEditHome({
   desSubtext,
   websiteBgColor,
   btnBgColor,
-  waitlistBtn,
   browseClctionBtn,
 }) {
   console.log(menuNav);
+  const { user, headerMenuData, headerLogo, headermenu, navbarType } =
+    useUserAuth();
+  console.log("editWebsite", headerMenuData);
   return (
     <>
       <HomepagePreview>
@@ -39,7 +39,7 @@ function CryptoCanvasEditHome({
           {/* CryptoCanvas */}
           <div className="homesec">
             {/* header */}
-            {headerType != "header2" ? (
+            {navbarType != "header2" ? (
               <Box
                 sx={{
                   position: "relative",
@@ -62,7 +62,7 @@ function CryptoCanvasEditHome({
                   >
                     <div className="logo">
                       <Image
-                        src={homeLogo}
+                        src={headerLogo}
                         alt="logo"
                         width={100}
                         height={100}
@@ -74,8 +74,8 @@ function CryptoCanvasEditHome({
                     </div>
                     <div className="headerbtn">
                       <ul>
-                        {menuNav
-                          ? menuNav.map((item, index) => (
+                        {headerMenuData
+                          ? headerMenuData.map((item, index) => (
                               <li key={index}>{item.button}</li>
                             ))
                           : ""}
@@ -83,23 +83,19 @@ function CryptoCanvasEditHome({
                     </div>
                   </Box>
 
-                  <Link href={waitlistBtn.link}>
-                    <a target="_blank">
-                      <Button
-                        className="waitLstBtn"
-                        sx={{ background: btnBgColor }}
-                      >
-                        {waitlistBtn.button}
-                      </Button>
-                    </a>
-                  </Link>
+                  <Button
+                    className="waitLstBtn"
+                    sx={{ background: btnBgColor }}
+                  >
+                    {headermenu && headermenu.button}
+                  </Button>
                 </Box>
               </Box>
             ) : (
               <div className="headersc">
                 <div className="logo">
                   <Image
-                    src={homeLogo}
+                    src={headerLogo}
                     alt="logo"
                     width={100}
                     height={100}
@@ -108,23 +104,19 @@ function CryptoCanvasEditHome({
                 </div>
                 <div className="headerbtn">
                   <ul>
-                    {menuNav
-                      ? menuNav.map((item, index) => (
+                    {headerMenuData
+                      ? headerMenuData.map((item, index) => (
                           <li key={index}>{item.button}</li>
                         ))
                       : ""}
                   </ul>
 
-                  <Link href={waitlistBtn.link}>
-                    <a target="_blank">
-                      <Button
-                        className="waitLstBtn"
-                        sx={{ background: btnBgColor }}
-                      >
-                        {waitlistBtn.button}
-                      </Button>
-                    </a>
-                  </Link>
+                  <Button
+                    className="waitLstBtn"
+                    sx={{ background: btnBgColor }}
+                  >
+                    {headermenu.button}
+                  </Button>
                 </div>
               </div>
             )}
@@ -330,6 +322,101 @@ function CryptoCanvasEditHome({
               component="div"
               className="overlaybg"
               sx={{ background: `${desOverlayColor}` }}
+            ></Box>
+          </div>
+          {/* Collaborator */}
+          <div className="homesec">
+            {heroType === "hero3" ? (
+              <div className="herosec hero3">
+                <div className="herotxt">
+                  <h1>{editHeroHeading}</h1>
+                  <p>{editHeroSubtext}</p>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        width: "fit-content",
+                        background: btnBgColor,
+                      }}
+                    >
+                      {browseClctionBtn.button}
+                    </Button>
+                  </Box>
+                </div>
+              </div>
+            ) : (
+              <div
+                className={
+                  heroType === "hero2" ? "herosec hero2" : "herosec hero1"
+                }
+              >
+                <div className="herotxt">
+                  <h1>{editHeroHeading}</h1>
+                  <p>{editHeroSubtext}</p>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      textAlign: "start",
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        width: "fit-content",
+                        background: btnBgColor,
+                      }}
+                    >
+                      {browseClctionBtn.button}
+                    </Button>
+                  </Box>
+                </div>
+                <div className="heroImg">
+                  {homeBg ? (
+                    <Image
+                      src={homeBg}
+                      alt="home background image"
+                      width={100}
+                      height={100}
+                    />
+                  ) : (
+                    <Image
+                      src="/images/templatePage/homeimgpreview.png"
+                      alt="home background image"
+                      width={100}
+                      height={100}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+            {heroType === "hero3" ? (
+              <div className="bgimage">
+                {homeBg ? (
+                  <Image
+                    src={homeBg}
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src="/images/templatePage/homeimgpreview.svg"
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+            <Box
+              component="div"
+              className="overlaybg"
+              sx={{ background: `${heroOverlayColor}` }}
             ></Box>
           </div>
         </Box>

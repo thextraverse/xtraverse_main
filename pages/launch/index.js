@@ -44,7 +44,7 @@ const DasboardContainer = styled.div`
   }
 `;
 export default function Launch() {
-  const { user } = useUserAuth();
+  const { user, setTwitterData } = useUserAuth();
   const router = useRouter();
   let emailData = null;
 
@@ -223,7 +223,7 @@ export default function Launch() {
                           margin: "10px 0px",
                         }}
                       >
-                        <IntergrationSec />
+                        <IntergrationSec setTwitterData={setTwitterData} />
                       </Box>
                     </div>
                   )}

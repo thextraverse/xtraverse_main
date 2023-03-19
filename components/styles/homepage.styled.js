@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 export const Main = styled.main`
-  background: #303030;
   margin-top: 125px;
   /* 252525 */
   /* 303030 */
@@ -317,33 +316,52 @@ export const Form = styled.form`
 export const EditorInputSec = styled.div`
   position: fixed;
   width: 580px;
-  height: 85vh;
+  height: calc(100vh - 100px);
   z-index: 9;
   background: #303030;
   padding: 0px 20px 20px 20px;
   overflow-x: hidden;
+  padding-left: 100px;
+  left: 0px;
+
   @media screen and (min-width: 1200px) {
-    width: 400px;
+    width: 450px;
     margin: auto;
-    left: 85px;
   }
   @media screen and (min-width: 1536px) {
-    width: 492px;
+    width: 502px;
     margin: auto;
-    left: inherit;
+    left: 0px;
+  }
+  @media screen and (min-width: 1640px) {
+    width: 550px;
+    margin: auto;
+    padding-left: 100px;
+    left: 0px;
+    /* left: inherit; */
   }
   @media screen and (min-width: 1840px) {
-    width: 580px;
+    width: 640px;
     margin: auto;
-    left: inherit;
+    padding-left: 120px;
+    left: 0px;
+    /* left: inherit; */
   }
 
+  @media screen and (min-width: 1940px) {
+    width: 700px;
+    margin: auto;
+    padding-left: 100px;
+    left: 0px;
+    /* left: inherit; */
+  }
   /* border-right: 1px solid #fff; */
 `;
 
 export const PageEditorFrom = styled.div`
   background: #303030;
   border-radius: 16px;
+  margin: 42px 0px 10px;
   .editorform {
     border: 2px solid #4f4f4f;
     border-radius: 16px;

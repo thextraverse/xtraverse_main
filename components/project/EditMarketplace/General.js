@@ -12,7 +12,8 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { AiOutlinePlus } from "react-icons/ai";
-import Select from "react-select";
+
+const Select = dynamic(() => import("react-select"), { ssr: false });
 import {
   ref,
   uploadBytes,
@@ -36,6 +37,7 @@ import Typography from "@mui/joy/Typography";
 import { Form } from "../../styles/homepage.styled";
 import { db, auth, storage } from "../../../configfile/firebaseConfig";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
+import dynamic from "next/dynamic";
 function MarketPlaceGeneral(props) {
   const {
     handleNext,
@@ -264,7 +266,7 @@ function MarketPlaceGeneral(props) {
                 ""
               )}
             </Box>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Name of NFT</span>
                 <input
@@ -275,7 +277,7 @@ function MarketPlaceGeneral(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box sx={{}}>
                 <span>Collection Name</span>
                 <input
@@ -286,7 +288,7 @@ function MarketPlaceGeneral(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box sx={{ margin: "15px 0px" }}>
                 <span>Description </span>
                 <textarea
@@ -300,7 +302,7 @@ function MarketPlaceGeneral(props) {
                 ></textarea>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <FormControl fullWidth sx={{}}>
                 <span htmlFor="fundType">Add utility</span>
                 <Select
@@ -308,6 +310,7 @@ function MarketPlaceGeneral(props) {
                   options={options}
                   isSearchable={true}
                   onChange={handleSelectUtility}
+                  inputId="my-select"
                 />
                 {/* <Space wrap>
                   <Select
@@ -333,7 +336,7 @@ function MarketPlaceGeneral(props) {
                 </Space> */}
               </FormControl>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   marginTop: "0px",
@@ -348,28 +351,26 @@ function MarketPlaceGeneral(props) {
                   />
                   <span>
                     <svg
-                      width="25"
-                      height="24"
+                      width="1em"
+                      height="1em"
                       viewBox="0 0 25 24"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_217_16463)">
+                      <g clipPath="url(#prefix__clip0_217_16463)">
                         <path
-                          d="M3.7 18C2.38484 17.235 1.5 15.8051 1.5 14.1674C1.5 12.1053 2.90285 10.3727 4.80122 9.88197C4.80041 9.83571 4.8 9.78935 4.8 9.7429C4.8 5.46661 8.24741 2 12.5 2C16.1211 2 19.1584 4.51348 19.9806 7.90009C22.0395 8.69955 23.5 10.7089 23.5 13.0613C23.5 14.8707 22.6359 16.4772 21.3 17.4862M12.5 22V13M12.5 13L9 16.5M12.5 13L16 16.5"
-                          stroke="white"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          d="M3.7 18a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 5.468 8.247 2 12.5 2c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 22v-9m0 0L9 16.5m3.5-3.5l3.5 3.5"
+                          stroke="#fff"
+                          strokeWidth={1.5}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </g>
                       <defs>
-                        <clipPath id="clip0_217_16463">
-                          <rect
-                            width="24"
-                            height="24"
-                            fill="white"
-                            transform="translate(0.5)"
+                        <clipPath id="prefix__clip0_217_16463">
+                          <path
+                            fill="#fff"
+                            transform="translate(.5)"
+                            d="M0 0h24v24H0z"
                           />
                         </clipPath>
                       </defs>
@@ -379,7 +380,7 @@ function MarketPlaceGeneral(props) {
                 </div>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   display: "grid",
@@ -402,7 +403,7 @@ function MarketPlaceGeneral(props) {
                 </div>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   gap: "10px",

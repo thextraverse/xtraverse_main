@@ -5,7 +5,7 @@ export const Dashboardsc = styled.div`
 
   h2 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   p {
@@ -143,5 +143,54 @@ export const CommunityDiv = styled.div`
 
   .tx-c {
     text-align: center;
+  }
+`;
+export const ActivityCharts = styled.div`
+  border-radius: 15px;
+  width: 100%;
+  padding: 50px 20px;
+  background: #252525;
+  position: relative;
+  overflow: hidden;
+  .apexcharts-menu {
+    background: #000;
+    color: #fff;
+    &:hover {
+      background: #000;
+      color: #000;
+    }
+  }
+  &.mixed {
+    &::before {
+      content: "";
+      width: 100%;
+      top: 0%;
+      left: 40%;
+      opacity: 0.2;
+      filter: blur(60px);
+      pointer-events: none;
+      background: linear-gradient(
+        to right,
+        #04fcbc,
+        rgb(251, 215, 134),
+        #04fcbc
+      );
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 302px;
+    height: 252px;
+    top: -40px;
+    left: -32px;
+    opacity: 0.2;
+    filter: blur(60px);
+    pointer-events: none;
+    background: #04fcbc;
+  }
+  .apexcharts-tooltip {
+    background: #f3f3f3 !important;
+    color: #252525;
   }
 `;

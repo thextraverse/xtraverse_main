@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
-
+export const HeaderSection = styled.div`
+  position: relative;
+`;
 export const Aside = styled.aside`
   position: fixed;
   height: 100vh;
@@ -10,6 +12,7 @@ export const Aside = styled.aside`
   z-index: 9999;
   display: grid;
   place-content: center;
+
   .nav {
     display: flex;
     flex-direction: column;
@@ -29,6 +32,12 @@ export const Aside = styled.aside`
           object-fit: cover;
         }
       }
+    }
+    .ant-menu-item {
+      margin: 15px 5px;
+    }
+    .ant-menu-item-icon {
+      font-size: 1.8em !important;
     }
     .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
       background: #fff !important;
@@ -59,6 +68,92 @@ export const Aside = styled.aside`
         }
       }
     }
+  }
+`;
+export const ProfileDropdown = styled.div`
+  background: #252525;
+  padding: 15px 20px;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #04fcbc50;
+  /* display: none; */
+  /* .notifyInfo{
+    display: ;
+  } */
+  .buttonsc {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .notifyInfo {
+    display: grid;
+    grid-template-columns: 80% auto;
+    margin: 10px 0px;
+    .img {
+      width: 50px;
+      height: 30px;
+      background: #8a8a8e;
+      margin-right: 10px;
+    }
+    p {
+      font-size: 1em;
+    }
+    span {
+      font-size: 0.8em;
+    }
+    .infowrap {
+      display: flex;
+    }
+  }
+  &.notifcationsbar {
+    width: 350px;
+    h1 {
+      font-size: 1em;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #04fcbc;
+      margin-top: 10px;
+    }
+  }
+  &.cryptoDropdwonw {
+    .crytpDetails {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0px;
+      .image {
+        width: 40px;
+        span {
+          width: 30px !important;
+          height: 30px !important;
+        }
+      }
+    }
+    span {
+      color: #e4f12e;
+      font-size: 0.7em;
+    }
+    p {
+      font-size: 1.3em;
+      line-height: 100%;
+    }
+  }
+  h1 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #fff;
+  }
+  span {
+    font-size: 1.1em;
+    color: #8a8a8e;
+  }
+  p {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #fff;
+    /* padding: 12px 0px; */
   }
 `;
 export const InitializeProject = styled.div`

@@ -36,7 +36,7 @@ import { useRouter } from "next/router";
 
 const Main = styled.main`
   background: #303030;
-  padding: 30px;
+  padding: 0px;
   height: 100%;
   color: #fff;
 `;
@@ -47,13 +47,13 @@ const Dashboardsc = styled.div`
 `;
 const Initialize = styled.div`
   width: 800px;
-  margin: auto;
-  margin-top: 20vh;
   gap: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  margin: auto;
   .uploadProject {
     width: 100%;
     background: #252525;
@@ -128,7 +128,7 @@ export default function Project() {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
-  const uniqueId = v4();
+  // const uniqueId = v4();
   let emailData = null;
 
   user !== null && user.email && (emailData = user.email);
@@ -141,7 +141,6 @@ export default function Project() {
     setProjectCoverImg(URL.createObjectURL(imageFile));
     setUpldPrjctCover(imageFile);
   };
-
   const [projectName, setProjectName] = useState();
   const [founderList, setFounderList] = useState([{ founder: "" }]);
 
@@ -158,7 +157,6 @@ export default function Project() {
     list.splice(index, 1);
     setFounderList(list);
   };
-
   const handleServiceAdd = () => {
     setFounderList([...founderList, { founder: "" }]);
   };
@@ -217,7 +215,7 @@ export default function Project() {
           project: imageurl,
           projectName: projectName,
           founderName: founderList,
-          id: uniqueId,
+          id: projectName,
         });
         if (
           MySwal.fire({
@@ -243,25 +241,19 @@ export default function Project() {
         <Initialize>
           <h1>Initialize Project</h1>
           <Grid container spacing={2}>
-            <Grid sm={6}>
+            <Grid item xs={6}>
               <Box
                 sx={{ display: "grid", placeItems: "center", height: "100%" }}
               >
                 <div className="uploadProject">
                   <input type="file" onChange={handleDesImageChange} required />
-                  <svg
-                    width="25"
-                    height="22"
-                    viewBox="0 0 25 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width="1em" height="1em" viewBox="0 0 25 22" fill="none">
                     <path
-                      d="M3.7 17C2.38484 16.235 1.5 14.8051 1.5 13.1674C1.5 11.1053 2.90285 9.37272 4.80122 8.88197C4.80041 8.83571 4.8 8.78935 4.8 8.7429C4.8 4.46661 8.24741 1 12.5 1C16.1211 1 19.1584 3.51348 19.9806 6.90009C22.0395 7.69955 23.5 9.70891 23.5 12.0613C23.5 13.8707 22.6359 15.4772 21.3 16.4862M12.5 21V12M12.5 12L9 15.5M12.5 12L16 15.5"
-                      stroke="white"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      d="M3.7 17a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 4.468 8.247 1 12.5 1c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 21v-9m0 0L9 15.5m3.5-3.5l3.5 3.5"
+                      stroke="#fff"
+                      strokeWidth={1.5}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   <p>Upload project cover</p>
@@ -278,7 +270,7 @@ export default function Project() {
                 </div>
               </Box>
             </Grid>
-            <Grid sm={6}>
+            <Grid item xs={6}>
               <form onSubmit={handleDataSubmit}>
                 <div className="form-wraper">
                   <label htmlFor="name">Name of project (keep it simple)</label>

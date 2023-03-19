@@ -66,8 +66,20 @@ import CryptoCanvasEditMarketPlace from "../../../../theme/CryptoCanvas/editMark
 import CryptoCanvasEditMarketPlaceSalespage from "../../../../theme/CryptoCanvas/editMarketplace/marketplacesales";
 import { useRouter } from "next/router";
 import MarketPlaceHeader from "../../../../components/project/EditMarketplace/MarketPlaceHeader";
+import EditorSalesPage from "../../../../components/project/EditMarketplace/EditorSalesPage";
 function EditMarketPlaceSalesindex() {
   const router = useRouter();
+  const {
+    user,
+    headerMenuData,
+    setHeaderMenuData,
+    headerLogo,
+    setHeaderLogo,
+    headermenu,
+    setHeadermenu,
+    navbarType,
+    setNavbarType,
+  } = useUserAuth();
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
     if (index === activeIndex) {
@@ -81,6 +93,11 @@ function EditMarketPlaceSalesindex() {
   const [imgUrl, setImgUrl] = useState();
 
   const [formId, setFormId] = useState(null);
+  // ! offers
+  const [closingHeader, setClosingHeader] = useState("Marketplace");
+  const [closingSubtexxt, setClosingSubtexxt] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum."
+  );
   //! Edit header
   const [headerType, setHeaderType] = useState("header1");
   const storeHeaderType = headerType;
@@ -95,7 +112,7 @@ function EditMarketPlaceSalesindex() {
   };
   const [waitlistBtn, setWaitlistBtn] = useState({
     button: "Collection",
-    link: "",
+    link: "www.demo.com",
   });
 
   const handleWaitlistBtnChange = (e) => {
@@ -103,7 +120,10 @@ function EditMarketPlaceSalesindex() {
   };
 
   const [menuNav, setMenuNav] = useState();
-  console.log(menuNav);
+  setHeaderMenuData(menuNav);
+  setHeaderLogo(homeLogo);
+  setHeadermenu(waitlistBtn);
+  setNavbarType(headerType);
   // waitlist button
   const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
@@ -230,7 +250,7 @@ function EditMarketPlaceSalesindex() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
-  const { user } = useUserAuth();
+
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -524,7 +544,7 @@ function EditMarketPlaceSalesindex() {
         console.log("No documents found.");
       }
 
-      router.push("/project/editMarketplace/thankyouPage");
+      router.push("/project/editMarketplace/sales-page-editor");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -561,345 +581,369 @@ function EditMarketPlaceSalesindex() {
   return (
     <>
       <Main>
-        <Stepnav />
+        {/* <Stepnav /> */}
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={3} />
-          <Box
-            sx={{
-              marginLeft: "auto",
-              background: "#303030",
-              height: "100%",
-              display: "grid",
-              gridTemplateColumns: "100%",
-              alignItems: "center",
-              paddingLeft: "110px",
-            }}
-          >
-            <XtraverseContainer>
-              <Grid container spacing={2}>
-                <Grid item lg={3} xl={4}>
-                  <EditorInputSec>
-                    <PageEditorFrom>
-                      <div className="editorform">
-                        {/* header */}
-                        <div
-                          className={
-                            activeIndex === 0
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => {
-                                handleToggle(0);
-                              }}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Offer Header</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-
-                            {/* <VisibilityIcon className="visible" /> */}
-                          </div>
-                          <div className="page-editor-content-input">
-                            <MarketPlaceHeader
-                              menuNav={menuNav}
-                              setMenuNav={setMenuNav}
-                              waitlistBtn={waitlistBtn}
-                              handleWaitlistBtnChange={handleWaitlistBtnChange}
-                              headerType={headerType}
-                              setHeaderType={setHeaderType}
-                              uploadLogo={uploadLogo}
-                              handleImageChange={handleLogoChange}
-                              key="1"
-                            />
-                          </div>
-                        </div>
-
-                        {/* general */}
-                        <div
-                          className={
-                            activeIndex === 1
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => {
-                                handleToggle(1);
-                              }}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Offer General</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-
-                            {/* <VisibilityIcon className="visible" /> */}
-                          </div>
-                          <div className="page-editor-content-input">
-                            <MarketPlaceGeneral
-                              setNftName={setNftName}
-                              nftName={nftName}
-                              addNftDescript={addNftDescript}
-                              nftCollectionName={nftCollectionName}
-                              setNftCollectionName={setNftCollectionName}
-                              setNftDescript={setAddNftDescript}
-                              handleSelectUtility={handleSelectUtility}
-                              selectedImage={selectedImage}
-                              handleImageChange={handleImageChange}
-                              nftPrice={nftPrice}
-                              setNftPrice={setNftPrice}
-                              nftMindBtn={nftMindBtn}
-                              setNftMindBtn={setNftMindBtn}
-                              key="1"
-                            />
-                          </div>
-                        </div>
-                        {/* features */}
-                        <div
-                          className={
-                            activeIndex === 2
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => handleToggle(2)}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Offer Features</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-                          </div>
-
-                          <div className="page-editor-content-input">
-                            <MarketPlaceFeatures
-                              handleVideoChange={handleVideoChange}
-                              setFeatureBtn={setFeatureBtn}
-                              setAddStory={setAddStory}
-                              setVideoTitle={setVideoTitle}
-                              tokenType={tokenType}
-                              setTokenType={setTokenType}
-                              mintType={mintType}
-                              setMintType={setMintType}
-                              featureBtn={featureBtn}
-                              handleButtonChange={handleButtonChange}
-                              handleServiceAdd={handleServiceAdd}
-                              handleServiceChange={handleServiceChange}
-                              handleServiceRemove={handleServiceRemove}
-                              royaltiesList={royaltiesList}
-                              key="1"
-                            />
-                          </div>
-                        </div>
-                        {/* project bio */}
-                        <div
-                          className={
-                            activeIndex === 3
-                              ? "page-editor-form active"
-                              : "page-editor-form"
-                          }
-                        >
-                          <div className="btn-flex">
-                            <Button
-                              className="page-editor-form-btn"
-                              onClick={() => handleToggle(3)}
-                              sx={{
-                                width: "100%",
-                                display: "flex",
-                                justifyContent: "space-between",
-                                color: "#fff",
-                                padding: "15px",
-                                textTransform: "capitalize",
-                              }}
-                            >
-                              <span>Offer Project Bio</span>
-                              <KeyboardArrowDownIcon className="activesvg" />
-                            </Button>
-                            <div className="visibility">
-                              <VisibilityOffIcon /> <VisibilityIcon />
-                            </div>
-                          </div>
-
-                          <div className="page-editor-content-input">
-                            <MarketPlaceProjectBio
-                              setPrjctBioCollection={setPrjctBioCollection}
-                              setProjectBio={setProjectBio}
-                              setProjectBioStory={setProjectBioStory}
-                              handleProjectBtnChange={handleProjectBtnChange}
-                              projectBtn={projectBtn}
-                              prjctSelectedVideo={prjctSelectedVideo}
-                              handlePrjctBioVideoChange={
-                                handlePrjctBioVideoChange
-                              }
-                              key="2"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </PageEditorFrom>
-                    <Box
-                      sx={{
-                        display: "grid",
-                        gridTemplateColumns: "50% auto",
-                        gap: "10px",
-                      }}
+          <XtraverseContainer>
+            <Grid container spacing={2}>
+              <Grid lg={4} xl={4}>
+                <EditorInputSec>
+                  <PageEditorFrom>
+                    {/* offers page editor */}
+                    <div
+                      className={
+                        activeIndex === 0
+                          ? "page-editor-form theme active"
+                          : "page-editor-form theme "
+                      }
                     >
-                      <Link href="/project">
+                      <div className="btn-flex">
                         <Button
+                          className="page-editor-form-btn"
+                          onClick={() => handleToggle(0)}
                           sx={{
                             width: "100%",
-                            background: "#252525",
-                            borderRadius: "8px",
+                            display: "flex",
+                            justifyContent: "space-between",
                             color: "#fff",
-                            fontSize: "1.2em",
+                            padding: "15px",
                             textTransform: "capitalize",
-                            border: "2px solid #04FCBC",
-                            padding: "8px 0px",
-                            fontWeight: "500",
-                            margin: "10px 0px",
-                            "&:hover ": {
-                              background:
-                                "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                              color: "#000",
-                              cursor: "pointer",
-                            },
                           }}
                         >
-                          Back
+                          <span>Offers page editor</span>
+                          <KeyboardArrowDownIcon className="activesvg" />
                         </Button>
-                      </Link>
+                        <div className="visibility">
+                          <VisibilityOffIcon /> <VisibilityIcon />
+                        </div>
+                      </div>
 
+                      <div className="page-editor-content-input">
+                        <EditorSalesPage
+                          setClosingHeader={setClosingHeader}
+                          setClosingSubtexxt={setClosingSubtexxt}
+                          key="3"
+                        />
+                      </div>
+                    </div>
+                    <div className="editorform">
+                      {/* header */}
+                      <div
+                        className={
+                          activeIndex === 1
+                            ? "page-editor-form  active"
+                            : "page-editor-form "
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => {
+                              handleToggle(1);
+                            }}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Header</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+
+                          {/* <VisibilityIcon className="visible" /> */}
+                        </div>
+                        <div className="page-editor-content-input">
+                          <MarketPlaceHeader
+                            menuNav={menuNav}
+                            setMenuNav={setMenuNav}
+                            waitlistBtn={waitlistBtn}
+                            handleWaitlistBtnChange={handleWaitlistBtnChange}
+                            headerType={headerType}
+                            setHeaderType={setHeaderType}
+                            uploadLogo={uploadLogo}
+                            handleImageChange={handleLogoChange}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+
+                      {/* general */}
+                      <div
+                        className={
+                          activeIndex === 2
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => {
+                              handleToggle(2);
+                            }}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Offer General</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+
+                          {/* <VisibilityIcon className="visible" /> */}
+                        </div>
+                        <div className="page-editor-content-input">
+                          <MarketPlaceGeneral
+                            setNftName={setNftName}
+                            nftName={nftName}
+                            addNftDescript={addNftDescript}
+                            nftCollectionName={nftCollectionName}
+                            setNftCollectionName={setNftCollectionName}
+                            setNftDescript={setAddNftDescript}
+                            handleSelectUtility={handleSelectUtility}
+                            selectedImage={selectedImage}
+                            handleImageChange={handleImageChange}
+                            nftPrice={nftPrice}
+                            setNftPrice={setNftPrice}
+                            nftMindBtn={nftMindBtn}
+                            setNftMindBtn={setNftMindBtn}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* features */}
+                      <div
+                        className={
+                          activeIndex === 3
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(3)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Offer Features</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <MarketPlaceFeatures
+                            handleVideoChange={handleVideoChange}
+                            setFeatureBtn={setFeatureBtn}
+                            setAddStory={setAddStory}
+                            setVideoTitle={setVideoTitle}
+                            tokenType={tokenType}
+                            setTokenType={setTokenType}
+                            mintType={mintType}
+                            setMintType={setMintType}
+                            featureBtn={featureBtn}
+                            handleButtonChange={handleButtonChange}
+                            handleServiceAdd={handleServiceAdd}
+                            handleServiceChange={handleServiceChange}
+                            handleServiceRemove={handleServiceRemove}
+                            royaltiesList={royaltiesList}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* project bio */}
+                      <div
+                        className={
+                          activeIndex === 4
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(4)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Offer Project Bio</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <MarketPlaceProjectBio
+                            setPrjctBioCollection={setPrjctBioCollection}
+                            setProjectBio={setProjectBio}
+                            setProjectBioStory={setProjectBioStory}
+                            handleProjectBtnChange={handleProjectBtnChange}
+                            projectBtn={projectBtn}
+                            prjctSelectedVideo={prjctSelectedVideo}
+                            handlePrjctBioVideoChange={
+                              handlePrjctBioVideoChange
+                            }
+                            key="2"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </PageEditorFrom>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: "50% auto",
+                      gap: "10px",
+                    }}
+                  >
+                    <Link href="/project">
                       <Button
-                        onClick={handleDataSubmit}
                         sx={{
                           width: "100%",
-                          background:
-                            "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                          background: "#252525",
                           borderRadius: "8px",
-                          color: "#000",
+                          color: "#fff",
                           fontSize: "1.2em",
                           textTransform: "capitalize",
+                          border: "2px solid #04FCBC",
                           padding: "8px 0px",
-                          transition: "0.3s",
                           fontWeight: "500",
                           margin: "10px 0px",
                           "&:hover ": {
                             background:
                               "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                            color: "#000",
                             cursor: "pointer",
                           },
                         }}
                       >
-                        Next
+                        Back
+                      </Button>
+                    </Link>
+
+                    <Button
+                      onClick={handleDataSubmit}
+                      sx={{
+                        width: "100%",
+                        background:
+                          "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                        borderRadius: "8px",
+                        color: "#000",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        "&:hover ": {
+                          background:
+                            "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                          cursor: "pointer",
+                        },
+                      }}
+                    >
+                      Compplete
+                    </Button>
+                  </Box>
+                </EditorInputSec>
+              </Grid>
+              <Grid lg={8} xl={8}>
+                <Box
+                  sx={{
+                    background: "#252525",
+                    padding: "3px",
+                    width: "100%",
+                    textAlign: "center",
+                  }}
+                >
+                  <BtnContainer>
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.597.374-3.106 1.04-4.444"
+                        stroke="#8A8A8E"
+                        strokeWidth={1.5}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "20px",
+                      }}
+                    >
+                      <Button>
+                        See full preview <AiOutlineEye />
                       </Button>
                     </Box>
-                  </EditorInputSec>
-                </Grid>
-                <Grid item lg={9} xl={8}>
-                  <Box
-                    sx={{
-                      background: "#252525",
-                      padding: "3px",
-                      width: "100%",
-                      textAlign: "center",
-                    }}
-                  >
-                    <BtnContainer>
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.4035 2.37412 8.8944 3.03947 7.55556"
-                          stroke="#8A8A8E"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          gap: "20px",
-                        }}
-                      >
-                        <Button>
-                          See full preview <AiOutlineEye />
-                        </Button>
-                      </Box>
-                    </BtnContainer>
+                  </BtnContainer>
 
-                    <MarketPlaceDataPreview>
-                      <CryptoCanvasEditMarketPlaceSalespage
-                        nftCollectionName={nftCollectionName}
-                        nftName={nftName}
-                        waitlistBtn={waitlistBtn}
-                        blueStatus={blueStatus}
-                        addNftDescript={addNftDescript}
-                        yellowStatus={yellowStatus}
-                        nftMindBtn={nftMindBtn}
-                        nftPrice={nftPrice}
-                        selectedImage={selectedImage}
-                        videoTitle={videoTitle}
-                        selectedVideo={selectedVideo}
-                        addStory={addStory}
-                        featureBtn={featureBtn}
-                        prjctSelectedVideo={prjctSelectedVideo}
-                        projectBioStory={projectBioStory}
-                        prjctBioCollection={prjctBioCollection}
-                        projectBio={projectBio}
-                        menuNav={menuNav}
-                        headerType={headerType}
-                        homeLogo={homeLogo}
-                        projectBtn={projectBtn}
-                      />
-                    </MarketPlaceDataPreview>
-                  </Box>
-                </Grid>
+                  <MarketPlaceDataPreview>
+                    <CryptoCanvasEditMarketPlaceSalespage
+                      nftCollectionName={nftCollectionName}
+                      nftName={nftName}
+                      waitlistBtn={waitlistBtn}
+                      blueStatus={blueStatus}
+                      addNftDescript={addNftDescript}
+                      yellowStatus={yellowStatus}
+                      nftMindBtn={nftMindBtn}
+                      nftPrice={nftPrice}
+                      selectedImage={selectedImage}
+                      videoTitle={videoTitle}
+                      selectedVideo={selectedVideo}
+                      addStory={addStory}
+                      featureBtn={featureBtn}
+                      prjctSelectedVideo={prjctSelectedVideo}
+                      projectBioStory={projectBioStory}
+                      prjctBioCollection={prjctBioCollection}
+                      projectBio={projectBio}
+                      menuNav={menuNav}
+                      headerType={headerType}
+                      homeLogo={homeLogo}
+                      projectBtn={projectBtn}
+                    />
+                  </MarketPlaceDataPreview>
+                </Box>
               </Grid>
-            </XtraverseContainer>
-            {/* {selectedTemplate} */}
-          </Box>
+            </Grid>
+          </XtraverseContainer>
+          {/* {selectedTemplate} */}
         </Box>
       </Main>
     </>

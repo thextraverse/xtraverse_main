@@ -212,6 +212,22 @@ export const PreviewBox = styled.div`
   height: 100%;
   width: 100%;
   padding: 50px 20px;
+  &.salespageeditor {
+    .videowrap {
+      h1 {
+        font-size: 3em;
+        line-height: 100%;
+        margin: 5px 0px;
+      }
+    }
+  }
+  .logo {
+    width: 30px;
+    height: 30px;
+    img {
+      object-fit: contain;
+    }
+  }
   .ant-pagination {
     display: none;
   }
@@ -249,14 +265,14 @@ export const PreviewBox = styled.div`
     }
   }
   .ownerdv {
-    width: 210px;
-    display: grid;
-    grid-template-columns: 20% 40% auto;
+    display: flex;
     padding: 10px 0px;
+    gap: 5px;
     p {
       font-weight: 700;
       &.p {
         color: #8a8a8e;
+        width: initial;
       }
     }
     span {
@@ -272,9 +288,10 @@ export const PreviewBox = styled.div`
     grid-template-columns: 50% auto;
     position: relative;
     padding-top: 80px;
+
     .offerheader {
       position: absolute;
-      top: -50px;
+      top: -8px;
       width: 100%;
       left: 0px;
     }
@@ -407,12 +424,25 @@ export const PreviewBox = styled.div`
     }
   }
 `;
+export const ProductSec = styled.div`
+  h1 {
+    text-align: center;
+  }
+  .createproduct {
+    height: 300px;
+  }
+`;
 export const BtnContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
-  padding: 15px 5px 15px 15px;
+  padding: 20px 5px 15px 15px;
+  width: 92%;
+  margin-left: auto;
+  svg {
+    font-size: 1.5em;
+  }
   button {
     text-transform: capitalize;
     color: #fff;

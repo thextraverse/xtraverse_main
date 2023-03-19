@@ -66,6 +66,7 @@ import CryptoCanvasEditMarketPlace from "../../../../theme/CryptoCanvas/editMark
 import CryptoCanvasEditMarketPlaceSalespage from "../../../../theme/CryptoCanvas/editMarketplace/marketplacesales";
 import { useRouter } from "next/router";
 import MarketPlaceHeader from "../../../../components/project/EditMarketplace/MarketPlaceHeader";
+import EditorSalesPage from "../../../../components/project/EditMarketplace/EditorSalesPage";
 function EditMarketPlaceSalesindex() {
   const router = useRouter();
   const {
@@ -92,6 +93,11 @@ function EditMarketPlaceSalesindex() {
   const [imgUrl, setImgUrl] = useState();
 
   const [formId, setFormId] = useState(null);
+  // ! offers
+  const [closingHeader, setClosingHeader] = useState("Marketplace");
+  const [closingSubtexxt, setClosingSubtexxt] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum."
+  );
   //! Edit header
   const [headerType, setHeaderType] = useState("header1");
   const storeHeaderType = headerType;
@@ -538,7 +544,7 @@ function EditMarketPlaceSalesindex() {
         console.log("No documents found.");
       }
 
-      router.push("/project/editMarketplace/thankyouPage");
+      router.push("/project/editMarketplace/sales-page-editor");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -575,7 +581,7 @@ function EditMarketPlaceSalesindex() {
   return (
     <>
       <Main>
-        <Stepnav />
+        {/* <Stepnav /> */}
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={3} />
           <XtraverseContainer>
@@ -583,20 +589,18 @@ function EditMarketPlaceSalesindex() {
               <Grid lg={4} xl={4}>
                 <EditorInputSec>
                   <PageEditorFrom>
-                    {/* header */}
+                    {/* offers page editor */}
                     <div
                       className={
                         activeIndex === 0
                           ? "page-editor-form theme active"
-                          : "page-editor-form theme"
+                          : "page-editor-form theme "
                       }
                     >
                       <div className="btn-flex">
                         <Button
                           className="page-editor-form-btn"
-                          onClick={() => {
-                            handleToggle(0);
-                          }}
+                          onClick={() => handleToggle(0)}
                           sx={{
                             width: "100%",
                             display: "flex",
@@ -606,35 +610,74 @@ function EditMarketPlaceSalesindex() {
                             textTransform: "capitalize",
                           }}
                         >
-                          <span>Header</span>
+                          <span>Offers page editor</span>
                           <KeyboardArrowDownIcon className="activesvg" />
                         </Button>
                         <div className="visibility">
                           <VisibilityOffIcon /> <VisibilityIcon />
                         </div>
-
-                        {/* <VisibilityIcon className="visible" /> */}
                       </div>
+
                       <div className="page-editor-content-input">
-                        <MarketPlaceHeader
-                          menuNav={menuNav}
-                          setMenuNav={setMenuNav}
-                          waitlistBtn={waitlistBtn}
-                          handleWaitlistBtnChange={handleWaitlistBtnChange}
-                          headerType={headerType}
-                          setHeaderType={setHeaderType}
-                          uploadLogo={uploadLogo}
-                          handleImageChange={handleLogoChange}
-                          key="1"
+                        <EditorSalesPage
+                          setClosingHeader={setClosingHeader}
+                          setClosingSubtexxt={setClosingSubtexxt}
+                          key="3"
                         />
                       </div>
                     </div>
-
                     <div className="editorform">
-                      {/* general */}
+                      {/* header */}
                       <div
                         className={
                           activeIndex === 1
+                            ? "page-editor-form  active"
+                            : "page-editor-form "
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => {
+                              handleToggle(1);
+                            }}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Header</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+
+                          {/* <VisibilityIcon className="visible" /> */}
+                        </div>
+                        <div className="page-editor-content-input">
+                          <MarketPlaceHeader
+                            menuNav={menuNav}
+                            setMenuNav={setMenuNav}
+                            waitlistBtn={waitlistBtn}
+                            handleWaitlistBtnChange={handleWaitlistBtnChange}
+                            headerType={headerType}
+                            setHeaderType={setHeaderType}
+                            uploadLogo={uploadLogo}
+                            handleImageChange={handleLogoChange}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+
+                      {/* general */}
+                      <div
+                        className={
+                          activeIndex === 2
                             ? "page-editor-form active"
                             : "page-editor-form"
                         }
@@ -643,7 +686,7 @@ function EditMarketPlaceSalesindex() {
                           <Button
                             className="page-editor-form-btn"
                             onClick={() => {
-                              handleToggle(1);
+                              handleToggle(2);
                             }}
                             sx={{
                               width: "100%",
@@ -685,7 +728,7 @@ function EditMarketPlaceSalesindex() {
                       {/* features */}
                       <div
                         className={
-                          activeIndex === 2
+                          activeIndex === 3
                             ? "page-editor-form active"
                             : "page-editor-form"
                         }
@@ -693,7 +736,7 @@ function EditMarketPlaceSalesindex() {
                         <div className="btn-flex">
                           <Button
                             className="page-editor-form-btn"
-                            onClick={() => handleToggle(2)}
+                            onClick={() => handleToggle(3)}
                             sx={{
                               width: "100%",
                               display: "flex",
@@ -734,7 +777,7 @@ function EditMarketPlaceSalesindex() {
                       {/* project bio */}
                       <div
                         className={
-                          activeIndex === 3
+                          activeIndex === 4
                             ? "page-editor-form active"
                             : "page-editor-form"
                         }
@@ -742,7 +785,7 @@ function EditMarketPlaceSalesindex() {
                         <div className="btn-flex">
                           <Button
                             className="page-editor-form-btn"
-                            onClick={() => handleToggle(3)}
+                            onClick={() => handleToggle(4)}
                             sx={{
                               width: "100%",
                               display: "flex",
@@ -830,7 +873,7 @@ function EditMarketPlaceSalesindex() {
                         },
                       }}
                     >
-                      Next
+                      Compplete
                     </Button>
                   </Box>
                 </EditorInputSec>

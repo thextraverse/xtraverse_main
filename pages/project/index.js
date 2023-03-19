@@ -128,7 +128,7 @@ export default function Project() {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
-  const uniqueId = v4();
+  // const uniqueId = v4();
   let emailData = null;
 
   user !== null && user.email && (emailData = user.email);
@@ -141,7 +141,6 @@ export default function Project() {
     setProjectCoverImg(URL.createObjectURL(imageFile));
     setUpldPrjctCover(imageFile);
   };
-
   const [projectName, setProjectName] = useState();
   const [founderList, setFounderList] = useState([{ founder: "" }]);
 
@@ -158,7 +157,6 @@ export default function Project() {
     list.splice(index, 1);
     setFounderList(list);
   };
-
   const handleServiceAdd = () => {
     setFounderList([...founderList, { founder: "" }]);
   };
@@ -217,7 +215,7 @@ export default function Project() {
           project: imageurl,
           projectName: projectName,
           founderName: founderList,
-          id: uniqueId,
+          id: projectName,
         });
         if (
           MySwal.fire({

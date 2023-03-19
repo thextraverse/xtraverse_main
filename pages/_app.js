@@ -13,6 +13,9 @@ function MyApp({ Component, pageProps }) {
     case "/project/editMarketplace/marketplaceSalespage":
       bodyClass = "css-mrkt23plc2pgs";
       break;
+    case "/project/editMarketplace/sales-page-editor":
+      bodyClass = "css-mrkt23plc2pgs";
+      break;
     case "/project/editMarketplace/thankyouPage":
       bodyClass = "css-edtw23plc2st";
       break;

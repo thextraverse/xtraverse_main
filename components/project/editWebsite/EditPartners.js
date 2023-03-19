@@ -4,9 +4,15 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid";
+import { IoMdCloudUpload } from "react-icons/io";
+import { RiTicketLine } from "react-icons/ri";
+import { HomepagePreview } from "./edithomepage.style";
+import firstimg from "../../images/project1.png";
 import { useRouter } from "next/router";
-import PercentIcon from "@mui/icons-material/Percent";
-import { AiOutlinePlus } from "react-icons/ai";
+import { Form } from "../../styles/homepage.styled";
+import { RiDeleteBinLine } from "react-icons/ri";
+import ColorPicker from "react-best-gradient-color-picker";
+import { auth, db, storage } from "../../../configfile/firebaseConfig";
 import {
   ref,
   uploadBytes,
@@ -23,26 +29,55 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { useUserAuth } from "../../../configfile/UserAuthContext";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
-import { Form } from "../../styles/homepage.styled";
-import { db, auth, storage } from "../../../configfile/firebaseConfig";
-import { useUserAuth } from "../../../configfile/UserAuthContext";
-import { FaCloudUploadAlt } from "react-icons/fa";
-import { FaPercent } from "react-icons/fa";
-import { BsPlusCircle } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
 
-function EditorSalesPage(props) {
-  const { setClosingHeader, setClosingSubtexxt } = props;
+function EditPartners(props) {
+  const {
+    heroType,
+    setHeroType,
+    uploadLogo,
+    editHeroName,
+    setEditHeroName,
+    editHeroScript,
+    handleImageChange,
+    setEditHeroScript,
+    setHeroButton,
+    heroOverlayColor,
+    setHeroOverlayColor,
+    showColorPopup,
+    setShowColorPopup,
+    formId,
+    setFormId,
+    browseClctionBtn,
+    handleBrowseClctionBtn,
+  } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState("");
   const [activeTab, setActiveTab] = useState(0);
+  const [royaltiesList, setRoyaltiesList] = useState([{ founder: "" }]);
+  const handleServiceChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...royaltiesList];
+    list[index][name] = value;
+    setRoyaltiesList(list);
+  };
+  const handleServiceRemove = (index) => {
+    const list = [...royaltiesList];
+    list.splice(index, 1);
+    setRoyaltiesList(list);
+  };
 
+  const handleServiceAdd = () => {
+    setRoyaltiesList([...royaltiesList, { founder: "" }]);
+  };
   // const [firebaseUserData, setFirebaseUserData] = useState([]);
   // useEffect(() => {
   //   getTemplates();
@@ -177,23 +212,105 @@ function EditorSalesPage(props) {
       >
         <Form className="forminput">
           <Grid container spacing={2}>
+            <Box sx={{ width: "100%" }}>
+              {uploadProgress > 0 ? (
+                <Box>
+                  <LinearProgress
+                    determinate
+                    variant="outlined"
+                    color="neutral"
+                    size="sm"
+                    thickness={32}
+                    value={uploadProgress}
+                    sx={{
+                      "--LinearProgress-radius": "0px",
+                      "--LinearProgress-progressThickness": "24px",
+                      boxShadow: "sm",
+                      borderColor: "neutral.500",
+                    }}
+                  >
+                    <Typography
+                      level="body3"
+                      fontWeight="xl"
+                      textColor="common.white"
+                      sx={{ mixBlendMode: "difference" }}
+                    >
+                      LOADING… {`${Math.round(uploadProgress)}%`}
+                    </Typography>
+                  </LinearProgress>
+                </Box>
+              ) : (
+                ""
+              )}
+            </Box>
             <Grid xs={12}>
               <Box>
-                <span>Header</span>
+                <span>Add Headline</span>
                 <input
                   type="text"
-                  placeholder="Marketplace"
-                  onChange={(e) => setClosingHeader(e.target.value)}
+                  placeholder="Ex: Robo Gremlins"
+                  onChange={(e) => setEditHeroName(e.target.value)}
                 />
               </Box>
             </Grid>
             <Grid xs={12}>
+              <Box
+                sx={{
+                  marginTop: "15px",
+                }}
+              >
+                <div className="inputsc">
+                  <input
+                    type="file"
+                    placeholder="upload Logo"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                  />
+                  <span>
+                    <IoMdCloudUpload />
+                    Upload image
+                  </span>
+                </div>
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
               <Box>
-                <span>Subtext </span>
-                <textarea
-                  onChange={(e) => setClosingSubtexxt(e.target.value)}
-                  placeholder="lorem ipsum....."
-                />
+                {royaltiesList.map((singleService, index) => (
+                  <div key={index} className="services">
+                    <span>Royalties</span>
+                    <div className="royalties">
+                      <div className="roayltiesinput">
+                        <input
+                          type="text"
+                          placeholder="Enter Wallet Address"
+                          name="royalties"
+                          value={singleService.service}
+                          onChange={(e) => handleServiceChange(e, index)}
+                        />
+
+                        <div className="parcentage">
+                          <PercentIcon />
+                        </div>
+                      </div>
+                      <Button onClick={handleServiceAdd}>
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 24 25"
+                          fill="none"
+                        >
+                          <path
+                            d="M8 12.5h4m0 0h4m-4 0v-4m0 4v4m-.4 6h.8c3.36 0 5.04 0 6.324-.654a6 6 0 002.622-2.622C22 17.94 22 16.26 22 12.9v-.8c0-3.36 0-5.04-.654-6.324a6 6 0 00-2.622-2.622C17.44 2.5 15.76 2.5 12.4 2.5h-.8c-3.36 0-5.04 0-6.324.654a6 6 0 00-2.622 2.622C2 7.06 2 8.74 2 12.1v.8c0 3.36 0 5.04.654 6.324a6 6 0 002.622 2.622c1.284.654 2.964.654 6.324.654z"
+                            stroke="#fff"
+                            strokeWidth={1.5}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </Box>
             </Grid>
           </Grid>
@@ -203,4 +320,4 @@ function EditorSalesPage(props) {
   );
 }
 
-export default EditorSalesPage;
+export default EditPartners;

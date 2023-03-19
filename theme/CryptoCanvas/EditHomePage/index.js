@@ -324,6 +324,101 @@ function CryptoCanvasEditHome({
               sx={{ background: `${desOverlayColor}` }}
             ></Box>
           </div>
+          {/* Collaborator */}
+          <div className="homesec">
+            {heroType === "hero3" ? (
+              <div className="herosec hero3">
+                <div className="herotxt">
+                  <h1>{editHeroHeading}</h1>
+                  <p>{editHeroSubtext}</p>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        width: "fit-content",
+                        background: btnBgColor,
+                      }}
+                    >
+                      {browseClctionBtn.button}
+                    </Button>
+                  </Box>
+                </div>
+              </div>
+            ) : (
+              <div
+                className={
+                  heroType === "hero2" ? "herosec hero2" : "herosec hero1"
+                }
+              >
+                <div className="herotxt">
+                  <h1>{editHeroHeading}</h1>
+                  <p>{editHeroSubtext}</p>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      textAlign: "start",
+                    }}
+                  >
+                    <Button
+                      sx={{
+                        width: "fit-content",
+                        background: btnBgColor,
+                      }}
+                    >
+                      {browseClctionBtn.button}
+                    </Button>
+                  </Box>
+                </div>
+                <div className="heroImg">
+                  {homeBg ? (
+                    <Image
+                      src={homeBg}
+                      alt="home background image"
+                      width={100}
+                      height={100}
+                    />
+                  ) : (
+                    <Image
+                      src="/images/templatePage/homeimgpreview.png"
+                      alt="home background image"
+                      width={100}
+                      height={100}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+            {heroType === "hero3" ? (
+              <div className="bgimage">
+                {homeBg ? (
+                  <Image
+                    src={homeBg}
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <Image
+                    src="/images/templatePage/homeimgpreview.svg"
+                    alt="home background image"
+                    width={100}
+                    height={100}
+                  />
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+            <Box
+              component="div"
+              className="overlaybg"
+              sx={{ background: `${heroOverlayColor}` }}
+            ></Box>
+          </div>
         </Box>
       </HomepagePreview>
     </>

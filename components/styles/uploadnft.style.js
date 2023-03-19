@@ -212,6 +212,15 @@ export const PreviewBox = styled.div`
   height: 100%;
   width: 100%;
   padding: 50px 20px;
+  &.salespageeditor {
+    .videowrap {
+      h1 {
+        font-size: 3em;
+        line-height: 100%;
+        margin: 5px 0px;
+      }
+    }
+  }
   .logo {
     width: 30px;
     height: 30px;
@@ -413,6 +422,14 @@ export const PreviewBox = styled.div`
     strong {
       color: #fff;
     }
+  }
+`;
+export const ProductSec = styled.div`
+  h1 {
+    text-align: center;
+  }
+  .createproduct {
+    height: 300px;
   }
 `;
 export const BtnContainer = styled.div`

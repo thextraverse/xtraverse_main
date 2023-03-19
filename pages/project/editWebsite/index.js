@@ -55,6 +55,7 @@ import ThemeSettings from "../../../components/project/editWebsite/ThemeSettings
 import { color } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import EditPartners from "../../../components/project/editWebsite/EditPartners";
 function EditHomePageindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -572,6 +573,57 @@ function EditHomePageindex() {
                             setDesOverlayColor={setDesOverlayColor}
                             showDesColorPopup={showDesColorPopup}
                             setShowDesColorPopup={setShowDesColorPopup}
+                            formId={formId}
+                            setFormId={setFormId}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* Partners */}
+                      <div
+                        className={
+                          activeIndex === 3
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(3)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>collaborator</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditPartners
+                            browseClctionBtn={browseClctionBtn}
+                            handleBrowseClctionBtn={handleBrowseClctionBtn}
+                            heroType={heroType}
+                            setHeroType={setHeroType}
+                            editHeroName={editHeroHeading}
+                            setEditHeroName={setEditHeroHeading}
+                            editHeroScript={editHeroSubtext}
+                            setEditHeroScript={setEditHeroSubtext}
+                            handleImageChange={handleHomeImageChange}
+                            setHeroButton={setHeroButton}
+                            heroOverlayColor={heroOverlayColor}
+                            setHeroOverlayColor={setHeroOverlayColor}
+                            showColorPopup={showColorPopup}
+                            setShowColorPopup={setShowColorPopup}
                             formId={formId}
                             setFormId={setFormId}
                             key="1"

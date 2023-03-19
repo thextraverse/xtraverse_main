@@ -81,6 +81,12 @@ export const Form = styled.form`
     }
   }
   &.forminput {
+    .previewimages {
+      width: 70px;
+      img {
+        object-fit: cover;
+      }
+    }
     .dltBtn {
       width: 35px;
       height: 35px;
@@ -484,6 +490,13 @@ export const HomepagePreview = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+  .partnersPrviewImg {
+    display: flex;
+    width: 80px;
+    img {
+      object-fit: contain;
+    }
+  }
   &.templatePreview {
     width: 100%;
     margin: 0px;
@@ -502,6 +515,10 @@ export const HomepagePreview = styled.div`
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
+    &.parternsc {
+      aspect-ratio: 25/9;
+      background: #20142d;
+    }
     &.descriptionsc {
       .herosec {
       }

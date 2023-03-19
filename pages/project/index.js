@@ -58,8 +58,6 @@ const Initialize = styled.div`
   &.project {
     width: 75%;
     margin: auto;
-    height: 100%;
-    margin-top: 100px;
     h1 {
       display: none;
     }

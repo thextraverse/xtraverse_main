@@ -147,8 +147,11 @@ function EditHomePageindex() {
   // const [heroButton, setHeroButton] = useState("Browse collection");
 
   const [showDesColorPopup, setShowDesColorPopup] = useState(false);
-  const [desOverlayColor, setDesOverlayColor] = useState("");
-
+  const [desOverlayColor, setDesOverlayColor] = useState("#20142D");
+  //! parters
+  const [parternsHeading, setparternsHeading] = useState("Our Partners");
+  const [parterns, setParterns] = useState();
+  console.log("hey", parterns);
   //!  upload section
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -174,39 +177,15 @@ function EditHomePageindex() {
   const handleDataSubmit = async () => {
     // const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
     // const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
-    const logoimageRef = ref(storage, `images/nft${headerLogo.name + v4()}`);
     const bgimageRef = ref(storage, `images/nft${uploadHomeBg.name + v4()}`);
     const desimageRef = ref(storage, `images/nft${uploadDesBg.name + v4()}`);
 
     // imageSnapshot, videoSnapshot
     // Upload the files to Firebase storage
-    const [logoimageSnapshot, herobgimageSnapshot, desbgimageSnapshot] =
-      await Promise.all([
-        uploadBytesResumable(logoimageRef, uploadLogo),
-        uploadBytesResumable(bgimageRef, uploadHomeBg),
-        uploadBytesResumable(desimageRef, uploadDesBg),
-      ]);
-
-    // Track upload progress for image
-    let logoimageUploadProgress = 0;
-    const logoimageUploadTask = uploadBytesResumable(logoimageRef, uploadLogo);
-    logoimageUploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        logoimageUploadProgress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        console.log(`Image Upload Progress: ${logoimageUploadProgress}%`);
-        setImageUploadProgrees(logoimageUploadProgress);
-        setUploadProgress(logoimageUploadProgress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        console.log("Image upload complete.");
-      }
-    );
+    const [herobgimageSnapshot, desbgimageSnapshot] = await Promise.all([
+      uploadBytesResumable(bgimageRef, uploadHomeBg),
+      uploadBytesResumable(desimageRef, uploadDesBg),
+    ]);
 
     let bgimageUploadProgress = 0;
     const bgimageUploadTask = uploadBytesResumable(bgimageRef, uploadHomeBg);
@@ -269,15 +248,10 @@ function EditHomePageindex() {
     // );
 
     // Wait for all the files to finish uploading
-    await Promise.all([
-      logoimageUploadTask,
-      bgimageUploadTask,
-      desimageUploadTask,
-    ]);
+    await Promise.all([bgimageUploadTask, desimageUploadTask]);
 
     // Get the download URLs for the files
-    const [logoimageUrl, herobgimageUrl, desibgimageUrl] = await Promise.all([
-      getDownloadURL(logoimageSnapshot.ref),
+    const [herobgimageUrl, desibgimageUrl] = await Promise.all([
       getDownloadURL(herobgimageSnapshot.ref),
       getDownloadURL(desbgimageSnapshot.ref),
     ]);
@@ -290,86 +264,90 @@ function EditHomePageindex() {
       if (!querySnapshot.empty) {
         const autoId = querySnapshot.docs[0].id;
         console.log(`AutoId: ${autoId}`);
+
+        const projectRef = collection(db, "Users", autoId, "project");
+        const pq = query(projectRef, where("id", "==", projectData));
+        const projectQuerySnapshot = await getDocs(pq);
         try {
-          const userDataCollectionRef = collection(
+          const projectAutoId = projectQuerySnapshot.docs[0].id;
+          const websiteDataCollectionRef = collection(
             db,
             "Users",
             autoId,
-            "editWebsite"
+            "project",
+            projectAutoId,
+            "WebsiteEditorData"
           );
-          const querySnapshot = await getDocs(userDataCollectionRef);
+          const newQuerySnapshot = await getDocs(websiteDataCollectionRef);
 
-          if (!querySnapshot.empty) {
+          if (!newQuerySnapshot.empty) {
             // User data exists in database, update the existing document
             const docId = querySnapshot.docs[0].id;
-            // console.log(`DocId: ${docId}`);
-            const docRef = doc(userDataCollectionRef, docId);
-            await updateDoc(docRef, {
-              header: {
-                logoImage: logoimageUrl,
-                navbarType: navbarType,
-                waitlistBtn: headermenu,
-                menuNav: headerMenuData,
-              },
-              hero: {
-                heroBgImage: herobgimageUrl,
-                heroButton: heroButton,
-                heroHeading: editHeroHeading,
-                heroOverlay: heroOverlayColor,
-                heroSubtext: editHeroSubtext,
-                heroBlockType: heroTypeStore,
-              },
-              descriptionBlock: {
-                DesBlockType: desTypeStore,
-                desOverlay: desOverlayColor,
-                desSubtitle: desSubHeading,
-                desscriptHeading: desHeading,
-                descriptionSubtext: desSubtext,
-                desBgImage: desibgimageUrl,
-              },
-              themeSetting: {
-                websiteBgColor: websiteBgColor,
-                btnBgColor: btnBgColor,
-                TypographyData: typographySelect,
-              },
-              id: uniqueId,
-            });
-            if (
-              MySwal.fire({
-                title: <strong>Uploaded</strong>,
-                icon: "success",
-              })
-            );
+            const docRef = doc(websiteDataCollectionRef, docId);
+            const docSnapshot = await getDoc(docRef);
+            if (docSnapshot.exists()) {
+              await updateDoc(docRef, {
+                editWebsiteData: {
+                  hero: {
+                    heroBgImage: herobgimageUrl,
+                    heroButton: heroButton,
+                    heroHeading: editHeroHeading,
+                    heroOverlay: heroOverlayColor,
+                    heroSubtext: editHeroSubtext,
+                    heroBlockType: heroTypeStore,
+                  },
+                  descriptionBlock: {
+                    DesBlockType: desTypeStore,
+                    desOverlay: desOverlayColor,
+                    desSubtitle: desSubHeading,
+                    desscriptHeading: desHeading,
+                    descriptionSubtext: desSubtext,
+                    desBgImage: desibgimageUrl,
+                  },
+                  themeSetting: {
+                    websiteBgColor: websiteBgColor,
+                    btnBgColor: btnBgColor,
+                    TypographyData: typographySelect,
+                  },
+                  id: uniqueId,
+                },
+              });
+              if (
+                MySwal.fire({
+                  title: <strong>Uploaded</strong>,
+                  icon: "success",
+                })
+              );
+            } else {
+              console.log(`Document does not exist: ${docId}`);
+            }
           } else {
             // User data does not exist in database, create a new document
-            await addDoc(userDataCollectionRef, {
-              header: {
-                logoImage: logoimageUrl,
-                navbarType: storeHeaderType,
-                waitlistBtn: waitlistBtn,
-                menuNav: menuNav,
+            await addDoc(websiteDataCollectionRef, {
+              editWebsiteData: {
+                hero: {
+                  heroBgImage: herobgimageUrl,
+                  heroButton: heroButton,
+                  heroHeading: editHeroHeading,
+                  heroOverlay: heroOverlayColor,
+                  heroSubtext: editHeroSubtext,
+                  heroBlockType: heroTypeStore,
+                },
+                descriptionBlock: {
+                  DesBlockType: desTypeStore,
+                  desOverlay: desOverlayColor,
+                  desSubtitle: desSubHeading,
+                  desscriptHeading: desHeading,
+                  descriptionSubtext: desSubtext,
+                  desBgImage: desibgimageUrl,
+                },
+                themeSetting: {
+                  websiteBgColor: websiteBgColor,
+                  btnBgColor: btnBgColor,
+                  TypographyData: typographySelect,
+                },
+                id: uniqueId,
               },
-              hero: {
-                heroBgImage: herobgimageUrl,
-                heroButton: heroButton,
-                heroHeading: editHeroHeading,
-                heroOverlay: heroOverlayColor,
-                heroSubtext: editHeroSubtext,
-                heroBlockType: heroTypeStore,
-              },
-              descriptionBlock: {
-                DesBlockType: desTypeStore,
-                desOverlay: desOverlayColor,
-                desSubtitle: desSubHeading,
-                desscriptHeading: desHeading,
-                descriptionSubtext: desSubtext,
-                desBgImage: desibgimageUrl,
-              },
-              themeSetting: {
-                websiteBgColor: websiteBgColor,
-                btnBgColor: btnBgColor,
-              },
-              id: uniqueId,
             });
             if (
               MySwal.fire({
@@ -379,16 +357,13 @@ function EditHomePageindex() {
             );
           }
         } catch (error) {
-          console.error("Error updating document:", error);
+          console.error(error);
         }
-      } else {
-        console.log("No documents found.");
       }
-      router.push("/project/launch");
     } catch (error) {
-      console.error("Error submitting form: ", error);
-      alert("Error submitting form. Please try again later.");
+      console.error(error);
     }
+
     setUploadProgress("");
   };
   const [tempalteId, setTempalteId] = useState();
@@ -615,23 +590,8 @@ function EditHomePageindex() {
 
                         <div className="page-editor-content-input">
                           <EditPartners
-                            browseClctionBtn={browseClctionBtn}
-                            handleBrowseClctionBtn={handleBrowseClctionBtn}
-                            heroType={heroType}
-                            setHeroType={setHeroType}
-                            editHeroName={editHeroHeading}
-                            setEditHeroName={setEditHeroHeading}
-                            editHeroScript={editHeroSubtext}
-                            setEditHeroScript={setEditHeroSubtext}
-                            handleImageChange={handleHomeImageChange}
-                            setHeroButton={setHeroButton}
-                            heroOverlayColor={heroOverlayColor}
-                            setHeroOverlayColor={setHeroOverlayColor}
-                            showColorPopup={showColorPopup}
-                            setShowColorPopup={setShowColorPopup}
-                            formId={formId}
-                            setFormId={setFormId}
-                            key="1"
+                            setparternsHeading={setparternsHeading}
+                            setParterns={setParterns}
                           />
                         </div>
                       </div>
@@ -746,6 +706,8 @@ function EditHomePageindex() {
                     desSubtext={desSubtext}
                     websiteBgColor={websiteBgColor}
                     btnBgColor={btnBgColor}
+                    parternsHeading={parternsHeading}
+                    parterns={parterns}
                   />
                 </Box>
               </Grid>

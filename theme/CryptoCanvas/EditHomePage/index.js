@@ -11,6 +11,12 @@ import { HomepagePreview } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
+import logo1 from "../../../components/images/editwebsite/partners/client1.svg";
+import logo2 from "../../../components/images/editwebsite/partners/client2.svg";
+import logo3 from "../../../components/images/editwebsite/partners/client3.svg";
+import logo4 from "../../../components/images/editwebsite/partners/client4.svg";
+import logo5 from "../../../components/images/editwebsite/partners/client5.svg";
+import logo6 from "../../../components/images/editwebsite/partners/client6.svg";
 function CryptoCanvasEditHome({
   menuNav,
   homeBg,
@@ -27,8 +33,11 @@ function CryptoCanvasEditHome({
   websiteBgColor,
   btnBgColor,
   browseClctionBtn,
+  parternsHeading,
+  parterns,
 }) {
   console.log(menuNav);
+  console.log("images", parterns);
   const { user, headerMenuData, headerLogo, headermenu, navbarType } =
     useUserAuth();
   console.log("editWebsite", headerMenuData);
@@ -325,99 +334,58 @@ function CryptoCanvasEditHome({
             ></Box>
           </div>
           {/* Collaborator */}
-          <div className="homesec">
-            {heroType === "hero3" ? (
-              <div className="herosec hero3">
-                <div className="herotxt">
-                  <h1>{editHeroHeading}</h1>
-                  <p>{editHeroSubtext}</p>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      textAlign: "center",
-                    }}
-                  >
-                    <Button
-                      sx={{
-                        width: "fit-content",
-                        background: btnBgColor,
-                      }}
-                    >
-                      {browseClctionBtn.button}
-                    </Button>
-                  </Box>
-                </div>
-              </div>
-            ) : (
-              <div
-                className={
-                  heroType === "hero2" ? "herosec hero2" : "herosec hero1"
-                }
+          <div className="homesec parternsc">
+            <div className="herotxt">
+              <h1>{parternsHeading}</h1>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "50px",
+                }}
               >
-                <div className="herotxt">
-                  <h1>{editHeroHeading}</h1>
-                  <p>{editHeroSubtext}</p>
+                {parterns && parterns.length === 0 ? (
                   <Box
                     sx={{
-                      width: "100%",
-                      textAlign: "start",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: "50px",
                     }}
                   >
-                    <Button
-                      sx={{
-                        width: "fit-content",
-                        background: btnBgColor,
-                      }}
-                    >
-                      {browseClctionBtn.button}
-                    </Button>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo1} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo2} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo3} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo4} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo5} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo6} alt="image" width={400} height={400} />
+                    </div>
                   </Box>
-                </div>
-                <div className="heroImg">
-                  {homeBg ? (
-                    <Image
-                      src={homeBg}
-                      alt="home background image"
-                      width={100}
-                      height={100}
-                    />
-                  ) : (
-                    <Image
-                      src="/images/templatePage/homeimgpreview.png"
-                      alt="home background image"
-                      width={100}
-                      height={100}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-            {heroType === "hero3" ? (
-              <div className="bgimage">
-                {homeBg ? (
-                  <Image
-                    src={homeBg}
-                    alt="home background image"
-                    width={100}
-                    height={100}
-                  />
                 ) : (
-                  <Image
-                    src="/images/templatePage/homeimgpreview.svg"
-                    alt="home background image"
-                    width={100}
-                    height={100}
-                  />
+                  parterns &&
+                  parterns.map((itm, index) => (
+                    <div className="partnersPrviewImg" key={index}>
+                      <Image
+                        src={itm.preview}
+                        alt="image"
+                        width={400}
+                        height={400}
+                      />
+                    </div>
+                  ))
                 )}
-              </div>
-            ) : (
-              ""
-            )}
-            <Box
-              component="div"
-              className="overlaybg"
-              sx={{ background: `${heroOverlayColor}` }}
-            ></Box>
+              </Box>
+            </div>
           </div>
         </Box>
       </HomepagePreview>

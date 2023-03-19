@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 export const Main = styled.main`
-  margin-top: 125px;
+  margin-top: 82px;
   /* 252525 */
   /* 303030 */
   /* padding: 30px; */
@@ -81,6 +81,12 @@ export const Form = styled.form`
     }
   }
   &.forminput {
+    .previewimages {
+      width: 70px;
+      img {
+        object-fit: cover;
+      }
+    }
     .dltBtn {
       width: 35px;
       height: 35px;
@@ -316,7 +322,7 @@ export const Form = styled.form`
 export const EditorInputSec = styled.div`
   position: fixed;
   width: 580px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 60px);
   z-index: 9;
   background: #303030;
   padding: 0px 20px 20px 20px;
@@ -484,6 +490,13 @@ export const HomepagePreview = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+  .partnersPrviewImg {
+    display: flex;
+    width: 80px;
+    img {
+      object-fit: contain;
+    }
+  }
   &.templatePreview {
     width: 100%;
     margin: 0px;
@@ -502,6 +515,10 @@ export const HomepagePreview = styled.div`
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
+    &.parternsc {
+      aspect-ratio: 25/9;
+      background: #20142d;
+    }
     &.descriptionsc {
       .herosec {
       }

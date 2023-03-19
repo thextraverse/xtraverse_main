@@ -206,6 +206,7 @@ export const MarketPlaceDataPreview = styled.div`
   width: 92%;
   margin-left: auto;
   padding: 10px 20px;
+  margin-bottom: 10px;
 `;
 // DomainType
 export const PreviewBox = styled.div`

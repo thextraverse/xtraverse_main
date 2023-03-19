@@ -18,6 +18,7 @@ export function UserAuthContextProvider({ children }) {
   const [headerLogo, setHeaderLogo] = useState();
   const [headermenu, setHeadermenu] = useState();
   const [navbarType, setNavbarType] = useState("header1");
+  const [projectData, setProjectData] = useState();
   function signUpAuth(email, password, confirmpassword) {
     return createUserWithEmailAndPassword(
       auth,
@@ -62,6 +63,8 @@ export function UserAuthContextProvider({ children }) {
         setHeadermenu,
         navbarType,
         setNavbarType,
+        setProjectData,
+        projectData,
       }}
     >
       {children}

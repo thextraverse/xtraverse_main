@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Sidebar from "../../components/dashboard/sidebar/Navbar";
 import Image from "next/image";
 import Link from "next/link";
+import NextImage from "next/image";
 import logo from "../../components/images/logo.svg";
 import { Box } from "@mui/system";
 import CreateProject from "../../components/dashboard/create-project";
@@ -54,6 +55,39 @@ const Initialize = styled.div`
   justify-content: center;
   height: 100vh;
   margin: auto;
+  &.project {
+    width: 75%;
+    margin: auto;
+    h1 {
+      display: none;
+    }
+    .createProjectButton {
+      button {
+        display: block;
+      }
+    }
+  }
+  .createProjectButton {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    button {
+      display: none;
+    }
+  }
+  .project {
+    width: 100%;
+    background: #9f56e9;
+    padding: 20px;
+
+    h2 {
+      font-size: 1.5em;
+    }
+    span {
+      width: 100% !important;
+      object-fit: cover;
+    }
+  }
   .uploadProject {
     width: 100%;
     background: #252525;
@@ -127,7 +161,7 @@ const Initialize = styled.div`
 export default function Project() {
   const MySwal = withReactContent(Swal);
   const router = useRouter();
-  const { user } = useUserAuth();
+  const { user, setProjectData } = useUserAuth();
   // const uniqueId = v4();
   let emailData = null;
 
@@ -161,7 +195,8 @@ export default function Project() {
     setFounderList([...founderList, { founder: "" }]);
   };
   console.log(founderList);
-
+  const projectId = projectName && projectName.split(" ").join("");
+  console.log(projectId);
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     const imageRef = ref(storage, `images/${upldPrjctCover.name + v4()}`);
@@ -212,10 +247,10 @@ export default function Project() {
           "project"
         );
         await addDoc(userDataCollectionRef, {
-          project: imageurl,
+          image: imageurl,
           projectName: projectName,
           founderName: founderList,
-          id: projectName,
+          id: projectId,
         });
         if (
           MySwal.fire({
@@ -226,6 +261,9 @@ export default function Project() {
       } else {
         alert("No documents found.");
       }
+      setProjectData(projectId);
+      setIsNoProject(false);
+      // Encode the data as a query parameter
       router.push("/project/editMarketplace/marketplaceSalespage");
     } catch (error) {
       console.error("Error submitting form: ", error);
@@ -233,139 +271,379 @@ export default function Project() {
     }
     setUploadProgress("");
   };
+  const [isNoProject, setIsNoProject] = useState(false);
+
+  //! projectuniqeId
+  const checkEmail = user.email;
+  const [isProject, setIsProject] = useState([]);
+  const queryUser = collection(db, "Users");
+  async function handleGetData() {
+    if (!checkEmail) return;
+    const q = query(queryUser, where("Email", "==", checkEmail));
+    const querySnapshot1 = await getDocs(q);
+
+    if (!querySnapshot1.empty) {
+      const autoId = querySnapshot1.docs[0].id;
+      const subcollectionRef = collection(db, "Users", autoId, "project");
+      const querySnapshot2 = await getDocs(subcollectionRef);
+      const docs = querySnapshot2.docs.map((doc) => doc.data());
+      console.log(docs);
+      setIsProject(docs);
+    }
+  }
+  useEffect(() => {
+    handleGetData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emailData]);
+  handleGetData();
+
+  console.log("id", isProject);
 
   return (
     <Main>
       <Dashboardsc>
         <Sidebar activeBtn={2} heading={"Project"} />
-        <Initialize>
+        <Initialize
+          className={
+            isProject.length != 0 ? (isNoProject ? "" : "project") : ""
+          }
+        >
           <h1>Initialize Project</h1>
+          <div className="createProjectButton">
+            <Button
+              onClick={() => setIsNoProject(true)}
+              sx={{
+                width: "200px",
+                background: "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                borderRadius: "8px",
+                color: "#000",
+                fontSize: "1.2em",
+                textTransform: "capitalize",
+                padding: "8px 20px",
+                transition: "0.3s",
+                fontWeight: "500",
+                margin: "10px 0px",
+                "&:hover ": {
+                  background:
+                    "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                  cursor: "pointer",
+                },
+              }}
+            >
+              Create Project
+            </Button>
+          </div>
+
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Box
-                sx={{ display: "grid", placeItems: "center", height: "100%" }}
-              >
-                <div className="uploadProject">
-                  <input type="file" onChange={handleDesImageChange} required />
-                  <svg width="1em" height="1em" viewBox="0 0 25 22" fill="none">
-                    <path
-                      d="M3.7 17a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 4.468 8.247 1 12.5 1c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 21v-9m0 0L9 15.5m3.5-3.5l3.5 3.5"
-                      stroke="#fff"
-                      strokeWidth={1.5}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p>Upload project cover</p>
-                  {ProjectCoverImg && (
-                    <div className="img">
-                      <Image
-                        src={ProjectCoverImg}
-                        width={100}
-                        height={100}
-                        alt="projectCover"
-                      />
-                    </div>
-                  )}
-                </div>
-              </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <form onSubmit={handleDataSubmit}>
-                <div className="form-wraper">
-                  <label htmlFor="name">Name of project (keep it simple)</label>
-                  <input
-                    type="text"
-                    placeholder="Add a name for your project"
-                    value={projectName}
-                    onChange={(e) => setProjectName(e.target.value)}
-                    required
-                  />
-                </div>
-                {founderList.map((singleService, index) => (
-                  <div key={index} className="services">
+            {isProject.length != 0 ? (
+              isNoProject ? (
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
                     <Box
                       sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "end",
-                        padding: "8px 0px",
+                        display: "grid",
+                        placeItems: "center",
+                        height: "100%",
                       }}
                     >
-                      <span>Founder {index + 1} </span>
-                      <div
-                        className="dltBtn"
-                        onClick={() => handleServiceRemove(index)}
-                      >
-                        <RiDeleteBinLine />
+                      <div className="uploadProject">
+                        <input
+                          type="file"
+                          onChange={handleDesImageChange}
+                          required
+                        />
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 25 22"
+                          fill="none"
+                        >
+                          <path
+                            d="M3.7 17a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 4.468 8.247 1 12.5 1c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 21v-9m0 0L9 15.5m3.5-3.5l3.5 3.5"
+                            stroke="#fff"
+                            strokeWidth={1.5}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <p>Upload project cover</p>
+                        {ProjectCoverImg && (
+                          <div className="img">
+                            <Image
+                              src={ProjectCoverImg}
+                              width={100}
+                              height={100}
+                              alt="projectCover"
+                            />
+                          </div>
+                        )}
                       </div>
                     </Box>
-                    <input
-                      type="text"
-                      placeholder="Founder's name"
-                      name="founder"
-                      id="founder"
-                      value={singleService.service}
-                      onChange={(e) => handleServiceChange(e, index)}
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      value={singleService.service}
-                      onChange={(e) => handleServiceChange(e, index)}
-                    />
-                  </div>
-                ))}
-                <Button
-                  onClick={handleServiceAdd}
-                  sx={{
-                    background: "#252525",
-                    width: "100%",
-                    borderRadius: "8px",
-                    fontSize: "1.2em",
-                    textTransform: "capitalize",
-                    padding: "8px 0px",
-                    transition: "0.3s",
-                    fontWeight: "500",
-                    margin: "10px 0px",
-                    display: "flex",
-                    gap: "8px",
-                    border: "2px dashed #8A8A8E",
-                    color: "#fff",
-                    cursor: "pointer",
-                    "&:hover ": {
-                      border: "2px dashed #fff",
-                    },
-                  }}
-                >
-                  <BsPlusCircle /> Add Founder
-                </Button>
-                <Button
-                  type="submit"
-                  sx={{
-                    width: "100%",
-                    background:
-                      "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                    borderRadius: "8px",
-                    color: "#000",
-                    fontSize: "1.2em",
-                    textTransform: "capitalize",
-                    padding: "8px 0px",
-                    transition: "0.3s",
-                    fontWeight: "500",
-                    margin: "10px 0px",
-                    "&:hover ": {
-                      background:
-                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  Initialize
-                </Button>
-              </form>
-            </Grid>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <form onSubmit={handleDataSubmit}>
+                      <div className="form-wraper">
+                        <label htmlFor="name">
+                          Name of project (keep it simple)
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Add a name for your project"
+                          value={projectName}
+                          onChange={(e) => setProjectName(e.target.value)}
+                          required
+                        />
+                      </div>
+                      {founderList.map((singleService, index) => (
+                        <div key={index} className="services">
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "end",
+                              padding: "8px 0px",
+                            }}
+                          >
+                            <span>Founder {index + 1} </span>
+                            <div
+                              className="dltBtn"
+                              onClick={() => handleServiceRemove(index)}
+                            >
+                              <RiDeleteBinLine />
+                            </div>
+                          </Box>
+                          <input
+                            type="text"
+                            placeholder="Founder's name"
+                            name="founder"
+                            id="founder"
+                            value={singleService.service}
+                            onChange={(e) => handleServiceChange(e, index)}
+                          />
+                          <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={singleService.service}
+                            onChange={(e) => handleServiceChange(e, index)}
+                          />
+                        </div>
+                      ))}
+                      <Button
+                        onClick={handleServiceAdd}
+                        sx={{
+                          background: "#252525",
+                          width: "100%",
+                          borderRadius: "8px",
+                          fontSize: "1.2em",
+                          textTransform: "capitalize",
+                          padding: "8px 0px",
+                          transition: "0.3s",
+                          fontWeight: "500",
+                          margin: "10px 0px",
+                          display: "flex",
+                          gap: "8px",
+                          border: "2px dashed #8A8A8E",
+                          color: "#fff",
+                          cursor: "pointer",
+                          "&:hover ": {
+                            border: "2px dashed #fff",
+                          },
+                        }}
+                      >
+                        <BsPlusCircle /> Add Founder
+                      </Button>
+                      <Button
+                        type="submit"
+                        sx={{
+                          width: "100%",
+                          background:
+                            "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                          borderRadius: "8px",
+                          color: "#000",
+                          fontSize: "1.2em",
+                          textTransform: "capitalize",
+                          padding: "8px 0px",
+                          transition: "0.3s",
+                          fontWeight: "500",
+                          margin: "10px 0px",
+                          "&:hover ": {
+                            background:
+                              "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                            cursor: "pointer",
+                          },
+                        }}
+                      >
+                        Initialize
+                      </Button>
+                    </form>
+                  </Grid>
+                </Grid>
+              ) : (
+                isProject.map((prjctid, index) => {
+                  return (
+                    <>
+                      <Grid item sm={3}>
+                        <div className="project">
+                          <h2>{prjctid.id}</h2>
+                          <div className="image">
+                            <Image
+                              src={prjctid.image}
+                              width={500}
+                              height={500}
+                              objectFit="cover"
+                            />
+                          </div>
+                        </div>
+                      </Grid>
+                    </>
+                  );
+                })
+              )
+            ) : (
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      placeItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <div className="uploadProject">
+                      <input
+                        type="file"
+                        onChange={handleDesImageChange}
+                        required
+                      />
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 25 22"
+                        fill="none"
+                      >
+                        <path
+                          d="M3.7 17a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 4.468 8.247 1 12.5 1c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 21v-9m0 0L9 15.5m3.5-3.5l3.5 3.5"
+                          stroke="#fff"
+                          strokeWidth={1.5}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <p>Upload project cover</p>
+                      {ProjectCoverImg && (
+                        <div className="img">
+                          <Image
+                            src={ProjectCoverImg}
+                            width={100}
+                            height={100}
+                            alt="projectCover"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <form onSubmit={handleDataSubmit}>
+                    <div className="form-wraper">
+                      <label htmlFor="name">
+                        Name of project (keep it simple)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Add a name for your project"
+                        value={projectName}
+                        onChange={(e) => setProjectName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    {founderList.map((singleService, index) => (
+                      <div key={index} className="services">
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "end",
+                            padding: "8px 0px",
+                          }}
+                        >
+                          <span>Founder {index + 1} </span>
+                          <div
+                            className="dltBtn"
+                            onClick={() => handleServiceRemove(index)}
+                          >
+                            <RiDeleteBinLine />
+                          </div>
+                        </Box>
+                        <input
+                          type="text"
+                          placeholder="Founder's name"
+                          name="founder"
+                          id="founder"
+                          value={singleService.service}
+                          onChange={(e) => handleServiceChange(e, index)}
+                        />
+                        <input
+                          type="email"
+                          name="email"
+                          placeholder="Email"
+                          value={singleService.service}
+                          onChange={(e) => handleServiceChange(e, index)}
+                        />
+                      </div>
+                    ))}
+                    <Button
+                      onClick={handleServiceAdd}
+                      sx={{
+                        background: "#252525",
+                        width: "100%",
+                        borderRadius: "8px",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        display: "flex",
+                        gap: "8px",
+                        border: "2px dashed #8A8A8E",
+                        color: "#fff",
+                        cursor: "pointer",
+                        "&:hover ": {
+                          border: "2px dashed #fff",
+                        },
+                      }}
+                    >
+                      <BsPlusCircle /> Add Founder
+                    </Button>
+                    <Button
+                      type="submit"
+                      sx={{
+                        width: "100%",
+                        background:
+                          "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                        borderRadius: "8px",
+                        color: "#000",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        "&:hover ": {
+                          background:
+                            "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                          cursor: "pointer",
+                        },
+                      }}
+                    >
+                      Initialize
+                    </Button>
+                  </form>
+                </Grid>
+              </Grid>
+            )}
           </Grid>
         </Initialize>
       </Dashboardsc>

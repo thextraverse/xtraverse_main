@@ -56,6 +56,28 @@ import { color } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EditPartners from "../../../components/project/editWebsite/EditPartners";
+import { registerDomain, addDomainToFirebase, deployWebsite } from './GoDaddy';
+
+function WebsiteForm() {
+  const [domainName, setDomainName] = useState('');
+  const [projectId, setProjectId] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Register domain with GoDaddy
+    const authorizationToken = await getAuthorizationToken();
+    const registeredDomain = await registerDomain(authorizationToken, domainName);
+
+    // Add domain to Firebase
+    const firebaseAccessToken = process.env.FIREBASE_ACCESS_TOKEN;
+    const addedDomain = await addDomainToFirebase(projectId, registeredDomain, firebaseAccessToken);
+
+    // Deploy website to Firebase Hosting
+    const websiteId = 'your-website-id'; // Replace with your website ID
+    await deployWebsite(projectId, websiteId, addedDomain);
+  };
+
 function EditHomePageindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);

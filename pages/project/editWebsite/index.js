@@ -154,8 +154,14 @@ function EditHomePageindex() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
-  const { user, headerMenuData, headerLogo, headermenu, navbarType } =
-    useUserAuth();
+  const {
+    user,
+    headerMenuData,
+    headerLogo,
+    headermenu,
+    navbarType,
+    projectData,
+  } = useUserAuth();
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -414,7 +420,6 @@ function EditHomePageindex() {
   return (
     <>
       <Main>
-        <Stepnav />
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={4} />
           <XtraverseContainer>

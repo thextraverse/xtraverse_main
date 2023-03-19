@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 export const Main = styled.main`
-  margin-top: 125px;
+  margin-top: 82px;
   /* 252525 */
   /* 303030 */
   /* padding: 30px; */
@@ -316,7 +316,7 @@ export const Form = styled.form`
 export const EditorInputSec = styled.div`
   position: fixed;
   width: 580px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 60px);
   z-index: 9;
   background: #303030;
   padding: 0px 20px 20px 20px;

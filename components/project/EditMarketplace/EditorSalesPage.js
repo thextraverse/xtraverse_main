@@ -35,7 +35,7 @@ import { FaPercent } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
 
 function EditorSalesPage(props) {
-  const { setClosingHeader, setClosingSubtexxt } = props;
+  const { setOfferHeader, setOfferSubtexxt } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
@@ -183,7 +183,7 @@ function EditorSalesPage(props) {
                 <input
                   type="text"
                   placeholder="Marketplace"
-                  onChange={(e) => setClosingHeader(e.target.value)}
+                  onChange={(e) => setOfferHeader(e.target.value)}
                 />
               </Box>
             </Grid>
@@ -191,7 +191,7 @@ function EditorSalesPage(props) {
               <Box>
                 <span>Subtext </span>
                 <textarea
-                  onChange={(e) => setClosingSubtexxt(e.target.value)}
+                  onChange={(e) => setOfferSubtexxt(e.target.value)}
                   placeholder="lorem ipsum....."
                 />
               </Box>

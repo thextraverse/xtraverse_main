@@ -113,7 +113,7 @@ function EditMarketPlaceSalesindex() {
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
   const router = useRouter();
-  const { user } = useUserAuth();
+  const { user, projectData } = useUserAuth();
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -180,18 +180,26 @@ function EditMarketPlaceSalesindex() {
       if (!querySnapshot.empty) {
         const autoId = querySnapshot.docs[0].id;
         console.log(`AutoId: ${autoId}`);
+
+        const projectRef = collection(db, "Users", autoId, "project");
+        const pq = query(projectRef, where("id", "==", projectData));
+        const projectQuerySnapshot = await getDocs(pq);
         try {
+          const projectAutoId = projectQuerySnapshot.docs[0].id;
+          console.log(`productAudtoId: ${projectAutoId}`);
           const userDataCollectionRef = collection(
             db,
             "Users",
             autoId,
-            "marketplaceData"
+            "project",
+            projectAutoId,
+            "OffersPageData"
           );
-          const querySnapshot = await getDocs(userDataCollectionRef);
+          const newQuerySnapshot = await getDocs(userDataCollectionRef);
 
-          if (!querySnapshot.empty) {
+          if (!newQuerySnapshot.empty) {
             // User data exists in database, update the existing document
-            const docId = querySnapshot.docs[0].id;
+            const docId = newQuerySnapshot.docs[0].id;
             // console.log(`DocId: ${docId}`);
             const docRef = doc(userDataCollectionRef, docId);
             await updateDoc(docRef, {
@@ -260,7 +268,6 @@ function EditMarketPlaceSalesindex() {
       });
     }
   }
-
   useEffect(() => {
     handleGetData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -269,7 +276,6 @@ function EditMarketPlaceSalesindex() {
   return (
     <>
       <Main>
-        <Stepnav />
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={3} />
           <XtraverseContainer>
@@ -278,12 +284,12 @@ function EditMarketPlaceSalesindex() {
                 <EditorInputSec>
                   <PageEditorFrom>
                     <div className="editorform">
-                      {/* Closing */}
+                      {/* Thanks you page */}
                       <div
                         className={
                           activeIndex === 0
-                            ? "page-editor-form active"
-                            : "page-editor-form"
+                            ? "page-editor-form "
+                            : "page-editor-form active"
                         }
                       >
                         <div className="btn-flex">

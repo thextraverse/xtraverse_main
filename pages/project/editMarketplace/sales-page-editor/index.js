@@ -57,7 +57,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EditorSalesPage from "../../../../components/project/EditMarketplace/EditorSalesPage";
-import CryptoCanvasEditMarketPlaceSalePage from "../../../../theme/CryptoCanvas/editMarketplace/SalesPageEditor";
+import CryptoCanvasMarketPlaceOfferPageEditor from "../../../../theme/CryptoCanvas/editMarketplace/OffersPageEditor";
 function SalesPageEditor() {
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
@@ -113,7 +113,6 @@ function SalesPageEditor() {
       const subcollectionRef = collection(db, "Users", autoId, "project");
       const querySnapshot2 = await getDocs(subcollectionRef);
       const docs = querySnapshot2.docs.map((doc) => doc.data());
-      console.log(docs);
       setTempalteId(docs);
 
       // docs.map((data) => {});
@@ -146,38 +145,42 @@ function SalesPageEditor() {
       if (!querySnapshot.empty) {
         const autoId = querySnapshot.docs[0].id;
         console.log(`AutoId: ${autoId}`);
-        let pq;
-        idData.map((itm, index) => {
+
+        const promises = idData.map((itm, index) => {
           const projectRef = collection(db, "Users", autoId, "project");
-          pq = query(projectRef, where("id", "==", itm));
+          const pq = query(projectRef, where("id", "==", itm));
+          return getDocs(pq);
         });
 
-        const projectQuerySnapshot = await getDocs(pq);
-        const projectAutoId = projectQuerySnapshot.docs[0].id;
+        const projectQuerySnapshots = await Promise.all(promises);
+        const projectAutoIds = projectQuerySnapshots.map(
+          (projectQuerySnapshot) => projectQuerySnapshot.docs[0].id
+        );
+
+        const newAutoId = projectAutoIds[0]; // Assuming that the first ID in idData is the one you want to use
+        console.log(`AudtoId: ${newAutoId}`);
         const offersDataCollectionRef = collection(
           db,
           "Users",
           autoId,
           "project",
-          projectAutoId,
+          newAutoId, // Assuming that the first ID in idData is the one you want to use
           "offerspage"
         );
-        if (!projectQuerySnapshot.empty) {
-          await addDoc(offersDataCollectionRef, {
-            salespageform: {
-              closingHeader: closingHeader,
-              closingSubtexxt: closingSubtexxt,
-            },
-          });
-          if (
-            MySwal.fire({
-              title: <strong>Uploaded</strong>,
-              icon: "success",
-            })
-          );
-        } else {
-          alert("no project found.");
-        }
+
+        await addDoc(offersDataCollectionRef, {
+          salespageform: {
+            closingHeader: closingHeader,
+            closingSubtexxt: closingSubtexxt,
+          },
+        });
+
+        if (
+          MySwal.fire({
+            title: <strong>Uploaded</strong>,
+            icon: "success",
+          })
+        );
       } else {
         alert("No user found.");
       }
@@ -280,7 +283,7 @@ function SalesPageEditor() {
                   </BtnContainer>
 
                   <MarketPlaceDataPreview>
-                    <CryptoCanvasEditMarketPlaceSalePage
+                    <CryptoCanvasMarketPlaceOfferPageEditor
                       closingHeader={closingHeader}
                       closingSubtexxt={closingSubtexxt}
                       handleDataSubmit={handleDataSubmit}

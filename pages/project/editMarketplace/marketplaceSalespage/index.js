@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { AiOutlineEye } from "react-icons/ai";
@@ -9,9 +8,7 @@ import Sidebar, {
 } from "../../../../components/dashboard/sidebar/Navbar";
 import Stepnav from "../../../../components/dashboard/step-nav";
 import { db, storage } from "../../../../configfile/firebaseConfig";
-import { BsPlusCircle } from "react-icons/bs";
 import { v4 } from "uuid";
-import { RiTicketLine } from "react-icons/ri";
 import blueStatus from "../../../../components/images/editwebsite/blue.png";
 import yellowStatus from "../../../../components/images/editwebsite/yellowStatus.png";
 import nftPreviewimg from "../../../../components/images/templatepage/uploadNft.png";
@@ -34,8 +31,7 @@ import {
   UploadTask,
 } from "firebase/storage";
 import { useUserAuth } from "../../../../configfile/UserAuthContext";
-import { Button, Container, Grid } from "@mui/material";
-import { RiDeleteBinLine } from "react-icons/ri";
+import { Button, Grid } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -44,7 +40,6 @@ import Image from "next/image";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {
-  HomepagePreview,
   Main,
   PageEditorFrom,
   EditorInputSec,
@@ -54,19 +49,19 @@ import { XtraverseContainer } from "../../..";
 import MarketPlaceGeneral from "../../../../components/project/EditMarketplace/General";
 import MarketPlaceFeatures from "../../../../components/project/EditMarketplace/Features";
 import {
-  PreviewBox,
   MarketPlaceDataPreview,
   BtnContainer,
 } from "../../../../components/styles/uploadnft.style";
 
 import MarketPlaceProjectBio from "../../../../components/project/EditMarketplace/ProjectBio";
 import Link from "next/link";
-import MarketPlaceClosing from "../../../../components/project/EditMarketplace/Closing";
-import CryptoCanvasEditMarketPlace from "../../../../theme/CryptoCanvas/editMarketplace";
 import CryptoCanvasEditMarketPlaceSalespage from "../../../../theme/CryptoCanvas/editMarketplace/marketplacesales";
 import { useRouter } from "next/router";
 import MarketPlaceHeader from "../../../../components/project/EditMarketplace/MarketPlaceHeader";
 import EditorSalesPage from "../../../../components/project/EditMarketplace/EditorSalesPage";
+import CryptoCanvasMarketPlaceOfferPageEditor from "../../../../theme/CryptoCanvas/editMarketplace/OffersPageEditor";
+import MarketPlaceClosing from "../../../../components/project/EditMarketplace/Closing";
+import ThanksyouPage from "../../../../components/project/EditMarketplace/ThanksyouPage";
 function EditMarketPlaceSalesindex() {
   const router = useRouter();
   const {
@@ -79,6 +74,7 @@ function EditMarketPlaceSalesindex() {
     setHeadermenu,
     navbarType,
     setNavbarType,
+    projectData,
   } = useUserAuth();
   const [activeIndex, setActiveIndex] = useState(null);
   const handleToggle = (index) => {
@@ -88,14 +84,16 @@ function EditMarketPlaceSalesindex() {
       setActiveIndex(index);
     }
   };
-
+  const { data } = router.query;
+  console.log(data);
   const [index, setIndex] = useState(0);
   const [imgUrl, setImgUrl] = useState();
-
   const [formId, setFormId] = useState(null);
+
   // ! offers
-  const [closingHeader, setClosingHeader] = useState("Marketplace");
-  const [closingSubtexxt, setClosingSubtexxt] = useState(
+  const [activeOffer, setActiveOffer] = useState(true);
+  const [offerHeader, setOfferHeader] = useState("Marketplace");
+  const [offerSubtexxt, setOfferSubtexxt] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum."
   );
   //! Edit header
@@ -128,7 +126,6 @@ function EditMarketPlaceSalesindex() {
   const [waitlistInput, setWaitlistInput] = useState("Waitlist");
 
   //! nft details name, collection name,price, chain utitlity, tag
-
   const [nftCollectionName, setNftCollectionName] = useState("Green Gremlins");
   const [nftName, setNftName] = useState("Draken");
   const [addNftDescript, setAddNftDescript] = useState(
@@ -166,16 +163,13 @@ function EditMarketPlaceSalesindex() {
     setFeatureBtn({ ...featureBtn, [e.target.name]: e.target.value });
   };
   console.log(featureBtn);
-
   const [uploadVideoUrl, setUploadVideoUrl] = useState(Predviewimg);
   const [selectedVideo, setSelectedVideo] = useState(Predviewimg);
-
   const handleVideoChange = (event) => {
     const videoFile = event.target.files[0];
     setSelectedVideo(URL.createObjectURL(videoFile));
     setUploadVideoUrl(videoFile);
   };
-
   const [royaltiesList, setRoyaltiesList] = useState([{ founder: "" }]);
   const handleServiceChange = (e, index) => {
     const { name, value } = e.target;
@@ -188,12 +182,11 @@ function EditMarketPlaceSalesindex() {
     list.splice(index, 1);
     setRoyaltiesList(list);
   };
-
   const handleServiceAdd = () => {
     setRoyaltiesList([...royaltiesList, { founder: "" }]);
   };
-  //! for project bio
 
+  //! for project bio
   const [prjctBioCollection, setPrjctBioCollection] = useState("Robois");
   const [projectBio, setProjectBio] = useState(
     "DRK is the first of its kind. Bringing AAA quality to the #NFT world with mythical creatures inside virtual realtiy space.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum. "
@@ -206,51 +199,45 @@ function EditMarketPlaceSalesindex() {
   const handleProjectBtnChange = (e) => {
     SetProjectBtn({ ...projectBtn, [e.target.name]: e.target.value });
   };
-
   const [prjctUploadVideoUrl, setPrjctUploadVideoUrl] = useState(
     "/video/xtraverse.mp4"
   );
   const [prjctSelectedVideo, setPrjctSelectedVideo] = useState(
     "/video/xtraverse.mp4"
   );
-
   const handlePrjctBioVideoChange = (event) => {
     const videoFile = event.target.files[0];
     setPrjctSelectedVideo(URL.createObjectURL(videoFile));
     setPrjctUploadVideoUrl(videoFile);
   };
 
-  //! for Closing layout
-  //   const [closingTopTxt, setClosingTopTxt] = useState(
-  //     "Welcome to Robo Gremlins"
-  //   );
-  //   const [closingHeader, setClosingHeader] = useState("Congratulations");
-  //   const [closingSubtexxt, setClosingSubtexxt] = useState(
-  //     " Book a call with an onboarding manager to unlock full benefits. "
-  //   );
-  //   const [closingBtn, setClosingBtn] = useState({
-  //     button: "Book a Call",
-  //     link: "",
-  //   });
-  //   const handleClosingBtnChange = (e) => {
-  //     setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
-  //   };
-
-  //   const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(null);
-  //   const [closingSelectedVideo, setClosingSelectedVideo] = useState(Predviewimg);
-
-  //   const handleClosingBioVideoChange = (event) => {
-  //     const videoFile = event.target.files[0];
-  //     setClosingSelectedVideo(URL.createObjectURL(videoFile));
-  //     setClosingUploadVideoUrl(videoFile);
-  //   };
+  //! Thank you page
+  // const [closingTopTxt, setClosingTopTxt] = useState(
+  //   "Welcome to Robo Gremlins"
+  // );
+  // const [closingHeader, setClosingHeader] = useState("Congratulations");
+  // const [closingSubtexxt, setClosingSubtexxt] = useState(
+  //   " Book a call with an onboarding manager to unlock full benefits. "
+  // );
+  // const [closingBtn, setClosingBtn] = useState({
+  //   button: "Book a Call",
+  //   link: "",
+  // });
+  // const handleClosingBtnChange = (e) => {
+  //   setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
+  // };
+  // const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(null);
+  // const [closingSelectedVideo, setClosingSelectedVideo] = useState(Predviewimg);
+  // const handleClosingBioVideoChange = (event) => {
+  //   const videoFile = event.target.files[0];
+  //   setClosingSelectedVideo(URL.createObjectURL(videoFile));
+  //   setClosingUploadVideoUrl(videoFile);
+  // };
 
   //!  upload section
-  const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUploadProgrees, setImageUploadProgrees] = useState(0);
   const MySwal = withReactContent(Swal);
-
   const emailData = user.email;
   // console.log(menuInput);
   console.log(emailData);
@@ -259,7 +246,6 @@ function EditMarketPlaceSalesindex() {
   // console.log("logo", storeLogo);
   // console.log("bg", storeBgImg);
   // console.log("bg", desBgStore);
-
   const handleDataSubmit = async () => {
     // const imageRef = ref(storage, `images/nft${imageupload.name + v4()}`);
     // const videoRef = ref(storage, `video/${uploadVideoUrl.name + v4()}`);
@@ -442,28 +428,36 @@ function EditMarketPlaceSalesindex() {
       if (!querySnapshot.empty) {
         const autoId = querySnapshot.docs[0].id;
         console.log(`AutoId: ${autoId}`);
+
+        const projectRef = collection(db, "Users", autoId, "project");
+        const pq = query(projectRef, where("id", "==", projectData));
+        const projectQuerySnapshot = await getDocs(pq);
         try {
+          const projectAutoId = projectQuerySnapshot.docs[0].id;
+          console.log(`productAudtoId: ${projectAutoId}`);
           const userDataCollectionRef = collection(
             db,
             "Users",
             autoId,
-            "marketplaceData"
+            "project",
+            projectAutoId,
+            "OffersPageData"
           );
-          const querySnapshot = await getDocs(userDataCollectionRef);
+          const newQuerySnapshot = await getDocs(userDataCollectionRef);
 
-          if (!querySnapshot.empty) {
+          if (!newQuerySnapshot.empty) {
             // User data exists in database, update the existing document
-            const docId = querySnapshot.docs[0].id;
+            const docId = newQuerySnapshot.docs[0].id;
             // console.log(`DocId: ${docId}`);
             const docRef = doc(userDataCollectionRef, docId);
             await updateDoc(docRef, {
-              Nftheader: {
+              Offerheader: {
                 logoImage: logoimageUrl,
                 navbarType: storeHeaderType,
                 waitlistBtn: waitlistBtn,
                 menuNav: menuNav,
               },
-              NftGeneralData: {
+              OfferGeneralData: {
                 nftImg: generalimageUrl,
                 nftName: nftName,
                 collectionName: nftCollectionName,
@@ -472,7 +466,7 @@ function EditMarketPlaceSalesindex() {
                 nftPrice: nftPrice,
                 nftMintBtn: nftMindBtn,
               },
-              NftFeaturesData: {
+              OfferFeaturesData: {
                 featuresImg: featuresimageUrl,
                 TokenType: tokenType,
                 minType: mintType,
@@ -481,7 +475,7 @@ function EditMarketPlaceSalesindex() {
                 videoTitle: videoTitle,
                 addStory: addStory,
               },
-              NftProjecBio: {
+              OffersProjecBio: {
                 projectBioVideo: projectBioVideoUrl,
                 prjctBioCollection: prjctBioCollection,
                 projectBio: projectBio,
@@ -498,13 +492,13 @@ function EditMarketPlaceSalesindex() {
           } else {
             // User data does not exist in database, create a new document
             await addDoc(userDataCollectionRef, {
-              Nftheader: {
+              Offerheader: {
                 logoImage: logoimageUrl,
                 navbarType: storeHeaderType,
                 waitlistBtn: waitlistBtn,
                 menuNav: menuNav,
               },
-              NftGeneralData: {
+              OfferGeneralData: {
                 nftImg: generalimageUrl,
                 nftName: nftName,
                 collectionName: nftCollectionName,
@@ -513,7 +507,7 @@ function EditMarketPlaceSalesindex() {
                 nftPrice: nftPrice,
                 nftMintBtn: nftMindBtn,
               },
-              NftFeaturesData: {
+              OfferFeaturesData: {
                 featuresImg: featuresimageUrl,
                 TokenType: tokenType,
                 minType: mintType,
@@ -522,7 +516,7 @@ function EditMarketPlaceSalesindex() {
                 videoTitle: videoTitle,
                 addStory: addStory,
               },
-              NftProjecBio: {
+              OffersProjecBio: {
                 projectBioVideo: projectBioVideoUrl,
                 prjctBioCollection: prjctBioCollection,
                 projectBio: projectBio,
@@ -543,8 +537,7 @@ function EditMarketPlaceSalesindex() {
       } else {
         console.log("No documents found.");
       }
-
-      router.push("/project/editMarketplace/sales-page-editor");
+      router.push("/project/editMarketplace/thankyouPage");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -555,13 +548,12 @@ function EditMarketPlaceSalesindex() {
   const queryUser = collection(db, "Users");
   async function handleGetData() {
     if (!emailData) return;
-
     const q = query(queryUser, where("Email", "==", emailData));
     const querySnapshot1 = await getDocs(q);
 
     if (!querySnapshot1.empty) {
       const autoId = querySnapshot1.docs[0].id;
-      const subcollectionRef = collection(db, "Users", autoId, "template");
+      const subcollectionRef = collection(db, "Users", autoId, "project");
       const querySnapshot2 = await getDocs(subcollectionRef);
       const docs = querySnapshot2.docs.map((doc) => doc.data());
       docs.map((data) => {
@@ -593,7 +585,9 @@ function EditMarketPlaceSalesindex() {
                     <div
                       className={
                         activeIndex === 0
-                          ? "page-editor-form theme active"
+                          ? activeOffer
+                            ? "page-editor-form theme  active"
+                            : "page-editor-form theme "
                           : "page-editor-form theme "
                       }
                     >
@@ -620,8 +614,8 @@ function EditMarketPlaceSalesindex() {
 
                       <div className="page-editor-content-input">
                         <EditorSalesPage
-                          setClosingHeader={setClosingHeader}
-                          setClosingSubtexxt={setClosingSubtexxt}
+                          setOfferHeader={setOfferHeader}
+                          setOfferSubtexxt={setOfferSubtexxt}
                           key="3"
                         />
                       </div>
@@ -631,7 +625,9 @@ function EditMarketPlaceSalesindex() {
                       <div
                         className={
                           activeIndex === 1
-                            ? "page-editor-form  active"
+                            ? activeOffer
+                              ? "page-editor-form "
+                              : "page-editor-form active"
                             : "page-editor-form "
                         }
                       >
@@ -673,13 +669,14 @@ function EditMarketPlaceSalesindex() {
                           />
                         </div>
                       </div>
-
                       {/* general */}
                       <div
                         className={
                           activeIndex === 2
-                            ? "page-editor-form active"
-                            : "page-editor-form"
+                            ? activeOffer
+                              ? "page-editor-form  "
+                              : "page-editor-form active"
+                            : "page-editor-form "
                         }
                       >
                         <div className="btn-flex">
@@ -729,8 +726,10 @@ function EditMarketPlaceSalesindex() {
                       <div
                         className={
                           activeIndex === 3
-                            ? "page-editor-form active"
-                            : "page-editor-form"
+                            ? activeOffer
+                              ? "page-editor-form  "
+                              : "page-editor-form active"
+                            : "page-editor-form "
                         }
                       >
                         <div className="btn-flex">
@@ -778,14 +777,19 @@ function EditMarketPlaceSalesindex() {
                       <div
                         className={
                           activeIndex === 4
-                            ? "page-editor-form active"
-                            : "page-editor-form"
+                            ? activeOffer
+                              ? "page-editor-form  "
+                              : "page-editor-form active"
+                            : "page-editor-form "
                         }
                       >
                         <div className="btn-flex">
                           <Button
                             className="page-editor-form-btn"
-                            onClick={() => handleToggle(4)}
+                            onClick={() => {
+                              setActiveIndex(true);
+                              handleToggle(4);
+                            }}
                             sx={{
                               width: "100%",
                               display: "flex",
@@ -818,6 +822,52 @@ function EditMarketPlaceSalesindex() {
                           />
                         </div>
                       </div>
+                      {/* Thanks you page */}
+                      {/* <div
+                        className={
+                          activeIndex === 5
+                            ? activeOffer
+                              ? "page-editor-form  "
+                              : "page-editor-form active"
+                            : "page-editor-form "
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(5)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Thank you page</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <ThanksyouPage
+                            setClosingTopTxt={setClosingTopTxt}
+                            setClosingHeader={setClosingHeader}
+                            setClosingSubtexxt={setClosingSubtexxt}
+                            setClosingBtn={setClosingBtn}
+                            closingBtn={closingBtn}
+                            handleClosingBtnChange={handleClosingBtnChange}
+                            handleClosingVideoChange={
+                              handleClosingBioVideoChange
+                            }
+                            key="3"
+                          />
+                        </div>
+                      </div> */}
                     </div>
                   </PageEditorFrom>
                   <Box
@@ -915,29 +965,37 @@ function EditMarketPlaceSalesindex() {
                   </BtnContainer>
 
                   <MarketPlaceDataPreview>
-                    <CryptoCanvasEditMarketPlaceSalespage
-                      nftCollectionName={nftCollectionName}
-                      nftName={nftName}
-                      waitlistBtn={waitlistBtn}
-                      blueStatus={blueStatus}
-                      addNftDescript={addNftDescript}
-                      yellowStatus={yellowStatus}
-                      nftMindBtn={nftMindBtn}
-                      nftPrice={nftPrice}
-                      selectedImage={selectedImage}
-                      videoTitle={videoTitle}
-                      selectedVideo={selectedVideo}
-                      addStory={addStory}
-                      featureBtn={featureBtn}
-                      prjctSelectedVideo={prjctSelectedVideo}
-                      projectBioStory={projectBioStory}
-                      prjctBioCollection={prjctBioCollection}
-                      projectBio={projectBio}
-                      menuNav={menuNav}
-                      headerType={headerType}
-                      homeLogo={homeLogo}
-                      projectBtn={projectBtn}
-                    />
+                    {activeOffer ? (
+                      <CryptoCanvasMarketPlaceOfferPageEditor
+                        offerHeader={offerHeader}
+                        offerSubtexxt={offerSubtexxt}
+                        setActiveOffer={setActiveOffer}
+                      />
+                    ) : (
+                      <CryptoCanvasEditMarketPlaceSalespage
+                        nftCollectionName={nftCollectionName}
+                        nftName={nftName}
+                        waitlistBtn={waitlistBtn}
+                        blueStatus={blueStatus}
+                        addNftDescript={addNftDescript}
+                        yellowStatus={yellowStatus}
+                        nftMindBtn={nftMindBtn}
+                        nftPrice={nftPrice}
+                        selectedImage={selectedImage}
+                        videoTitle={videoTitle}
+                        selectedVideo={selectedVideo}
+                        addStory={addStory}
+                        featureBtn={featureBtn}
+                        prjctSelectedVideo={prjctSelectedVideo}
+                        projectBioStory={projectBioStory}
+                        prjctBioCollection={prjctBioCollection}
+                        projectBio={projectBio}
+                        menuNav={menuNav}
+                        headerType={headerType}
+                        homeLogo={homeLogo}
+                        projectBtn={projectBtn}
+                      />
+                    )}
                   </MarketPlaceDataPreview>
                 </Box>
               </Grid>

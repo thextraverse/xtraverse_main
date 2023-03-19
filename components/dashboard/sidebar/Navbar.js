@@ -115,7 +115,7 @@ const items = [
         strokeLinejoin="round"
       />
     </svg>,
-    "project/editMarketplace/sales-page-editor"
+    "project/editMarketplace/marketplaceSalespage"
   ),
   getItem(
     "Website",

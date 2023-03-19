@@ -287,10 +287,6 @@ function EditPartners(props) {
                           value={singleService.service}
                           onChange={(e) => handleServiceChange(e, index)}
                         />
-
-                        <div className="parcentage">
-                          <PercentIcon />
-                        </div>
                       </div>
                       <Button onClick={handleServiceAdd}>
                         <svg

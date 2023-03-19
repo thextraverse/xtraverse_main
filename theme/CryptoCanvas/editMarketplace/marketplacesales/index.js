@@ -145,7 +145,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
             <h1>{nftName}</h1>
             <div className="ownerdv">
               <div className="image">
-                <Image src={blueStatus} />
+                <Image src={blueStatus} alt="" />
               </div>
               <p className="p"> By</p>
               <p>Phillip</p>
@@ -208,8 +208,8 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
               <Image
                 src={selectedImage}
                 alt=""
-                width={100}
-                height={100}
+                width={800}
+                height={800}
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
@@ -237,7 +237,7 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
         <div className="videowrap">
           <h1>{videoTitle}</h1>
           <div className="videoBox">
-            <Image src={selectedVideo} width={100} height={100} />
+            <Image src={selectedVideo} width={1000} height={600} alt="" />
           </div>
           <p>{addStory}</p>
           <Link href={featureBtn.link}>

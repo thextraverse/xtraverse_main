@@ -11,11 +11,12 @@ import { HomepagePreview } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
-import logo1 from "../../../components/images/editwebsite/partners/client1.png";
-import logo2 from "../../../components/images/editwebsite/partners/client2.png";
-import logo3 from "../../../components/images/editwebsite/partners/client3.png";
-import logo4 from "../../../components/images/editwebsite/partners/client4.png";
-import logo5 from "../../../components/images/editwebsite/partners/client5.png";
+import logo1 from "../../../components/images/editwebsite/partners/client1.svg";
+import logo2 from "../../../components/images/editwebsite/partners/client2.svg";
+import logo3 from "../../../components/images/editwebsite/partners/client3.svg";
+import logo4 from "../../../components/images/editwebsite/partners/client4.svg";
+import logo5 from "../../../components/images/editwebsite/partners/client5.svg";
+import logo6 from "../../../components/images/editwebsite/partners/client6.svg";
 function CryptoCanvasEditHome({
   menuNav,
   homeBg,
@@ -362,6 +363,12 @@ function CryptoCanvasEditHome({
                     </div>
                     <div className="partnersPrviewImg">
                       <Image src={logo4} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo5} alt="image" width={400} height={400} />
+                    </div>
+                    <div className="partnersPrviewImg">
+                      <Image src={logo6} alt="image" width={400} height={400} />
                     </div>
                   </Box>
                 ) : (

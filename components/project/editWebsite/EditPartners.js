@@ -138,14 +138,43 @@ function EditPartners(props) {
               <Box>
                 <span>Upload Logos </span>
                 <div>
-                  <input
-                    type="file"
-                    placeholder="upload images"
-                    accept="image/*"
-                    multiple
-                    onChange={handleImagesChange}
-                  />
-                  <div>
+                  <div className="inputsc" style={{ marginTop: "5px" }}>
+                    <input
+                      type="file"
+                      placeholder="upload Logo"
+                      onChange={handleImagesChange}
+                      accept="image/*"
+                    />
+                    <span>
+                      <svg
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 25 24"
+                        fill="none"
+                      >
+                        <g clipPath="url(#prefix__clip0_890_14854)">
+                          <path
+                            d="M3.7 18a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 5.468 8.247 2 12.5 2c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 22v-9m0 0L9 16.5m3.5-3.5l3.5 3.5"
+                            stroke="#fff"
+                            strokeWidth={1.5}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="prefix__clip0_890_14854">
+                            <path
+                              fill="#fff"
+                              transform="translate(.5)"
+                              d="M0 0h24v24H0z"
+                            />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      Upload image
+                    </span>
+                  </div>
+                  <Box sx={{ background: "#252525", padding: "10px" }}>
                     {imagesList.map((image, index) => (
                       <Box
                         key={index}
@@ -178,7 +207,7 @@ function EditPartners(props) {
                         </Button>
                       </Box>
                     ))}
-                  </div>
+                  </Box>
                 </div>
               </Box>
             </Grid>

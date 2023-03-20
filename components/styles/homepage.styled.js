@@ -515,6 +515,12 @@ export const HomepagePreview = styled.div`
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
+    &:hover {
+      .deletesc {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
     &.parternsc {
       aspect-ratio: 25/9;
       background: #20142d;
@@ -551,6 +557,15 @@ export const HomepagePreview = styled.div`
       background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
       border-radius: 9.675px;
       margin: 0px 10px;
+    }
+    .deletesc {
+      border: 2px solid #71dd37;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      visibility: hidden;
+      opacity: 0;
     }
   }
   .overlaybg {

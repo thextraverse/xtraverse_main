@@ -332,6 +332,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${desOverlayColor}` }}
             ></Box>
+            <div className="deletesc"></div>
           </div>
           {/* Collaborator */}
           <div className="homesec parternsc">
@@ -386,6 +387,7 @@ function CryptoCanvasEditHome({
                 )}
               </Box>
             </div>
+            <div className="deletesc"></div>
           </div>
         </Box>
       </HomepagePreview>

@@ -84,7 +84,7 @@ export const Form = styled.form`
     .previewimages {
       width: 70px;
       img {
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     .dltBtn {

@@ -172,6 +172,21 @@ function EditHomePageindex() {
   const [desOverlayColor, setDesOverlayColor] = useState("#20142D");
   //! parters
   const [parternsHeading, setparternsHeading] = useState("Our Partners");
+  const [imagesList, setImagesList] = useState([]);
+  const handleParternsImagesChange = (e) => {
+    const files = Array.from(e.target.files);
+    const images = files.map((file) => ({
+      preview: URL.createObjectURL(file),
+      file: file,
+    }));
+    setImagesList(imagesList.concat(images));
+  };
+  const handleParternsImagesRemove = (index) => {
+    const images = [...imagesList];
+    images.splice(index, 1);
+    setImagesList(images);
+  };
+
   const [parterns, setParterns] = useState();
   console.log("hey", parterns);
   //!  upload section
@@ -614,6 +629,13 @@ function EditHomePageindex() {
                           <EditPartners
                             setparternsHeading={setparternsHeading}
                             setParterns={setParterns}
+                            imagesList={imagesList}
+                            handleParternsImagesChange={
+                              handleParternsImagesChange
+                            }
+                            handleParternsImagesRemove={
+                              handleParternsImagesRemove
+                            }
                           />
                         </div>
                       </div>
@@ -729,7 +751,7 @@ function EditHomePageindex() {
                     websiteBgColor={websiteBgColor}
                     btnBgColor={btnBgColor}
                     parternsHeading={parternsHeading}
-                    parterns={parterns}
+                    parterns={imagesList}
                   />
                 </Box>
               </Grid>

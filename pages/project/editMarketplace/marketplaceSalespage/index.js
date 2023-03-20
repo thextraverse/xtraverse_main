@@ -923,7 +923,7 @@ function EditMarketPlaceSalesindex() {
                         },
                       }}
                     >
-                      Compplete
+                      Complete
                     </Button>
                   </Box>
                 </EditorInputSec>

@@ -262,14 +262,20 @@ function MarketPlaceFeatures(props) {
                     }}
                   >
                     <Button
-                      onClick={(e) => setMintType("Regular")}
+                      onClick={(e) => {
+                        // apicall
+                        setMintType("Regular");
+                      }}
                       className={mintType === "Regular" ? "active" : ""}
                     >
                       <h2>Regular</h2>
                       <p>You pay gas fees</p>
                     </Button>
                     <Button
-                      onClick={(e) => setMintType("Lazy")}
+                      onClick={(e) => {
+                        // apicall
+                        setMintType("Lazy");
+                      }}
                       className={mintType === "Lazy" ? "active" : ""}
                     >
                       <h2>Lazy</h2>

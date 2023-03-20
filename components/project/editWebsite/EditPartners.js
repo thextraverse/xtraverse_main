@@ -37,30 +37,19 @@ import Typography from "@mui/joy/Typography";
 import { AiOutlinePlus } from "react-icons/ai";
 
 function EditPartners(props) {
-  const { setParterns, setparternsHeading } = props;
+  const {
+    setparternsHeading,
+    imagesList,
+    handleParternsImagesChange,
+    handleParternsImagesRemove,
+  } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
   const { user } = useUserAuth();
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState("");
   const [activeTab, setActiveTab] = useState(0);
-  const [imagesList, setImagesList] = useState([]);
-  const handleImagesChange = (e) => {
-    const files = Array.from(e.target.files);
-    const images = files.map((file) => ({
-      preview: URL.createObjectURL(file),
-      file: file,
-    }));
-    setImagesList(imagesList.concat(images));
-  };
 
-  const handleImageRemove = (index) => {
-    const images = [...imagesList];
-    images.splice(index, 1);
-    setImagesList(images);
-  };
-  console.log(imagesList);
-  setParterns(imagesList);
   return (
     <>
       <Box
@@ -114,26 +103,6 @@ function EditPartners(props) {
                 />
               </Box>
             </Grid>
-            {/* <Grid xs={12}>
-              <Box
-                sx={{
-                  marginTop: "15px",
-                }}
-              >
-                <div className="inputsc">
-                  <input
-                    type="file"
-                    placeholder="upload Logo"
-                    onChange={handleImageChange}
-                    accept="image/*"
-                  />
-                  <span>
-                    <IoMdCloudUpload />
-                    Upload image
-                  </span>
-                </div>
-              </Box>
-            </Grid> */}
             <Grid item xs={12}>
               <Box>
                 <span>Upload Logos </span>
@@ -142,7 +111,7 @@ function EditPartners(props) {
                     <input
                       type="file"
                       placeholder="upload Logo"
-                      onChange={handleImagesChange}
+                      onChange={handleParternsImagesChange}
                       accept="image/*"
                     />
                     <span>
@@ -174,7 +143,7 @@ function EditPartners(props) {
                       Upload image
                     </span>
                   </div>
-                  <Box sx={{ background: "#252525", padding: "10px" }}>
+                  <Box sx={{ background: "#252525", borderRadius: "10px" }}>
                     {imagesList.map((image, index) => (
                       <Box
                         key={index}
@@ -182,6 +151,7 @@ function EditPartners(props) {
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
+                          padding: "10px",
                         }}
                       >
                         <div className="previewimages">
@@ -194,7 +164,7 @@ function EditPartners(props) {
                         </div>
 
                         <Button
-                          onClick={() => handleImageRemove(index)}
+                          onClick={() => handleParternsImagesRemove(index)}
                           sx={{
                             fontSize: ".8em",
                             border: "1px solid #fff",

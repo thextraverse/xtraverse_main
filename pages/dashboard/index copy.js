@@ -554,17 +554,70 @@ export default function Dashboard() {
                                 <Grid item xs={12}>
                                   <EngagementsTop />
                                 </Grid>
+
                                 <Grid item xs={6}>
                                   <EngagementsLeft />
                                 </Grid>
                                 <Grid item xs={6}>
                                   <EngagementsRight />
                                 </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts>
+                                    <EngageChart />
+                                  </ActivityCharts>
+                                </Grid>
                               </Grid>
                             </Grid>
 
                             <Grid item xs={6}>
                               <Community />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Grid
+                            container
+                            spacing={2}
+                            style={{ height: "100%" }}
+                          >
+                            <Grid item xs={12}>
+                              <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <MixedChartsLayout />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <TreeMapLayout />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardGradientDonut />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardPieChart />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardRadialBarChart />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <ChartText />
+                                  </ActivityCharts>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ActivityCharts className="mixed">
+                                    <DashboardMultipleYAxis />
+                                  </ActivityCharts>
+                                </Grid>
+                              </Grid>
                             </Grid>
                           </Grid>
                         </Grid>

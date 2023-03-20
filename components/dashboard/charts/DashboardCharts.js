@@ -9,14 +9,60 @@ const ActivityChart = () => {
   const objectData = {
     data: {
       daily: [
-        { date: "18-3-2023", followers: 4344, following: 5343, tweets: 42 },
-        { date: "19-3-2023", followers: 5344, following: 1343, tweets: 18 },
-        { date: "20-3-2023", followers: 6344, following: 3343, tweets: 30 },
-        { date: "21-3-2023", followers: 4344, following: 1343, tweets: 5 },
-        { date: "22-3-2023", followers: 2344, following: 6343, tweets: 10 },
-        { date: "23-3-2023", followers: 1344, following: 4343, tweets: 20 },
-        { date: "24-3-2023", followers: 8344, following: 343, tweets: 15 },
-        { date: "25-3-2023", followers: 3344, following: 2343, tweets: 35 },
+        {
+          date: "14-3-2023",
+          followers: 4344,
+          following: 5343,
+          tweets: 42,
+          discord: 120,
+          impressions: 500,
+          engagement: 320,
+        },
+        {
+          date: "15-3-2023",
+          followers: 5344,
+          following: 1343,
+          tweets: 18,
+          discord: 60,
+          impressions: 300,
+          engagement: 120,
+        },
+        {
+          date: "16-3-2023",
+          followers: 6344,
+          following: 3343,
+          tweets: 30,
+          discord: 220,
+          impressions: 200,
+          engagement: 520,
+        },
+        {
+          date: "17-3-2023",
+          followers: 4344,
+          following: 1343,
+          tweets: 5,
+          discord: 170,
+          impressions: 700,
+          engagement: 780,
+        },
+        {
+          date: "18-3-2023",
+          followers: 2344,
+          following: 6343,
+          tweets: 10,
+          discord: 120,
+          impressions: 500,
+          engagement: 320,
+        },
+        {
+          date: "19-3-2023",
+          followers: 1344,
+          following: 4343,
+          tweets: 20,
+          discord: 120,
+          impressions: 500,
+          engagement: 320,
+        },
       ],
       general: {
         created_at: "thu may 27 21:26:25",
@@ -53,6 +99,27 @@ const ActivityChart = () => {
           y: item.tweets,
         })),
       },
+      {
+        name: "Discord",
+        data: objectData.data.daily.map((item) => ({
+          x: item.date,
+          y: item.discord,
+        })),
+      },
+      {
+        name: "Impressions",
+        data: objectData.data.daily.map((item) => ({
+          x: item.date,
+          y: item.impressions,
+        })),
+      },
+      {
+        name: "Engagement",
+        data: objectData.data.daily.map((item) => ({
+          x: item.date,
+          y: item.engagement,
+        })),
+      },
     ],
     options: {
       chart: {
@@ -84,7 +151,7 @@ const ActivityChart = () => {
         enabled: false,
       },
       stroke: {
-        width: [5, 7, 5],
+        width: [5, 7, 5, 5, 5, 5],
         curve: "smooth",
         dashArray: [0, 0, 0], // here we define the dash array
         gradient: {

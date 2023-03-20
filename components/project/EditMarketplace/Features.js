@@ -49,6 +49,7 @@ function MarketPlaceFeatures(props) {
     mintType,
     setMintType,
     handleButtonChange,
+    handlePayment,
   } = props;
   const MySwal = withReactContent(Swal);
   const router = useRouter();
@@ -236,14 +237,20 @@ function MarketPlaceFeatures(props) {
                     }}
                   >
                     <Button
-                      onClick={(e) => setTokenType("ERC-721A")}
+                      onClick={(e) => {
+                        setTokenType("ERC-721A");
+                        handlePayment;
+                      }}
                       className={tokenType === "ERC-721A" ? "active" : ""}
                     >
                       <h2>ERC-721A</h2>
                       <p>Each unique token only has one owner.</p>
                     </Button>
                     <Button
-                      onClick={(e) => setTokenType("RC-1155")}
+                      onClick={(e) => {
+                        setTokenType("RC-1155");
+                        handlePayment;
+                      }}
                       className={tokenType === "RC-1155" ? "active" : ""}
                     >
                       <h2>ERC-1155</h2>
@@ -263,8 +270,8 @@ function MarketPlaceFeatures(props) {
                   >
                     <Button
                       onClick={(e) => {
-                        // apicall
                         setMintType("Regular");
+                        handlePayment;
                       }}
                       className={mintType === "Regular" ? "active" : ""}
                     >
@@ -273,8 +280,8 @@ function MarketPlaceFeatures(props) {
                     </Button>
                     <Button
                       onClick={(e) => {
-                        // apicall
                         setMintType("Lazy");
+                        handlePayment;
                       }}
                       className={mintType === "Lazy" ? "active" : ""}
                     >

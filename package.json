@@ -21,6 +21,7 @@
     "ethers": "^6.1.0",
     "firebase": "^9.17.1",
     "framer-motion": "^10.2.3",
+    "ipfs": "^0.66.0",
     "next": "^12.3.4",
     "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
@@ -33,6 +34,7 @@
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.7.3",
     "sweetalert2-react-content": "^5.0.7",
+    "swiper": "^9.1.1",
     "uuid": "^9.0.0",
     "web3": "^1.8.2"
   },

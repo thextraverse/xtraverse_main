@@ -1,6 +1,7 @@
 import { useState } from "react";
 import App from "next/app";
 import "../styles/globals.css";
+
 import { UserAuthContextProvider } from "../configfile/UserAuthContext";
 import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }) {

@@ -7,9 +7,22 @@ import Image from "next/image";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import demoimg from "../../../components/images/blacklogo.svg";
-import { HomepagePreview } from "../../../components/styles/homepage.styled";
+import {
+  HomepagePreview,
+  RoadmapCard,
+} from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar } from "swiper";
+import "swiper/css";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+// Import Swiper styles
+import "swiper/css";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
 import logo1 from "../../../components/images/editwebsite/partners/client1.svg";
 import logo2 from "../../../components/images/editwebsite/partners/client2.svg";
@@ -17,6 +30,13 @@ import logo3 from "../../../components/images/editwebsite/partners/client3.svg";
 import logo4 from "../../../components/images/editwebsite/partners/client4.svg";
 import logo5 from "../../../components/images/editwebsite/partners/client5.svg";
 import logo6 from "../../../components/images/editwebsite/partners/client6.svg";
+import himg1 from "../../../components/images/editwebsite/mint-01.svg";
+import himg2 from "../../../components/images/editwebsite/mint-02.svg";
+import himg3 from "../../../components/images/editwebsite/mint-03.svg";
+import himg4 from "../../../components/images/editwebsite/mint-04.svg";
+import { Card } from "../../../components/project/editWebsite/EditRaodmap";
+import { FiEdit } from "react-icons/fi";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 function CryptoCanvasEditHome({
   menuNav,
   homeBg,
@@ -35,12 +55,19 @@ function CryptoCanvasEditHome({
   browseClctionBtn,
   parternsHeading,
   parterns,
+  howItWorsType,
+  stepInputData,
+  howitWorksHeading,
+  stepImageData,
+  cards,
+  handleEdit,
+  handleDelete,
+  roadmapHeading,
 }) {
   console.log(menuNav);
-  console.log("images", parterns);
   const { user, headerMenuData, headerLogo, headermenu, navbarType } =
     useUserAuth();
-  console.log("editWebsite", headerMenuData);
+
   return (
     <>
       <HomepagePreview>
@@ -387,6 +414,298 @@ function CryptoCanvasEditHome({
                 )}
               </Box>
             </div>
+            <div className="deletesc"></div>
+          </div>
+          {/* how it works */}
+          <div className="homesec howitworksec">
+            <div className="wrapper">
+              <div
+                className={
+                  howItWorsType === "howitworks2"
+                    ? "herosec howitworks2"
+                    : "herosec howitworks1"
+                }
+              >
+                <div className="herotxt">
+                  <h1>{howitWorksHeading}</h1>
+                  <Grid container spacing={2}>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.firstImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.firstImage
+                              )}
+                              alt="First image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg1}
+                              alt="first image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.firstField?.title}</h3>
+                          <p>{stepInputData.firstField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.secondImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.secondImage
+                              )}
+                              alt="second image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg2}
+                              alt="second image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.secondField?.title}</h3>
+                          <p>{stepInputData.secondField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.thirdImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.thirdImage
+                              )}
+                              alt="First image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg3}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.thirdField?.title}</h3>
+                          <p>{stepInputData.thirdField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.fourthImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.fourthImage
+                              )}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg4}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.fourthField?.title}</h3>
+                          <p>{stepInputData.fourthField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </div>
+              </div>
+            </div>
+            <div className="deletesc"></div>
+          </div>
+          {/* Roadmap */}
+          <div className="homesec roadmapsc">
+            {/* <div className="wrapper">
+              <div
+                className={
+                  howItWorsType === "howitworks2"
+                    ? "herosec howitworks2"
+                    : "herosec howitworks1"
+                }
+              >
+                <div className="herotxt">
+                  <h1>{howitWorksHeading}</h1>
+                  <Grid container spacing={2}>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.firstImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.firstImage
+                              )}
+                              alt="First image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg1}
+                              alt="first image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.firstField?.title}</h3>
+                          <p>{stepInputData.firstField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.secondImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.secondImage
+                              )}
+                              alt="second image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg2}
+                              alt="second image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.secondField?.title}</h3>
+                          <p>{stepInputData.secondField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.thirdImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.thirdImage
+                              )}
+                              alt="First image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg3}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.thirdField?.title}</h3>
+                          <p>{stepInputData.thirdField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item sm={howItWorsType === "howitworks2" ? 6 : 3}>
+                      <div className="CardWrap">
+                        <div className="image">
+                          {stepImageData.fourthImage ? (
+                            <Image
+                              src={URL.createObjectURL(
+                                stepImageData.fourthImage
+                              )}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          ) : (
+                            <Image
+                              src={himg4}
+                              alt="fourth image"
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </div>
+                        <div>
+                          <h3>{stepInputData.fourthField?.title}</h3>
+                          <p>{stepInputData.fourthField?.textarea}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </div>
+              </div>
+            </div> */}
+            <div className="wrapper">
+              <h1 className="h1">{roadmapHeading}</h1>
+              <Swiper
+                modules={[Pagination, Scrollbar]}
+                spaceBetween={50}
+                slidesPerView={3}
+                // navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+              >
+                {cards.map((card) => (
+                  <SwiperSlide key={card.id}>
+                    <RoadmapCard>
+                      <div className="content">
+                        <h5>{card.title}</h5>
+                        <h1>{card.explain}</h1>
+                        <p>{card.subtext}</p>
+                        <hr />
+                        <ul>
+                          {card.list.map((item, index) => (
+                            <li key={index}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="btnsc">
+                        <button onClick={() => handleEdit(card)}>
+                          <FiEdit />
+                        </button>
+                        <button onClick={() => handleDelete(card)}>
+                          <RiDeleteBin6Fill />
+                        </button>
+                      </div>
+                    </RoadmapCard>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
             <div className="deletesc"></div>
           </div>
         </Box>

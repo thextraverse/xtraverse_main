@@ -23,23 +23,64 @@ export const Main = styled.main`
     }
   }
 `;
+export const Headlines = styled.div`
+  padding: 35px 35px 0px 35px;
+  @media screen and (max-width: 1536px) {
+    padding: 20px 10px;
+  }
+  input,
+  textarea {
+    padding: 15px 15px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    margin: 5px 0px 20px;
+    background: #252525;
+    outline: none;
+    color: #fff;
+    font-size: 1.1em;
+    @media screen and (max-width: 1400px) {
+      padding: 10px 10px;
+      margin: 5px 0px 15px;
+    }
+  }
+`;
 export const Form = styled.form`
   width: 100%;
   color: rgba(255, 255, 255, 0.6);
   padding: 35px;
+  .radmapul {
+    li {
+      padding: 0px;
+      input {
+        margin: 2px 0px 10px;
+      }
+    }
+  }
+  @media screen and (max-width: 1536px) {
+    padding: 20px 10px;
+  }
   .hero-type {
     border: 2px solid #4f4f4f;
     border-radius: 10px;
     overflow: hidden;
     margin: 5px;
     cursor: pointer;
-    height: 140px;
+    height: 120px;
+    background: #252525;
+    @media screen and (max-width: 1800px) {
+      height: 100px;
+    }
+    @media screen and (max-width: 1536px) {
+      height: 80px;
+    }
     span {
       width: 100% !important;
       height: 100% !important;
       img {
         width: 100% !important;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     &.active {
@@ -80,7 +121,18 @@ export const Form = styled.form`
       }
     }
   }
+
   &.forminput {
+    .steps {
+      background: #4f4f4f;
+      padding: 10px;
+      border-radius: 10px;
+      input,
+      textarea,
+      .inputsc {
+        margin: 4px 0px;
+      }
+    }
     .previewimages {
       width: 70px;
       img {
@@ -363,7 +415,98 @@ export const EditorInputSec = styled.div`
   }
   /* border-right: 1px solid #fff; */
 `;
+export const RoadmapCard = styled.div`
+  height: 350px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  display: flex;
+  align-items: end;
+  transition: all 0.3s;
 
+  &:hover {
+    .btnsc {
+      visibility: visible;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+  }
+  .btnsc {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: inline-flex;
+    visibility: hidden;
+    transition: all 0.3s;
+    opacity: 0;
+    button {
+      color: #000;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #fff;
+      font-size: 1.2em;
+      display: grid;
+      border: none;
+      place-items: center;
+      margin: 2px;
+      cursor: pointer;
+    }
+  }
+  .content {
+    width: 100%;
+    height: 94%;
+    background: #36224a;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    place-content: center;
+    h5 {
+      font-size: 0.8em;
+      background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 10px 0px !important;
+    }
+    p {
+      color: #c09ce4;
+    }
+    hr {
+      width: 100px;
+      height: 1px;
+      background: rgba(131, 131, 131, 25%);
+      border: none;
+      margin: 10px 0px;
+    }
+    ul {
+      padding: 0px 18px;
+    }
+  }
+  @media screen and (max-width: 1536px) {
+    height: 250px;
+    .content {
+      h5 {
+        font-size: 0.8em;
+      }
+      h1 {
+        font-size: 1em;
+      }
+      p {
+        font-size: 0.6em;
+      }
+      ul {
+        li {
+          font-size: 0.6em;
+        }
+      }
+    }
+  }
+`;
 export const PageEditorFrom = styled.div`
   background: #303030;
   border-radius: 16px;
@@ -515,6 +658,18 @@ export const HomepagePreview = styled.div`
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
+    &.roadmapsc {
+      display: flex;
+      align-items: center;
+      .h1 {
+        padding-top: 50px;
+      }
+    }
+    .wrapper {
+      width: 90%;
+      margin: auto;
+      height: 100%;
+    }
     &:hover {
       .deletesc {
         visibility: visible;
@@ -548,6 +703,95 @@ export const HomepagePreview = styled.div`
         text-align: right;
         h5 {
           text-align: right;
+        }
+      }
+    }
+    &.howitworksec {
+      h1 {
+        margin: 25px 0px;
+      }
+      .CardWrap {
+        display: flex;
+        background: #bb9edb;
+        border-radius: 10px;
+        width: 100%;
+        gap: 20px;
+        padding: 20px;
+        align-items: center;
+        height: 140px;
+        .image {
+          width: 140px;
+        }
+        h3 {
+          font-size: 1.4em;
+          text-align: left;
+        }
+        p {
+          font-size: 0.9em;
+          text-align: left;
+          color: #20142d;
+          font-weight: 500;
+        }
+      }
+      .howitworks1 {
+        .CardWrap {
+          display: block;
+          background: #bb9edb;
+          border-radius: 10px;
+          width: 100%;
+          gap: 20px;
+          padding: 20px 10px;
+          align-items: center;
+          height: 100%;
+          .image {
+            width: 100%;
+            height: 120px;
+            span {
+              height: 100% !important;
+            }
+          }
+          h3 {
+            font-size: 1.1em;
+            text-align: left;
+          }
+          p {
+            font-size: 0.8em;
+            text-align: left;
+            color: #20142d;
+            font-weight: 500;
+          }
+          @media screen and (max-width: 1536px) {
+            .image {
+              height: 80px;
+            }
+            h3 {
+              font-size: 0.8em;
+            }
+            p {
+              font-size: 0.7em;
+              line-height: 120%;
+              padding: 5px 0px;
+            }
+          }
+        }
+      }
+      .howitworks2 {
+        .CardWrap {
+          @media screen and (max-width: 1536px) {
+            height: 100px;
+
+            .image {
+              height: 80px;
+            }
+            h3 {
+              font-size: 0.8em;
+            }
+            p {
+              font-size: 0.7em;
+              line-height: 120%;
+              padding: 5px 0px;
+            }
+          }
         }
       }
     }
@@ -760,7 +1004,6 @@ export const HomepagePreview = styled.div`
       /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
     }
   }
-
   .herotxt {
     height: 100%;
     display: grid;

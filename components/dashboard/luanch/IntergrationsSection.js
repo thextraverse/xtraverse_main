@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { BsCheck2 } from "react-icons/bs";
@@ -17,7 +17,16 @@ import Image from "next/image";
 import { Domain } from "@mui/icons-material";
 import axios from "axios";
 import { useUserAuth } from "../../../configfile/UserAuthContext";
-
+import { db } from "../../../configfile/firebaseConfig";
+import {
+  query,
+  addDoc,
+  collection,
+  getDocs,
+  where,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 const IntegrationCard = styled.div`
   background: #212121;
   border-radius: 10px;
@@ -70,7 +79,6 @@ const IntegrationCard = styled.div`
     }
   }
 `;
-
 const colorStyles = {
   control: (styles, state) => ({
     ...styles,
@@ -223,14 +231,70 @@ export function IntergrationSec({ setTwitterData }) {
     }
   };
   const handleSubmit = (event) => {
-    event.preventDefault();
-    fetchData();
     setUsername("");
   };
-  console.log(data);
-  console.log(username);
-  data && setTwitterData(data);
+  // console.log(data);
+  // console.log(username);
 
+  data && setTwitterData(data);
+  // console.log("usertiktok", titokUsername);
+  const emailData = user.email;
+
+  const handleIntergrationsSubmit = async (e) => {
+    // Check if user already exists in database
+    e.preventDefault();
+
+    const usersRef = collection(db, "Users");
+    const q = query(usersRef, where("Email", "==", emailData));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const autoId = querySnapshot.docs[0].id;
+      console.log(`AutoId: ${autoId}`);
+      try {
+        const response = await axios.get(
+          `https://matrix.sbapis.com/b/twitter/statistics?token=${apiKey}&query=${username}&clientid=${clientId}`
+        );
+        setData(response.data);
+        setError(null);
+
+        const userDataCollectionRef = collection(
+          db,
+          "Users",
+          autoId,
+          "integrations"
+        );
+        console.log(userDataCollectionRef);
+        const querySnapshot = await getDocs(userDataCollectionRef);
+        console.log("did everyone got the data", data);
+
+        if (!querySnapshot.empty) {
+          // User data exists in database, update the existing document
+          const docId = querySnapshot.docs[0].id;
+          // console.log(`DocId: ${docId}`);
+          const docRef = doc(userDataCollectionRef, docId);
+          console.log("did you got the data", data);
+          await updateDoc(docRef, {
+            twitterData: data,
+          });
+          if (console.log("succesfully update data"));
+        } else {
+          // User data does not exist in database, create a new document
+          await addDoc(userDataCollectionRef, {
+            twitterData: data,
+          });
+          if (console.log("succesfully create data"));
+        }
+      } catch (error) {
+        console.error("Error updating document:", error);
+        alert("select domain please");
+        setData(null);
+        setError(error.message);
+      }
+    } else {
+      console.log("No documents found.");
+    }
+  };
+  console.log("kirehala kajkor", data);
   return (
     <>
       <Grid container>
@@ -839,56 +903,64 @@ export function IntergrationSec({ setTwitterData }) {
               <Box
                 component="span"
                 sx={{
-                  color: "#04FCBC ",
+                  color: data ? "#04FCBC" : "#b5b5b5",
                   fontWeight: "500",
                   display: "flex",
                   alignItems: "center",
                   gap: "5px",
                 }}
               >
-                Connected{" "}
-                <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                {data ? "Connected" : "connect"}
+
+                {data && (
+                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                )}
               </Box>
             </Box>
             <div className="content">
-              <p>Tiktok Account (admin@xtraverse.com)</p>
-              <p>Selected Other account</p>
-              <Select
-                styles={colorStyles}
-                options={options8}
-                isSearchable={true}
-                onChange={handleRainbow}
-                placeholder="Select account"
-              />
-
-              <Button
-                className="absluteBtn"
-                sx={{
-                  width: "100%",
-                  borderRadius: "8px",
-                  color: "#fff",
-                  border: "2px solid #04FCBC",
-                  fontSize: "1em",
-                  textTransform: "capitalize",
-                  padding: "5px 0px",
-                  transition: "0.3s",
-                  fontWeight: "500",
-                  margin: "10px 0px",
-                  display: "flex",
-                  gap: "20px",
-                  "&:hover ": {
-                    color: "#000",
+              <p>Tiktok Account (@{data && data.data.id.username})</p>
+              <p>Enter the Twitter username:</p>
+              <form className="searchAccount">
+                <input
+                  type="text"
+                  id="username"
+                  required
+                  placeholder="Yourname"
+                />
+                <Button
+                  className="absluteBtn"
+                  type="submit"
+                  sx={{
+                    width: "100%",
+                    borderRadius: "8px",
                     background:
+                      data &&
                       "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                Connect
-              </Button>
+                    color: "#fff",
+                    border: "2px solid #04FCBC",
+                    fontSize: "1em",
+                    textTransform: "capitalize",
+                    padding: "5px 0px",
+                    transition: "0.3s",
+                    fontWeight: "500",
+                    margin: "10px 0px",
+                    display: "flex",
+                    gap: "20px",
+                    "&:hover ": {
+                      color: "#000",
+                      background:
+                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Connect
+                </Button>
+              </form>
             </div>
           </IntegrationCard>
         </Grid>
+
         {/* snapchat */}
         <Grid md={4}>
           <IntegrationCard>
@@ -998,7 +1070,10 @@ export function IntergrationSec({ setTwitterData }) {
             <div className="content">
               <p>Twitter Account (@{data && data.data.id.username})</p>
               <p>Enter the Twitter username:</p>
-              <form onSubmit={handleSubmit} className="searchAccount">
+              <form
+                onSubmit={handleIntergrationsSubmit}
+                className="searchAccount"
+              >
                 <input
                   type="text"
                   id="username"

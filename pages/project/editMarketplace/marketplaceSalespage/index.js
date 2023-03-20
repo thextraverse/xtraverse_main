@@ -570,6 +570,12 @@ function EditMarketPlaceSalesindex() {
   }, [emailData]);
   console.log(tempalteId);
   console.log(royaltiesList);
+  // function handleCheckToekSubmit() {
+  //   if (tokenType === "ERC-721A" && mintType === "Regular") {
+  //     alert("yes color");
+  //   }
+  // }
+
   return (
     <>
       <Main>
@@ -579,6 +585,9 @@ function EditMarketPlaceSalesindex() {
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid lg={4} xl={4}>
+                {tokenType === "ERC-721A" && mintType === "Regular"
+                  ? console.log("match")
+                  : console.log("not match")}
                 <EditorInputSec>
                   <PageEditorFrom>
                     {/* offers page editor */}

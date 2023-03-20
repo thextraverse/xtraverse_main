@@ -56,6 +56,8 @@ import { color } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import EditPartners from "../../../components/project/editWebsite/EditPartners";
+import EditHowitWorks from "../../../components/project/editWebsite/EditHowItWork";
+import EditRaodmap from "../../../components/project/editWebsite/EditRaodmap";
 function EditHomePageindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -75,7 +77,7 @@ function EditHomePageindex() {
   const [typographySelect, setTypographySelect] = useState();
   const [websiteBgColorPopup, setWebsiteBgColorPopup] = useState(false);
   const [websiteBgColor, setWebsiteBgColor] = useState(
-    "linear-gradient(190deg, rgba(2,0,36,0.38) 0%, RGBA(97, 0, 255, 0.46) 100%)"
+    "linear-gradient(190deg, rgba(2,0,36,0.38) 0%, RGBA(32, 20, 45, 1) 100%)"
   );
   const [btnBgColorPopup, setBtnBgColorPopup] = useState(false);
   const [btnBgColor, setBtnBgColor] = useState(
@@ -167,6 +169,120 @@ function EditHomePageindex() {
 
   const [parterns, setParterns] = useState();
   console.log("hey", parterns);
+
+  //! how it works
+  const [howitWorksHeading, setHowitWorksHeading] = useState("How it Works");
+  const [howItWorsType, setHowItWorsType] = useState("howitworks2");
+  const [stepInputData, setStepInputData] = useState({});
+  const [stepImageData, setStepImageData] = useState({});
+
+  //! Roadmap
+  const [roadmapHeading, setRoadmapHeading] = useState("Robo's Roadmap");
+  // const [roadEditMode, setRoadEditMode] = useState();
+  // const [roadEditCardId, setRoadEditCardId] = useState();
+  // const [roadFormData, setRoadFormData] = useState({});
+
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      title: "PHASE 01",
+      explain: "Planning ",
+      subtext:
+        "Quality comes first. we took our time to plan out everything and build our production pipeline for a good quality artworks.",
+      list: [
+        "Release website and logo",
+        "Grow community",
+        "Launch the project",
+      ],
+    },
+    {
+      id: 2,
+      title: "PHASE 02",
+      explain: "Production ",
+      subtext:
+        "Quality comes first. we took our time to plan out everything and build our production pipeline for a good quality artworks.",
+      list: [
+        "Release website and logo",
+        "Grow Community",
+        "Launch the project",
+      ],
+    },
+    {
+      id: 3,
+      title: "PHASE 03 ",
+      explain: "Launch ",
+      subtext:
+        "Quality comes first. we took our time to plan out everything and build our production pipeline for a good quality artworks.",
+      list: [
+        "Release website and logo",
+        "Grow community",
+        "Launch the project",
+      ],
+    },
+  ]);
+
+  const [formData, setFormData] = useState({
+    title: "Phase 01",
+    explain: "Planning",
+    subtext:
+      "Quality comes first. we took our time to plan out everything and build our production pipeline for a good quality artworks.",
+    list: ["", "", ""],
+  });
+
+  const [editMode, setEditMode] = useState(false);
+  const [editCardId, setEditCardId] = useState(null);
+
+  const handleInputChange = (e, index) => {
+    if (index !== undefined) {
+      setFormData((prevFormData) => {
+        const updatedList = [...prevFormData.list];
+        updatedList[index] = e.target.value;
+        return { ...prevFormData, list: updatedList };
+      });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editMode) {
+      const updatedCards = cards.map((card) => {
+        if (card.id === editCardId) {
+          return { ...card, ...formData };
+        }
+        return card;
+      });
+      setCards(updatedCards);
+      setEditMode(false);
+      setEditCardId(null);
+    } else {
+      const newCard = {
+        id: Math.random(),
+        ...formData,
+      };
+      setCards([...cards, newCard]);
+    }
+    setFormData({
+      title: "",
+      explain: "",
+      subtext: "",
+      list: ["", "", ""],
+    });
+  };
+
+  const handleEdit = (card) => {
+    setFormData(card);
+    setEditMode(true);
+    setEditCardId(card.id);
+  };
+
+  const handleDelete = (card) => {
+    const updatedCards = cards.filter((c) => c.id !== card.id);
+    setCards(updatedCards);
+  };
+
+  console.log("roadmap data", cards);
   //!  upload section
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -324,6 +440,9 @@ function EditHomePageindex() {
                     btnBgColor: btnBgColor,
                     TypographyData: typographySelect,
                   },
+                  howitworks: {
+                    heading: howitWorksHeading,
+                  },
                   id: uniqueId,
                 },
               });
@@ -360,6 +479,9 @@ function EditHomePageindex() {
                   websiteBgColor: websiteBgColor,
                   btnBgColor: btnBgColor,
                   TypographyData: typographySelect,
+                },
+                howitworks: {
+                  heading: howitWorksHeading,
                 },
                 id: uniqueId,
               },
@@ -412,10 +534,75 @@ function EditHomePageindex() {
       <Main>
         <Box sx={{ width: "100%" }}>
           <Sidebar activeBtn={4} />
+
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid xs={4}>
                 <EditorInputSec>
+                  {/* <h1>Card List</h1>
+                  <form onSubmit={handleSubmit}>
+                    <label>
+                      Title:
+                      <input
+                        type="text"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleInputChange}
+                      />
+                    </label>
+                    <br />
+                    <label>
+                      Explain:
+                      <textarea
+                        name="explain"
+                        value={formData.explain}
+                        onChange={handleInputChange}
+                      />
+                    </label>
+                    <br />
+                    <label>
+                      Subtext:
+                      <input
+                        type="text"
+                        name="subtext"
+                        value={formData.subtext}
+                        onChange={handleInputChange}
+                      />
+                    </label>
+                    <br />
+                    <label>
+                      List:
+                      <ul>
+                        {formData.list.map((item, index) => (
+                          <li key={index}>
+                            <input
+                              type="text"
+                              value={item}
+                              onChange={(e) => handleInputChange(e, index)}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </label>
+                    <br />
+                    <button type="submit">{editMode ? "Save" : "Add"}</button>
+                  </form>
+                  <br />
+                  <hr />
+                  {cards.map((card) => (
+                    <div key={card.id}>
+                      <h2>{card.title}</h2>
+                      <p>{card.explain}</p>
+                      <p>{card.subtext}</p>
+                      <ul>
+                        {card.list.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                      <button onClick={() => handleEdit(card)}>Edit</button>
+                      <button onClick={() => handleDelete(card)}>Delete</button>
+                    </div>
+                  ))} */}
                   <PageEditorFrom
                     onClick={() => {
                       setShowColorPopup(false);
@@ -617,6 +804,97 @@ function EditHomePageindex() {
                           />
                         </div>
                       </div>
+                      {/* How it works  */}
+                      <div
+                        className={
+                          activeIndex === 5
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(5)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>How it works</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditHowitWorks
+                            setHowItWorsType={setHowItWorsType}
+                            howItWorsType={howItWorsType}
+                            setDesHeading={setDesHeading}
+                            setDesSubtext={setDesSubtext}
+                            setDesSubHeading={setDesSubHeading}
+                            editHeroScript={editHeroSubtext}
+                            setEditHeroScript={setEditHeroSubtext}
+                            handleDesImageChange={handleDesImageChange}
+                            setHeroButton={setHeroButton}
+                            desOverlayColor={desOverlayColor}
+                            setDesOverlayColor={setDesOverlayColor}
+                            showDesColorPopup={showDesColorPopup}
+                            setShowDesColorPopup={setShowDesColorPopup}
+                            setStepInputData={setStepInputData}
+                            setHowitWorksHeading={setHowitWorksHeading}
+                            setStepImageData={setStepImageData}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* Roadmap  */}
+                      <div
+                        className={
+                          activeIndex === 6
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(6)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Roadmap</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditRaodmap
+                            handleSubmit={handleSubmit}
+                            handleInputChange={handleInputChange}
+                            formData={formData}
+                            editMode={editMode}
+                            setRoadmapHeading={setRoadmapHeading}
+                            key="1"
+                          />
+                        </div>
+                      </div>
                     </div>
                     <Box
                       sx={{
@@ -730,6 +1008,14 @@ function EditHomePageindex() {
                     btnBgColor={btnBgColor}
                     parternsHeading={parternsHeading}
                     parterns={imagesList}
+                    howItWorsType={howItWorsType}
+                    stepInputData={stepInputData}
+                    howitWorksHeading={howitWorksHeading}
+                    stepImageData={stepImageData}
+                    cards={cards}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                    roadmapHeading={roadmapHeading}
                   />
                 </Box>
               </Grid>

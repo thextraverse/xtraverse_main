@@ -46,10 +46,23 @@ export const Headlines = styled.div`
     }
   }
 `;
-export const Form = styled.form`
+export const Form = styled.div`
   width: 100%;
   color: rgba(255, 255, 255, 0.6);
   padding: 35px;
+  &.editem {
+    padding: 10px 20px;
+    .box {
+      background: #4f4f4f;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    input {
+      margin: 5px 0px 5px !important;
+    }
+  }
+
   .radmapul {
     li {
       padding: 0px;
@@ -507,6 +520,107 @@ export const RoadmapCard = styled.div`
     }
   }
 `;
+export const XtraverseCard = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  .cardwrapper {
+    text-align: left;
+    position: relative;
+    display: flex;
+    align-items: end;
+    transition: all 0.3s;
+    height: 310px;
+    /* &:nth-of-type(even) {
+      transform: translateY(20px);
+    } */
+    &:hover {
+      .btnsc {
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  .image {
+  }
+  .btnsc {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: inline-flex;
+    visibility: hidden;
+    transition: all 0.3s;
+    opacity: 0;
+    button {
+      color: #000;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #fff;
+      font-size: 1.2em;
+      display: grid;
+      border: none;
+      place-items: center;
+      margin: 2px;
+      cursor: pointer;
+    }
+  }
+  .content {
+    width: 100%;
+    height: 94%;
+    background: #bb9edb;
+    border-radius: 20px;
+    padding: 20px 10px;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    &:nth-of-type(even) {
+      transform: translateY(20px);
+    }
+    h1 {
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+    p {
+      color: #26163c;
+      font-size: 0.8em;
+      padding-top: 2px;
+      font-weight: 500;
+    }
+    hr {
+      width: 100px;
+      height: 1px;
+      background: rgba(131, 131, 131, 25%);
+      border: none;
+      margin: 10px 0px;
+    }
+    ul {
+      padding: 0px 18px;
+    }
+  }
+  @media screen and (max-width: 1536px) {
+    height: 250px;
+    .content {
+      h5 {
+        font-size: 0.8em;
+      }
+      h1 {
+        font-size: 1em;
+      }
+      p {
+        font-size: 0.6em;
+      }
+      ul {
+        li {
+          font-size: 0.6em;
+        }
+      }
+    }
+  }
+`;
 export const PageEditorFrom = styled.div`
   background: #303030;
   border-radius: 16px;
@@ -658,6 +772,18 @@ export const HomepagePreview = styled.div`
   .homesec {
     position: relative;
     aspect-ratio: 16/9;
+    &.team {
+      aspect-ratio: inherit;
+      padding: 100px 0px;
+      .cardwrapper {
+        width: 190px;
+      }
+      .wrapper {
+        display: grid;
+        place-content: center;
+        height: 100%;
+      }
+    }
     &.roadmapsc {
       display: flex;
       align-items: center;
@@ -669,6 +795,8 @@ export const HomepagePreview = styled.div`
       width: 90%;
       margin: auto;
       height: 100%;
+      position: relative;
+      z-index: 2;
     }
     &:hover {
       .deletesc {
@@ -900,7 +1028,9 @@ export const HomepagePreview = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    .heroImg {
+      margin: 20px;
+    }
     .MuiGrid-container {
       height: 100%;
     }
@@ -911,7 +1041,9 @@ export const HomepagePreview = styled.div`
     }
 
     &.hero3,
-    &.destype3 {
+    &.destype3,
+    &.upperSection3,
+    &.bottomSection3 {
       padding: 0px 210px;
       display: grid;
       place-content: center;
@@ -924,9 +1056,12 @@ export const HomepagePreview = styled.div`
       }
     }
     &.destype1,
-    &.destype2 {
+    &.destype2,
+    &.upperSection2,
+    &.bottomSection2 {
       .heroImg {
         padding: 50px 30px;
+        margin: 10px;
       }
     }
     &.hero1 {
@@ -950,7 +1085,9 @@ export const HomepagePreview = styled.div`
       }
     }
     &.hero2,
-    &.destype2 {
+    &.destype2,
+    &.upperSection2,
+    &.bottomSection2 {
       display: grid;
       grid-template-columns: 50% auto;
       width: 85%;
@@ -960,7 +1097,9 @@ export const HomepagePreview = styled.div`
       }
     }
     &.hero1,
-    &.destype1 {
+    &.destype1,
+    &.upperSection1,
+    &.bottomSection1 {
       display: grid;
       grid-template-columns: 50% auto;
       direction: rtl;
@@ -970,6 +1109,25 @@ export const HomepagePreview = styled.div`
         h1,
         p {
           text-align: right;
+        }
+      }
+    }
+    &.upperSection1,
+    &.upperSection2 {
+      text-align: left;
+      .grdntsc {
+        flex-direction: column;
+        padding: 30px 0px 0px;
+        h1 {
+          display: block;
+          width: 100%;
+          text-align: left;
+        }
+      }
+      .herotxt {
+        h1,
+        p {
+          text-align: left;
         }
       }
     }

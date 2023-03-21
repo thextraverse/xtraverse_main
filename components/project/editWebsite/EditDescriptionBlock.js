@@ -98,9 +98,9 @@ function EditDescription(props) {
       >
         <Form className="forminput">
           <Grid container spacing={2}>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Grid container spacing={2}>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       desType === "destype1" ? "hero-type active" : "hero-type"
@@ -115,7 +115,7 @@ function EditDescription(props) {
                     />
                   </div>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       desType === "destype2" ? "hero-type active" : "hero-type"
@@ -130,7 +130,7 @@ function EditDescription(props) {
                     />
                   </div>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       desType === "destype3" ? "hero-type active" : "hero-type"
@@ -147,7 +147,7 @@ function EditDescription(props) {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   marginTop: "15px",
@@ -167,7 +167,7 @@ function EditDescription(props) {
                 </div>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Add Subheadling</span>
                 <input
@@ -177,7 +177,7 @@ function EditDescription(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Add Heading</span>
                 <input
@@ -187,7 +187,7 @@ function EditDescription(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box sx={{}}>
                 <span>Description</span>
                 <input
@@ -198,7 +198,7 @@ function EditDescription(props) {
               </Box>
             </Grid>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box sx={{}}>
                 <span>Button</span>
                 <input
@@ -208,7 +208,7 @@ function EditDescription(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <div className="selectColorType">
                 <span
                   style={{

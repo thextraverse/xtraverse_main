@@ -58,6 +58,10 @@ import { useRouter } from "next/router";
 import EditPartners from "../../../components/project/editWebsite/EditPartners";
 import EditHowitWorks from "../../../components/project/editWebsite/EditHowItWork";
 import EditRaodmap from "../../../components/project/editWebsite/EditRaodmap";
+import EditTeam from "../../../components/project/editWebsite/EditTeam";
+import { useRef } from "react";
+import EditFeatures from "../../../components/project/editWebsite/EditFeatures";
+import EditFrequentQuestion from "../../../components/project/editWebsite/EditFAQ";
 function EditHomePageindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -168,7 +172,6 @@ function EditHomePageindex() {
   };
 
   const [parterns, setParterns] = useState();
-  console.log("hey", parterns);
 
   //! how it works
   const [howitWorksHeading, setHowitWorksHeading] = useState("How it Works");
@@ -178,9 +181,6 @@ function EditHomePageindex() {
 
   //! Roadmap
   const [roadmapHeading, setRoadmapHeading] = useState("Robo's Roadmap");
-  // const [roadEditMode, setRoadEditMode] = useState();
-  // const [roadEditCardId, setRoadEditCardId] = useState();
-  // const [roadFormData, setRoadFormData] = useState({});
 
   const [cards, setCards] = useState([
     {
@@ -282,7 +282,280 @@ function EditHomePageindex() {
     setCards(updatedCards);
   };
 
-  console.log("roadmap data", cards);
+  //! Team/Artist
+  const [teamHeading, setTeamHeading] = useState("Meet The Artist");
+
+  const [teamCards, setTeamCards] = useState([
+    {
+      image: "/images/editwebsite/team01.png",
+      name: "Steps Jobs",
+      title: "Artist",
+      links: {
+        Twitter: "https://twitter.com/johndoe",
+        Discord: "https://discord.gg/johndoe",
+        Instagram: "https://instagram.com/johndoe",
+        Facebook: "https://facebook.com/johndoe",
+      },
+    },
+    {
+      image: "/images/editwebsite/team02.png",
+      name: "Andry Moray",
+      title: "Artist",
+      links: {
+        Twitter: "https://twitter.com/janedoe",
+        Discord: "https://discord.gg/janedoe",
+        Instagram: "https://instagram.com/janedoe",
+        Facebook: "https://facebook.com/janedoe",
+      },
+    },
+    {
+      image: "/images/editwebsite/team03.png",
+      name: "Zaid Ed",
+      title: "Artist",
+      links: {
+        Twitter: "https://twitter.com/janedoe",
+        Discord: "https://discord.gg/janedoe",
+        Instagram: "https://instagram.com/janedoe",
+        Facebook: "https://facebook.com/janedoe",
+      },
+    },
+    {
+      image: "/images/editwebsite/team04.png",
+      name: "Laila Ed",
+      title: "Artist",
+      links: {
+        Twitter: "https://twitter.com/janedoe",
+        Discord: "https://discord.gg/janedoe",
+        Instagram: "https://instagram.com/janedoe",
+        Facebook: "https://facebook.com/janedoe",
+      },
+    },
+    {
+      image: "/images/editwebsite/team05.png",
+      name: "Naymur",
+      title: "Artist",
+      links: {
+        Twitter: "https://twitter.com/janedoe",
+        Discord: "https://discord.gg/janedoe",
+        Instagram: "https://instagram.com/janedoe",
+        Facebook: "https://facebook.com/janedoe",
+      },
+    },
+    // Add two more cards here
+  ]);
+  const [teamFormData, setTeamFormData] = useState({
+    image: "",
+    name: "",
+    title: "",
+    links: {
+      Twitter: "",
+      Discord: "",
+      Instagram: "",
+      Facebook: "",
+    },
+  });
+  const [editingCardIndex, setEditingCardIndex] = useState(null);
+  function handleTeamFormChange(event) {
+    const { name, value } = event.target;
+    if (name === "name" || name === "title") {
+      setTeamFormData({
+        ...teamFormData,
+        [name]: value,
+      });
+    } else {
+      setTeamFormData({
+        ...teamFormData,
+        links: {
+          ...teamFormData.links,
+          [name]: value,
+        },
+      });
+    }
+  }
+  function handleTeamImageChange(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setTeamFormData({ ...teamFormData, image: reader.result });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+  function handleTeamAddCard(event) {
+    event.preventDefault();
+    setTeamCards([...teamCards, teamFormData]);
+    setTeamFormData({
+      image: "",
+      name: "",
+      title: "",
+      links: {
+        Twitter: "",
+        Discord: "",
+        Instagram: "",
+        Facebook: "",
+      },
+    });
+  }
+  function handleTeamEditCard(index) {
+    setTeamFormData(teamCards[index]);
+    setEditingCardIndex(index);
+  }
+  function handleTeamUpdateCard(event) {
+    event.preventDefault();
+    const updatedCards = [...teamCards];
+    updatedCards[editingCardIndex] = teamFormData;
+    setTeamCards(updatedCards);
+    setTeamFormData({
+      image: "",
+      name: "",
+      title: "",
+      links: {
+        Twitter: "",
+        Discord: "",
+        Instagram: "",
+        Facebook: "",
+      },
+    });
+    setEditingCardIndex(null);
+  }
+  function handleTeamDeleteCard(index) {
+    const updatedCards = teamCards.filter((_, i) => i !== index);
+    setTeamCards(updatedCards);
+  }
+
+  //! Features
+  const [featuresHeading, setFeaturesHeading] = useState("Why Us");
+
+  const [featuresType1, setFeaturesType1] = useState("upperSection1");
+  const [featuresType2, setFeaturesType2] = useState("bottomSection2");
+
+  // feature1 bg
+  const [features1Bg, setfeatures1Bg] = useState(
+    "/images/templatePage/descriptionblock.svg"
+  );
+  const [uploadFeature1Bg, setUploadFeature1Bg] = useState(
+    "/images/templatePage/descriptionblock.svg"
+  );
+
+  const handleFeatures1ImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setfeatures1Bg(URL.createObjectURL(imageFile));
+    setUploadFeature1Bg(imageFile);
+  };
+  // feature2 bg
+  const [features2Bg, setfeatures2Bg] = useState(
+    "/images/templatePage/descriptionblock.svg"
+  );
+  const [uploadFeature2Bg, setUploadFeature2Bg] = useState(
+    "/images/templatePage/descriptionblock.svg"
+  );
+  const handleFeatures2ImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setfeatures2Bg(URL.createObjectURL(imageFile));
+    setUploadFeature2Bg(imageFile);
+  };
+  const [feature1SubHeading, setFeature1SubHeading] =
+    useState("Create and Invest");
+  const [feature2SubHeading, setFeature2SubHeading] =
+    useState("Sync and Track");
+  const [feature1Heading, setFeature1Heading] = useState("Create your own NFT");
+  const [feature2Heading, setFeature2Heading] = useState(
+    "Multiple Chains, One Home"
+  );
+
+  const [feature1Subtext, setFeature1Subtext] = useState(
+    "Multiple Chains, One Home. Stack up all your NFTs from across blockchains."
+  );
+  const [feature2Subtext, setFeature2Subtext] = useState(
+    "We make it easy to Discover, Invest and manage all your NFTs at one place, looked up one of the more obscure.Find the right NFT collections to buy within the platform."
+  );
+  const [clcktionBtn, setClcktionBtn] = useState("4,500+");
+  const [nftValueBtn, setNftValueBtn] = useState("2.5x");
+  // // const [heroButton, setHeroButton] = useState("Browse collection");
+
+  // const [showDesColorPopup, setShowDesColorPopup] = useState(false);
+  const [featureOverlayColor, setFeatureOverlayColor] = useState("#321155");
+
+  //! Roadmap
+  const [faqHeading, setFaqHeading] = useState("FAQ");
+
+  const [faqCards, setFaqCards] = useState([
+    {
+      id: 1,
+      title: "PHASE 01",
+      explain: "Planning ",
+    },
+    {
+      id: 2,
+      title: "PHASE 02",
+      explain: "Production ",
+    },
+    {
+      id: 3,
+      title: "PHASE 03 ",
+      explain: "Launch ",
+    },
+  ]);
+
+  const [faQFormData, setFaqFormData] = useState({
+    title: "Phase 01",
+    explain: "Planning",
+  });
+
+  const [faqEditMode, setFaQEditMode] = useState(false);
+  const [faqEditCardId, setFaqEditCardId] = useState(null);
+
+  const handleFaqInputChange = (e, index) => {
+    if (index !== undefined) {
+      setFaqFormData((prevFormData) => {
+        const updatedList = [...prevFormData.list];
+        updatedList[index] = e.target.value;
+        return { ...prevFormData, list: updatedList };
+      });
+    } else {
+      setFaqFormData({ ...faQFormData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleFaqSubmit = (e) => {
+    e.preventDefault();
+    if (faqEditMode) {
+      const updatedCards = faqCards.map((card) => {
+        if (card.id === faqEditCardId) {
+          return { ...card, ...faQFormData };
+        }
+        return card;
+      });
+      setFaqCards(updatedCards);
+      setFaqFormData(false);
+      setFaqEditCardId(null);
+    } else {
+      const newCard = {
+        id: Math.random(),
+        ...faQFormData,
+      };
+      setFaqCards([...faqCards, newCard]);
+    }
+    setFaqFormData({
+      title: "",
+      explain: "",
+    });
+  };
+
+  const handleFaqEdit = (card) => {
+    setFaqFormData(card);
+    setFaqFormData(true);
+    setFaqEditCardId(card.id);
+  };
+
+  const handleFaqDelete = (card) => {
+    const updatedCards = faqCards.filter((c) => c.id !== card.id);
+    setFaqCards(updatedCards);
+  };
+
   //!  upload section
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -540,69 +813,7 @@ function EditHomePageindex() {
               <Grid xs={4}>
                 <EditorInputSec>
                   {/* <h1>Card List</h1>
-                  <form onSubmit={handleSubmit}>
-                    <label>
-                      Title:
-                      <input
-                        type="text"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Explain:
-                      <textarea
-                        name="explain"
-                        value={formData.explain}
-                        onChange={handleInputChange}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      Subtext:
-                      <input
-                        type="text"
-                        name="subtext"
-                        value={formData.subtext}
-                        onChange={handleInputChange}
-                      />
-                    </label>
-                    <br />
-                    <label>
-                      List:
-                      <ul>
-                        {formData.list.map((item, index) => (
-                          <li key={index}>
-                            <input
-                              type="text"
-                              value={item}
-                              onChange={(e) => handleInputChange(e, index)}
-                            />
-                          </li>
-                        ))}
-                      </ul>
-                    </label>
-                    <br />
-                    <button type="submit">{editMode ? "Save" : "Add"}</button>
-                  </form>
-                  <br />
-                  <hr />
-                  {cards.map((card) => (
-                    <div key={card.id}>
-                      <h2>{card.title}</h2>
-                      <p>{card.explain}</p>
-                      <p>{card.subtext}</p>
-                      <ul>
-                        {card.list.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                      <button onClick={() => handleEdit(card)}>Edit</button>
-                      <button onClick={() => handleDelete(card)}>Delete</button>
-                    </div>
-                  ))} */}
+                   */}
                   <PageEditorFrom
                     onClick={() => {
                       setShowColorPopup(false);
@@ -895,6 +1106,159 @@ function EditHomePageindex() {
                           />
                         </div>
                       </div>
+                      {/* Team/Artist  */}
+                      <div
+                        className={
+                          activeIndex === 7
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(7)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Team/Artist</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditTeam
+                            setTeamHeading={setTeamHeading}
+                            teamFormData={teamFormData}
+                            handleTeamFormChange={handleTeamFormChange}
+                            handleTeamImageChange={handleTeamImageChange}
+                            handleTeamAddCard={handleTeamAddCard}
+                            handleTeamEditCard={handleTeamEditCard}
+                            handleTeamUpdateCard={handleTeamUpdateCard}
+                            handleTeamDeleteCard={handleTeamDeleteCard}
+                            editingCardIndex={editingCardIndex}
+                            teamCards={teamCards}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* Features Block */}
+                      <div
+                        className={
+                          activeIndex === 8
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(8)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Features </span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditFeatures
+                            featuresType1={featuresType1}
+                            setFeaturesType1={setFeaturesType1}
+                            featuresType2={featuresType2}
+                            setFeaturesType2={setFeaturesType2}
+                            setDesHeading={setDesHeading}
+                            setDesSubtext={setDesSubtext}
+                            setDesSubHeading={setDesSubHeading}
+                            editHeroScript={editHeroSubtext}
+                            setEditHeroScript={setEditHeroSubtext}
+                            handleDesImageChange={handleDesImageChange}
+                            setHeroButton={setHeroButton}
+                            desOverlayColor={desOverlayColor}
+                            setDesOverlayColor={setDesOverlayColor}
+                            showDesColorPopup={showDesColorPopup}
+                            setShowDesColorPopup={setShowDesColorPopup}
+                            handleFeatures1ImageChange={
+                              handleFeatures1ImageChange
+                            }
+                            handleFeatures2ImageChange={
+                              handleFeatures2ImageChange
+                            }
+                            setFeature1SubHeading={setFeature1SubHeading}
+                            setFeature2SubHeading={setFeature2SubHeading}
+                            setFeature1Heading={setFeature1Heading}
+                            setFeature2Heading={setFeature2Heading}
+                            setFeature2Subtext={setFeature2Subtext}
+                            setFeature1Subtext={setFeature1Subtext}
+                            setClcktionBtn={setClcktionBtn}
+                            setNftValueBtn={setNftValueBtn}
+                            setFeatureOverlayColor={setFeatureOverlayColor}
+                            featureOverlayColor={featureOverlayColor}
+                            setFeaturesHeading={setFeaturesHeading}
+                            key="1"
+                          />
+                        </div>
+                      </div>
+                      {/* FAQ  */}
+                      <div
+                        className={
+                          activeIndex === 9
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(9)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>FAQ</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+
+                        <div className="page-editor-content-input">
+                          <EditFrequentQuestion
+                            handleFaqSubmit={handleFaqSubmit}
+                            handleFaqInputChange={handleFaqInputChange}
+                            faQFormData={faQFormData}
+                            faqEditMode={faqEditMode}
+                            setRoadmapHeading={setRoadmapHeading}
+                            setFaqHeading={setFaqHeading}
+                            key="1"
+                          />
+                        </div>
+                      </div>
                     </div>
                     <Box
                       sx={{
@@ -1016,6 +1380,27 @@ function EditHomePageindex() {
                     handleEdit={handleEdit}
                     handleDelete={handleDelete}
                     roadmapHeading={roadmapHeading}
+                    handleTeamEditCard={handleTeamEditCard}
+                    handleTeamDeleteCard={handleTeamDeleteCard}
+                    teamHeading={teamHeading}
+                    teamCards={teamCards}
+                    featuresType1={featuresType1}
+                    featuresType2={featuresType2}
+                    features1Bg={features1Bg}
+                    features2Bg={features2Bg}
+                    feature1SubHeading={feature1SubHeading}
+                    feature2SubHeading={feature2SubHeading}
+                    feature1Heading={feature1Heading}
+                    feature2Heading={feature2Heading}
+                    feature1Subtext={feature1Subtext}
+                    feature2Subtext={feature2Subtext}
+                    clcktionBtn={clcktionBtn}
+                    nftValueBtn={nftValueBtn}
+                    featureOverlayColor={featureOverlayColor}
+                    faqCards={faqCards}
+                    handleFaqEdit={handleFaqEdit}
+                    handleFaqDelete={handleFaqDelete}
+                    faqHeading={faqHeading}
                   />
                 </Box>
               </Grid>

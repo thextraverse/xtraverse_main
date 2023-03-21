@@ -229,9 +229,9 @@ function Edithero(props) {
               )}
             </Box>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Grid container spacing={2}>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       heroType === "hero1" ? "hero-type active" : "hero-type"
@@ -246,7 +246,7 @@ function Edithero(props) {
                     />
                   </div>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       heroType === "hero2" ? "hero-type active" : "hero-type"
@@ -261,7 +261,7 @@ function Edithero(props) {
                     />
                   </div>
                 </Grid>
-                <Grid xs={6}>
+                <Grid item xs={6}>
                   <div
                     className={
                       heroType === "hero3" ? "hero-type active" : "hero-type"
@@ -278,7 +278,7 @@ function Edithero(props) {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   marginTop: "15px",
@@ -298,7 +298,7 @@ function Edithero(props) {
                 </div>
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 component="span"
                 sx={{ padding: "5px 0px 10px", display: "block" }}
@@ -370,7 +370,7 @@ function Edithero(props) {
                 </Box>
               </div> */}
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Heading</span>
                 <input
@@ -380,7 +380,7 @@ function Edithero(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box sx={{}}>
                 <span>Subtext</span>
                 <input
@@ -391,7 +391,7 @@ function Edithero(props) {
               </Box>
             </Grid>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 sx={{
                   gap: "10px",

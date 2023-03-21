@@ -324,7 +324,6 @@ function EditHowitWorks(props) {
                   />
                 </Box>
                 <Box>
-                  {" "}
                   <textarea
                     placeholder="Explain your first step"
                     id="textarea"

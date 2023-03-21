@@ -35,13 +35,14 @@ import withReactContent from "sweetalert2-react-content";
 import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import { AiOutlinePlus } from "react-icons/ai";
-function EditRaodmap(props) {
+function EditFrequentQuestion(props) {
   const {
-    handleSubmit,
-    handleInputChange,
-    formData,
-    editMode,
+    handleFaqSubmit,
+    handleFaqInputChange,
+    faQFormData,
+    faqEditMode,
     setRoadmapHeading,
+    setFaqHeading,
   } = props;
 
   return (
@@ -52,56 +53,33 @@ function EditRaodmap(props) {
             <span>Add Headline</span>
             <input
               type="text"
-              onChange={(e) => setRoadmapHeading(e.target.value)}
+              onChange={(e) => setFaqHeading(e.target.value)}
               placeholder="headline"
             />
           </Grid>
         </Grid>
       </Headlines>
       <Form className="forminput">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFaqSubmit}>
           <div>
             <span>Title</span>
             <input
               type="text"
               name="title"
-              value={formData.title}
-              onChange={handleInputChange}
+              value={faQFormData.title}
+              onChange={handleFaqInputChange}
               placeholder="Title"
             />
             <br />
             <span>Heading</span>
-            <input
-              type="text"
+            <textarea
               name="explain"
-              value={formData.explain}
-              onChange={handleInputChange}
+              value={faQFormData.explain}
+              onChange={handleFaqInputChange}
               placeholder="Heading"
             />
             <br />
-            <span>Subtext</span>
 
-            <textarea
-              name="subtext"
-              value={formData.subtext}
-              onChange={handleInputChange}
-              placeholder="Subtext"
-            />
-            <br />
-            <span>List</span>
-            <ul style={{ listStyle: "none" }} className="radmapul">
-              {formData.list.map((item, index) => (
-                <li key={index}>
-                  <input
-                    type="text"
-                    value={item}
-                    onChange={(e) => handleInputChange(e, index)}
-                    placeholder="List.."
-                  />
-                </li>
-              ))}
-            </ul>
-            <br />
             <Button
               type="submit"
               sx={{
@@ -124,7 +102,7 @@ function EditRaodmap(props) {
                 },
               }}
             >
-              {editMode ? "Update" : "Add New Roadmap"}
+              {faqEditMode ? "Update" : "Add New Roadmap"}
             </Button>
             <br />
           </div>
@@ -154,4 +132,4 @@ function EditRaodmap(props) {
 //     </>
 //   );
 // }
-export default EditRaodmap;
+export default EditFrequentQuestion;

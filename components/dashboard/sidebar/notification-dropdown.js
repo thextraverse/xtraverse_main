@@ -144,7 +144,13 @@ function NotificationDropdownlayout() {
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        sx={{ fontSize: "1.7em", color: "#fff" }}
+        sx={{
+          fontSize: "1.7em",
+          color: "#fff",
+          minWidth: "24px",
+          padding: "6px 0px",
+          // mr: "20px",
+        }}
       >
         <IoMdNotificationsOutline />
         {/* {username} */}

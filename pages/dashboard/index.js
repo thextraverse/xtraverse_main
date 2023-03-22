@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import Sidebar from "../../components/dashboard/sidebar/Navbar";
 import { Box } from "@mui/system";
 import { Button, Grid } from "@mui/material";
-import TopCard from "../../components/dashboard/home/TopCard";
 import EngagementsTop from "../../components/dashboard/home/EngagementsTop";
 import EngagementsLeft from "../../components/dashboard/home/EngagementsLeft";
 import EngagementsRight from "../../components/dashboard/home/EngagementsRight";
@@ -16,17 +15,10 @@ import {
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { Router, useRouter } from "next/router";
 import React, { useState, PureComponent } from "react";
-import axios from "axios";
-import WertIntergration from "../../components/api/WertIntergration";
 import ActivityChart from "../../components/dashboard/charts/DashboardCharts";
-import EngageChart from "../../components/dashboard/charts/EngagementChart";
-import MixedChartsLayout from "../../components/dashboard/charts/MixedCharts";
-import TreeMapLayout from "../../components/dashboard/charts/DashboardTreeMap";
-import DashboardPieChart from "../../components/dashboard/charts/DashboardPieChart";
-import ChartText from "../../components/dashboard/charts/ChartText";
-import DashboardGradientDonut from "../../components/dashboard/charts/GradientDonutChart";
-import DashboardRadialBarChart from "../../components/dashboard/charts/RadialBarChart";
-import DashboardMultipleYAxis from "../../components/dashboard/charts/DashboardMultipleYChart";
+
+import Select from "react-select";
+
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -78,6 +70,46 @@ const data = [
   { date: "2023-03-20", followers: 5273, following: 5838, post: 435 },
   { date: "2023-03-21", followers: 5273, following: 5838, post: 435 },
 ];
+const colorStyles = {
+  control: (styles, state) => ({
+    ...styles,
+    backgroundColor: "#252525",
+    color: "#fff",
+    border: "transparent",
+    padding: "10px 0px",
+    margin: "10px 0px",
+    width: "180px",
+    "& input": {
+      color: "#fff !important",
+    },
+  }),
+  highlight: (styles, state) => ({
+    ...styles,
+    backgroundColor: "yellow",
+    color: "#fff",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    color: "#000",
+    backgroundColor: state.isSelected ? "#04fcbc" : "#fff",
+    "&:active": {
+      backgroundColor: "blue",
+    },
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: "white", // Change this to your desired color
+  }),
+  menu: (provided) => ({
+    ...provided,
+    maxHeight: "150px",
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    maxHeight: "150px",
+    overflowY: "auto",
+  }),
+};
 
 export default function Dashboard() {
   const { user, twitterData } = useUserAuth();
@@ -93,6 +125,18 @@ export default function Dashboard() {
     following: item.following,
     post: item.post,
   }));
+
+  const [launchSelection, setLaunchSelection] = useState({});
+  const handleSelectLaunch = (selectedOption) => {
+    setProjectSelection(selectedOption);
+    // console.log("handleChange", selectedOption);
+  };
+
+  const options1 = [
+    { value: "NewBusiness", label: "New Business" },
+    { value: "NewOffer", label: "New Offer" },
+  ];
+
   return (
     <Main>
       <Dashboardsc>
@@ -126,10 +170,18 @@ export default function Dashboard() {
                           width: "100%",
                         }}
                       >
-                        <h2>Recent activity</h2>
+                        <h2>Attention*</h2>
 
                         <div style={{ width: "175px" }}>
-                          <Button
+                          <Select
+                            styles={colorStyles}
+                            options={options1}
+                            // defaultValue={{ value: "H1", label: "H1" }}
+                            isSearchable={true}
+                            onChange={handleSelectLaunch}
+                            placeholder="Launch"
+                          />
+                          {/* <Button
                             type="submit"
                             sx={{
                               width: "100%",
@@ -151,7 +203,7 @@ export default function Dashboard() {
                             }}
                           >
                             Create Project
-                          </Button>
+                          </Button> */}
                         </div>
                       </Box>
                     </Grid>
@@ -196,337 +248,341 @@ export default function Dashboard() {
                         </ResponsiveContainer> */}
                       </ActivityCharts>
 
+                      {/* twitter data here */}
                       <Grid container spacing={2}>
-                        {twitterData && (
-                          <>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>Followers</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                        <>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>Followers</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData
+                                    ? twitterData.data.daily[0].followers
+                                    : "31270"}
+                                </h2>
+
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].followers}
-                                  </h2>
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
 
-                                  <div
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>21 new followers today</span>
+                            </TopCardDiv>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>Follwing</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData
+                                    ? twitterData.data.daily[0].following
+                                    : "5231"}
+                                </h2>
 
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>21 new followers today</span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>Follwing</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].following}
-                                  </h2>
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
 
-                                  <div
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>21 new followers today</span>
+                            </TopCardDiv>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>Posts</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData
+                                    ? twitterData.data.statistics.total.tweets
+                                    : "8023"}
+                                </h2>
 
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>21 new followers today</span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>Posts</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.statistics.total.tweets}
-                                  </h2>
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
 
-                                  <div
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>
+                                {/* {data && data.data.daily[0].following} */}
+                                21 new followers today
+                              </span>
+                            </TopCardDiv>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>impressions</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData
+                                    ? twitterData.data.daily[0].favorites
+                                    : "23943"}
+                                </h2>
 
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>
-                                  {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
-                                </span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>impressions</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
-                                  </h2>
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
 
-                                  <div
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>
+                                {/* {data && data.data.daily[0].following} */}
+                                21 new followers today
+                              </span>
+                            </TopCardDiv>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>Profile visit</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData
+                                    ? twitterData.data.daily[0].favorites
+                                    : "4231"}
+                                </h2>
 
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>
-                                  {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
-                                </span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>Profile visit</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
-                                  </h2>
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
 
-                                  <div
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>
+                                {/* {data && data.data.daily[0].following} */}
+                                21 new followers today
+                              </span>
+                            </TopCardDiv>
+                          </Grid>
+                          <Grid item xs={2}>
+                            <TopCardDiv>
+                              <p>Discord</p>
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h2>
+                                  {twitterData &&
+                                    twitterData.data.daily[0].favorites}
+                                </h2>
 
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>
-                                  {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
-                                </span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
-                                <p>Discord</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
+                                <div
+                                  style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    marginTop: "8px",
+
+                                    marginLeft: "8px",
+                                    padding: "4px",
+                                    background: "#252525",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
-                                  </h2>
-
-                                  <div
+                                  <svg
+                                    width="1em"
+                                    height="1em"
+                                    viewBox="0 0 10 10"
+                                    fill="none"
+                                  >
+                                    <path
+                                      d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                      stroke="#71DD37"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                  <span
                                     style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
+                                      marginLeft: "6px",
                                     }}
                                   >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>21 new followers today</span>
-                              </TopCardDiv>
-                            </Grid>
-                          </>
-                        )}
+                                    +5.0 %
+                                  </span>
+                                </div>
+                              </Box>
+                              <span>21 new followers today</span>
+                            </TopCardDiv>
+                          </Grid>
+                        </>
                       </Grid>
                     </Grid>
                     {/*Engagements and Community section*/}
@@ -535,7 +591,7 @@ export default function Dashboard() {
                         <Grid item xs={12} style={{ margin: "0 0 20px 0" }}>
                           <Grid container spacing={1.3}>
                             <Grid item xs={6}>
-                              <h2>Engagements</h2>
+                              <h2>Engagement*</h2>
                             </Grid>
                             <Grid item xs={6}>
                               <h2>Community</h2>
@@ -574,7 +630,7 @@ export default function Dashboard() {
                     <Grid item xs={12} style={{ marginTop: "50px" }}>
                       <Grid container spacing={1.3}>
                         <Grid item xs={12} style={{ marginBottom: "20px" }}>
-                          <h2>Your Sales</h2>
+                          <h2>Primary Sales</h2>
                         </Grid>
 
                         <Grid item xs={12}>

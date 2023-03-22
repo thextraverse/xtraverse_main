@@ -1187,7 +1187,6 @@ export const Step = styled.div`
     padding: 15px 0px;
   }
 `;
-
 export const LuanchForm = styled.form`
   &.manageDomain {
     input,
@@ -1268,7 +1267,6 @@ export const ActiveDot = styled.div`
     }
   }
 `;
-
 export const Connectionsec = styled.div`
   width: 670px;
   margin: auto;

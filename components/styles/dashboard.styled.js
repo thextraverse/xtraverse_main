@@ -91,15 +91,21 @@ export const TopCardDiv = styled.div`
   border: 1px solid #4f4f4f;
   border-radius: 8px;
   padding: 16px;
+  height: 125px;
+  margin-top: 40px;
 `;
 
 export const EngagementsTopDiv = styled.div`
-  width: 100%;
-  height: 100%;
   /* Primary/Grey Medium */
   background: #252525;
   border-radius: 8px;
   padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  .engrd {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const EngagementsLeftDiv = styled.div`

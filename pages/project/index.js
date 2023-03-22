@@ -58,6 +58,8 @@ const Initialize = styled.div`
   &.project {
     width: 75%;
     margin: auto;
+    height: 100%;
+    margin-top: 120px;
     h1 {
       display: none;
     }
@@ -157,6 +159,9 @@ const Initialize = styled.div`
       }
     }
   }
+  .dltBtn {
+    cursor: pointer;
+  }
 `;
 export default function Project() {
   const MySwal = withReactContent(Swal);
@@ -252,19 +257,19 @@ export default function Project() {
           founderName: founderList,
           id: projectId,
         });
-        if (
-          MySwal.fire({
-            title: <strong>Uploaded</strong>,
-            icon: "success",
-          })
-        );
+        // if (
+        //   MySwal.fire({
+        //     title: <strong>Uploaded</strong>,
+        //     icon: "success",
+        //   })
+        // );
+        router.push("/project/editMarketplace/marketplaceSalespage");
       } else {
         alert("No documents found.");
       }
       setProjectData(projectId);
       setIsNoProject(false);
       // Encode the data as a query parameter
-      router.push("/project/editMarketplace/marketplaceSalespage");
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -302,7 +307,7 @@ export default function Project() {
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar activeBtn={2} heading={"Project"} />
+        <Sidebar activeBtn={2} />
         <Initialize
           className={
             isProject.length != 0 ? (isNoProject ? "" : "project") : ""
@@ -384,7 +389,7 @@ export default function Project() {
                     <form onSubmit={handleDataSubmit}>
                       <div className="form-wraper">
                         <label htmlFor="name">
-                          Name of project (keep it simple)
+                          Name of project (Name of Business)
                         </label>
                         <input
                           type="text"
@@ -404,7 +409,7 @@ export default function Project() {
                               padding: "8px 0px",
                             }}
                           >
-                            <span>Founder {index + 1} </span>
+                            <span>Member {index + 1} </span>
                             <div
                               className="dltBtn"
                               onClick={() => handleServiceRemove(index)}
@@ -414,7 +419,7 @@ export default function Project() {
                           </Box>
                           <input
                             type="text"
-                            placeholder="Founder's name"
+                            placeholder="Memeber name"
                             name="founder"
                             id="founder"
                             value={singleService.service}
@@ -451,7 +456,7 @@ export default function Project() {
                           },
                         }}
                       >
-                        <BsPlusCircle /> Add Founder
+                        <BsPlusCircle /> Add Member
                       </Button>
                       <Button
                         type="submit"
@@ -548,7 +553,7 @@ export default function Project() {
                   <form onSubmit={handleDataSubmit}>
                     <div className="form-wraper">
                       <label htmlFor="name">
-                        Name of project (keep it simple)
+                        Name of project (Name of businees)
                       </label>
                       <input
                         type="text"
@@ -568,7 +573,7 @@ export default function Project() {
                             padding: "8px 0px",
                           }}
                         >
-                          <span>Founder {index + 1} </span>
+                          <span>Memeber {index + 1} </span>
                           <div
                             className="dltBtn"
                             onClick={() => handleServiceRemove(index)}
@@ -578,7 +583,7 @@ export default function Project() {
                         </Box>
                         <input
                           type="text"
-                          placeholder="Founder's name"
+                          placeholder="Memeber name"
                           name="founder"
                           id="founder"
                           value={singleService.service}
@@ -615,7 +620,7 @@ export default function Project() {
                         },
                       }}
                     >
-                      <BsPlusCircle /> Add Founder
+                      <BsPlusCircle /> Add Member
                     </Button>
                     <Button
                       type="submit"

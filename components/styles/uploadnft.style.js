@@ -426,11 +426,50 @@ export const PreviewBox = styled.div`
   }
 `;
 export const ProductSec = styled.div`
-  h1 {
-    text-align: center;
-  }
   .createproduct {
-    height: 300px;
+    width: 100%;
+    height: 350px;
+    &.white {
+      background: #fff;
+      color: #252525;
+      border-radius: 10px;
+    }
+    span {
+      color: #252525;
+      font-weight: 400;
+    }
+    .imgsc {
+      height: 220px;
+      background: crimson;
+      border-radius: 10px;
+      &.blueGrdnt {
+        background: linear-gradient(98.67deg, #05f9ff -18.01%, #05b2f8 149.47%);
+      }
+      &.pnkGrndt {
+        background: linear-gradient(106.74deg, #e401ff -22.06%, #f60e5c 61.56%);
+      }
+    }
+    .infotxt {
+      padding: 20px;
+      button {
+        width: 100%;
+        color: #212121;
+        margin-top: 10px;
+      }
+      h3 {
+        text-align: left;
+        font-weight: 500;
+      }
+      .dflex {
+        display: flex;
+        gap: 5px;
+      }
+      h4 {
+        width: 100%;
+        font-weight: 600;
+        text-align: left;
+      }
+    }
   }
 `;
 export const BtnContainer = styled.div`

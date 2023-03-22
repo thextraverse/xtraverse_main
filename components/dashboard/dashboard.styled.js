@@ -8,20 +8,22 @@ export const Aside = styled.aside`
   top: 0vh;
   left: 20px;
   background: #303030;
-  overflow: hidden;
   z-index: 9999;
   display: grid;
   place-content: center;
-
   .nav {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 70px;
     border-radius: 16px;
     background: #252525;
     height: 97vh;
-    overflow: hidden;
+    padding: 0px;
+    &.activenav {
+      padding: 20px;
+      .ant-menu-item.ant-menu-item-selected {
+        background: #303030;
+      }
+    }
     .logo {
       padding: 25px 0px 15px;
       width: 100%;
@@ -29,44 +31,45 @@ export const Aside = styled.aside`
       span {
         width: 100% !important;
         img {
-          object-fit: cover;
+          object-fit: contain;
         }
       }
     }
     .ant-menu-item {
       margin: 15px 5px;
     }
+    ul.ant-menu {
+      position: relative;
+      height: 100%;
+      background: #252525;
+      border-radius: 15px;
+      width: 300px;
+    }
+    .ant-menu.ant-menu-root.ant-menu-vertical.ant-menu-dark.ant-menu-inline-collapsed {
+      width: 60px;
+      /* .ant-menu-item {
+        width: 30px;
+      } */
+    }
+    .ant-menu-item.ant-menu-item-selected {
+      background: transparent;
+      .ant-menu-item-icon path {
+        stroke: #04fcbc;
+      }
+      .ant-menu-title-content {
+        color: #04fcbc;
+      }
+    }
+    .ant-menu-title-content {
+      font-size: 1.25em;
+    }
     .ant-menu-item-icon {
       font-size: 1.8em !important;
+      transform: translateX(-3px);
     }
     .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
       background: #fff !important;
       color: #000;
-    }
-    > ul {
-      width: 100%;
-      height: 100%;
-      background: #252525;
-      position: relative;
-      padding: 12px 5.6px;
-
-      .ant-menu-item-selected {
-        border-radius: 12px;
-        background: #323232 !important;
-        path {
-          stroke: #04fcbc;
-        }
-      }
-      li {
-        &:last-of-type {
-          position: absolute;
-          bottom: 10px;
-        }
-        svg {
-          transform: translate(-5px, 5px);
-          padding: 1px;
-        }
-      }
     }
   }
 `;

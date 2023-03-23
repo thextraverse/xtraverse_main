@@ -11,6 +11,7 @@ import {
   HomepagePreview,
   RoadmapCard,
   XtraverseCard,
+  Faq,
 } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
@@ -36,8 +37,12 @@ import himg2 from "../../../components/images/editwebsite/mint-02.svg";
 import himg3 from "../../../components/images/editwebsite/mint-03.svg";
 import himg4 from "../../../components/images/editwebsite/mint-04.svg";
 import { Card } from "../../../components/project/editWebsite/EditRaodmap";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin6Fill, RiFacebookBoxFill } from "react-icons/ri";
+import { FiEdit, FiInstagram, FiTwitter } from "react-icons/fi";
+import {
+  RiDeleteBin6Fill,
+  RiDiscordFill,
+  RiFacebookBoxFill,
+} from "react-icons/ri";
 import { TeamCard } from "../../../components/project/editWebsite/EditTeam";
 import { Edit } from "@mui/icons-material";
 import Accordion from "@mui/material/Accordion";
@@ -45,6 +50,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Collapse } from "antd";
 function CryptoCanvasEditHome({
   menuNav,
   homeBg,
@@ -92,11 +98,22 @@ function CryptoCanvasEditHome({
   handleFaqDelete,
   faqCards,
   faqHeading,
+  footerBg,
+  footerDescription,
+  footerCopyright,
+  footerTwiiter,
+  footerDiscord,
+  footerInstagram,
+  footerHeading,
+  footerButton,
 }) {
   console.log(menuNav);
   const { user, headerMenuData, headerLogo, headermenu, navbarType } =
     useUserAuth();
-
+  const { Panel } = Collapse;
+  const onChange = (key) => {
+    console.log(key);
+  };
   return (
     <>
       <HomepagePreview>
@@ -279,6 +296,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${heroOverlayColor}` }}
             ></Box>
+            <div className="deletesc " style={{ zIndex: "2" }}></div>
           </div>
           {/* description section */}
           <div className="homesec descriptionsc">
@@ -388,7 +406,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${desOverlayColor}` }}
             ></Box>
-            <div className="deletesc"></div>
+            <div className="deletesc " style={{ zIndex: "2" }}></div>
           </div>
           {/* Collaborator */}
           <div className="homesec parternsc">
@@ -893,24 +911,87 @@ function CryptoCanvasEditHome({
           <div className="homesec roadmapsc">
             <div className="wrapper">
               <h1 className="h1">{faqHeading}</h1>
-              {faqCards.map((card) => (
-                <>
-                  <div>
-                    <div className="content">
-                      <p>{card.title}</p>
-                      <h1>{card.explain}</h1>
-                    </div>
-                    <div className="btnsc">
-                      <button onClick={() => handleFaqEdit(card)}>
-                        <FiEdit />
-                      </button>
-                      <button onClick={() => handleFaqDelete(card)}>
-                        <RiDeleteBin6Fill />
-                      </button>
-                    </div>
+              <Faq>
+                <Collapse defaultActiveKey={["1"]} onChange={onChange}>
+                  {faqCards.map((card, index) => (
+                    <>
+                      <Panel header={card.title} key={index}>
+                        <div className="content">
+                          <p>{card.explain}</p>
+                        </div>
+                        <div className="btnsc">
+                          <button onClick={() => handleFaqEdit(card)}>
+                            <FiEdit />
+                          </button>
+                          <button onClick={() => handleFaqDelete(card)}>
+                            <RiDeleteBin6Fill />
+                          </button>
+                        </div>
+                      </Panel>
+                    </>
+                  ))}
+                </Collapse>
+              </Faq>
+            </div>
+
+            <div className="deletesc"></div>
+          </div>
+          {/* FAQ */}
+          <div className="homesec footer">
+            <div className="wrapper">
+              <div className="footertxt">
+                <h1>{footerHeading}</h1>
+                <p>{footerDescription}</p>
+                <Button
+                  sx={{
+                    borderRadius: "8px",
+                    color: "#fff",
+                    fontSize: "1.2em",
+                    textTransform: "capitalize",
+                    padding: "8px 20px",
+                    fontWeight: "500",
+                    background:
+                      "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%);",
+                    margin: "10px 0px",
+                    "&:hover ": {
+                      background:
+                        "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%);",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  {footerButton}
+                </Button>
+              </div>
+
+              <div className="footerwrapper">
+                <Box
+                  sx={{
+                    width: "40%",
+                    margin: "auto",
+                  }}
+                >
+                  <div className="icons">
+                    <FiTwitter />
+                    <RiDiscordFill />
+                    <FiInstagram />
                   </div>
-                </>
-              ))}
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="image">
+                      <Image src={footerBg} alt="" width={50} height={50} />
+                      <p>Powered by Xtraverse</p>
+                    </div>
+                  </Box>
+
+                  <span>{footerCopyright}</span>
+                </Box>
+              </div>
             </div>
 
             <div className="deletesc"></div>

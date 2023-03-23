@@ -128,7 +128,8 @@ export default function Dashboard() {
 
   const [launchSelection, setLaunchSelection] = useState({});
   const handleSelectLaunch = (selectedOption) => {
-    setProjectSelection(selectedOption);
+    setLaunchSelection(selectedOption);
+    router.push("/project");
     // console.log("handleChange", selectedOption);
   };
 

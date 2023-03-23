@@ -44,7 +44,7 @@ import {
   PageEditorFrom,
   EditorInputSec,
 } from "../../../../components/styles/homepage.styled";
-
+// marketplaceSalespage
 import { XtraverseContainer } from "../../..";
 import MarketPlaceGeneral from "../../../../components/project/EditMarketplace/General";
 import MarketPlaceFeatures from "../../../../components/project/EditMarketplace/Features";
@@ -109,7 +109,7 @@ function EditMarketPlaceSalesindex() {
     setUploadLogo(imageFile);
   };
   const [waitlistBtn, setWaitlistBtn] = useState({
-    button: "Collection",
+    button: "Login",
     link: "www.demo.com",
   });
 
@@ -132,7 +132,7 @@ function EditMarketPlaceSalesindex() {
     "DRK is the first of its kind. Bringing AAA quality to the #NFT world with mythical creatures inside virtual realtiy space."
   );
   const [nftPrice, setNftPrice] = useState("7");
-  const [nftMindBtn, setNftMindBtn] = useState("Mint Now");
+  const [nftMindBtn, setNftMindBtn] = useState("Buy Now");
   const [utility, setUtility] = useState("");
   const handleSelectUtility = (selectedOption) => {
     setUtility(selectedOption);
@@ -581,7 +581,7 @@ function EditMarketPlaceSalesindex() {
       <Main>
         {/* <Stepnav /> */}
         <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={2} heading="shop" />
+          <Sidebar activeBtn={4} heading="shop" />
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid lg={4} xl={4}>

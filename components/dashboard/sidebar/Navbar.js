@@ -79,10 +79,10 @@ const items = [
       />
     </svg>,
     [
-      getItem("Website", "2", "", "project/editWebsite"),
+      getItem("Website", "3", "", "project/edit-website"),
       getItem("Shop", "4", "", "project/editMarketplace/marketplaceSalespage"),
       getItem("Community", "5", "", "Community"),
-      getItem("Launch", "6", "", "Launch"),
+      getItem("Launch", "6", "", "launch"),
     ]
   ),
 
@@ -208,7 +208,6 @@ function Sidebar({ activeBtn, heading }) {
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
-
   const router = useRouter();
   const isDashboardPage = router.pathname === "/dashboard";
 
@@ -326,7 +325,7 @@ function Sidebar({ activeBtn, heading }) {
             </div>
           </Link>
           <Menu
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={[active]}
             defaultOpenKeys={["sub1"]}
             mode="inline"
             theme="dark"

@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
     case "/project/editMarketplace/thankyouPage":
       bodyClass = "css-edtw23plc2st";
       break;
-    case "/project/editWebsite":
+    case "/project/edit-website":
       bodyClass = "css-edtw23plc2st";
       break;
     default:

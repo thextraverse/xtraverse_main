@@ -62,6 +62,7 @@ import EditTeam from "../../../components/project/editWebsite/EditTeam";
 import { useRef } from "react";
 import EditFeatures from "../../../components/project/editWebsite/EditFeatures";
 import EditFrequentQuestion from "../../../components/project/editWebsite/EditFAQ";
+import CommonFooter from "../../../components/project/editWebsite/CommonFooter";
 function EditHomePageindex() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(null);
@@ -181,7 +182,6 @@ function EditHomePageindex() {
 
   //! Roadmap
   const [roadmapHeading, setRoadmapHeading] = useState("Robo's Roadmap");
-
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -220,7 +220,6 @@ function EditHomePageindex() {
       ],
     },
   ]);
-
   const [formData, setFormData] = useState({
     title: "Phase 01",
     explain: "Planning",
@@ -228,10 +227,8 @@ function EditHomePageindex() {
       "Quality comes first. we took our time to plan out everything and build our production pipeline for a good quality artworks.",
     list: ["", "", ""],
   });
-
   const [editMode, setEditMode] = useState(false);
   const [editCardId, setEditCardId] = useState(null);
-
   const handleInputChange = (e, index) => {
     if (index !== undefined) {
       setFormData((prevFormData) => {
@@ -243,7 +240,6 @@ function EditHomePageindex() {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editMode) {
@@ -270,13 +266,11 @@ function EditHomePageindex() {
       list: ["", "", ""],
     });
   };
-
   const handleEdit = (card) => {
     setFormData(card);
     setEditMode(true);
     setEditCardId(card.id);
   };
-
   const handleDelete = (card) => {
     const updatedCards = cards.filter((c) => c.id !== card.id);
     setCards(updatedCards);
@@ -481,43 +475,53 @@ function EditHomePageindex() {
 
   //! Roadmap
   const [faqHeading, setFaqHeading] = useState("FAQ");
-
   const [faqCards, setFaqCards] = useState([
     {
       id: 1,
-      title: "PHASE 01",
-      explain: "Planning ",
+      title: "What is Robo's NFT Collection?",
+      explain:
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
     {
       id: 2,
-      title: "PHASE 02",
-      explain: "Production ",
+      title: "How we can buy and invest NFT?",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
     {
       id: 3,
-      title: "PHASE 03 ",
-      explain: "Launch ",
+      title: "Why we should choose Robo's NFT",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 4,
+      title: "Where we can buy and sell NFTs?",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 5,
+      title: "How secure in this token",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 6,
+      title: "What is your contact address",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
   ]);
 
   const [faQFormData, setFaqFormData] = useState({
-    title: "Phase 01",
-    explain: "Planning",
+    title: "",
+    explain: "",
   });
-
   const [faqEditMode, setFaQEditMode] = useState(false);
   const [faqEditCardId, setFaqEditCardId] = useState(null);
-
-  const handleFaqInputChange = (e, index) => {
-    if (index !== undefined) {
-      setFaqFormData((prevFormData) => {
-        const updatedList = [...prevFormData.list];
-        updatedList[index] = e.target.value;
-        return { ...prevFormData, list: updatedList };
-      });
-    } else {
-      setFaqFormData({ ...faQFormData, [e.target.name]: e.target.value });
-    }
+  const handleFaqInputChange = (e) => {
+    setFaqFormData({ ...faQFormData, [e.target.name]: e.target.value });
   };
 
   const handleFaqSubmit = (e) => {
@@ -530,7 +534,7 @@ function EditHomePageindex() {
         return card;
       });
       setFaqCards(updatedCards);
-      setFaqFormData(false);
+      setFaQEditMode(false);
       setFaqEditCardId(null);
     } else {
       const newCard = {
@@ -539,15 +543,11 @@ function EditHomePageindex() {
       };
       setFaqCards([...faqCards, newCard]);
     }
-    setFaqFormData({
-      title: "",
-      explain: "",
-    });
+    setFaqFormData({ title: "", explain: "" });
   };
-
   const handleFaqEdit = (card) => {
     setFaqFormData(card);
-    setFaqFormData(true);
+    setFaQEditMode(true);
     setFaqEditCardId(card.id);
   };
 
@@ -555,7 +555,27 @@ function EditHomePageindex() {
     const updatedCards = faqCards.filter((c) => c.id !== card.id);
     setFaqCards(updatedCards);
   };
+  //! Footer
+  const [footerBg, setFooterBg] = useState("/White.svg");
+  const [uploadFooterBg, setUploadFooterBg] = useState("/White.svg");
+  const handleFooterImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setFooterBg(URL.createObjectURL(imageFile));
+    setUploadFooterBg(imageFile);
+  };
+  const [footerHeading, setFooterHeading] = useState("Discover The New World");
+  const [footerDescription, setFooterDescription] = useState(
+    "Invest and manage all your NFTs at one place."
+  );
+  const [footerButton, setFooterButton] = useState("Join community");
+  const [footerCopyright, setFooterCopyright] = useState(
+    "@2023 Robo All rights reserved."
+  );
+  const [footerTwiiter, setFooterTwiiter] = useState();
+  const [footerDiscord, setFooterDiscord] = useState();
+  const [footerInstagram, setFooterInstagram] = useState();
 
+  // editWebsite
   //!  upload section
   const uniqueId = v4();
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -806,7 +826,7 @@ function EditHomePageindex() {
     <>
       <Main>
         <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={4} />
+          <Sidebar activeBtn={3} />
 
           <XtraverseContainer>
             <Grid container spacing={2}>
@@ -1259,6 +1279,48 @@ function EditHomePageindex() {
                           />
                         </div>
                       </div>
+                      {/* Description Block */}
+                      <div
+                        className={
+                          activeIndex === 10
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(10)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Footer</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+                        <div className="page-editor-content-input">
+                          <CommonFooter
+                            handleFooterImageChange={handleFooterImageChange}
+                            setFooterDescription={setFooterDescription}
+                            setFooterCopyright={setFooterCopyright}
+                            setFooterTwiiter={setFooterTwiiter}
+                            setFooterDiscord={setFooterDiscord}
+                            setFooterInstagram={setFooterInstagram}
+                            setFooterHeading={setFooterHeading}
+                            setFooterButton={setFooterButton}
+                            key="1"
+                          />
+                        </div>
+                      </div>
                     </div>
                     <Box
                       sx={{
@@ -1343,16 +1405,6 @@ function EditHomePageindex() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: "20px",
-                      }}
-                    >
-                      <Button>
-                        See full preview <AiOutlineEye />
-                      </Button>
-                    </Box>
                   </BtnContainer>
                   <CryptoCanvasEditHome
                     browseClctionBtn={browseClctionBtn}
@@ -1401,6 +1453,14 @@ function EditHomePageindex() {
                     handleFaqEdit={handleFaqEdit}
                     handleFaqDelete={handleFaqDelete}
                     faqHeading={faqHeading}
+                    footerDescription={footerDescription}
+                    footerCopyright={footerCopyright}
+                    footerTwiiter={footerTwiiter}
+                    footerDiscord={footerDiscord}
+                    footerInstagram={footerInstagram}
+                    footerHeading={footerHeading}
+                    footerBg={footerBg}
+                    footerButton={footerButton}
                   />
                 </Box>
               </Grid>

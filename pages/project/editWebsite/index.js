@@ -104,9 +104,7 @@ function EditHomePageindex() {
     setHomeBg(URL.createObjectURL(imageFile));
     setUploadHomeBg(imageFile);
   };
-  const [editHeroHeading, setEditHeroHeading] = useState(
-    "Buy & Sell Robo's Collection"
-  );
+  const [editHeroHeading, setEditHeroHeading] = useState("Buy & Sell Robos");
   const [editHeroSubtext, setEditHeroSubtext] = useState(
     "Invest and manage all your NFTs at one place."
   );
@@ -806,7 +804,7 @@ function EditHomePageindex() {
     <>
       <Main>
         <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={4} />
+          <Sidebar activeBtn={4} heading={"Website"} />
 
           <XtraverseContainer>
             <Grid container spacing={2}>
@@ -846,7 +844,7 @@ function EditHomePageindex() {
                             textTransform: "capitalize",
                           }}
                         >
-                          <span>Theme settings</span>
+                          <span>website</span>
                           <KeyboardArrowDownIcon className="activesvg" />
                         </Button>
                         <div className="visibility">
@@ -1355,6 +1353,7 @@ function EditHomePageindex() {
                     </Box>
                   </BtnContainer>
                   <CryptoCanvasEditHome
+                    activeIndex={activeIndex}
                     browseClctionBtn={browseClctionBtn}
                     homeBg={homeBg}
                     desBg={desBg}

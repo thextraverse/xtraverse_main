@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { AiOutlineEye } from "react-icons/ai";
 import demoimg from "../../../../components/images/blacklogo.svg";
+import xtraverseLogo from "../../../../components/images/logo/whitelogo.png";
 
 import Sidebar, {
   drawerWidth,
@@ -100,7 +101,7 @@ function EditMarketPlaceSalesindex() {
   const [headerType, setHeaderType] = useState("header1");
   const storeHeaderType = headerType;
   // for upload logo
-  const [homeLogo, setHomeLogo] = useState(demoimg);
+  const [homeLogo, setHomeLogo] = useState(xtraverseLogo);
   const [uploadLogo, setUploadLogo] = useState(demoimg);
   const [storeLogo, setStoreLogo] = useState();
   const handleLogoChange = (event) => {
@@ -109,7 +110,7 @@ function EditMarketPlaceSalesindex() {
     setUploadLogo(imageFile);
   };
   const [waitlistBtn, setWaitlistBtn] = useState({
-    button: "Collection",
+    button: "Login",
     link: "www.demo.com",
   });
 
@@ -581,7 +582,7 @@ function EditMarketPlaceSalesindex() {
       <Main>
         {/* <Stepnav /> */}
         <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={3} />
+          <Sidebar activeBtn={3} heading="Shop" />
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid lg={4} xl={4}>
@@ -613,7 +614,7 @@ function EditMarketPlaceSalesindex() {
                             textTransform: "capitalize",
                           }}
                         >
-                          <span>Offers page editor</span>
+                          <span>Shop</span>
                           <KeyboardArrowDownIcon className="activesvg" />
                         </Button>
                         <div className="visibility">
@@ -703,7 +704,7 @@ function EditMarketPlaceSalesindex() {
                               textTransform: "capitalize",
                             }}
                           >
-                            <span>Offer General</span>
+                            <span>General</span>
                             <KeyboardArrowDownIcon className="activesvg" />
                           </Button>
                           <div className="visibility">
@@ -754,7 +755,7 @@ function EditMarketPlaceSalesindex() {
                               textTransform: "capitalize",
                             }}
                           >
-                            <span>Offer Features</span>
+                            <span>Features</span>
                             <KeyboardArrowDownIcon className="activesvg" />
                           </Button>
                           <div className="visibility">
@@ -808,7 +809,7 @@ function EditMarketPlaceSalesindex() {
                               textTransform: "capitalize",
                             }}
                           >
-                            <span>Offer Project Bio</span>
+                            <span>Bio</span>
                             <KeyboardArrowDownIcon className="activesvg" />
                           </Button>
                           <div className="visibility">
@@ -955,22 +956,12 @@ function EditMarketPlaceSalesindex() {
                     >
                       <path
                         d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.597.374-3.106 1.04-4.444"
-                        stroke="#8A8A8E"
+                        stroke="#04fcbc"
                         strokeWidth={1.5}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: "20px",
-                      }}
-                    >
-                      <Button>
-                        See full preview <AiOutlineEye />
-                      </Button>
-                    </Box>
                   </BtnContainer>
 
                   <MarketPlaceDataPreview>

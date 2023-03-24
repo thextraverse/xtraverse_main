@@ -177,7 +177,7 @@ function EditorSalesPage(props) {
       >
         <Form className="forminput">
           <Grid container spacing={2}>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Header</span>
                 <input
@@ -187,7 +187,7 @@ function EditorSalesPage(props) {
                 />
               </Box>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box>
                 <span>Subtext </span>
                 <textarea

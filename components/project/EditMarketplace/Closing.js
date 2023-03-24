@@ -184,7 +184,7 @@ function MarketPlaceClosing(props) {
         }}
       >
         <Form className="forminput">
-          <Grid container spacing={2}>
+          <Grid item spacing={2}>
             <Grid xs={12}>
               <Box>
                 <span>Top Text</span>

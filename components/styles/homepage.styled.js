@@ -1044,7 +1044,7 @@ export const HomepagePreview = styled.div`
     &.destype3,
     &.upperSection3,
     &.bottomSection3 {
-      padding: 0px 210px;
+      padding: 0px 190px;
       display: grid;
       place-content: center;
       h1 {
@@ -1054,6 +1054,9 @@ export const HomepagePreview = styled.div`
       p {
         padding: 20px 0px;
       }
+    }
+    &.destype3 {
+      padding: 0px 140px;
     }
     &.destype1,
     &.destype2,
@@ -1090,12 +1093,13 @@ export const HomepagePreview = styled.div`
     &.bottomSection2 {
       display: grid;
       grid-template-columns: 50% auto;
-      width: 85%;
+      width: 90%;
       margin: auto;
       .herotxt {
         text-align: start;
       }
     }
+
     &.hero1,
     &.destype1,
     &.upperSection1,
@@ -1111,6 +1115,10 @@ export const HomepagePreview = styled.div`
           text-align: right;
         }
       }
+    }
+    &.destype2,
+    &.destype1 {
+      grid-template-columns: 70% auto;
     }
     &.upperSection1,
     &.upperSection2 {
@@ -1171,6 +1179,15 @@ export const HomepagePreview = styled.div`
     height: 100%;
     display: grid;
     padding: 50px 0px;
+  }
+  .editable {
+    border: 2px solid #71dd37;
+    padding: 0px 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    z-index: 2;
   }
 `;
 export const LaucnhWrapper = styled.div`

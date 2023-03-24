@@ -332,7 +332,7 @@ function ThemeSettings(props) {
               )}
             </Box>
 
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 component="span"
                 sx={{ padding: "5px 0px 10px", display: "block" }}
@@ -367,7 +367,7 @@ function ThemeSettings(props) {
                 )}
               </div>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 component="span"
                 sx={{ padding: "5px 0px 0px", display: "block" }}
@@ -403,7 +403,7 @@ function ThemeSettings(props) {
                 onChange={handleSmallUtility}
               />
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Box
                 component="span"
                 sx={{ padding: "5px 0px 10px", display: "block" }}

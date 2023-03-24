@@ -113,8 +113,8 @@ function MarketPlaceHeader(props) {
   console.log(handleImageChange);
   const [founderList, setFounderList] = useState([
     { button: "Home" },
-    { button: "About" },
-    { button: "Blog" },
+    { button: "Shop" },
+    { button: "Waitlist" },
   ]);
 
   const handleServiceChange = (selectedOption, index) => {
@@ -267,7 +267,7 @@ function MarketPlaceHeader(props) {
         }}
       >
         <Form className="forminput">
-          <Grid container spacing={2}>
+          <Grid item spacing={2}>
             <Box sx={{ width: "100%" }}>
               {uploadProgress > 0 ? (
                 <Box>

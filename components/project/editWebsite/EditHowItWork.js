@@ -49,12 +49,12 @@ function EditHowitWorks(props) {
 
   const [titleData, setTitleData] = useState({
     firstField: {
-      title: "Connect your wallet",
+      title: "Look and Learn",
       textarea:
         "Use Trust Wallet, Metamask or any wallet to connect to the app.",
     },
     secondField: {
-      title: "Select your quantity",
+      title: "Select your favorites",
       textarea:
         "Use Trust Wallet, Metamask or any wallet to connect to the app.",
     },

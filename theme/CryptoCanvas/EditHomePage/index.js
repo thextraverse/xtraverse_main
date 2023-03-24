@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { IoIosAddCircle, IoIosArrowDropright } from "react-icons/io";
 import { useRouter } from "next/router";
 import { BsDiscord, BsInstagram, BsPlusLg, BsTwitter } from "react-icons/bs";
@@ -46,6 +46,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 function CryptoCanvasEditHome({
+  activeIndex,
   menuNav,
   homeBg,
   desBg,
@@ -93,9 +94,21 @@ function CryptoCanvasEditHome({
   faqCards,
   faqHeading,
 }) {
-  console.log(menuNav);
   const { user, headerMenuData, headerLogo, headermenu, navbarType } =
     useUserAuth();
+
+  useEffect(() => {
+    const selectedSection = document.getElementsByClassName("editable")[0];
+    selectedSection?.classList?.remove("editable");
+    if (activeIndex) {
+      const section = document.getElementById(`section${activeIndex}`);
+      section?.classList?.add("editable");
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  });
 
   return (
     <>
@@ -279,6 +292,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${heroOverlayColor}` }}
             ></Box>
+            <div id="section2"></div>
           </div>
           {/* description section */}
           <div className="homesec descriptionsc">
@@ -321,8 +335,11 @@ function CryptoCanvasEditHome({
               >
                 <div className="herotxt">
                   <span>{desSubHeading}</span>
-                  <h1>{desHeading}</h1>
+                  <div style={{ width: "80%", marginBottom: "10px" }}>
+                    <h1>{desHeading}</h1>
+                  </div>
                   <p>{desSubtext}</p>
+                  <br />
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
                       <div className="grdntsc">
@@ -388,7 +405,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${desOverlayColor}` }}
             ></Box>
-            <div className="deletesc"></div>
+            <div id="section4"></div>
           </div>
           {/* Collaborator */}
           <div className="homesec parternsc">
@@ -446,7 +463,7 @@ function CryptoCanvasEditHome({
                 )}
               </Box>
             </div>
-            <div className="deletesc"></div>
+            <div id="section3"></div>
           </div>
           {/* how it works */}
           <div className="homesec howitworksec">
@@ -573,7 +590,7 @@ function CryptoCanvasEditHome({
                 </div>
               </div>
             </div>
-            <div className="deletesc"></div>
+            <div id="section5"></div>
           </div>
           {/* Roadmap */}
           <div className="homesec roadmapsc">
@@ -614,8 +631,7 @@ function CryptoCanvasEditHome({
                 ))}
               </Swiper>
             </div>
-
-            <div className="deletesc"></div>
+            <div id="section6"></div>
           </div>
           {/* Team/Artist */}
           <div className="homesec team">
@@ -678,7 +694,7 @@ function CryptoCanvasEditHome({
                 ))}
               </XtraverseCard>
             </div>
-            <div className="deletesc"></div>
+            <div id="section7"></div>
           </div>
           {/* Features section */}
           <div className="homesec descriptionsc">
@@ -887,7 +903,7 @@ function CryptoCanvasEditHome({
               className="overlaybg"
               sx={{ background: `${featureOverlayColor}` }}
             ></Box>
-            <div className="deletesc" style={{ zIndex: "2" }}></div>
+            <div id="section8"></div>
           </div>
           {/* FAQ */}
           <div className="homesec roadmapsc">
@@ -912,8 +928,7 @@ function CryptoCanvasEditHome({
                 </>
               ))}
             </div>
-
-            <div className="deletesc"></div>
+            <div id="section9"></div>
           </div>
         </Box>
       </HomepagePreview>

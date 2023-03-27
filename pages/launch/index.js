@@ -54,7 +54,7 @@ export default function Launch() {
 
   return (
     <Main>
-      <Sidebar activeBtn={6} heading={"Dashboard"} />
+      <Sidebar activeBtn={6} heading={"Integations"} />
 
       <Grid container spacing={1.3}>
         <Grid item xs={12}></Grid>
@@ -106,34 +106,35 @@ export default function Launch() {
                   </div>
                 </Box>
               </Grid>
-              <Grid item xs={12}>
-                <Box sx={{ display: "flex", gap: "10px" }}>
-                  <Button
-                    className={activeTab === 0 ? "active" : ""}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveTab(0);
-                    }}
-                    sx={{
-                      width: "100%",
-                      background: activeTab === 0 ? "#fff" : "#303030",
-                      borderRadius: "8px",
-                      color: activeTab === 0 ? "#000" : "#fff",
-                      fontSize: "1.2em",
-                      textTransform: "capitalize",
-                      padding: "8px 0px",
-                      transition: "0.3s",
-                      fontWeight: "500",
-                      margin: "10px 0px",
-                      "&:hover ": {
-                        background: "#fff",
-                        color: "#000",
-                      },
-                    }}
-                  >
-                    Integrations
-                  </Button>
-                  <Button
+              <Grid xs={12}>
+                <Grid item xs={8}>
+                  <Box sx={{ display: "flex", gap: "10px" }}>
+                    <Button
+                      className={activeTab === 0 ? "active" : ""}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveTab(0);
+                      }}
+                      sx={{
+                        width: "100%",
+                        background: activeTab === 0 ? "#fff" : "#303030",
+                        borderRadius: "8px",
+                        color: activeTab === 0 ? "#000" : "#fff",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        "&:hover ": {
+                          background: "#fff",
+                          color: "#000",
+                        },
+                      }}
+                    >
+                      Integrations
+                    </Button>
+                    {/* <Button
                     className={activeTab === 1 ? "active" : ""}
                     onClick={(e) => {
                       e.preventDefault();
@@ -185,34 +186,36 @@ export default function Launch() {
                     }}
                   >
                     Tiktok Form
-                  </Button>
-                  <Button
-                    className={activeTab === 3 ? "active" : ""}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setActiveTab(3);
-                    }}
-                    sx={{
-                      width: "100%",
-                      background: activeTab === 3 ? "#fff" : "#303030",
+                  </Button> */}
+                    <Button
+                      className={activeTab === 3 ? "active" : ""}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setActiveTab(3);
+                      }}
+                      sx={{
+                        width: "100%",
+                        background: activeTab === 3 ? "#fff" : "#303030",
 
-                      borderRadius: "8px",
-                      color: activeTab === 3 ? "#000" : "#fff",
-                      fontSize: "1.2em",
-                      textTransform: "capitalize",
-                      padding: "8px 0px",
-                      transition: "0.3s",
-                      fontWeight: "500",
-                      margin: "10px 0px",
-                      "&:hover ": {
-                        background: "#fff",
-                        color: "#000",
-                      },
-                    }}
-                  >
-                    Domain Integration
-                  </Button>
-                </Box>
+                        borderRadius: "8px",
+                        color: activeTab === 3 ? "#000" : "#fff",
+                        fontSize: "1.2em",
+                        textTransform: "capitalize",
+                        padding: "8px 0px",
+                        transition: "0.3s",
+                        fontWeight: "500",
+                        margin: "10px 0px",
+                        "&:hover ": {
+                          background: "#fff",
+                          color: "#000",
+                        },
+                      }}
+                    >
+                      Domain Integration
+                    </Button>
+                  </Box>
+                </Grid>
+
                 <hr />
                 <div className="tab-content">
                   {activeTab === 0 && (

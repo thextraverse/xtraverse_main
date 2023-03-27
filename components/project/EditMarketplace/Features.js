@@ -244,7 +244,7 @@ function MarketPlaceFeatures(props) {
                       className={tokenType === "ERC-721A" ? "active" : ""}
                     >
                       <h2>ERC-721A</h2>
-                      <p>Each unique token only has one owner.</p>
+                      <p>Each token has one owner</p>
                     </Button>
                     <Button
                       onClick={(e) => {
@@ -254,7 +254,7 @@ function MarketPlaceFeatures(props) {
                       className={tokenType === "RC-1155" ? "active" : ""}
                     >
                       <h2>ERC-1155</h2>
-                      <p>Each token is unique to multiple owner.</p>
+                      <p>Each token is unique to multiple owners</p>
                     </Button>
                   </Box>
                 </Box>
@@ -276,7 +276,7 @@ function MarketPlaceFeatures(props) {
                       className={mintType === "Regular" ? "active" : ""}
                     >
                       <h2>Regular</h2>
-                      <p>You pay gas fees</p>
+                      <p>Seller pays fees</p>
                     </Button>
                     <Button
                       onClick={(e) => {
@@ -285,8 +285,8 @@ function MarketPlaceFeatures(props) {
                       }}
                       className={mintType === "Lazy" ? "active" : ""}
                     >
-                      <h2>Lazy</h2>
-                      <p>Buyer pay gas fees</p>
+                      <h2>Free</h2>
+                      <p>Buyer pays fees</p>
                     </Button>
                   </Box>
                 </Box>

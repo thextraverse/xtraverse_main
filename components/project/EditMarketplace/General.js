@@ -185,8 +185,20 @@ function MarketPlaceGeneral(props) {
     );
   };
   const options = [
-    { value: "Waitlist", label: "Waitlist" },
-    { value: "Whitelist", label: "Whitelist" },
+    { value: "Product", label: "Product" },
+    { value: "Service", label: "Service" },
+    { value: "Collector_Item", label: "Collector Item" },
+    { value: "Art", label: "Art" },
+    { value: "Collectables", label: "Collectables" },
+    { value: "Physical Product", label: "Physical Product" },
+    { value: "Phygital Produc", label: "Phygital Produc" },
+    { value: "Digital Good", label: "Digital Good" },
+    { value: "Membership", label: "Membership" },
+    { value: "Governance Token", label: "Governance Token" },
+    { value: "Certificate", label: "Certificate" },
+    { value: "Social Token", label: "Social Token" },
+    { value: "Documents", label: "Documents" },
+    { value: "Domain", label: "Domain" },
   ];
 
   const colorStyles = {

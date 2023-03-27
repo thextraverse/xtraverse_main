@@ -113,9 +113,10 @@ const Dashboardsc = styled.div`
   position: relative;
 `;
 const Initialize = styled.div`
-  width: 985px;
-  margin: auto;
-  margin-top: 20vh;
+  width: 1300px;
+  // margin: auto;
+  margin: 10vh 0 10vh 6vw;
+  margin-top: 10vh;
   gap: 15px;
   display: flex;
   flex-direction: column;
@@ -228,10 +229,10 @@ export default function Community() {
               width: "100%",
             }}
           >
-            <h2>Account Community</h2>
+            <h2>Community</h2>
 
-            <Box sx={{ minWidth: 120, display: "flex", alignItems: "center" }}>
-              <FormControl
+            <Box sx={{ minWidth: 150, display: "flex", alignItems: "center" }}>
+              {/* <FormControl
                 fullWidth
                 style={{
                   marginRight: "20px",
@@ -260,9 +261,9 @@ export default function Community() {
                     Project 3
                   </MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
 
-              <div style={{ width: "300px" }}>
+              <div style={{ width: "200px" }}>
                 <Button
                   type="submit"
                   sx={{

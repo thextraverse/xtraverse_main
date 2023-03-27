@@ -241,7 +241,7 @@ export default function CustomTableContainer() {
       component={Paper}
       style={{ backgroundColor: "transparent", boxShadow: "unset" }}
     >
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 1300 }} aria-label="simple table">
         <TableHead className="table-head">
           <TableRow>
             {columns.map((column, i) => (

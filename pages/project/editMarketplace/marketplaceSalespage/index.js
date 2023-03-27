@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { AiOutlineEye } from "react-icons/ai";
 import demoimg from "../../../../components/images/blacklogo.svg";
-import xtraverseLogo from "../../../../components/images/logo/whitelogo.png";
+import xtraverseLogo from "../../../../components/images/logo/3d-logo.png";
 
 import Sidebar, {
   drawerWidth,

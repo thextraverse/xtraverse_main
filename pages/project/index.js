@@ -310,7 +310,7 @@ export default function Project() {
             isProject.length != 0 ? (isNoProject ? "" : "project") : ""
           }
         >
-          <h1>Initialize Project</h1>
+          <h1>Initialize Business</h1>
           <div className="createProjectButton">
             <Button
               onClick={() => setIsNoProject(true)}

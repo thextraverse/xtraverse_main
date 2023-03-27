@@ -370,13 +370,13 @@ export function IntergrationSec({ setTwitterData }) {
                 onChange={handleAnalytics1Account}
                 placeholder="Select account"
               />
-              <Select
+              {/* <Select
                 styles={colorStyles}
                 options={options2}
                 isSearchable={true}
                 onChange={handleAnalytics2Account}
                 placeholder="Select account"
-              />
+              /> */}
               <span className="span">Adwords MCC account ID</span>
               <Select
                 styles={colorStyles}
@@ -519,10 +519,35 @@ export function IntergrationSec({ setTwitterData }) {
                 onChange={handleGoogleSelectBusiness}
                 placeholder="Select page"
               />
-              <p className="absluteBtn">
+              <p>
                 Multiple locations are connected to same page, tracking or
                 messaging might not work
               </p>
+              <Button
+                className="absluteBtn"
+                sx={{
+                  width: "100%",
+                  borderRadius: "8px",
+                  color: "#fff",
+                  border: "2px solid #04FCBC",
+                  fontSize: "1em",
+                  textTransform: "capitalize",
+                  padding: "5px 0px",
+                  transition: "0.3s",
+                  fontWeight: "500",
+                  margin: "10px 0px",
+                  display: "flex",
+                  gap: "20px",
+                  "&:hover ": {
+                    color: "#000",
+                    background:
+                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                    cursor: "pointer",
+                  },
+                }}
+              >
+                Connect
+              </Button>
             </div>
           </IntegrationCard>
         </Grid>
@@ -558,7 +583,7 @@ export function IntergrationSec({ setTwitterData }) {
               </Box>
             </Box>
             <div className="content">
-              <p>Selected page</p>
+              <p>Select page</p>
               <Select
                 styles={colorStyles}
                 options={options5}

@@ -1011,8 +1011,8 @@ export const HomepagePreview = styled.div`
     /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
   }
   .logo {
-    width: 30px;
-    height: 25px;
+    width: 50px;
+    height: 45px;
     img {
       object-fit: cover;
     }

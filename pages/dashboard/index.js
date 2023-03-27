@@ -126,7 +126,7 @@ export default function Dashboard() {
                           width: "100%",
                         }}
                       >
-                        <h2>Recent activity</h2>
+                        <h2>Attention</h2>
 
                         <div style={{ width: "175px" }}>
                           <Button
@@ -535,7 +535,7 @@ export default function Dashboard() {
                         <Grid item xs={12} style={{ margin: "0 0 20px 0" }}>
                           <Grid container spacing={1.3}>
                             <Grid item xs={6}>
-                              <h2>Engagements</h2>
+                              <h2>Engagement</h2>
                             </Grid>
                             <Grid item xs={6}>
                               <h2>Community</h2>
@@ -574,7 +574,7 @@ export default function Dashboard() {
                     <Grid item xs={12} style={{ marginTop: "50px" }}>
                       <Grid container spacing={1.3}>
                         <Grid item xs={12} style={{ marginBottom: "20px" }}>
-                          <h2>Your Sales</h2>
+                          <h2>Primary Sales</h2>
                         </Grid>
 
                         <Grid item xs={12}>

@@ -112,22 +112,22 @@ export default function CustomTableContainer() {
 
   const columns = [
     {
-      title: "Name",
+      title: "NAME",
     },
     {
-      title: "email",
+      title: "EMAIL",
     },
     {
-      title: "phone",
+      title: "PHONE",
     },
     {
-      title: "engagement",
+      title: "ENGAGEMENTS",
     },
     {
-      title: "connection",
+      title: "CONNECTIONS",
     },
     {
-      title: "owner",
+      title: "OWNER",
     },
     {
       title: "",
@@ -138,8 +138,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -147,8 +147,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -156,8 +156,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -165,8 +165,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -174,8 +174,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -183,8 +183,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -192,8 +192,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -201,8 +201,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -210,8 +210,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -219,8 +219,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -228,8 +228,8 @@ export default function CustomTableContainer() {
     {
       name: "Pedgy Penguin",
       email: "Pedgy@gpenguin.com",
-      phone: "+01 2345 6786",
-      engagement: ["120", "+5.0%"],
+      phone: "+XX (123)345-6789",
+      engagement: ["120"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -239,9 +239,13 @@ export default function CustomTableContainer() {
   return (
     <TableContainer
       component={Paper}
-      style={{ backgroundColor: "transparent", boxShadow: "unset" }}
+      style={{
+        backgroundColor: "transparent",
+        boxShadow: "unset",
+        // padding: "30px",
+      }}
     >
-      <Table sx={{ minWidth: 1300 }} aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead className="table-head">
           <TableRow>
             {columns.map((column, i) => (
@@ -377,10 +381,10 @@ export default function CustomTableContainer() {
 
 function TableDataMiniCells({ name, pr }) {
   return (
-    <div>
+    <div style={{ justifyContent: "center" }}>
       {name}
 
-      <div className="percent-cont">
+      {/* <div className="percent-cont">
         <svg
           width="13"
           height="13"
@@ -397,7 +401,7 @@ function TableDataMiniCells({ name, pr }) {
         </svg>
 
         <span>{`${pr}`}</span>
-      </div>
+      </div> */}
     </div>
   );
 }

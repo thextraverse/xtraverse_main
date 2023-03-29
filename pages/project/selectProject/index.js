@@ -166,6 +166,10 @@ function SelectProject() {
           // );
         }
         router.push("/project/editMarketplace");
+        window.sessionStorage.setItem(
+          "activeMenu",
+          JSON.stringify({ key: "3", label: "Shop" })
+        );
       } catch (error) {
         console.error("Error updating document:", error);
       }

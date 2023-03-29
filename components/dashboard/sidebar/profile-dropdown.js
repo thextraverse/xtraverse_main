@@ -117,6 +117,7 @@ function ProfileDropdownlayout() {
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
+        sx={{ paddingLeft: "unset" }}
         onClick={handleClick}
       >
         <Avatar icon={<UserProfile />} />

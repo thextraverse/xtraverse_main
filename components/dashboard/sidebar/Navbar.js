@@ -72,6 +72,16 @@ function getItem(label, key, icon, link, children) {
 //     label,
 //   };
 // }
+
+const menuList = {
+  1: { key: "1", label: "Dashboard" },
+  2: { key: "2", label: "Business" },
+  3: { key: "3", label: "Shop" },
+  4: { key: "4", label: "Website" },
+  5: { key: "5", label: "Community" },
+  6: { key: "6", label: "Integations" },
+  7: { key: "7", label: "Setting" },
+};
 const items = [
   getItem(
     "Dashboards",
@@ -85,7 +95,7 @@ const items = [
     "dashboard"
   ),
   getItem(
-    "Project",
+    "Business",
     "2",
     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
       <path
@@ -96,91 +106,91 @@ const items = [
         strokeLinejoin="round"
       />
     </svg>,
-    "project"
-    // [
-    //   getItem("Website", "4", <PhonelinkRoundedIcon />, "project/editWebsite"),
-    //   getItem(
-    //     "Shops",
-    //     "3",
-    //     <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
-    //       <path
-    //         d="M5 8v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C6.602 5 7.068 5 8 5h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C17 6.52 17 7.08 17 8.2V14c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C15.398 17 14.932 17 14 17v0M9 4v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C10.602 1 11.068 1 12 1h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C21 2.52 21 3.08 21 4.2V10c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C19.398 13 18.932 13 18 13v0M4.2 21h5.6c1.12 0 1.68 0 2.108-.218a2 2 0 00.874-.874C13 19.48 13 18.92 13 17.8v-5.6c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C11.48 9 10.92 9 9.8 9H4.2c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C1 10.52 1 11.08 1 12.2v5.6c0 1.12 0 1.68.218 2.108a2 2 0 00.874.874C2.52 21 3.08 21 4.2 21z"
-    //         stroke="#fff"
-    //         strokeWidth={1.5}
-    //         strokeLinecap="round"
-    //         strokeLinejoin="round"
-    //       />
-    //     </svg>,
-    //     "project/editMarketplace/marketplaceSalespage"
-    //   ),
-    //   getItem(
-    //     "Community",
-    //     "5",
-    //     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-    //       <path
-    //         d="M15 10a4 4 0 000-8m2 20h2.8a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H17m-5-8a4 4 0 11-8 0 4 4 0 018 0zM4.2 22h7.6a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H5.8A4.8 4.8 0 001 18.8v0A3.2 3.2 0 004.2 22z"
-    //         stroke="#fff"
-    //         strokeWidth={1.5}
-    //         strokeLinecap="round"
-    //         strokeLinejoin="round"
-    //       />
-    //     </svg>,
-    //     "community"
-    //   ),
-    //   getItem(
-    //     "Integations",
-    //     "6",
-    //     <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
-    //       <path
-    //         d="M4.5 9.5L1 7l1.078-1.078c.886-.886 1.328-1.328 1.852-1.608a4 4 0 011.496-.453c.59-.058 1.205.065 2.433.31l1.64.329m8 8l.329 1.64c.246 1.229.369 1.843.31 2.434a4 4 0 01-.452 1.496c-.28.524-.723.967-1.608 1.852L15 21l-2.5-3.5M6 16l2-2m8.002-6a2 2 0 11-4 0 2 2 0 014 0zm.197-7h-.55c-.978 0-1.467 0-1.927.11a4 4 0 00-1.156.48c-.404.247-.75.593-1.442 1.285L6 8c-1.09 1.09-1.635 1.636-1.927 2.224a4 4 0 000 3.552C4.364 14.364 4.91 14.909 6 16v0c1.09 1.09 1.636 1.636 2.224 1.927a4 4 0 003.553 0c.588-.291 1.133-.837 2.223-1.927l5.125-5.126c.692-.691 1.038-1.037 1.285-1.44.22-.359.381-.749.48-1.157.11-.46.11-.95.11-1.928V5.8c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.311-1.311C18.719 1 17.879 1 16.199 1z"
-    //         stroke="#fff"
-    //       />
-    //     </svg>,
-    //     "launch"
-    //   ),
-    // ]
+    "project",
+    [
+      getItem("Website", "4", <DevicesOutlinedIcon />, "project/editWebsite"),
+      getItem(
+        "Shop",
+        "3",
+        <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
+          <path
+            d="M5 8v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C6.602 5 7.068 5 8 5h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C17 6.52 17 7.08 17 8.2V14c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C15.398 17 14.932 17 14 17v0M9 4v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C10.602 1 11.068 1 12 1h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C21 2.52 21 3.08 21 4.2V10c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C19.398 13 18.932 13 18 13v0M4.2 21h5.6c1.12 0 1.68 0 2.108-.218a2 2 0 00.874-.874C13 19.48 13 18.92 13 17.8v-5.6c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C11.48 9 10.92 9 9.8 9H4.2c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C1 10.52 1 11.08 1 12.2v5.6c0 1.12 0 1.68.218 2.108a2 2 0 00.874.874C2.52 21 3.08 21 4.2 21z"
+            stroke="#fff"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>,
+        "project/editMarketplace/marketplaceSalespage"
+      ),
+      getItem(
+        "Community",
+        "5",
+        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M15 10a4 4 0 000-8m2 20h2.8a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H17m-5-8a4 4 0 11-8 0 4 4 0 018 0zM4.2 22h7.6a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H5.8A4.8 4.8 0 001 18.8v0A3.2 3.2 0 004.2 22z"
+            stroke="#fff"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>,
+        "community"
+      ),
+      getItem(
+        "Integations",
+        "6",
+        <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
+          <path
+            d="M4.5 9.5L1 7l1.078-1.078c.886-.886 1.328-1.328 1.852-1.608a4 4 0 011.496-.453c.59-.058 1.205.065 2.433.31l1.64.329m8 8l.329 1.64c.246 1.229.369 1.843.31 2.434a4 4 0 01-.452 1.496c-.28.524-.723.967-1.608 1.852L15 21l-2.5-3.5M6 16l2-2m8.002-6a2 2 0 11-4 0 2 2 0 014 0zm.197-7h-.55c-.978 0-1.467 0-1.927.11a4 4 0 00-1.156.48c-.404.247-.75.593-1.442 1.285L6 8c-1.09 1.09-1.635 1.636-1.927 2.224a4 4 0 000 3.552C4.364 14.364 4.91 14.909 6 16v0c1.09 1.09 1.636 1.636 2.224 1.927a4 4 0 003.553 0c.588-.291 1.133-.837 2.223-1.927l5.125-5.126c.692-.691 1.038-1.037 1.285-1.44.22-.359.381-.749.48-1.157.11-.46.11-.95.11-1.928V5.8c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.311-1.311C18.719 1 17.879 1 16.199 1z"
+            stroke="#fff"
+          />
+        </svg>,
+        "launch"
+      ),
+    ]
   ),
 
-  getItem(
-    "Shops",
-    "3",
-    <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
-      <path
-        d="M5 8v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C6.602 5 7.068 5 8 5h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C17 6.52 17 7.08 17 8.2V14c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C15.398 17 14.932 17 14 17v0M9 4v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C10.602 1 11.068 1 12 1h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C21 2.52 21 3.08 21 4.2V10c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C19.398 13 18.932 13 18 13v0M4.2 21h5.6c1.12 0 1.68 0 2.108-.218a2 2 0 00.874-.874C13 19.48 13 18.92 13 17.8v-5.6c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C11.48 9 10.92 9 9.8 9H4.2c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C1 10.52 1 11.08 1 12.2v5.6c0 1.12 0 1.68.218 2.108a2 2 0 00.874.874C2.52 21 3.08 21 4.2 21z"
-        stroke="#fff"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>,
-    "project/editMarketplace/marketplaceSalespage"
-  ),
-  getItem("Website", "4", <DevicesOutlinedIcon />, "project/editWebsite"),
-  getItem(
-    "Community",
-    "5",
-    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M15 10a4 4 0 000-8m2 20h2.8a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H17m-5-8a4 4 0 11-8 0 4 4 0 018 0zM4.2 22h7.6a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H5.8A4.8 4.8 0 001 18.8v0A3.2 3.2 0 004.2 22z"
-        stroke="#fff"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>,
-    "community"
-  ),
-  getItem(
-    "Integations ",
-    "6",
-    <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
-      <path
-        d="M4.5 9.5L1 7l1.078-1.078c.886-.886 1.328-1.328 1.852-1.608a4 4 0 011.496-.453c.59-.058 1.205.065 2.433.31l1.64.329m8 8l.329 1.64c.246 1.229.369 1.843.31 2.434a4 4 0 01-.452 1.496c-.28.524-.723.967-1.608 1.852L15 21l-2.5-3.5M6 16l2-2m8.002-6a2 2 0 11-4 0 2 2 0 014 0zm.197-7h-.55c-.978 0-1.467 0-1.927.11a4 4 0 00-1.156.48c-.404.247-.75.593-1.442 1.285L6 8c-1.09 1.09-1.635 1.636-1.927 2.224a4 4 0 000 3.552C4.364 14.364 4.91 14.909 6 16v0c1.09 1.09 1.636 1.636 2.224 1.927a4 4 0 003.553 0c.588-.291 1.133-.837 2.223-1.927l5.125-5.126c.692-.691 1.038-1.037 1.285-1.44.22-.359.381-.749.48-1.157.11-.46.11-.95.11-1.928V5.8c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.311-1.311C18.719 1 17.879 1 16.199 1z"
-        stroke="#fff"
-      />
-    </svg>,
-    "launch"
-  ),
+  // getItem(
+  //   "Shops",
+  //   "3",
+  //   <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
+  //     <path
+  //       d="M5 8v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C6.602 5 7.068 5 8 5h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C17 6.52 17 7.08 17 8.2V14c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C15.398 17 14.932 17 14 17v0M9 4v0c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C10.602 1 11.068 1 12 1h5.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C21 2.52 21 3.08 21 4.2V10c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C19.398 13 18.932 13 18 13v0M4.2 21h5.6c1.12 0 1.68 0 2.108-.218a2 2 0 00.874-.874C13 19.48 13 18.92 13 17.8v-5.6c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C11.48 9 10.92 9 9.8 9H4.2c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C1 10.52 1 11.08 1 12.2v5.6c0 1.12 0 1.68.218 2.108a2 2 0 00.874.874C2.52 21 3.08 21 4.2 21z"
+  //       stroke="#fff"
+  //       strokeWidth={1.5}
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //     />
+  //   </svg>,
+  //   "project/editMarketplace/marketplaceSalespage"
+  // ),
+  // getItem("Website", "4", <DevicesOutlinedIcon />, "project/editWebsite"),
+  // getItem(
+  //   "Community",
+  //   "5",
+  //   <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+  //     <path
+  //       d="M15 10a4 4 0 000-8m2 20h2.8a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H17m-5-8a4 4 0 11-8 0 4 4 0 018 0zM4.2 22h7.6a3.2 3.2 0 003.2-3.2v0a4.8 4.8 0 00-4.8-4.8H5.8A4.8 4.8 0 001 18.8v0A3.2 3.2 0 004.2 22z"
+  //       stroke="#fff"
+  //       strokeWidth={1.5}
+  //       strokeLinecap="round"
+  //       strokeLinejoin="round"
+  //     />
+  //   </svg>,
+  //   "community"
+  // ),
+  // getItem(
+  //   "Integations ",
+  //   "6",
+  //   <svg width="1em" height="1em" viewBox="0 0 22 22" fill="none">
+  //     <path
+  //       d="M4.5 9.5L1 7l1.078-1.078c.886-.886 1.328-1.328 1.852-1.608a4 4 0 011.496-.453c.59-.058 1.205.065 2.433.31l1.64.329m8 8l.329 1.64c.246 1.229.369 1.843.31 2.434a4 4 0 01-.452 1.496c-.28.524-.723.967-1.608 1.852L15 21l-2.5-3.5M6 16l2-2m8.002-6a2 2 0 11-4 0 2 2 0 014 0zm.197-7h-.55c-.978 0-1.467 0-1.927.11a4 4 0 00-1.156.48c-.404.247-.75.593-1.442 1.285L6 8c-1.09 1.09-1.635 1.636-1.927 2.224a4 4 0 000 3.552C4.364 14.364 4.91 14.909 6 16v0c1.09 1.09 1.636 1.636 2.224 1.927a4 4 0 003.553 0c.588-.291 1.133-.837 2.223-1.927l5.125-5.126c.692-.691 1.038-1.037 1.285-1.44.22-.359.381-.749.48-1.157.11-.46.11-.95.11-1.928V5.8c0-1.68 0-2.52-.327-3.162a3 3 0 00-1.311-1.311C18.719 1 17.879 1 16.199 1z"
+  //       stroke="#fff"
+  //     />
+  //   </svg>,
+  //   "launch"
+  // ),
   getItem(
     "Setting",
     "7",
@@ -254,6 +264,23 @@ const QnaIcons = () => {
 };
 function Sidebar({ activeBtn, heading }) {
   const [collapsed, setCollapsed] = useState(false);
+  const { user, logOut } = useUserAuth();
+  const [activeMenu, setActiveMenu] = useState({
+    key: "1",
+    label: "Dashboard",
+  });
+
+  useEffect(() => {
+    const storedState = window.sessionStorage.getItem("activeMenu");
+    if (storedState) {
+      const storedValue = JSON.parse(storedState);
+      if (storedValue.key != activeMenu?.key) {
+        setActiveMenu(storedValue);
+      }
+    } else {
+      window.sessionStorage.setItem("activeMenu", JSON.stringify(activeMenu));
+    }
+  });
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -264,7 +291,6 @@ function Sidebar({ activeBtn, heading }) {
     setIsOpen(!isOpen);
   };
 
-  const { user, logOut } = useUserAuth();
   // console.log(user);
   // logout
   const router = useRouter();
@@ -291,81 +317,7 @@ function Sidebar({ activeBtn, heading }) {
 
   return (
     <>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { lg: "calc(100% - 100px)" },
-          background: "#303030",
-          backdropFilter: "blur(10px)",
-          borderBottom: "2px solid #252525",
-          color: "#000",
-          boxShadow: "0px 0px 0px transparent",
-          // addingLeft: "50px",
-          // ml: { sm: `${drawerWidth}px` },
-          position: "fixed",
-        }}
-      >
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingLeft: "0px",
-            // padding: "0px 0px",
-          }}
-        >
-          {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { lg: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-          <Box
-            sx={{
-              fontSize: "2em",
-              fontWeight: "bold",
-              color: "#fff",
-            }}
-          >
-            {heading}
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "end",
-              // gap: "12px",
-            }}
-          >
-            {/* <Box>
-              <CyptoDropdownSec />
-            </Box> */}
-            <SearchBox>
-              <GoSearch />
-              <input type="text" placeholder="Search..." />
-            </SearchBox>
-            <Box>
-              <NotificationDropdownlayout />
-            </Box>
-            <Box>
-              <ProfileDropdownlayout />
-            </Box>
-          </Box>
-        </Toolbar>
-      </AppBar>
-
       <Aside>
-        {/* <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button> */}
         <div className="nav">
           <Link href="/">
             <div className="logo">
@@ -373,8 +325,26 @@ function Sidebar({ activeBtn, heading }) {
             </div>
           </Link>
           <Menu
-            defaultSelectedKeys={[active]}
-            // defaultOpenKeys={["sub1"]}
+            selectedKeys={[activeMenu.key]}
+            // defaultOpenKeys={["2"]}
+            onClick={(e) => {
+              console.log(e, "test on click");
+              setActiveMenu(menuList[e.key]);
+              window.sessionStorage.setItem(
+                "activeMenu",
+                JSON.stringify(menuList[e.key])
+              );
+            }}
+            onOpenChange={() => {
+              console.log("router.pathname", router.pathname);
+              if (activeMenu !== 2) {
+                setActiveMenu(menuList[2]);
+                window.sessionStorage.setItem(
+                  "activeMenu",
+                  JSON.stringify(menuList[2])
+                );
+              }
+            }}
             mode="inline"
             theme="dark"
             inlineCollapsed={true}

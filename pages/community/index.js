@@ -109,13 +109,14 @@ const Main = styled.main`
 `;
 
 const Dashboardsc = styled.div`
-  width: 100%;
+  width: 93%;
   position: relative;
+  // padding: 30px;
+  margin: 10vh 0 10vh 6vw;
 `;
 const Initialize = styled.div`
-  width: 1300px;
+  // width: 1300px;
   // margin: auto;
-  margin: 10vh 0 10vh 6vw;
   margin-top: 10vh;
   gap: 15px;
   display: flex;
@@ -218,7 +219,7 @@ export default function Community() {
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar activeBtn={5} heading={"Project"} />
+        {/* <Sidebar activeBtn={5} heading={"Project"} /> */}
         <Initialize>
           <Box
             sx={{
@@ -263,7 +264,7 @@ export default function Community() {
                 </Select>
               </FormControl> */}
 
-              <div style={{ width: "200px" }}>
+              {/* <div style={{ width: "200px" }}>
                 <Button
                   type="submit"
                   sx={{
@@ -287,13 +288,13 @@ export default function Community() {
                 >
                   Create Project
                 </Button>
-              </div>
+              </div> */}
             </Box>
           </Box>
 
           <FilterBar />
 
-          <div>
+          <div style={{ width: "100%" }}>
             <Table />
           </div>
         </Initialize>

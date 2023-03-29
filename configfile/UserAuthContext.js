@@ -13,6 +13,10 @@ import {
 const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState("");
+  const [activeMenu, setActiveMenu] = useState({
+    key: "1",
+    label: "Dashboard",
+  });
   const [twitterData, setTwitterData] = useState();
   const [headerMenuData, setHeaderMenuData] = useState("");
   const [headerLogo, setHeaderLogo] = useState();
@@ -37,6 +41,7 @@ export function UserAuthContextProvider({ children }) {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider);
   }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -49,6 +54,8 @@ export function UserAuthContextProvider({ children }) {
     <userAuthContext.Provider
       value={{
         user,
+        activeMenu,
+        setActiveMenu,
         signUpAuth,
         loginAuth,
         logOut,

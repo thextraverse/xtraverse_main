@@ -79,14 +79,14 @@ const ActivityChart = () => {
   const [chartData, setChartData] = useState({
     series: [
       {
-        name: "Follwers",
+        name: "Followers",
         data: objectData.data.daily.map((item) => ({
           x: item.date,
           y: item.followers,
         })),
       },
       {
-        name: "Follwing",
+        name: "Following",
         data: objectData.data.daily.map((item) => ({
           x: item.date,
           y: item.following,
@@ -186,7 +186,7 @@ const ActivityChart = () => {
         },
       },
       markers: {
-        size: 6,
+        size: 0,
         hover: {
           sizeOffset: 6,
         },

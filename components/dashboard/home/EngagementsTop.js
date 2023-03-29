@@ -7,7 +7,7 @@ export default function EngagementsTop() {
     <EngagementsTopDiv>
       <Grid container>
         <Grid item xs={4}>
-          <p>Created</p>
+          <p>New Offers</p>
           <Box
             sx={{
               width: "100%",
@@ -47,7 +47,7 @@ export default function EngagementsTop() {
               </span>
             </div>
           </Box>
-          <span>5 new mints</span>
+          <span>5 new offers</span>
         </Grid>
         <Grid item xs={4}>
           <p>Purchased</p>
@@ -90,10 +90,10 @@ export default function EngagementsTop() {
               </span>
             </div>
           </Box>
-          <span>5 new mints</span>
+          <span>5 new purchased</span>
         </Grid>
         <Grid item xs={4}>
-          <p>Airdrop</p>
+          <p>Sent</p>
           <Box
             sx={{
               width: "100%",
@@ -133,7 +133,7 @@ export default function EngagementsTop() {
               </span>
             </div>
           </Box>
-          <span>5 new mints</span>
+          <span>5 new sent</span>
         </Grid>
       </Grid>
     </EngagementsTopDiv>

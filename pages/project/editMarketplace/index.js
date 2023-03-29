@@ -437,6 +437,10 @@ function EditHomePageindex() {
     // }
     // setUploadProgress("");
     router.push("/project/editMarketplace/marketplaceSalespage");
+    window.sessionStorage.setItem(
+      "activeMenu",
+      JSON.stringify({ key: "3", label: "Shop" })
+    );
   };
   const [tempalteId, setTempalteId] = useState();
   const queryUser = collection(db, "Users");

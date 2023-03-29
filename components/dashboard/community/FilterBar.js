@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
+import Image from "next/image";
 
 import * as React from "react";
 import Checkbox from "@mui/material/Checkbox";
@@ -85,7 +86,48 @@ function FilterComponents() {
           <Checkbox {...label} style={{ color: "#fff" }} />
         </Grid>
 
-        <Grid item xs={2.8} style={{ alignSelf: "center" }}>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
+          <div className="drp-up">
+            <Image
+              src="/images/communityPage/vector.svg"
+              alt="hero-type1"
+              width={15}
+              height={16}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
+          <div className="drp-up">
+            <Image
+              src="/images/communityPage/email.svg"
+              alt="hero-type1"
+              width={15}
+              height={16}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
+          <div className="drp-up">
+            <Image
+              src="/images/communityPage/cloud.svg"
+              alt="hero-type1"
+              width={15}
+              height={16}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
+          <div className="drp-up">
+            <Image
+              src="/images/communityPage/send-2.svg"
+              alt="hero-type1"
+              width={15}
+              height={16}
+            />
+          </div>
+        </Grid>
+
+        <Grid item xs={2} style={{ alignSelf: "center" }}>
           <div className="input">
             <svg
               width="16"
@@ -106,7 +148,7 @@ function FilterComponents() {
           </div>
         </Grid>
 
-        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <svg
               width="16"

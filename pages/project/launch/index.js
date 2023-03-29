@@ -50,8 +50,8 @@ const Main = styled.main`
   padding: 30px;
 `;
 const Launchsc = styled.div`
-  width: 500px;
-  margin: auto;
+  // width: 500px;
+  // margin: auto;
   .launchimgbox {
     display: grid;
     place-content: center;
@@ -249,7 +249,7 @@ function Launch() {
       </Head>
 
       <Main>
-        <Sidebar activeBtn={2} />
+        {/* <Sidebar activeBtn={2} /> */}
         <Stepnav />
         <Box
           sx={{

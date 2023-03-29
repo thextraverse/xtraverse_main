@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 export const Main = styled.main`
-  margin-top: 82px;
+  // margin-top: 82px;
   /* 252525 */
   /* 303030 */
   /* padding: 30px; */
@@ -386,36 +386,35 @@ export const Form = styled.div`
 `;
 export const EditorInputSec = styled.div`
   position: fixed;
-  width: 580px;
+  // width: 380px;
   height: calc(100vh - 60px);
   z-index: 9;
   background: #303030;
   padding: 0px 20px 20px 20px;
   overflow-x: hidden;
-  padding-left: 100px;
-  left: 0px;
+  // left: 0px;
 
   @media screen and (min-width: 1200px) {
-    width: 450px;
+    width: 380px;
     margin: auto;
   }
   @media screen and (min-width: 1536px) {
     width: 502px;
     margin: auto;
-    left: 0px;
+    // left: 0px;
   }
   @media screen and (min-width: 1640px) {
     width: 550px;
     margin: auto;
     padding-left: 100px;
-    left: 0px;
+    // left: 0px;
     /* left: inherit; */
   }
   @media screen and (min-width: 1840px) {
     width: 640px;
     margin: auto;
     padding-left: 120px;
-    left: 0px;
+    // left: 0px;
     /* left: inherit; */
   }
 
@@ -423,7 +422,7 @@ export const EditorInputSec = styled.div`
     width: 700px;
     margin: auto;
     padding-left: 100px;
-    left: 0px;
+    // left: 0px;
     /* left: inherit; */
   }
   /* border-right: 1px solid #fff; */
@@ -742,8 +741,8 @@ export const PageEditorFrom = styled.div`
 `;
 export const HomepagePreview = styled.div`
   width: 90%;
-  margin: 10px;
-  margin-left: auto;
+  // margin: 10px;
+  margin: auto;
   height: 100%;
   position: relative;
   overflow: hidden;
@@ -1011,8 +1010,8 @@ export const HomepagePreview = styled.div`
     /* background: linear-gradient(25deg, #2600fc 0%, #ff00ea 100%); */
   }
   .logo {
-    width: 50px;
-    height: 45px;
+    width: 30px;
+    height: 25px;
     img {
       object-fit: cover;
     }

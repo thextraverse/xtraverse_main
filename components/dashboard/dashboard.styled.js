@@ -3,28 +3,30 @@ export const HeaderSection = styled.div`
   position: relative;
 `;
 export const Aside = styled.aside`
-  position: fixed;
+
   height: 100vh;
-  top: 0vh;
-  left: 20px;
-  background: #303030;
-  overflow: hidden;
-  z-index: 9999;
-  display: grid;
-  place-content: center;
+  background: "#252525";
+  // border-radius: "20px";
+  // margin: "10px 20px";
+
+
 
   .nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 70px;
-    border-radius: 16px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
+    //width: 15vw;
+    // border-radius: 16px;
+    
+    margin-top: 1.5vh;
+    border-radius: 25px;
     background: #252525;
-    height: 97vh;
-    overflow: hidden;
+    height: 100vh;
+    // overflow: hidden;
     .logo {
       padding: 25px 0px 15px;
       width: 100%;
+      line-height: 0px !important;
       cursor: pointer;
       span {
         width: 100% !important;
@@ -33,6 +35,15 @@ export const Aside = styled.aside`
         }
       }
     }
+
+    .ant-menu-dark .ant-menu-item-selected {
+      background-color: #424242;
+    }
+
+    .ant-menu-dark.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+      background: #252525;
+    }
+
     .ant-menu-item {
       margin: 15px 5px;
     }
@@ -43,28 +54,45 @@ export const Aside = styled.aside`
       background: #fff !important;
       color: #000;
     }
+  
+    a {
+      color: inherit !important;
+    }
+    
     > ul {
       width: 100%;
       height: 100%;
       background: #252525;
       position: relative;
-      padding: 12px 5.6px;
 
       .ant-menu-item-selected {
         border-radius: 12px;
         background: #323232 !important;
+        color: #04fcbc !important;
         path {
           stroke: #04fcbc;
         }
+        
       }
-      li {
-        &:last-of-type {
-          position: absolute;
-          bottom: 10px;
+      :where(.css-dev-only-do-not-override-1me4733).ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
+        color: #04fcbc;
+        path {
+          stroke: #04fcbc;
         }
-        svg {
-          transform: translate(-5px, 5px);
-          padding: 1px;
+    }
+      :where(.css-dev-only-do-not-override-1me4733).ant-menu-submenu-popup .ant-menu-item-selected {
+        background: #04fcbc !important;
+        }
+        
+        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-submenu>.ant-menu-submenu-title {
+        padding-top: 5px !important;
+        inset-inline-start: 0;
+        padding-inline: calc(50% - 18px) !important;
+        text-overflow: clip;
+        }  
+        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content{
+          text-align: start;
+
         }
       }
     }
@@ -330,7 +358,7 @@ export const SearchBox = styled.div`
   svg {
     position: absolute;
     left: 8px;
-    top: 30%;
+    top: 40%;
     color: #fff;
   }
 `;

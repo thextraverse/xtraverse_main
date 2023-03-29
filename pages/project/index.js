@@ -35,9 +35,14 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 const Main = styled.main`
   background: #303030;
-  padding: 0px;
+  padding: 30px;
   height: 100%;
   color: #fff;
 `;
@@ -47,19 +52,19 @@ const Dashboardsc = styled.div`
   position: relative;
 `;
 const Initialize = styled.div`
-  width: 800px;
+  padding: 0px 0px 0px 100px;
+
+  width: 80%;
+  margin: auto;
   gap: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  margin: auto;
   &.project {
-    width: 75%;
+    width: 100%;
     margin: auto;
     height: 100%;
-    margin-top: 100px;
     h1 {
       display: none;
     }
@@ -127,6 +132,7 @@ const Initialize = styled.div`
   }
   h1 {
     font-weight: 600;
+    font-size: xx-large;
     margin: 20px 0px;
   }
   form {
@@ -145,6 +151,15 @@ const Initialize = styled.div`
         opacity: 0.3;
       }
     }
+    #demo-simple-select-label,
+    #demo-simple-select {
+      color: #fff;
+    }
+
+    #demo-simple-select + input + svg {
+      fill: #fff;
+    }
+
     label {
       font-size: 0.98em;
       padding: 3px 0px;
@@ -181,7 +196,17 @@ export default function Project() {
   const [founderList, setFounderList] = useState([{ founder: "" }]);
 
   const handleServiceChange = (e, index) => {
-    const { name, value } = e.target;
+    console.log(e, "console in project index");
+    const name = "",
+      value = "";
+    if (e.value) {
+      name = "role";
+      value = e.value;
+    } else {
+      name = e.target.name;
+      value = e.target.value;
+    }
+    console.log(name, value, "console in project index");
     const list = [...founderList];
     list[index][name] = value;
     setFounderList(list);
@@ -194,11 +219,11 @@ export default function Project() {
     setFounderList(list);
   };
   const handleServiceAdd = () => {
-    setFounderList([...founderList, { founder: "" }]);
+    setFounderList([...founderList, {}]);
   };
-  console.log(founderList);
+  // console.log(founderList);
   const projectId = projectName && projectName.split(" ").join("");
-  console.log(projectId);
+  // console.log(projectId);
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     const imageRef = ref(storage, `images/${upldPrjctCover.name + v4()}`);
@@ -267,6 +292,10 @@ export default function Project() {
       setIsNoProject(false);
       // Encode the data as a query parameter
       router.push("/project/editMarketplace/marketplaceSalespage");
+      window.sessionStorage.setItem(
+        "activeMenu",
+        JSON.stringify({ key: "3", label: "Shop" })
+      );
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -289,7 +318,7 @@ export default function Project() {
       const subcollectionRef = collection(db, "Users", autoId, "project");
       const querySnapshot2 = await getDocs(subcollectionRef);
       const docs = querySnapshot2.docs.map((doc) => doc.data());
-      console.log(docs);
+      // console.log(docs);
       setIsProject(docs);
     }
   }
@@ -299,16 +328,20 @@ export default function Project() {
   }, [emailData]);
   handleGetData();
 
-  console.log("id", isProject);
+  const roleOptions = [
+    { name: "founder", value: "Founder" },
+    { name: "marketer", value: "Marketer" },
+    { name: "developer", value: "Developer" },
+    { name: "salesperson", value: "Salesperson" },
+    { name: "treasury_manager", value: "Treasury Manager" },
+  ];
 
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar activeBtn={2} heading={"Project"} />
+        {/* <Sidebar activeBtn={2} heading={"Project"} /> */}
         <Initialize
-          className={
-            isProject.length != 0 ? (isNoProject ? "" : "project") : ""
-          }
+          className={isProject.length == 0 || isNoProject ? "" : "project"}
         >
           <h1>Initialize Business</h1>
           <div className="createProjectButton">
@@ -337,172 +370,7 @@ export default function Project() {
           </div>
 
           <Grid container spacing={2}>
-            {isProject.length != 0 ? (
-              isNoProject ? (
-                <Grid container spacing={2}>
-                  <Grid item xs={6}>
-                    <Box
-                      sx={{
-                        display: "grid",
-                        placeItems: "center",
-                        height: "100%",
-                      }}
-                    >
-                      <div className="uploadProject">
-                        <input
-                          type="file"
-                          onChange={handleDesImageChange}
-                          required
-                        />
-                        <svg
-                          width="1em"
-                          height="1em"
-                          viewBox="0 0 25 22"
-                          fill="none"
-                        >
-                          <path
-                            d="M3.7 17a4.427 4.427 0 01-2.2-3.833 4.422 4.422 0 013.301-4.285l-.001-.14C4.8 4.468 8.247 1 12.5 1c3.621 0 6.658 2.513 7.48 5.9a5.532 5.532 0 013.52 5.161c0 1.81-.864 3.416-2.2 4.425M12.5 21v-9m0 0L9 15.5m3.5-3.5l3.5 3.5"
-                            stroke="#fff"
-                            strokeWidth={1.5}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <p>Upload project cover</p>
-                        {ProjectCoverImg && (
-                          <div className="img">
-                            <Image
-                              src={ProjectCoverImg}
-                              width={100}
-                              height={100}
-                              alt="projectCover"
-                            />
-                          </div>
-                        )}
-                      </div>
-                    </Box>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <form onSubmit={handleDataSubmit}>
-                      <div className="form-wraper">
-                        <label htmlFor="name">
-                          Name of project (keep it simple)
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Add a name for your project"
-                          value={projectName}
-                          onChange={(e) => setProjectName(e.target.value)}
-                          required
-                        />
-                      </div>
-                      {founderList.map((singleService, index) => (
-                        <div key={index} className="services">
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "end",
-                              padding: "8px 0px",
-                            }}
-                          >
-                            <span>Founder {index + 1} </span>
-                            <div
-                              className="dltBtn"
-                              onClick={() => handleServiceRemove(index)}
-                            >
-                              <RiDeleteBinLine />
-                            </div>
-                          </Box>
-                          <input
-                            type="text"
-                            placeholder="Founder's name"
-                            name="founder"
-                            id="founder"
-                            value={singleService.service}
-                            onChange={(e) => handleServiceChange(e, index)}
-                          />
-                          <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            value={singleService.service}
-                            onChange={(e) => handleServiceChange(e, index)}
-                          />
-                        </div>
-                      ))}
-                      <Button
-                        onClick={handleServiceAdd}
-                        sx={{
-                          background: "#252525",
-                          width: "100%",
-                          borderRadius: "8px",
-                          fontSize: "1.2em",
-                          textTransform: "capitalize",
-                          padding: "8px 0px",
-                          transition: "0.3s",
-                          fontWeight: "500",
-                          margin: "10px 0px",
-                          display: "flex",
-                          gap: "8px",
-                          border: "2px dashed #8A8A8E",
-                          color: "#fff",
-                          cursor: "pointer",
-                          "&:hover ": {
-                            border: "2px dashed #fff",
-                          },
-                        }}
-                      >
-                        <BsPlusCircle /> Add Founder
-                      </Button>
-                      <Button
-                        type="submit"
-                        sx={{
-                          width: "100%",
-                          background:
-                            "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                          borderRadius: "8px",
-                          color: "#000",
-                          fontSize: "1.2em",
-                          textTransform: "capitalize",
-                          padding: "8px 0px",
-                          transition: "0.3s",
-                          fontWeight: "500",
-                          margin: "10px 0px",
-                          "&:hover ": {
-                            background:
-                              "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                            cursor: "pointer",
-                          },
-                        }}
-                      >
-                        Initialize
-                      </Button>
-                    </form>
-                  </Grid>
-                </Grid>
-              ) : (
-                isProject.map((prjctid, index) => {
-                  return (
-                    <>
-                      <Grid item sm={3}>
-                        <div className="project">
-                          <h2>{prjctid.id}</h2>
-                          <div className="image">
-                            <Image
-                              src={prjctid.image}
-                              width={500}
-                              height={500}
-                              objectFit="cover"
-                            />
-                          </div>
-                        </div>
-                      </Grid>
-                    </>
-                  );
-                })
-              )
-            ) : (
+            {isProject.length == 0 || isNoProject ? (
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <Box
@@ -550,7 +418,7 @@ export default function Project() {
                   <form onSubmit={handleDataSubmit}>
                     <div className="form-wraper">
                       <label htmlFor="name">
-                        Name of project (keep it simple)
+                        Name of business (keep it simple)
                       </label>
                       <input
                         type="text"
@@ -570,7 +438,7 @@ export default function Project() {
                             padding: "8px 0px",
                           }}
                         >
-                          <span>Founder {index + 1} </span>
+                          <span>Member {index + 1} </span>
                           <div
                             className="dltBtn"
                             onClick={() => handleServiceRemove(index)}
@@ -579,20 +447,38 @@ export default function Project() {
                           </div>
                         </Box>
                         <input
-                          type="text"
-                          placeholder="Founder's name"
-                          name="founder"
-                          id="founder"
-                          value={singleService.service}
-                          onChange={(e) => handleServiceChange(e, index)}
-                        />
-                        <input
                           type="email"
                           name="email"
                           placeholder="Email"
                           value={singleService.service}
                           onChange={(e) => handleServiceChange(e, index)}
                         />
+                        <FormControl
+                          fullWidth
+                          style={{
+                            margin: "10px 0px",
+                            background: "#242424",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          <InputLabel id="demo-simple-select-label">
+                            Member's Role
+                          </InputLabel>
+                          <Select
+                            id="demo-simple-select"
+                            placeholder="Select Member's Role"
+                            onChange={(e) => handleServiceChange(e, index)}
+                          >
+                            {roleOptions.map((item) => (
+                              <MenuItem
+                                value={item.name}
+                                style={{ color: "white" }}
+                              >
+                                {item.value}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
                       </div>
                     ))}
                     <Button
@@ -617,7 +503,7 @@ export default function Project() {
                         },
                       }}
                     >
-                      <BsPlusCircle /> Add Founder
+                      <BsPlusCircle /> Add Member
                     </Button>
                     <Button
                       type="submit"
@@ -645,6 +531,26 @@ export default function Project() {
                   </form>
                 </Grid>
               </Grid>
+            ) : (
+              isProject.map((prjctid, index) => {
+                return (
+                  <>
+                    <Grid item sm={3}>
+                      <div className="project">
+                        <h2>{prjctid.id}</h2>
+                        <div className="image">
+                          <Image
+                            src={prjctid.image}
+                            width={500}
+                            height={500}
+                            objectFit="cover"
+                          />
+                        </div>
+                      </div>
+                    </Grid>
+                  </>
+                );
+              })
             )}
           </Grid>
         </Initialize>

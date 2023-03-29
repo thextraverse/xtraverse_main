@@ -25,7 +25,7 @@ const Main = styled.main`
   color: #fff;
 `;
 const DasboardContainer = styled.div`
-  padding: 0px 100px;
+  padding-left: 100px;
   hr {
     background: #252525;
     width: 100%;
@@ -39,7 +39,7 @@ const DasboardContainer = styled.div`
   }
   @media screen and (min-width: 1800px) {
     width: 1750px;
-    padding: 0px 100px;
+    // padding: 0px 100px;
     margin: auto;
   }
 `;
@@ -54,7 +54,7 @@ export default function Launch() {
 
   return (
     <Main>
-      <Sidebar activeBtn={6} heading={"Integations"} />
+      {/* <Sidebar activeBtn={6} heading={"Integations"} /> */}
 
       <Grid container spacing={1.3}>
         <Grid item xs={12}></Grid>
@@ -73,13 +73,12 @@ export default function Launch() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-
                     width: "100%",
                   }}
                 >
-                  <h2>Integrations</h2>
+                  {/* <h2>Integrations</h2> */}
 
-                  <div style={{ width: "175px" }}>
+                  {/* <div style={{ width: "175px" }}>
                     <Button
                       type="submit"
                       sx={{
@@ -103,11 +102,11 @@ export default function Launch() {
                     >
                       Create Project
                     </Button>
-                  </div>
+                  </div> */}
                 </Box>
               </Grid>
               <Grid xs={12}>
-                <Grid item xs={8}>
+                {/* <Grid item xs={8}>
                   <Box sx={{ display: "flex", gap: "10px" }}>
                     <Button
                       className={activeTab === 0 ? "active" : ""}
@@ -134,7 +133,7 @@ export default function Launch() {
                     >
                       Integrations
                     </Button>
-                    {/* <Button
+                    <Button
                     className={activeTab === 1 ? "active" : ""}
                     onClick={(e) => {
                       e.preventDefault();
@@ -186,7 +185,7 @@ export default function Launch() {
                     }}
                   >
                     Tiktok Form
-                  </Button> */}
+                  </Button>
                     <Button
                       className={activeTab === 3 ? "active" : ""}
                       onClick={(e) => {
@@ -214,9 +213,9 @@ export default function Launch() {
                       Domain Integration
                     </Button>
                   </Box>
-                </Grid>
+                </Grid> */}
 
-                <hr />
+                {/* <hr /> */}
                 <div className="tab-content">
                   {activeTab === 0 && (
                     <div>

@@ -803,13 +803,13 @@ function EditHomePageindex() {
   return (
     <>
       <Main>
-        <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={4} heading={"Website"} />
+        <Box sx={{ width: "100%", padding: " 0px 0px 0px 100px" }}>
+          {/* <Sidebar activeBtn={4} heading={"Website"} /> */}
 
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid xs={4}>
-                <EditorInputSec>
+                <EditorInputSec sx={{ position: "fixed" }}>
                   {/* <h1>Card List</h1>
                    */}
                   <PageEditorFrom

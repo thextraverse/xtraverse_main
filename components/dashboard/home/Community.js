@@ -44,14 +44,14 @@ export default function Community() {
       <Grid container spacing={2}>
         <Grid item xs={5}>
           <div>
-            <p>Following</p>
+            <p>Following Related</p>
             <h2>1,500</h2>
           </div>
         </Grid>
 
         <Grid item xs={5}>
           <div>
-            <p>Correlating projects</p>
+            <p>Related Purchases</p>
             <h2>1,500</h2>
           </div>
         </Grid>

@@ -242,6 +242,10 @@ function EditMarketPlaceSalesindex() {
         console.log("No documents found.");
       }
       router.push("/project/editWebsite");
+      window.sessionStorage.setItem(
+        "activeMenu",
+        JSON.stringify({ key: "4", label: "Website" })
+      );
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -276,8 +280,8 @@ function EditMarketPlaceSalesindex() {
   return (
     <>
       <Main>
-        <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={3} />
+        <Box sx={{ padding: "0px 0px 0px 100px" }}>
+          {/* <Sidebar activeBtn={3} /> */}
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid lg={4} xl={4}>

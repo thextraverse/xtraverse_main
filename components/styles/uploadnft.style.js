@@ -204,7 +204,8 @@ export const Form = styled.form`
 export const MarketPlaceDataPreview = styled.div`
   background: #212121;
   width: 92%;
-  margin-left: auto;
+  // margin-left: auto;
+  margin: auto;
   padding: 10px 20px;
   margin-bottom: 10px;
 `;
@@ -440,7 +441,7 @@ export const BtnContainer = styled.div`
   gap: 15px;
   padding: 20px 5px 15px 15px;
   width: 92%;
-  margin-left: auto;
+  margin: auto;
   svg {
     font-size: 1.5em;
   }

@@ -539,6 +539,10 @@ function EditMarketPlaceSalesindex() {
         console.log("No documents found.");
       }
       router.push("/project/editMarketplace/thankyouPage");
+      window.sessionStorage.setItem(
+        "activeMenu",
+        JSON.stringify({ key: "3", label: "Shop" })
+      );
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");
@@ -581,8 +585,9 @@ function EditMarketPlaceSalesindex() {
     <>
       <Main>
         {/* <Stepnav /> */}
-        <Box sx={{ width: "100%" }}>
-          <Sidebar activeBtn={3} heading="Shop" />
+
+        <Box sx={{ padding: "0px 0px 0px 100px" }}>
+          {/* <Sidebar activeBtn={3} heading="Shop" /> */}
           <XtraverseContainer>
             <Grid container spacing={2}>
               <Grid lg={4} xl={4}>

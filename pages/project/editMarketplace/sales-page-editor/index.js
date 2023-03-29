@@ -185,6 +185,10 @@ function SalesPageEditor() {
         alert("No user found.");
       }
       router.push("/project/editMarketplace/marketplaceSalespage");
+      window.sessionStorage.setItem(
+        "activeMenu",
+        JSON.stringify({ key: "3", label: "Shop" })
+      );
     } catch (error) {
       console.error("Error submitting form: ", error);
       alert("Error submitting form. Please try again later.");

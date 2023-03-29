@@ -27,6 +27,7 @@ import ChartText from "../../components/dashboard/charts/ChartText";
 import DashboardGradientDonut from "../../components/dashboard/charts/GradientDonutChart";
 import DashboardRadialBarChart from "../../components/dashboard/charts/RadialBarChart";
 import DashboardMultipleYAxis from "../../components/dashboard/charts/DashboardMultipleYChart";
+import { Dropdown } from "antd";
 const Main = styled.main`
   background: #303030;
   padding: 30px;
@@ -34,7 +35,7 @@ const Main = styled.main`
   color: #fff;
 `;
 const DasboardContainer = styled.div`
-  padding: 0px 100px;
+  padding: 0px 0px 0px 100px;
   .searchAccount {
     label {
       font-size: 2em;
@@ -66,7 +67,7 @@ const DasboardContainer = styled.div`
   }
   @media screen and (min-width: 1800px) {
     width: 1750px;
-    padding: 0px 100px;
+    padding: 0px 0px 0px 100px;
     margin: auto;
   }
 `;
@@ -93,22 +94,49 @@ export default function Dashboard() {
     following: item.following,
     post: item.post,
   }));
+  const launchItems = [
+    {
+      key: "1",
+      label: (
+        <div
+          onClick={() => {
+            router.push("/project");
+            window.sessionStorage.setItem(
+              "activeMenu",
+              JSON.stringify({ key: "2", label: "Business" })
+            );
+          }}
+        >
+          New Business
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div
+          onClick={() => {
+            router.push("/project/editMarketplace/marketplaceSalespage");
+            window.sessionStorage.setItem(
+              "activeMenu",
+              JSON.stringify({ key: "3", label: "Shop" })
+            );
+          }}
+        >
+          New Offer
+        </div>
+      ),
+    },
+  ];
   return (
     <Main>
       <Dashboardsc>
-        <Sidebar activeBtn={1} heading={"Dashboard"} />
+        {/* <Sidebar activeBtn={1} heading={"Dashboard"} /> */}
 
-        <Grid container spacing={1.3}>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
+        <Grid container spacing={1.3} sx={{ marginTop: "60px" }}>
           <DasboardContainer>
             {/* <WertIntergration wertApiKey={wertApiKey} /> */}
-            <div></div>
+
             <Grid item xs={12}>
               <Grid container spacing={1.3}>
                 <Grid item xs={1.25}></Grid>
@@ -129,30 +157,38 @@ export default function Dashboard() {
                         <h2>Attention</h2>
 
                         <div style={{ width: "175px" }}>
-                          <Button
-                            type="submit"
-                            sx={{
-                              width: "100%",
-                              background:
-                                "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                              borderRadius: "8px",
-                              color: "#000",
-                              fontSize: "1.2em",
-                              textTransform: "capitalize",
-                              padding: "8px 0px",
-                              transition: "0.3s",
-                              fontWeight: "500",
-                              margin: "10px 0px",
-                              "&:hover ": {
-                                background:
-                                  "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                                cursor: "pointer",
-                              },
-                            }}
+                          <Dropdown
+                            menu={{ items: launchItems }}
+                            placement="topLeft"
                           >
-                            Create Project
-                          </Button>
+                            <Button
+                              sx={{
+                                width: "100%",
+                                background:
+                                  "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                                borderRadius: "8px",
+                                color: "#000",
+                                fontSize: "1.2em",
+                                textTransform: "capitalize",
+                                padding: "8px 0px",
+                                transition: "0.3s",
+                                fontWeight: "500",
+                                margin: "10px 0px",
+                                "&:hover ": {
+                                  background:
+                                    "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                                  cursor: "pointer",
+                                },
+                              }}
+                            >
+                              Launch
+                            </Button>
+                          </Dropdown>
                         </div>
+
+                        {/* <div style={{ width: "175px" }}>
+                          <Button type="submit">Create Project</Button>
+                        </div> */}
                       </Box>
                     </Grid>
                     {/*top card section*/}
@@ -196,8 +232,8 @@ export default function Dashboard() {
                         </ResponsiveContainer> */}
                       </ActivityCharts>
 
-                      <Grid container spacing={2}>
-                        {twitterData && (
+                      <Grid sx={{ marginTop: "10px" }} container spacing={2}>
+                        {true && (
                           <>
                             <Grid item xs={2}>
                               <TopCardDiv>
@@ -210,8 +246,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].followers}
+                                    {twitterData
+                                      ? twitterData.data.daily[0].followers
+                                      : 200}
                                   </h2>
 
                                   <div
@@ -249,12 +286,12 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>21 new followers today</span>
+                                <span>200 new followers today</span>
                               </TopCardDiv>
                             </Grid>
                             <Grid item xs={2}>
                               <TopCardDiv>
-                                <p>Follwing</p>
+                                <p>Following</p>
                                 <Box
                                   sx={{
                                     width: "100%",
@@ -263,8 +300,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].following}
+                                    {twitterData
+                                      ? twitterData.data.daily[0].following
+                                      : 50}
                                   </h2>
 
                                   <div
@@ -302,7 +340,7 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>21 new followers today</span>
+                                <span>50 new following today</span>
                               </TopCardDiv>
                             </Grid>
                             <Grid item xs={2}>
@@ -316,8 +354,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.statistics.total.tweets}
+                                    {twitterData
+                                      ? twitterData.data.statistics.total.tweets
+                                      : 40}
                                   </h2>
 
                                   <div
@@ -357,7 +396,7 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
+                                  40 new posts today
                                 </span>
                               </TopCardDiv>
                             </Grid>
@@ -372,8 +411,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
+                                    {twitterData
+                                      ? twitterData.data.daily[0].favorites
+                                      : 10}
                                   </h2>
 
                                   <div
@@ -413,7 +453,7 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
+                                  10 new impression today
                                 </span>
                               </TopCardDiv>
                             </Grid>
@@ -428,8 +468,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
+                                    {twitterData
+                                      ? twitterData.data.daily[0].favorites
+                                      : 15}
                                   </h2>
 
                                   <div
@@ -469,7 +510,7 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  21 new followers today
+                                  15 new profile visits today
                                 </span>
                               </TopCardDiv>
                             </Grid>
@@ -484,8 +525,9 @@ export default function Dashboard() {
                                   }}
                                 >
                                   <h2>
-                                    {twitterData &&
-                                      twitterData.data.daily[0].favorites}
+                                    {twitterData
+                                      ? twitterData.data.daily[0].favorites
+                                      : 15}
                                   </h2>
 
                                   <div
@@ -522,7 +564,7 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>21 new followers today</span>
+                                <span>10 new discord today</span>
                               </TopCardDiv>
                             </Grid>
                           </>

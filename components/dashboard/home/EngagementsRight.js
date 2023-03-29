@@ -4,7 +4,7 @@ import { EngagementsRightDiv } from "../../styles/dashboard.styled";
 export default function EngagementsRight() {
   return (
     <EngagementsRightDiv>
-      <p>Project unminted</p>
+      <p>Offers Sold</p>
 
       <Box
         sx={{

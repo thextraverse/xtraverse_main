@@ -3,7 +3,7 @@ import App from "next/app";
 import "../styles/globals.css";
 
 import { UserAuthContextProvider } from "../configfile/UserAuthContext";
-import Layout from "../components/dashboard/layout";
+import Layout from "../components/dashboard/Layout";
 import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

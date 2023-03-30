@@ -45,6 +45,7 @@ import ProfileDropdownlayout from "./profile-dropdown";
 import CyptoDropdownSec from "./cypto-dropdown";
 import NotificationDropdownlayout from "./notification-dropdown";
 import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 
 export const drawerWidth = 120;
 const Hr = styled.hr`
@@ -95,8 +96,6 @@ const items = [
     "dashboard"
   ),
   getItem(
-    "Business",
-    "2",
     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
       <path
         d="M2 5.2c0-1.12 0-1.68.218-2.108a2 2 0 01.874-.874C3.52 2 4.08 2 5.2 2h1.6c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C10 3.52 10 4.08 10 5.2v3.6c0 1.12 0 1.68-.218 2.108a2 2 0 01-.874.874C8.48 12 7.92 12 6.8 12H5.2c-1.12 0-1.68 0-2.108-.218a2 2 0 01-.874-.874C2 10.48 2 9.92 2 8.8V5.2zM2 19c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C3.602 16 4.068 16 5 16h2c.932 0 1.398 0 1.765.152a2 2 0 011.083 1.083C10 17.602 10 18.068 10 19v0c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C8.398 22 7.932 22 7 22H5c-.932 0-1.398 0-1.765-.152a2 2 0 01-1.083-1.083C2 20.398 2 19.932 2 19v0zM14 5c0-.932 0-1.398.152-1.765a2 2 0 011.083-1.083C15.602 2 16.068 2 17 2h2c.932 0 1.398 0 1.765.152a2 2 0 011.083 1.083C22 3.602 22 4.068 22 5v0c0 .932 0 1.398-.152 1.765a2 2 0 01-1.083 1.083C20.398 8 19.932 8 19 8h-2c-.932 0-1.398 0-1.765-.152a2 2 0 01-1.083-1.083C14 6.398 14 5.932 14 5v0zM14 15.2c0-1.12 0-1.68.218-2.108a2 2 0 01.874-.874C15.52 12 16.08 12 17.2 12h1.6c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C22 13.52 22 14.08 22 15.2v3.6c0 1.12 0 1.68-.218 2.108a2 2 0 01-.874.874C20.48 22 19.92 22 18.8 22h-1.6c-1.12 0-1.68 0-2.108-.218a2 2 0 01-.874-.874C14 20.48 14 19.92 14 18.8v-3.6z"
@@ -106,8 +105,12 @@ const items = [
         strokeLinejoin="round"
       />
     </svg>,
-    "project",
+    "submenu",
+    "",
+    "",
     [
+      getItem("Business", "2", <AddBusinessIcon />, "project"),
+
       getItem("Website", "4", <DevicesOutlinedIcon />, "project/editWebsite"),
       getItem(
         "Shop",
@@ -192,7 +195,7 @@ const items = [
   //   "launch"
   // ),
   getItem(
-    "Setting",
+    "Settings",
     "7",
     <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none">
       <path
@@ -335,16 +338,16 @@ function Sidebar({ activeBtn, heading }) {
                 JSON.stringify(menuList[e.key])
               );
             }}
-            onOpenChange={() => {
-              console.log("router.pathname", router.pathname);
-              if (activeMenu !== 2) {
-                setActiveMenu(menuList[2]);
-                window.sessionStorage.setItem(
-                  "activeMenu",
-                  JSON.stringify(menuList[2])
-                );
-              }
-            }}
+            // onOpenChange={() => {
+            //   console.log("router.pathname", router.pathname);
+            //   if (activeMenu !== 2) {
+            //     setActiveMenu(menuList[2]);
+            //     window.sessionStorage.setItem(
+            //       "activeMenu",
+            //       JSON.stringify(menuList[2])
+            //     );
+            //   }
+            // }}
             mode="inline"
             theme="dark"
             inlineCollapsed={true}

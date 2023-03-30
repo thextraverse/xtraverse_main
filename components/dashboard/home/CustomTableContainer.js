@@ -38,7 +38,7 @@ export default function CustomTableContainer() {
               <HeaderMiniCells name="VOLUME" />
             </TableCell>
             <TableCell align="right">
-              <HeaderMiniCells name="LOWEST Price" />
+              <HeaderMiniCells name="LOWEST PRICE" />
             </TableCell>
             <TableCell align="right">
               <HeaderMiniCells name="BEST OFFER" />

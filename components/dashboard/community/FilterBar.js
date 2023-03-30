@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
+import CallIcon from "@mui/icons-material/Call";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import Image from "next/image";
 
 import * as React from "react";
@@ -68,7 +70,7 @@ const FilterBar = () => {
       <Grid container spacing={2} style={{ alignItems: "center" }}>
         <Grid item xs={0.1}></Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={10}>
           <FilterComponents />
         </Grid>
 
@@ -81,7 +83,7 @@ const FilterBar = () => {
 function FilterComponents() {
   return (
     <FilterComponentsDiv>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         <Grid item xs={1} style={{ alignSelf: "center" }}>
           <Checkbox {...label} style={{ color: "#fff" }} />
         </Grid>
@@ -118,6 +120,11 @@ function FilterComponents() {
         </Grid>
         <Grid item xs={1} style={{ alignSelf: "center" }}>
           <div className="drp-up">
+            <CallIcon style={{ width: 15, height: 16 }} />
+          </div>
+        </Grid>
+        <Grid item xs={1} style={{ alignSelf: "center" }}>
+          <div className="drp-up">
             <Image
               src="/images/communityPage/send-2.svg"
               alt="hero-type1"
@@ -127,7 +134,7 @@ function FilterComponents() {
           </div>
         </Grid>
 
-        <Grid item xs={2} style={{ alignSelf: "center" }}>
+        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
           <div className="input">
             <svg
               width="16"
@@ -150,25 +157,11 @@ function FilterComponents() {
 
         <Grid item xs={1} style={{ alignSelf: "center" }}>
           <div className="drp-up">
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.33203 9.83331V10.1666V10.1666C1.33203 11.096 1.33203 11.5606 1.40889 11.947C1.72452 13.5338 2.96491 14.7742 4.55167 15.0898C4.93807 15.1666 5.40272 15.1666 6.33203 15.1666L9.66537 15.1666C10.5947 15.1666 11.0593 15.1666 11.4457 15.0898C13.0325 14.7742 14.2729 13.5338 14.5885 11.947C14.6654 11.5606 14.6654 11.096 14.6654 10.1666V10.1666V9.83331M7.9987 9.83331L7.9987 1.83331M7.9987 1.83331L10.6654 4.49998M7.9987 1.83331L5.33203 4.49998"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <FileDownloadOutlinedIcon style={{ width: 15, height: 16 }} />
           </div>
         </Grid>
 
-        <Grid item xs={2} style={{ alignSelf: "center" }}>
+        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
           <div className="sort-by">
             <span>Sort by</span>
 
@@ -189,7 +182,7 @@ function FilterComponents() {
             </svg>
           </div>
         </Grid>
-        <Grid item xs={2} style={{ alignSelf: "center" }}>
+        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
           <div className="sort-by">
             <span>Filter by</span>
 

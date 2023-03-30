@@ -586,11 +586,11 @@ function EditMarketPlaceSalesindex() {
       <Main>
         {/* <Stepnav /> */}
 
-        <Box sx={{ padding: "0px 0px 0px 100px" }}>
+        <Box sx={{ width: "100%", padding: "0px 0px 0px 100px" }}>
           {/* <Sidebar activeBtn={3} heading="Shop" /> */}
           <XtraverseContainer>
             <Grid container spacing={2}>
-              <Grid lg={4} xl={4}>
+              <Grid xs={12} md={4}>
                 {tokenType === "ERC-721A" && mintType === "Regular"
                   ? console.log("match")
                   : console.log("not match")}
@@ -943,7 +943,7 @@ function EditMarketPlaceSalesindex() {
                   </Box>
                 </EditorInputSec>
               </Grid>
-              <Grid lg={8} xl={8}>
+              <Grid xs={12} md={8}>
                 <Box
                   sx={{
                     background: "#252525",

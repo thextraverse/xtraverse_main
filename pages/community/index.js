@@ -109,15 +109,17 @@ const Main = styled.main`
 `;
 
 const Dashboardsc = styled.div`
-  width: 93%;
+  width: 100%;
   position: relative;
   // padding: 30px;
-  margin: 10vh 0 10vh 6vw;
+  // margin: 10vh 0 10vh 6vw;
 `;
 const Initialize = styled.div`
-  // width: 1300px;
+  padding: 0px 0px 0px 100px;
+
+  // width: 80%;
   // margin: auto;
-  margin-top: 10vh;
+  // margin-top: 10vh;
   gap: 15px;
   display: flex;
   flex-direction: column;

@@ -385,7 +385,9 @@ export const Form = styled.div`
   }
 `;
 export const EditorInputSec = styled.div`
-  position: fixed;
+  // position: fixed;
+  position: sticky;
+  top: 0;
   // width: 380px;
   height: calc(100vh - 60px);
   z-index: 9;
@@ -394,37 +396,41 @@ export const EditorInputSec = styled.div`
   overflow-x: hidden;
   // left: 0px;
 
-  @media screen and (min-width: 1200px) {
-    width: 380px;
-    margin: auto;
-  }
-  @media screen and (min-width: 1536px) {
-    width: 502px;
-    margin: auto;
-    // left: 0px;
-  }
-  @media screen and (min-width: 1640px) {
-    width: 550px;
-    margin: auto;
-    padding-left: 100px;
-    // left: 0px;
-    /* left: inherit; */
-  }
-  @media screen and (min-width: 1840px) {
-    width: 640px;
-    margin: auto;
-    padding-left: 120px;
-    // left: 0px;
-    /* left: inherit; */
-  }
+  // @media screen and (min-width: 720px) {
+  //   width: 270px;
+  //   margin: auto;
+  // }
+  // @media screen and (min-width: 1200px) {
+  //   width: 380px;
+  //   margin: auto;
+  // }
+  // @media screen and (min-width: 1536px) {
+  //   width: 502px;
+  //   margin: auto;
+  //   // left: 0px;
+  // }
+  // @media screen and (min-width: 1640px) {
+  //   width: 550px;
+  //   margin: auto;
+  //   padding-left: 100px;
+  //   // left: 0px;
+  //   /* left: inherit; */
+  // }
+  // @media screen and (min-width: 1840px) {
+  //   width: 640px;
+  //   margin: auto;
+  //   padding-left: 120px;
+  //   // left: 0px;
+  //   /* left: inherit; */
+  // }
 
-  @media screen and (min-width: 1940px) {
-    width: 700px;
-    margin: auto;
-    padding-left: 100px;
-    // left: 0px;
-    /* left: inherit; */
-  }
+  // @media screen and (min-width: 1940px) {
+  //   width: 700px;
+  //   margin: auto;
+  //   padding-left: 100px;
+  //   // left: 0px;
+  //   /* left: inherit; */
+  // }
   /* border-right: 1px solid #fff; */
 `;
 export const RoadmapCard = styled.div`
@@ -746,6 +752,54 @@ export const HomepagePreview = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+
+  .footer {
+    height: 500px;
+    position: relative;
+    aspect-ratio: unset !important;
+    .image {
+      width: 100px;
+      border: 2px solid #40fcbc;
+      margin: 10px 0px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 10px;
+      p {
+        font-size: 0.5em;
+      }
+    }
+    .footertxt {
+      padding-top: 100px;
+      h1 {
+        font-size: 2.9em;
+      }
+      p {
+        color: #7b7583;
+        padding: 6px 0px;
+      }
+    }
+    .footerwrapper {
+      background: url("/images/editwebsite/footer.png") no-repeat;
+      background-size: contain;
+      background-position: center;
+      width: 100%;
+      position: absolute;
+      bottom: 0px;
+      padding: 10px 0px 40px;
+    }
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      svg {
+        font-size: 2em;
+      }
+    }
+  }
+
   .partnersPrviewImg {
     display: flex;
     width: 80px;
@@ -1327,6 +1381,51 @@ export const Connectionsec = styled.div`
         font-size: 1.5em;
         color: #04fcbc;
       }
+    }
+  }
+`;
+
+export const Faq = styled.div`
+  width: 480px;
+  margin: auto;
+  margin-top: 30px;
+  background: #36224a;
+  .ant-collapse-item {
+    position: relative;
+  }
+  .ant-collapse-expand-icon {
+    color: #fff;
+  }
+  .ant-collapse-header-text {
+    text-align: left;
+    color: #fff;
+    font-size: 1.3em;
+  }
+  p {
+    font-size: 1.1em;
+    line-height: 110%;
+    text-align: left;
+  }
+  h1 {
+  }
+  .btnsc {
+    position: absolute;
+    top: 8px;
+    right: 4px;
+    display: inline-flex;
+    align-items: center;
+    button {
+      color: #000;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff;
+      font-size: 1.1em;
+      display: grid;
+      border: none;
+      place-items: center;
+      margin: 2px;
+      cursor: pointer;
     }
   }
 `;

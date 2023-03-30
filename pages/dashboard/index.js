@@ -402,7 +402,7 @@ export default function Dashboard() {
                             </Grid>
                             <Grid item xs={2}>
                               <TopCardDiv>
-                                <p>impressions</p>
+                                <p>Views</p>
                                 <Box
                                   sx={{
                                     width: "100%",
@@ -453,13 +453,13 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  10 new impression today
+                                  10 new Views today
                                 </span>
                               </TopCardDiv>
                             </Grid>
                             <Grid item xs={2}>
                               <TopCardDiv>
-                                <p>Profile visit</p>
+                                <p>Likes</p>
                                 <Box
                                   sx={{
                                     width: "100%",
@@ -510,13 +510,13 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  15 new profile visits today
+                                  15 new likes today
                                 </span>
                               </TopCardDiv>
                             </Grid>
                             <Grid item xs={2}>
                               <TopCardDiv>
-                                <p>Discord</p>
+                                <p>Comments</p>
                                 <Box
                                   sx={{
                                     width: "100%",
@@ -564,7 +564,7 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>10 new discord today</span>
+                                <span>10 new Comments today</span>
                               </TopCardDiv>
                             </Grid>
                           </>

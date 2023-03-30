@@ -21,7 +21,7 @@ export default function Community() {
 
         <Grid item xs={2}>
           <div className="tx-c">
-            <p>Holders</p>
+            <p>Members</p>
             <h2>1276</h2>
           </div>
         </Grid>

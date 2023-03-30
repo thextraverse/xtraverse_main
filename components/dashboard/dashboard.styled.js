@@ -24,7 +24,7 @@ export const Aside = styled.aside`
     height: 100vh;
     // overflow: hidden;
     .logo {
-      padding: 25px 0px 15px;
+      padding-top: 20px;
       width: 100%;
       line-height: 0px !important;
       cursor: pointer;
@@ -72,27 +72,28 @@ export const Aside = styled.aside`
         path {
           stroke: #04fcbc;
         }
-        
       }
+
+      .ant-menu-submenu-title >.ant-menu-title-content{
+        font-size: 24px;
+      }
+
       :where(.css-dev-only-do-not-override-1me4733).ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
-        color: #04fcbc;
+        color: #04fcbc !important;
         path {
-          stroke: #04fcbc;
+          stroke: #04fcbc !important;
         }
     }
       :where(.css-dev-only-do-not-override-1me4733).ant-menu-submenu-popup .ant-menu-item-selected {
         background: #04fcbc !important;
         }
-        
+
         :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-submenu>.ant-menu-submenu-title {
         padding-top: 5px !important;
-        inset-inline-start: 0;
-        padding-inline: calc(50% - 18px) !important;
-        text-overflow: clip;
         }  
-        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content{
-          text-align: start;
-
+        
+        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content{
+          text-align: start !important;
         }
       }
     }

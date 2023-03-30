@@ -7,6 +7,8 @@ import Sidebar, {
 import Stepnav from "../../../components/dashboard/step-nav";
 import { db, storage } from "../../../configfile/firebaseConfig";
 import { AiOutlineEye } from "react-icons/ai";
+import CommonFooter from "../../../components/project/editWebsite/CommonFooter";
+import whiteLogo from "../../../components/images/logo/whitelogo.png";
 
 import { v4 } from "uuid";
 import {
@@ -506,6 +508,26 @@ function EditHomePageindex() {
   const [faqEditMode, setFaQEditMode] = useState(false);
   const [faqEditCardId, setFaqEditCardId] = useState(null);
 
+  //! Footer
+  const [footerBg, setFooterBg] = useState(whiteLogo);
+  const handleFooterImageChange = (event) => {
+    const imageFile = event.target.files[0];
+    setFooterBg(URL.createObjectURL(imageFile));
+  };
+  const [footerHeading, setFooterHeading] = useState("Discover The New World");
+  const [footerDescription, setFooterDescription] = useState(
+    "Invest and manage all your NFTs at one place."
+  );
+  const [footerButton, setFooterButton] = useState("Join community");
+  const [footerCopyright, setFooterCopyright] = useState(
+    "@2023 Robo All rights reserved."
+  );
+  const [footerTwiiter, setFooterTwiiter] = useState();
+  const [footerDiscord, setFooterDiscord] = useState();
+  const [footerInstagram, setFooterInstagram] = useState();
+  const [footerEmail, setFooterEmail] = useState();
+  const [footerYoutube, setFooterYoutube] = useState();
+
   const handleFaqInputChange = (e, index) => {
     if (index !== undefined) {
       setFaqFormData((prevFormData) => {
@@ -808,8 +830,8 @@ function EditHomePageindex() {
 
           <XtraverseContainer>
             <Grid container spacing={2}>
-              <Grid xs={4}>
-                <EditorInputSec sx={{ position: "fixed" }}>
+              <Grid xs={12} md={4}>
+                <EditorInputSec>
                   {/* <h1>Card List</h1>
                    */}
                   <PageEditorFrom
@@ -1257,6 +1279,51 @@ function EditHomePageindex() {
                           />
                         </div>
                       </div>
+
+                      {/* Description Block */}
+                      <div
+                        className={
+                          activeIndex === 10
+                            ? "page-editor-form active"
+                            : "page-editor-form"
+                        }
+                      >
+                        <div className="btn-flex">
+                          <Button
+                            className="page-editor-form-btn"
+                            onClick={() => handleToggle(10)}
+                            sx={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "space-between",
+                              color: "#fff",
+                              padding: "15px",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            <span>Footer</span>
+                            <KeyboardArrowDownIcon className="activesvg" />
+                          </Button>
+                          <div className="visibility">
+                            <VisibilityOffIcon /> <VisibilityIcon />
+                          </div>
+                        </div>
+                        <div className="page-editor-content-input">
+                          <CommonFooter
+                            handleFooterImageChange={handleFooterImageChange}
+                            setFooterDescription={setFooterDescription}
+                            setFooterCopyright={setFooterCopyright}
+                            setFooterTwiiter={setFooterTwiiter}
+                            setFooterDiscord={setFooterDiscord}
+                            setFooterInstagram={setFooterInstagram}
+                            setFooterEmail={setFooterEmail}
+                            setFooterYoutube={setFooterYoutube}
+                            setFooterHeading={setFooterHeading}
+                            setFooterButton={setFooterButton}
+                            key="1"
+                          />
+                        </div>
+                      </div>
                     </div>
                     <Box
                       sx={{
@@ -1317,7 +1384,7 @@ function EditHomePageindex() {
                   </PageEditorFrom>
                 </EditorInputSec>
               </Grid>
-              <Grid xs={8}>
+              <Grid xs={12} md={8}>
                 <Box
                   sx={{
                     background: "#252525",
@@ -1400,6 +1467,16 @@ function EditHomePageindex() {
                     handleFaqEdit={handleFaqEdit}
                     handleFaqDelete={handleFaqDelete}
                     faqHeading={faqHeading}
+                    footerDescription={footerDescription}
+                    footerCopyright={footerCopyright}
+                    footerTwiiter={footerTwiiter}
+                    footerDiscord={footerDiscord}
+                    footerInstagram={footerInstagram}
+                    footerEmail={footerEmail}
+                    footerYoutube={footerYoutube}
+                    footerHeading={footerHeading}
+                    footerBg={footerBg}
+                    footerButton={footerButton}
                   />
                 </Box>
               </Grid>

@@ -36,8 +36,15 @@ import himg2 from "../../../components/images/editwebsite/mint-02.svg";
 import himg3 from "../../../components/images/editwebsite/mint-03.svg";
 import himg4 from "../../../components/images/editwebsite/mint-04.svg";
 import { Card } from "../../../components/project/editWebsite/EditRaodmap";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin6Fill, RiFacebookBoxFill } from "react-icons/ri";
+import { FiEdit, FiInstagram, FiTwitter } from "react-icons/fi";
+
+import {
+  RiDeleteBin6Fill,
+  RiDiscordFill,
+  RiFacebookBoxFill,
+  RiYoutubeFill,
+  RiSendPlaneFill,
+} from "react-icons/ri";
 import { TeamCard } from "../../../components/project/editWebsite/EditTeam";
 import { Edit } from "@mui/icons-material";
 import Accordion from "@mui/material/Accordion";
@@ -45,6 +52,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Collapse } from "antd";
 function CryptoCanvasEditHome({
   activeIndex,
   menuNav,
@@ -93,9 +101,23 @@ function CryptoCanvasEditHome({
   handleFaqDelete,
   faqCards,
   faqHeading,
+  footerBg,
+  footerDescription,
+  footerCopyright,
+  footerTwiiter,
+  footerDiscord,
+  footerInstagram,
+  footerEmail,
+  footerYoutube,
+  footerHeading,
+  footerButton,
 }) {
   const { user, headerMenuData, headerLogo, headermenu, navbarType } =
     useUserAuth();
+  const { Panel } = Collapse;
+  const onChange = (key) => {
+    console.log(key);
+  };
 
   useEffect(() => {
     const selectedSection = document.getElementsByClassName("editable")[0];
@@ -103,7 +125,7 @@ function CryptoCanvasEditHome({
     if (activeIndex) {
       const section = document.getElementById(`section${activeIndex}`);
       section?.classList?.add("editable");
-      section.scrollIntoView({
+      section?.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
@@ -929,6 +951,69 @@ function CryptoCanvasEditHome({
               ))}
             </div>
             <div id="section9"></div>
+          </div>
+
+          {/* Footer */}
+          <div className="homesec footer">
+            <div className="wrapper">
+              <div className="footertxt">
+                <h1>{footerHeading}</h1>
+                <p>{footerDescription}</p>
+                <Button
+                  sx={{
+                    borderRadius: "8px",
+                    color: "#fff",
+                    fontSize: "1.2em",
+                    textTransform: "capitalize",
+                    padding: "8px 20px",
+                    fontWeight: "500",
+                    background:
+                      "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%);",
+                    margin: "10px 0px",
+                    "&:hover ": {
+                      background:
+                        "linear-gradient(25deg, #2600FC 0%, #FF00EA 100%);",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  {footerButton}
+                </Button>
+              </div>
+
+              <div className="footerwrapper">
+                <Box
+                  sx={{
+                    width: "40%",
+                    margin: "auto",
+                  }}
+                >
+                  <div className="icons">
+                    <FiTwitter />
+                    <RiDiscordFill />
+                    <FiInstagram />
+                    <RiSendPlaneFill />
+                    <RiYoutubeFill />
+                  </div>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="image">
+                      <Image src={footerBg} alt="" width={50} height={50} />
+                      <p>Powered by Xtraverse</p>
+                    </div>
+                  </Box>
+
+                  <span>{footerCopyright}</span>
+                </Box>
+              </div>
+            </div>
+
+            <div id="section10"></div>
           </div>
         </Box>
       </HomepagePreview>

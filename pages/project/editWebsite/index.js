@@ -485,24 +485,45 @@ function EditHomePageindex() {
   const [faqCards, setFaqCards] = useState([
     {
       id: 1,
-      title: "PHASE 01",
-      explain: "Planning ",
+      title: "What is Robo's NFT Collection?",
+      explain:
+        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
     {
       id: 2,
-      title: "PHASE 02",
-      explain: "Production ",
+      title: "How we can buy and invest NFT?",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
     {
       id: 3,
-      title: "PHASE 03 ",
-      explain: "Launch ",
+      title: "Why we should choose Robo's NFT",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 4,
+      title: "Where we can buy and sell NFTs?",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 5,
+      title: "How secure in this token",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
+    },
+    {
+      id: 6,
+      title: "What is your contact address",
+      explain:
+        "Voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.",
     },
   ]);
 
   const [faQFormData, setFaqFormData] = useState({
-    title: "Phase 01",
-    explain: "Planning",
+    title: "",
+    explain: "",
   });
 
   const [faqEditMode, setFaQEditMode] = useState(false);
@@ -529,15 +550,7 @@ function EditHomePageindex() {
   const [footerYoutube, setFooterYoutube] = useState();
 
   const handleFaqInputChange = (e, index) => {
-    if (index !== undefined) {
-      setFaqFormData((prevFormData) => {
-        const updatedList = [...prevFormData.list];
-        updatedList[index] = e.target.value;
-        return { ...prevFormData, list: updatedList };
-      });
-    } else {
-      setFaqFormData({ ...faQFormData, [e.target.name]: e.target.value });
-    }
+    setFaqFormData({ ...faQFormData, [e.target.name]: e.target.value });
   };
 
   const handleFaqSubmit = (e) => {
@@ -550,7 +563,7 @@ function EditHomePageindex() {
         return card;
       });
       setFaqCards(updatedCards);
-      setFaqFormData(false);
+      setFaQEditMode(false);
       setFaqEditCardId(null);
     } else {
       const newCard = {
@@ -567,7 +580,7 @@ function EditHomePageindex() {
 
   const handleFaqEdit = (card) => {
     setFaqFormData(card);
-    setFaqFormData(true);
+    setFaQEditMode(true);
     setFaqEditCardId(card.id);
   };
 

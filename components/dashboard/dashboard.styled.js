@@ -74,9 +74,7 @@ export const Aside = styled.aside`
         }
       }
 
-      .ant-menu-submenu-title >.ant-menu-title-content{
-        font-size: 24px;
-      }
+  
 
       :where(.css-dev-only-do-not-override-1me4733).ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
         color: #04fcbc !important;
@@ -92,7 +90,7 @@ export const Aside = styled.aside`
         padding-top: 5px !important;
         }  
         
-        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content{
+        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content{
           text-align: start !important;
         }
       }

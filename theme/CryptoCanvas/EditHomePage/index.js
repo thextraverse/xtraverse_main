@@ -11,6 +11,7 @@ import {
   HomepagePreview,
   RoadmapCard,
   XtraverseCard,
+  Faq,
 } from "../../../components/styles/homepage.styled";
 import { Grid } from "@mui/joy";
 import Link from "next/link";
@@ -928,27 +929,33 @@ function CryptoCanvasEditHome({
             <div id="section8"></div>
           </div>
           {/* FAQ */}
-          <div className="homesec roadmapsc">
-            <div className="wrapper">
+          <div
+            className="homesec faq"
+            // style={{ }}
+          >
+            <div className="wrapper" style={{ paddingTop: "10px" }}>
               <h1 className="h1">{faqHeading}</h1>
-              {faqCards.map((card) => (
-                <>
-                  <div>
-                    <div className="content">
-                      <p>{card.title}</p>
-                      <h1>{card.explain}</h1>
-                    </div>
-                    <div className="btnsc">
-                      <button onClick={() => handleFaqEdit(card)}>
-                        <FiEdit />
-                      </button>
-                      <button onClick={() => handleFaqDelete(card)}>
-                        <RiDeleteBin6Fill />
-                      </button>
-                    </div>
-                  </div>
-                </>
-              ))}
+              <Faq>
+                <Collapse defaultActiveKey={["1"]} onChange={onChange}>
+                  {faqCards.map((card, index) => (
+                    <>
+                      <Panel header={card.title} key={index}>
+                        <div className="content">
+                          <p>{card.explain}</p>
+                        </div>
+                        <div className="btnsc">
+                          <button onClick={() => handleFaqEdit(card)}>
+                            <FiEdit />
+                          </button>
+                          <button onClick={() => handleFaqDelete(card)}>
+                            <RiDeleteBin6Fill />
+                          </button>
+                        </div>
+                      </Panel>
+                    </>
+                  ))}
+                </Collapse>
+              </Faq>
             </div>
             <div id="section9"></div>
           </div>

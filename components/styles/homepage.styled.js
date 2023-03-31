@@ -639,6 +639,11 @@ export const PageEditorFrom = styled.div`
     border-radius: 16px;
     margin: 0px 0px 20px 0px;
   }
+  .thankyou {
+    border: 2px solid #4f4f4f;
+    border-radius: 16px;
+    margin: 20px 0px;
+  }
   .page-editor-form {
     position: relative;
     height: auto;
@@ -976,6 +981,10 @@ export const HomepagePreview = styled.div`
         }
       }
     }
+    &.faq {
+      max-height: 500px;
+      overflow: auto;
+    }
     .GrdntBox {
       width: 40px;
       height: 40px;
@@ -991,6 +1000,14 @@ export const HomepagePreview = styled.div`
       top: 0px;
       visibility: hidden;
       opacity: 0;
+    }
+    .editable {
+      border: 2px solid #71dd37;
+      padding: 0px 10px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
     }
   }
   .overlaybg {
@@ -1232,15 +1249,6 @@ export const HomepagePreview = styled.div`
     height: 100%;
     display: grid;
     padding: 50px 0px;
-  }
-  .editable {
-    border: 2px solid #71dd37;
-    padding: 0px 10px;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    z-index: 2;
   }
 `;
 export const LaucnhWrapper = styled.div`

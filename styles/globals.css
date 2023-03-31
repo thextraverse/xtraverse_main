@@ -226,4 +226,5 @@ header.mui-fixed::before {
 .css-6hp17o-MuiList-root-MuiMenu-list,
 .css-177ic5c {
   background-color: #252525 !important;
+  max-height: 300px !important;
 }

@@ -65,6 +65,7 @@ const Initialize = styled.div`
     width: 100%;
     margin: auto;
     height: 100%;
+    cursor: pointer;
     h1 {
       display: none;
     }
@@ -326,7 +327,7 @@ export default function Project() {
     handleGetData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailData]);
-  handleGetData();
+  // handleGetData();
 
   const roleOptions = [
     { name: "founder", value: "Founder" },
@@ -532,15 +533,31 @@ export default function Project() {
                 </Grid>
               </Grid>
             ) : (
-              isProject.map((prjctid, index) => {
+              isProject.map((project, index) => {
                 return (
                   <>
                     <Grid item sm={3}>
-                      <div className="project">
-                        <h2>{prjctid.id}</h2>
+                      <div
+                        className="project"
+                        onClick={() => {
+                          setProjectData(project.id);
+                          window.sessionStorage.setItem(
+                            "activeProject",
+                            JSON.stringify({ id: project.id })
+                          );
+                          window.sessionStorage.setItem(
+                            "activeMenu",
+                            JSON.stringify({ key: "3", label: "Shop" })
+                          );
+                          router.push(
+                            "/project/editMarketplace/marketplaceSalespage"
+                          );
+                        }}
+                      >
+                        <h2>{project.id}</h2>
                         <div className="image">
                           <Image
-                            src={prjctid.image}
+                            src={project.image}
                             width={500}
                             height={500}
                             objectFit="cover"

@@ -213,27 +213,35 @@ function EditMarketPlaceSalesindex() {
   };
 
   //! Thank you page
-  // const [closingTopTxt, setClosingTopTxt] = useState(
-  //   "Welcome to Robo Gremlins"
-  // );
-  // const [closingHeader, setClosingHeader] = useState("Congratulations");
-  // const [closingSubtexxt, setClosingSubtexxt] = useState(
-  //   " Book a call with an onboarding manager to unlock full benefits. "
-  // );
-  // const [closingBtn, setClosingBtn] = useState({
-  //   button: "Book a Call",
-  //   link: "",
-  // });
-  // const handleClosingBtnChange = (e) => {
-  //   setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
-  // };
-  // const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(null);
-  // const [closingSelectedVideo, setClosingSelectedVideo] = useState(Predviewimg);
-  // const handleClosingBioVideoChange = (event) => {
-  //   const videoFile = event.target.files[0];
-  //   setClosingSelectedVideo(URL.createObjectURL(videoFile));
-  //   setClosingUploadVideoUrl(videoFile);
-  // };
+
+  const [closingTopTxt, setClosingTopTxt] = useState(
+    "Welcome to Robo Gremlins"
+  );
+
+  const [closingHeader, setClosingHeader] = useState("Congratulations");
+  const [closingSubtexxt, setClosingSubtexxt] = useState(
+    " Book a call with an onboarding manager to unlock full benefits. "
+  );
+  const [closingBtn, setClosingBtn] = useState({
+    button: "Thank you",
+    link: "",
+  });
+  const handleClosingBtnChange = (e) => {
+    setClosingBtn({ ...closingBtn, [e.target.name]: e.target.value });
+  };
+
+  const [closingUploadVideoUrl, setClosingUploadVideoUrl] = useState(
+    "/video/xtraverse.mp4"
+  );
+  const [closingSelectedVideo, setClosingSelectedVideo] = useState(
+    "/video/xtraverse.mp4"
+  );
+
+  const handleClosingBioVideoChange = (event) => {
+    const videoFile = event.target.files[0];
+    setClosingSelectedVideo(URL.createObjectURL(videoFile));
+    setClosingUploadVideoUrl(videoFile);
+  };
 
   //!  upload section
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -373,28 +381,40 @@ function EditMarketPlaceSalesindex() {
         console.log("Image upload complete.");
       }
     );
-    // let closingUploadProgress = 0;
-    // const closingUploadTask = uploadBytesResumable(
-    //   closingVideoRef,
-    //   closingUploadVideoUrl
-    // );
-    // closingUploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     closingUploadProgress = Math.round(
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //     );
-    //     console.log(`Image Upload Progress: ${closingUploadProgress}%`);
-    //     setImageUploadProgrees(closingUploadProgress);
-    //     setUploadProgress(closingUploadProgress);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //   () => {
-    //     console.log("Image upload complete.");
-    //   }
-    // );
+
+    const closingVideoRef = ref(
+      storage,
+      `video/${closingUploadVideoUrl.name + v4()}`
+    );
+
+    // imageSnapshot, videoSnapshot
+    // Upload the files to Firebase storage
+    const [closingVideoSnapshot] = await Promise.all([
+      uploadBytesResumable(closingVideoRef, closingUploadVideoUrl),
+    ]);
+
+    let closingUploadProgress = 0;
+    const closingUploadTask = uploadBytesResumable(
+      closingVideoRef,
+      closingUploadVideoUrl
+    );
+    closingUploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        closingUploadProgress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        console.log(`Image Upload Progress: ${closingUploadProgress}%`);
+        setImageUploadProgrees(closingUploadProgress);
+        setUploadProgress(closingUploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log("Image upload complete.");
+      }
+    );
 
     // Wait for all the files to finish uploading
     await Promise.all([
@@ -402,7 +422,7 @@ function EditMarketPlaceSalesindex() {
       featurefilesUploadTask,
       projectBioUploadTask,
       logoimageUploadTask,
-      //   closingUploadTask,
+      closingUploadTask,
       // desimageUploadTask,
     ]);
     // Get the download URLs for the files
@@ -412,13 +432,13 @@ function EditMarketPlaceSalesindex() {
       featuresimageUrl,
       projectBioVideoUrl,
       logoimageUrl,
-      //   closingVideoUrl,
+      closingVideoUrl,
     ] = await Promise.all([
       getDownloadURL(generalimageSnapshot.ref),
       getDownloadURL(featuresimageSnapshot.ref),
       getDownloadURL(projectsVideoSnapshot.ref),
       getDownloadURL(logoimageSnapshot.ref),
-      //   getDownloadURL(closingVideoSnapshot.ref),
+      getDownloadURL(closingVideoSnapshot.ref),
     ]);
 
     try {
@@ -451,6 +471,7 @@ function EditMarketPlaceSalesindex() {
             const docId = newQuerySnapshot.docs[0].id;
             // console.log(`DocId: ${docId}`);
             const docRef = doc(userDataCollectionRef, docId);
+            console.log(docRef, "test doc ref");
             await updateDoc(docRef, {
               Offerheader: {
                 logoImage: logoimageUrl,
@@ -483,10 +504,17 @@ function EditMarketPlaceSalesindex() {
                 projectBioStory: projectBioStory,
                 projectBtn: projectBtn,
               },
+              Thanksyou: {
+                closingTopTxt: closingTopTxt,
+                closingHeader: closingHeader,
+                closingSubtexxt: closingSubtexxt,
+                closingBtn: closingBtn,
+                closingVideo: closingVideoUrl,
+              },
             });
             if (
               MySwal.fire({
-                title: <strong>Uploaded</strong>,
+                title: <strong>Updated</strong>,
                 icon: "success",
               })
             );
@@ -524,6 +552,13 @@ function EditMarketPlaceSalesindex() {
                 projectBioStory: projectBioStory,
                 projectBtn: projectBtn,
               },
+              Thanksyou: {
+                closingTopTxt: closingTopTxt,
+                closingHeader: closingHeader,
+                closingSubtexxt: closingSubtexxt,
+                closingBtn: closingBtn,
+                closingVideo: closingVideoUrl,
+              },
             });
             if (
               MySwal.fire({
@@ -538,10 +573,10 @@ function EditMarketPlaceSalesindex() {
       } else {
         console.log("No documents found.");
       }
-      router.push("/project/editMarketplace/thankyouPage");
+      router.push("/project/editWebsite");
       window.sessionStorage.setItem(
         "activeMenu",
-        JSON.stringify({ key: "3", label: "Shop" })
+        JSON.stringify({ key: "4", label: "Website" })
       );
     } catch (error) {
       console.error("Error submitting form: ", error);
@@ -553,33 +588,45 @@ function EditMarketPlaceSalesindex() {
   const queryUser = collection(db, "Users");
   async function handleGetData() {
     if (!emailData) return;
-    const q = query(queryUser, where("Email", "==", emailData));
-    const querySnapshot1 = await getDocs(q);
+    const usersRef = collection(db, "Users");
+    const q = query(usersRef, where("Email", "==", emailData));
+    const querySnapshot = await getDocs(q);
 
-    if (!querySnapshot1.empty) {
-      const autoId = querySnapshot1.docs[0].id;
-      const subcollectionRef = collection(db, "Users", autoId, "project");
-      const querySnapshot2 = await getDocs(subcollectionRef);
-      const docs = querySnapshot2.docs.map((doc) => doc.data());
-      docs.map((data) => {
-        // console.log(data.id);
+    if (!querySnapshot.empty) {
+      const autoId = querySnapshot.docs[0].id;
+      console.log(`AutoId: ${autoId}`);
 
-        setTempalteId(data.id);
-      });
+      const projectRef = collection(db, "Users", autoId, "project");
+      const pq = query(projectRef, where("id", "==", projectData));
+      const projectQuerySnapshot = await getDocs(pq);
+      try {
+        const projectAutoId = projectQuerySnapshot.docs[0].id;
+        console.log(`productAudtoId: ${projectAutoId}`);
+        const userDataCollectionRef = collection(
+          db,
+          "Users",
+          autoId,
+          "project",
+          projectAutoId,
+          "OffersPageData"
+        );
+        const newQuerySnapshot = await getDocs(userDataCollectionRef);
+
+        if (!newQuerySnapshot.empty) {
+          // User data exists in database, update the existing document
+          const docId = newQuerySnapshot.docs[0].id;
+          // console.log(`DocId: ${docId}`);
+          const docRef = doc(userDataCollectionRef, docId);
+          console.log(docRef, "test doc ref");
+        }
+      } catch (error) {
+        console.log("error while getting record", error);
+      }
     }
   }
-
   useEffect(() => {
     handleGetData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [emailData]);
-  console.log(tempalteId);
-  console.log(royaltiesList);
-  // function handleCheckToekSubmit() {
-  //   if (tokenType === "ERC-721A" && mintType === "Regular") {
-  //     alert("yes color");
-  //   }
-  // }
+  }, [projectData]);
 
   return (
     <>
@@ -837,52 +884,50 @@ function EditMarketPlaceSalesindex() {
                           />
                         </div>
                       </div>
-                      {/* Thanks you page */}
-                      {/* <div
-                        className={
-                          activeIndex === 5
-                            ? activeOffer
-                              ? "page-editor-form  "
-                              : "page-editor-form active"
-                            : "page-editor-form "
-                        }
-                      >
-                        <div className="btn-flex">
-                          <Button
-                            className="page-editor-form-btn"
-                            onClick={() => handleToggle(5)}
-                            sx={{
-                              width: "100%",
-                              display: "flex",
-                              justifyContent: "space-between",
-                              color: "#fff",
-                              padding: "15px",
-                              textTransform: "capitalize",
-                            }}
-                          >
-                            <span>Thank you page</span>
-                            <KeyboardArrowDownIcon className="activesvg" />
-                          </Button>
-                          <div className="visibility">
-                            <VisibilityOffIcon /> <VisibilityIcon />
-                          </div>
+                    </div>
+                    {/* Thanks you page */}
+                    <div
+                      className={
+                        activeIndex === 5
+                          ? activeOffer
+                            ? "page-editor-form thankyou "
+                            : "page-editor-form thankyou active"
+                          : "page-editor-form thankyou"
+                      }
+                    >
+                      <div className="btn-flex">
+                        <Button
+                          className="page-editor-form-btn"
+                          onClick={() => handleToggle(5)}
+                          sx={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                            color: "#fff",
+                            padding: "15px",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          <span>Thank you page</span>
+                          <KeyboardArrowDownIcon className="activesvg" />
+                        </Button>
+                        <div className="visibility">
+                          <VisibilityOffIcon /> <VisibilityIcon />
                         </div>
+                      </div>
 
-                        <div className="page-editor-content-input">
-                          <ThanksyouPage
-                            setClosingTopTxt={setClosingTopTxt}
-                            setClosingHeader={setClosingHeader}
-                            setClosingSubtexxt={setClosingSubtexxt}
-                            setClosingBtn={setClosingBtn}
-                            closingBtn={closingBtn}
-                            handleClosingBtnChange={handleClosingBtnChange}
-                            handleClosingVideoChange={
-                              handleClosingBioVideoChange
-                            }
-                            key="3"
-                          />
-                        </div>
-                      </div> */}
+                      <div className="page-editor-content-input">
+                        <ThanksyouPage
+                          setClosingTopTxt={setClosingTopTxt}
+                          setClosingHeader={setClosingHeader}
+                          setClosingSubtexxt={setClosingSubtexxt}
+                          setClosingBtn={setClosingBtn}
+                          closingBtn={closingBtn}
+                          handleClosingBtnChange={handleClosingBtnChange}
+                          handleClosingVideoChange={handleClosingBioVideoChange}
+                          key="3"
+                        />
+                      </div>
                     </div>
                   </PageEditorFrom>
                   <Box
@@ -999,6 +1044,11 @@ function EditMarketPlaceSalesindex() {
                         headerType={headerType}
                         homeLogo={homeLogo}
                         projectBtn={projectBtn}
+                        closingTopTxt={closingTopTxt}
+                        closingHeader={closingHeader}
+                        closingSubtexxt={closingSubtexxt}
+                        closingSelectedVideo={closingSelectedVideo}
+                        closingBtn={closingBtn}
                       />
                     )}
                   </MarketPlaceDataPreview>

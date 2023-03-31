@@ -73,7 +73,7 @@ function MyHeader({}) {
   useEffect(() => {
     const storedState = window.sessionStorage.getItem("activeMenu");
     const storedProject = window.sessionStorage.getItem("activeProject");
-    if (storedState) {
+    if (storedState && storedState !== "undefined") {
       const storedValue = JSON.parse(storedState);
       if (storedValue.key != activeMenu?.key) {
         setActiveMenu(storedValue);
@@ -81,7 +81,7 @@ function MyHeader({}) {
     } else {
       window.sessionStorage.setItem("activeMenu", JSON.stringify(activeMenu));
     }
-    if (storedProject) {
+    if (storedProject && storedProject !== "undefined") {
       const storedProjectValue = JSON.parse(storedProject);
       if (
         projects.length &&
@@ -91,7 +91,7 @@ function MyHeader({}) {
         setActiveProject(storedProjectValue);
         setProjectData(storedProjectValue.id);
       }
-    } else {
+    } else if (projects.length) {
       window.sessionStorage.setItem(
         "activeProject",
         JSON.stringify(projects[0])

@@ -99,7 +99,7 @@ function MyHeader({}) {
     }
   });
 
-  const namedHeader = ["Business"];
+  const namedHeader = ["Business", "Dashboard"];
 
   const handleProjectChange = (e) => {
     setActiveProject({ id: e.target.value });

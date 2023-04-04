@@ -119,6 +119,26 @@ export const EngagementsRightDiv = styled.div`
   border-radius: 8px;
   padding: 16px;
 `;
+export const EngagementCard = styled.div`
+  width: 100%;
+  height: 100%;
+  /* Primary/Grey Medium */
+  background: #252525;
+  border-radius: 8px;
+  padding: 16px;
+`;
+export const DropdownDiv = styled.div`
+  width: 250px;
+  #demo-simple-select-label,
+  #demo-simple-select {
+    color: #fff;
+    text-align: start;
+  }
+
+  #demo-simple-select + input + svg {
+    fill: #fff;
+  }
+`;
 
 export const CommunityDiv = styled.div`
   width: 100%;

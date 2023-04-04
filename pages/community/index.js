@@ -228,7 +228,6 @@ export default function Community() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-
               width: "100%",
             }}
           >
@@ -266,7 +265,7 @@ export default function Community() {
                 </Select>
               </FormControl> */}
 
-              {/* <div style={{ width: "200px" }}>
+              <div style={{ width: "200px" }}>
                 <Button
                   type="submit"
                   sx={{
@@ -288,9 +287,9 @@ export default function Community() {
                     },
                   }}
                 >
-                  Create Project
+                  Create
                 </Button>
-              </div> */}
+              </div>
             </Box>
           </Box>
 

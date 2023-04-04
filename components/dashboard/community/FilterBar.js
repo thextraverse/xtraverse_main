@@ -84,11 +84,11 @@ function FilterComponents() {
   return (
     <FilterComponentsDiv>
       <Grid container spacing={1}>
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} style={{ alignSelf: "center" }}>
           <Checkbox {...label} style={{ color: "#fff" }} />
         </Grid>
 
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} md={0.5} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <Image
               src="/images/communityPage/vector.svg"
@@ -98,7 +98,7 @@ function FilterComponents() {
             />
           </div>
         </Grid>
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} md={0.5} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <Image
               src="/images/communityPage/email.svg"
@@ -108,7 +108,7 @@ function FilterComponents() {
             />
           </div>
         </Grid>
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} md={0.5} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <Image
               src="/images/communityPage/cloud.svg"
@@ -118,12 +118,7 @@ function FilterComponents() {
             />
           </div>
         </Grid>
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
-          <div className="drp-up">
-            <CallIcon style={{ width: 15, height: 16 }} />
-          </div>
-        </Grid>
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} md={0.5} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <Image
               src="/images/communityPage/send-2.svg"
@@ -134,7 +129,7 @@ function FilterComponents() {
           </div>
         </Grid>
 
-        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
+        <Grid item sm={4} md={2} style={{ alignSelf: "center" }}>
           <div className="input">
             <svg
               width="16"
@@ -155,13 +150,13 @@ function FilterComponents() {
           </div>
         </Grid>
 
-        <Grid item xs={1} style={{ alignSelf: "center" }}>
+        <Grid item sm={1} md={0.5} style={{ alignSelf: "center" }}>
           <div className="drp-up">
             <FileDownloadOutlinedIcon style={{ width: 15, height: 16 }} />
           </div>
         </Grid>
 
-        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
+        <Grid item xs={4} md={1.5} style={{ alignSelf: "center" }}>
           <div className="sort-by">
             <span>Sort by</span>
 
@@ -182,7 +177,7 @@ function FilterComponents() {
             </svg>
           </div>
         </Grid>
-        <Grid item xs={1.5} style={{ alignSelf: "center" }}>
+        <Grid item xs={4} md={1.5} style={{ alignSelf: "center" }}>
           <div className="sort-by">
             <span>Filter by</span>
 

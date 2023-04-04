@@ -110,126 +110,237 @@ export default function CustomTableContainer() {
   };
   const handleClose = () => setOpen(false);
 
+  // const columns = [
+  //   {
+  //     title: "NAME",
+  //   },
+  //   {
+  //     title: "EMAIL",
+  //   },
+  //   {
+  //     title: "PHONE",
+  //   },
+  //   {
+  //     title: "ENGAGEMENTS",
+  //   },
+  //   {
+  //     title: "CONNECTIONS",
+  //   },
+  //   {
+  //     title: "OWNER",
+  //   },
+  //   {
+  //     title: "",
+  //   },
+  // ];
+
   const columns = [
     {
       title: "NAME",
     },
     {
-      title: "EMAIL",
+      title: "USERNAME",
     },
     {
-      title: "PHONE",
+      title: "STAGE",
     },
     {
-      title: "ENGAGEMENTS",
+      title: "ENGAGEMENT",
     },
     {
-      title: "CONNECTIONS",
+      title: "PAYMENT",
     },
     {
-      title: "OWNER",
+      title: "RELATED INTERESTS",
     },
     {
       title: "",
     },
   ];
 
+  // const data = [
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  //   {
+  //     name: "Pedgy Penguin",
+  //     email: "Pedgy@gpenguin.com",
+  //     phone: "+XX (123)345-6789",
+  //     engagement: ["120"],
+  //     connection: "",
+  //     owner: "pudgy penguin",
+  //     seeDetails: "See Details",
+  //   },
+  // ];
+
   const data = [
     {
-      name: "Pedgy Penguin",
+      name: "Seby Rubino",
+      userName: "@sebyverse",
+      stage: "Booked Call",
+      relatedInteres: "#highticketsales,#",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["131", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Austin Norman",
+      userName: "@austinverse",
+      stage: "DM",
+      relatedInteres: "#socialfunnels, @zs",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Isaiah Cotto",
+      userName: "@isaiahverse",
+      stage: "Like",
+      relatedInteres: "#aidevelopment,@",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Allen McVicker",
+      userName: "@allenverse",
+      stage: "Comment",
+      relatedInteres: "#highticketsales",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Prince Derrin",
+      userName: "@derrinverse",
+      stage: "Follow",
+      relatedInteres: "#highticketsales",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Shah Zaib",
+      userName: "@shaverse",
+      stage: "Follow Back",
+      relatedInteres: "#highticketsales",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
     },
     {
-      name: "Pedgy Penguin",
+      name: "Usama Verse",
+      userName: "@usamaverse",
+      stage: "Booked Call",
+      relatedInteres: "#highticketsales",
       email: "Pedgy@gpenguin.com",
       phone: "+XX (123)345-6789",
-      engagement: ["120"],
-      connection: "",
-      owner: "pudgy penguin",
-      seeDetails: "See Details",
-    },
-    {
-      name: "Pedgy Penguin",
-      email: "Pedgy@gpenguin.com",
-      phone: "+XX (123)345-6789",
-      engagement: ["120"],
-      connection: "",
-      owner: "pudgy penguin",
-      seeDetails: "See Details",
-    },
-    {
-      name: "Pedgy Penguin",
-      email: "Pedgy@gpenguin.com",
-      phone: "+XX (123)345-6789",
-      engagement: ["120"],
-      connection: "",
-      owner: "pudgy penguin",
-      seeDetails: "See Details",
-    },
-    {
-      name: "Pedgy Penguin",
-      email: "Pedgy@gpenguin.com",
-      phone: "+XX (123)345-6789",
-      engagement: ["120"],
-      connection: "",
-      owner: "pudgy penguin",
-      seeDetails: "See Details",
-    },
-    {
-      name: "Pedgy Penguin",
-      email: "Pedgy@gpenguin.com",
-      phone: "+XX (123)345-6789",
-      engagement: ["120"],
+      engagement: ["120", "+5.0 %"],
       connection: "",
       owner: "pudgy penguin",
       seeDetails: "See Details",
@@ -294,11 +405,11 @@ export default function CustomTableContainer() {
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
-                {record.email}
+                {record.userName}
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
-                {record.phone}
+                {record.stage}
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
@@ -316,7 +427,7 @@ export default function CustomTableContainer() {
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
-                {record.owner}
+                {record.relatedInteres}
               </TableCell>
 
               <TableCell style={{ whiteSpace: "nowrap" }}>
@@ -381,10 +492,12 @@ export default function CustomTableContainer() {
 
 function TableDataMiniCells({ name, pr }) {
   return (
-    <div style={{ justifyContent: "center" }}>
+    <div
+    // style={{ justifyContent: "center" }}
+    >
       {name}
 
-      {/* <div className="percent-cont">
+      <div className="percent-cont">
         <svg
           width="13"
           height="13"
@@ -401,7 +514,7 @@ function TableDataMiniCells({ name, pr }) {
         </svg>
 
         <span>{`${pr}`}</span>
-      </div> */}
+      </div>
     </div>
   );
 }

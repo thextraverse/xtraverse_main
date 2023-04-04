@@ -14,14 +14,14 @@ export default function Community() {
 
         <Grid item xs={5}>
           <div>
-            <p>Sellers</p>
+            <p>Opt-ins</p>
             <h2>223</h2>
           </div>
         </Grid>
 
         <Grid item xs={2}>
           <div className="tx-c">
-            <p>Members</p>
+            <p>New Leads</p>
             <h2>1276</h2>
           </div>
         </Grid>
@@ -30,22 +30,22 @@ export default function Community() {
       <div
         style={{
           width: "100%",
-          padding: "2px",
+          padding: "1px",
           background: "#444",
           margin: "10px 0 0 0 ",
         }}
-      ></div>
+      />
 
       <div style={{ margin: "10px 0" }}>
-        <p>Net worth</p>
+        <p>Campaign Sales</p>
         <h2>$ 123,456.99</h2>
       </div>
 
       <Grid container spacing={2}>
         <Grid item xs={5}>
           <div>
-            <p>Following Related</p>
-            <h2>1,500</h2>
+            <p>Common Interests</p>
+            <h2>2,764</h2>
           </div>
         </Grid>
 

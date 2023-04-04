@@ -57,12 +57,6 @@ export default function Launch() {
       {/* <Sidebar activeBtn={6} heading={"Integations"} /> */}
 
       <Grid container spacing={1.3}>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
-        <Grid item xs={12}></Grid>
         <DasboardContainer>
           <Grid item xs={12}>
             <Grid container spacing={1.3}>
@@ -106,7 +100,7 @@ export default function Launch() {
                 </Box>
               </Grid>
               <Grid xs={12}>
-                {/* <Grid item xs={8}>
+                <Grid item xs={8} md={3}>
                   <Box sx={{ display: "flex", gap: "10px" }}>
                     <Button
                       className={activeTab === 0 ? "active" : ""}
@@ -133,7 +127,7 @@ export default function Launch() {
                     >
                       Integrations
                     </Button>
-                    <Button
+                    {/* <Button
                     className={activeTab === 1 ? "active" : ""}
                     onClick={(e) => {
                       e.preventDefault();
@@ -211,9 +205,9 @@ export default function Launch() {
                       }}
                     >
                       Domain Integration
-                    </Button>
+                    </Button> */}
                   </Box>
-                </Grid> */}
+                </Grid>
 
                 {/* <hr /> */}
                 <div className="tab-content">

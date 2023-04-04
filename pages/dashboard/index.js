@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import { Button, Grid } from "@mui/material";
 import TopCard from "../../components/dashboard/home/TopCard";
 import EngagementsTop from "../../components/dashboard/home/EngagementsTop";
+import EngagementCard from "../../components/dashboard/home/EngagementCard";
 import EngagementsLeft from "../../components/dashboard/home/EngagementsLeft";
 import EngagementsRight from "../../components/dashboard/home/EngagementsRight";
 import Community from "../../components/dashboard/home/Community";
@@ -12,6 +13,7 @@ import {
   Dashboardsc,
   TopCardDiv,
   ActivityCharts,
+  DropdownDiv,
 } from "../../components/styles/dashboard.styled";
 import { useUserAuth } from "../../configfile/UserAuthContext";
 import { Router, useRouter } from "next/router";
@@ -27,6 +29,8 @@ import ChartText from "../../components/dashboard/charts/ChartText";
 import DashboardGradientDonut from "../../components/dashboard/charts/GradientDonutChart";
 import DashboardRadialBarChart from "../../components/dashboard/charts/RadialBarChart";
 import DashboardMultipleYAxis from "../../components/dashboard/charts/DashboardMultipleYChart";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
 import { Dropdown } from "antd";
 const Main = styled.main`
   background: #303030;
@@ -78,6 +82,13 @@ const data = [
   { date: "2023-03-19", followers: 5223, following: 5838, post: 435 },
   { date: "2023-03-20", followers: 5273, following: 5838, post: 435 },
   { date: "2023-03-21", followers: 5273, following: 5838, post: 435 },
+];
+
+const campaigns = [
+  { name: "campaign 1", value: "campaign_1" },
+  { name: "campaign 2", value: "campaign_2" },
+  { name: "campaign 3", value: "campaign_3" },
+  { name: "campaign 4", value: "campaign_4" },
 ];
 
 export default function Dashboard() {
@@ -133,7 +144,7 @@ export default function Dashboard() {
       <Dashboardsc>
         {/* <Sidebar activeBtn={1} heading={"Dashboard"} /> */}
 
-        <Grid container spacing={1.3} sx={{ marginTop: "60px" }}>
+        <Grid container spacing={1.3}>
           <DasboardContainer>
             {/* <WertIntergration wertApiKey={wertApiKey} /> */}
 
@@ -157,33 +168,33 @@ export default function Dashboard() {
                         <h2>Attention</h2>
 
                         <div style={{ width: "175px" }}>
-                          <Dropdown
+                          {/* <Dropdown
                             menu={{ items: launchItems }}
                             placement="topLeft"
-                          >
-                            <Button
-                              sx={{
-                                width: "100%",
+                          > */}
+                          <Button
+                            sx={{
+                              width: "100%",
+                              background:
+                                "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
+                              borderRadius: "8px",
+                              color: "#000",
+                              fontSize: "1.2em",
+                              textTransform: "capitalize",
+                              padding: "8px 0px",
+                              transition: "0.3s",
+                              fontWeight: "500",
+                              margin: "10px 0px",
+                              "&:hover ": {
                                 background:
-                                  "linear-gradient(180deg, #04fcbc 0%, #40fd8f 100%)",
-                                borderRadius: "8px",
-                                color: "#000",
-                                fontSize: "1.2em",
-                                textTransform: "capitalize",
-                                padding: "8px 0px",
-                                transition: "0.3s",
-                                fontWeight: "500",
-                                margin: "10px 0px",
-                                "&:hover ": {
-                                  background:
-                                    "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                                  cursor: "pointer",
-                                },
-                              }}
-                            >
-                              Launch
-                            </Button>
-                          </Dropdown>
+                                  "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                                cursor: "pointer",
+                              },
+                            }}
+                          >
+                            Create
+                          </Button>
+                          {/* </Dropdown> */}
                         </div>
 
                         {/* <div style={{ width: "175px" }}>
@@ -193,10 +204,10 @@ export default function Dashboard() {
                     </Grid>
                     {/*top card section*/}
                     <Grid item xs={12}>
-                      <ActivityCharts>
-                        <ActivityChart twitterData={twitterData} />
+                      {/* <ActivityCharts> */}
+                      {/* <ActivityChart twitterData={twitterData} /> */}
 
-                        {/* <ResponsiveContainer width="100%" height="100%">
+                      {/* <ResponsiveContainer width="100%" height="100%">
                           <LineChart
                             width={500}
                             height={300}
@@ -230,7 +241,7 @@ export default function Dashboard() {
                             />
                           </LineChart>
                         </ResponsiveContainer> */}
-                      </ActivityCharts>
+                      {/* </ActivityCharts> */}
 
                       <Grid sx={{ marginTop: "10px" }} container spacing={2}>
                         {true && (
@@ -402,63 +413,6 @@ export default function Dashboard() {
                             </Grid>
                             <Grid item xs={2}>
                               <TopCardDiv>
-                                <p>Views</p>
-                                <Box
-                                  sx={{
-                                    width: "100%",
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <h2>
-                                    {twitterData
-                                      ? twitterData.data.daily[0].favorites
-                                      : 10}
-                                  </h2>
-
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginTop: "8px",
-
-                                      marginLeft: "8px",
-                                      padding: "4px",
-                                      background: "#252525",
-                                      borderRadius: "4px",
-                                    }}
-                                  >
-                                    <svg
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 10 10"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
-                                        stroke="#71DD37"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
-
-                                    <span
-                                      style={{
-                                        marginLeft: "6px",
-                                      }}
-                                    >
-                                      +5.0 %
-                                    </span>
-                                  </div>
-                                </Box>
-                                <span>
-                                  {/* {data && data.data.daily[0].following} */}
-                                  10 new views today
-                                </span>
-                              </TopCardDiv>
-                            </Grid>
-                            <Grid item xs={2}>
-                              <TopCardDiv>
                                 <p>Likes</p>
                                 <Box
                                   sx={{
@@ -567,6 +521,63 @@ export default function Dashboard() {
                                 <span>10 new comments today</span>
                               </TopCardDiv>
                             </Grid>
+                            <Grid item xs={2}>
+                              <TopCardDiv>
+                                <p>Share</p>
+                                <Box
+                                  sx={{
+                                    width: "100%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <h2>
+                                    {twitterData
+                                      ? twitterData.data.daily[0].favorites
+                                      : 10}
+                                  </h2>
+
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginTop: "8px",
+
+                                      marginLeft: "8px",
+                                      padding: "4px",
+                                      background: "#252525",
+                                      borderRadius: "4px",
+                                    }}
+                                  >
+                                    <svg
+                                      width="1em"
+                                      height="1em"
+                                      viewBox="0 0 10 10"
+                                      fill="none"
+                                    >
+                                      <path
+                                        d="M1 9l8-8m0 0v5.5M9 1H3.5"
+                                        stroke="#71DD37"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      />
+                                    </svg>
+
+                                    <span
+                                      style={{
+                                        marginLeft: "6px",
+                                      }}
+                                    >
+                                      +5.0 %
+                                    </span>
+                                  </div>
+                                </Box>
+                                <span>
+                                  {/* {data && data.data.daily[0].following} */}
+                                  10 new share today
+                                </span>
+                              </TopCardDiv>
+                            </Grid>
                           </>
                         )}
                       </Grid>
@@ -577,10 +588,35 @@ export default function Dashboard() {
                         <Grid item xs={12} style={{ margin: "0 0 20px 0" }}>
                           <Grid container spacing={1.3}>
                             <Grid item xs={6}>
-                              <h2>Engagement</h2>
+                              <DropdownDiv>
+                                <TextField
+                                  style={{
+                                    background: "#242424",
+                                    borderRadius: "8px",
+                                    maxHeight: "50px",
+                                  }}
+                                  label="Select Campaign"
+                                  size="small"
+                                  sx={{ width: 200 }}
+                                  select
+                                  id="demo-simple-select"
+                                  // value={activeProject?.id}
+                                  // onChange={handleProjectChange}
+                                >
+                                  {campaigns.map((campaign, index) => (
+                                    <MenuItem
+                                      key={index}
+                                      value={campaign.value}
+                                      sx={{ color: "#fff" }}
+                                    >
+                                      {campaign.name}
+                                    </MenuItem>
+                                  ))}
+                                </TextField>
+                              </DropdownDiv>
                             </Grid>
                             <Grid item xs={6}>
-                              <h2>Community</h2>
+                              <h2>Engagement</h2>
                             </Grid>
                           </Grid>
                         </Grid>
@@ -593,14 +629,39 @@ export default function Dashboard() {
                           >
                             <Grid item xs={6}>
                               <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                  <EngagementsTop />
+                                <Grid item xs={12} md={6}>
+                                  <EngagementCard
+                                    header="Campaign Likes"
+                                    value="171"
+                                    discription="53 new likes today"
+                                  />
                                 </Grid>
-                                <Grid item xs={6}>
-                                  <EngagementsLeft />
+                                <Grid item xs={12} md={6}>
+                                  <EngagementCard
+                                    header="Campaign Comments"
+                                    value="84"
+                                    discription="32 new comments today"
+                                  />
                                 </Grid>
-                                <Grid item xs={6}>
-                                  <EngagementsRight />
+                              </Grid>
+                              <Grid
+                                container
+                                spacing={2}
+                                sx={{ marginTop: "2px" }}
+                              >
+                                <Grid item xs={12} md={6}>
+                                  <EngagementCard
+                                    header="Campaign Follows"
+                                    value="89"
+                                    discription="5 new followers today"
+                                  />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                  <EngagementCard
+                                    header="Campaign Automations"
+                                    value="131"
+                                    discription="5 automations today"
+                                  />
                                 </Grid>
                               </Grid>
                             </Grid>

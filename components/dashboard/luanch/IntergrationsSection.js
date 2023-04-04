@@ -298,7 +298,170 @@ export function IntergrationSec({ setTwitterData }) {
   return (
     <>
       <Grid container>
+        {/* twitter */}
         <Grid md={4}>
+          <IntegrationCard>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                }}
+              >
+                <Image src={twitter} alt="" />
+              </Box>
+
+              <Box
+                component="span"
+                sx={{
+                  color: data ? "#04FCBC" : "#b5b5b5",
+                  fontWeight: "500",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                {data ? "Connected" : "connect"}
+
+                {data && (
+                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                )}
+              </Box>
+            </Box>
+            <div className="content">
+              <p>Twitter Account (@{data && data.data.id.username})</p>
+              <p>Enter the Twitter username:</p>
+              <form
+                onSubmit={handleIntergrationsSubmit}
+                className="searchAccount"
+              >
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  required
+                  placeholder="@ElonMask"
+                />
+                <Button
+                  className="absluteBtn"
+                  type="submit"
+                  sx={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    background:
+                      data &&
+                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                    color: "#fff",
+                    border: "2px solid #04FCBC",
+                    fontSize: "1em",
+                    textTransform: "capitalize",
+                    padding: "5px 0px",
+                    transition: "0.3s",
+                    fontWeight: "500",
+                    margin: "10px 0px",
+                    display: "flex",
+                    gap: "20px",
+                    "&:hover ": {
+                      color: "#000",
+                      background:
+                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Connect
+                </Button>
+              </form>
+            </div>
+          </IntegrationCard>
+        </Grid>
+
+        {/* titktok */}
+        <Grid md={4}>
+          <IntegrationCard>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                }}
+              >
+                <Image src={tiktok} alt="" />
+              </Box>
+
+              <Box
+                component="span"
+                sx={{
+                  color: data ? "#04FCBC" : "#b5b5b5",
+                  fontWeight: "500",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                {data ? "Connected" : "connect"}
+
+                {data && (
+                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
+                )}
+              </Box>
+            </Box>
+            <div className="content">
+              <p>Tiktok Account (@{data && data.data.id.username})</p>
+              <p>Enter the Twitter username:</p>
+              <form className="searchAccount">
+                <input
+                  type="text"
+                  id="username"
+                  required
+                  placeholder="Yourname"
+                />
+                <Button
+                  className="absluteBtn"
+                  type="submit"
+                  sx={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    background:
+                      data &&
+                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                    color: "#fff",
+                    border: "2px solid #04FCBC",
+                    fontSize: "1em",
+                    textTransform: "capitalize",
+                    padding: "5px 0px",
+                    transition: "0.3s",
+                    fontWeight: "500",
+                    margin: "10px 0px",
+                    display: "flex",
+                    gap: "20px",
+                    "&:hover ": {
+                      color: "#000",
+                      background:
+                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  Connect
+                </Button>
+              </form>
+            </div>
+          </IntegrationCard>
+        </Grid>
+
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -370,13 +533,6 @@ export function IntergrationSec({ setTwitterData }) {
                 onChange={handleAnalytics1Account}
                 placeholder="Select account"
               />
-              {/* <Select
-                styles={colorStyles}
-                options={options2}
-                isSearchable={true}
-                onChange={handleAnalytics2Account}
-                placeholder="Select account"
-              /> */}
               <span className="span">Adwords MCC account ID</span>
               <Select
                 styles={colorStyles}
@@ -446,8 +602,8 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
-        <Grid md={4}>
+        </Grid> */}
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -550,7 +706,7 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
+        </Grid> */}
         <Grid md={4}>
           <IntegrationCard>
             <Box
@@ -646,7 +802,7 @@ export function IntergrationSec({ setTwitterData }) {
             </div>
           </IntegrationCard>
         </Grid>
-        <Grid md={4}>
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -835,9 +991,9 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
+        </Grid> */}
         {/* rainbow */}
-        <Grid md={4}>
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -906,88 +1062,10 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
-        {/* titktok */}
-        <Grid md={4}>
-          <IntegrationCard>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                }}
-              >
-                <Image src={tiktok} alt="" />
-              </Box>
-
-              <Box
-                component="span"
-                sx={{
-                  color: data ? "#04FCBC" : "#b5b5b5",
-                  fontWeight: "500",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
-              >
-                {data ? "Connected" : "connect"}
-
-                {data && (
-                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
-                )}
-              </Box>
-            </Box>
-            <div className="content">
-              <p>Tiktok Account (@{data && data.data.id.username})</p>
-              <p>Enter the Twitter username:</p>
-              <form className="searchAccount">
-                <input
-                  type="text"
-                  id="username"
-                  required
-                  placeholder="Yourname"
-                />
-                <Button
-                  className="absluteBtn"
-                  type="submit"
-                  sx={{
-                    width: "100%",
-                    borderRadius: "8px",
-                    background:
-                      data &&
-                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    color: "#fff",
-                    border: "2px solid #04FCBC",
-                    fontSize: "1em",
-                    textTransform: "capitalize",
-                    padding: "5px 0px",
-                    transition: "0.3s",
-                    fontWeight: "500",
-                    margin: "10px 0px",
-                    display: "flex",
-                    gap: "20px",
-                    "&:hover ": {
-                      color: "#000",
-                      background:
-                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  Connect
-                </Button>
-              </form>
-            </div>
-          </IntegrationCard>
-        </Grid>
+        </Grid> */}
 
         {/* snapchat */}
-        <Grid md={4}>
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -1056,90 +1134,8 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
-        {/* twitter */}
-        <Grid md={4}>
-          <IntegrationCard>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                }}
-              >
-                <Image src={twitter} alt="" />
-              </Box>
+        </Grid> */}
 
-              <Box
-                component="span"
-                sx={{
-                  color: data ? "#04FCBC" : "#b5b5b5",
-                  fontWeight: "500",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
-              >
-                {data ? "Connected" : "connect"}
-
-                {data && (
-                  <BsCheck2 style={{ fontSize: "1.2em", color: "#04FCBC " }} />
-                )}
-              </Box>
-            </Box>
-            <div className="content">
-              <p>Twitter Account (@{data && data.data.id.username})</p>
-              <p>Enter the Twitter username:</p>
-              <form
-                onSubmit={handleIntergrationsSubmit}
-                className="searchAccount"
-              >
-                <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  required
-                  placeholder="@ElonMask"
-                />
-                <Button
-                  className="absluteBtn"
-                  type="submit"
-                  sx={{
-                    width: "100%",
-                    borderRadius: "8px",
-                    background:
-                      data &&
-                      "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                    color: "#fff",
-                    border: "2px solid #04FCBC",
-                    fontSize: "1em",
-                    textTransform: "capitalize",
-                    padding: "5px 0px",
-                    transition: "0.3s",
-                    fontWeight: "500",
-                    margin: "10px 0px",
-                    display: "flex",
-                    gap: "20px",
-                    "&:hover ": {
-                      color: "#000",
-                      background:
-                        "linear-gradient(180deg, #40fd8f 0%, #04fcbc 100%)",
-                      cursor: "pointer",
-                    },
-                  }}
-                >
-                  Connect
-                </Button>
-              </form>
-            </div>
-          </IntegrationCard>
-        </Grid>
         {/* discord */}
         <Grid md={4}>
           <IntegrationCard>
@@ -1354,7 +1350,7 @@ export function IntergrationSec({ setTwitterData }) {
           </IntegrationCard>
         </Grid>
         {/* Website */}
-        <Grid md={4}>
+        {/* <Grid md={4}>
           <IntegrationCard>
             <Box
               sx={{
@@ -1423,7 +1419,7 @@ export function IntergrationSec({ setTwitterData }) {
               </Button>
             </div>
           </IntegrationCard>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

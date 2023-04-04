@@ -73,26 +73,28 @@ export const Aside = styled.aside`
           stroke: #04fcbc;
         }
       }
-
   
 
-      :where(.css-dev-only-do-not-override-1me4733).ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
-        color: #04fcbc !important;
-        path {
-          stroke: #04fcbc !important;
-        }
-    }
-      :where(.css-dev-only-do-not-override-1me4733).ant-menu-submenu-popup .ant-menu-item-selected {
-        background: #04fcbc !important;
+        :where(.css-1me4733).ant-menu-dark .ant-menu-submenu-selected >.ant-menu-submenu-title {
+          color: #04fcbc !important;
+          path {
+            stroke: #04fcbc !important;
+          }
         }
 
-        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline-collapsed >.ant-menu-submenu>.ant-menu-submenu-title {
-        padding-top: 5px !important;
-        }  
-        
-        :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content, :where(.css-dev-only-do-not-override-1me4733).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content{
-          text-align: start !important;
-        }
+        :where(.css-1me4733).ant-menu-submenu-popup .ant-menu-item-selected {
+          background: #04fcbc !important;
+          }
+  
+        :where(.css-1me4733).ant-menu-inline-collapsed >.ant-menu-item, :where(.css-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item, :where(.css-1me4733).ant-menu-inline-collapsed >.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title, :where(.css-1me4733).ant-menu-inline-collapsed >.ant-menu-submenu>.ant-menu-submenu-title {
+          padding-top: 5px !important;
+          }  
+          
+        :where(.css-1me4733).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content, :where(.css-1me4733).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content{
+            text-align: start !important;
+          }
+
+    }
       }
     }
   }

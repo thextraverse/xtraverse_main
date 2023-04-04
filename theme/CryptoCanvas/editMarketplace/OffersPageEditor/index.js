@@ -178,15 +178,60 @@ function CryptoCanvasMarketPlaceOfferPageEditor(props) {
             })} */}
           <Grid item sm={4}>
             <ProductSec>
+              <div className="createproduct white ">
+                <div className="imgsc blueGrdnt"></div>
+                <div className="infotxt">
+                  <h4>Robois #3145</h4>
+                  <div className="dflex">
+                    <h3>6.0 ETH</h3>
+                    <span>$9.942</span>
+                  </div>
+
+                  <Button
+                    sx={{
+                      background:
+                        " linear-gradient(180deg, #04FCBC 0%, #40FD8F 100%)",
+                    }}
+                  >
+                    Buy Now
+                  </Button>
+                </div>
+              </div>
+            </ProductSec>
+          </Grid>
+          <Grid item sm={4}>
+            <ProductSec>
+              <div className="createproduct white ">
+                <div className="imgsc pnkGrndt"></div>
+                <div className="infotxt">
+                  <h4>Robois #3145</h4>
+                  <div className="dflex">
+                    <h3>6.0 ETH</h3>
+                    <span>$9.942</span>
+                  </div>
+
+                  <Button
+                    sx={{
+                      background:
+                        " linear-gradient(180deg, #04FCBC 0%, #40FD8F 100%)",
+                    }}
+                  >
+                    Buy Now
+                  </Button>
+                </div>
+              </div>
+            </ProductSec>
+          </Grid>
+          <Grid item sm={4}>
+            <ProductSec>
               <div className="createproduct">
                 <Button
                   sx={{
                     border: "2px solid #fff",
                     height: "100%",
-                    width: "240px",
+                    width: "100%",
                     fontSize: "2.3em",
                     color: "#fff",
-                    margin: "20px 0px",
                   }}
                   onClick={handleDataSubmit}
                 >

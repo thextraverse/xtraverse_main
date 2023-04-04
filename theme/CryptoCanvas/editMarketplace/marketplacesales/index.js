@@ -341,6 +341,8 @@ function CryptoCanvasEditMarketPlaceSalespage(props) {
           </div>
         </div>
       </PreviewBox>
+      <div style={{ border: "1px solid white" }}></div>
+
       <PreviewBox>
         <div className="videowrap">
           <h2>{closingTopTxt}</h2>

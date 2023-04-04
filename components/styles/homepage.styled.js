@@ -668,9 +668,9 @@ export const PageEditorFrom = styled.div`
         }
       }
     }
-    &:last-of-type {
-      border-bottom: none;
-    }
+  }
+  .bio {
+    border-bottom: none;
   }
   .page-editor-heading-btn {
     background-color: #303030;

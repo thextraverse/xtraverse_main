@@ -33,6 +33,10 @@ import { useUserAuth } from "../../../configfile/UserAuthContext";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { FaPercent } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
+import FormControl from "@mui/material/FormControl";
+import dynamic from "next/dynamic";
+
+const Select = dynamic(() => import("react-select"), { ssr: false });
 
 function MarketPlaceFeatures(props) {
   const {
@@ -44,6 +48,8 @@ function MarketPlaceFeatures(props) {
     featureBtn,
     setFeatureBtn,
     setVideoTitle,
+    offerType,
+    setOfferType,
     tokenType,
     setTokenType,
     mintType,
@@ -91,6 +97,46 @@ function MarketPlaceFeatures(props) {
   const emailData = user.email;
   console.log(emailData);
   // handleshubmit function for sending data to firebase
+
+  const colorStyles = {
+    control: (styles, state) => ({
+      ...styles,
+      backgroundColor: "#252525",
+      color: "#fff",
+      border: "transparent",
+      // borderColor: state.isFocused ? "#04fcbc" : "transparent",
+      // "&:hover": {
+      //   borderColor: state.isFocused ? "#04fcbc" : styles.borderColor,
+      // },
+      padding: "10px 0px",
+      margin: "10px 0px",
+      "& input": {
+        color: "#fff !important",
+      },
+    }),
+    highlight: (styles, state) => ({
+      ...styles,
+      backgroundColor: "yellow",
+      color: "#fff",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: "#000",
+      backgroundColor: state.isSelected ? "#04fcbc" : "#fff",
+      "&:active": {
+        backgroundColor: "blue",
+      },
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: "white", // Change this to your desired color
+    }),
+  };
+
+  const options = [
+    { value: "Web2", label: "Web2" },
+    { value: "Web3", label: "Web3" },
+  ];
 
   const handleDataSubmit = async () => {
     const imageRef = ref(storage, `images/nft${uploadLogo.name + v4()}`);
@@ -226,70 +272,86 @@ function MarketPlaceFeatures(props) {
 
             <Grid item xs={12}>
               <div className="typslction">
-                <Box sx={{ marginBottom: "10px" }}>
-                  <span>Offer type</span>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "50% auto",
-                      gap: "15px",
-                      marginTop: "5px",
+                <FormControl fullWidth>
+                  <span htmlFor="fundType">Offer Type</span>
+                  <Select
+                    styles={colorStyles}
+                    options={options}
+                    value={options.filter((i) => i.value == offerType)}
+                    onChange={(e) => {
+                      setOfferType(e.value);
                     }}
-                  >
-                    <Button
-                      onClick={(e) => {
-                        setTokenType("ERC-721A");
-                        handlePayment;
-                      }}
-                      className={tokenType === "ERC-721A" ? "active" : ""}
-                    >
-                      <h2>ERC-721A</h2>
-                      <p>Each token has one owner</p>
-                    </Button>
-                    <Button
-                      onClick={(e) => {
-                        setTokenType("RC-1155");
-                        handlePayment;
-                      }}
-                      className={tokenType === "RC-1155" ? "active" : ""}
-                    >
-                      <h2>ERC-1155</h2>
-                      <p>Each token is unique to multiple owners</p>
-                    </Button>
-                  </Box>
-                </Box>
-                <Box sx={{ marginBottom: "10px" }}>
-                  <span>Mint type</span>
-                  <Box
-                    sx={{
-                      display: "grid",
-                      gridTemplateColumns: "50% auto",
-                      gap: "15px",
-                      marginTop: "5px",
-                    }}
-                  >
-                    <Button
-                      onClick={(e) => {
-                        setMintType("Regular");
-                        handlePayment;
-                      }}
-                      className={mintType === "Regular" ? "active" : ""}
-                    >
-                      <h2>Regular</h2>
-                      <p>Seller pays fees</p>
-                    </Button>
-                    <Button
-                      onClick={(e) => {
-                        setMintType("Lazy");
-                        handlePayment;
-                      }}
-                      className={mintType === "Lazy" ? "active" : ""}
-                    >
-                      <h2>Free</h2>
-                      <p>Buyer pays fees</p>
-                    </Button>
-                  </Box>
-                </Box>
+                    inputId="my-select"
+                  />
+                </FormControl>
+                {offerType === "Web3" && (
+                  <>
+                    <Box sx={{ marginBottom: "10px" }}>
+                      <span>Token type</span>
+                      <Box
+                        sx={{
+                          display: "grid",
+                          gridTemplateColumns: "50% auto",
+                          gap: "15px",
+                          marginTop: "5px",
+                        }}
+                      >
+                        <Button
+                          onClick={(e) => {
+                            setTokenType("ERC-721A");
+                            handlePayment;
+                          }}
+                          className={tokenType === "ERC-721A" ? "active" : ""}
+                        >
+                          <h2>ERC-721A</h2>
+                          <p>Each token has one owner</p>
+                        </Button>
+                        <Button
+                          onClick={(e) => {
+                            setTokenType("RC-1155");
+                            handlePayment;
+                          }}
+                          className={tokenType === "RC-1155" ? "active" : ""}
+                        >
+                          <h2>ERC-1155</h2>
+                          <p>Each token is unique to multiple owners</p>
+                        </Button>
+                      </Box>
+                    </Box>
+                    <Box sx={{ marginBottom: "10px" }}>
+                      <span>Mint type</span>
+                      <Box
+                        sx={{
+                          display: "grid",
+                          gridTemplateColumns: "50% auto",
+                          gap: "15px",
+                          marginTop: "5px",
+                        }}
+                      >
+                        <Button
+                          onClick={(e) => {
+                            setMintType("Regular");
+                            handlePayment;
+                          }}
+                          className={mintType === "Regular" ? "active" : ""}
+                        >
+                          <h2>Regular</h2>
+                          <p>Seller pays fees</p>
+                        </Button>
+                        <Button
+                          onClick={(e) => {
+                            setMintType("Lazy");
+                            handlePayment;
+                          }}
+                          className={mintType === "Lazy" ? "active" : ""}
+                        >
+                          <h2>Free</h2>
+                          <p>Buyer pays fees</p>
+                        </Button>
+                      </Box>
+                    </Box>
+                  </>
+                )}
               </div>
             </Grid>
             <Grid item xs={12}>

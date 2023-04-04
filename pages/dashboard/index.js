@@ -453,7 +453,7 @@ export default function Dashboard() {
                                 </Box>
                                 <span>
                                   {/* {data && data.data.daily[0].following} */}
-                                  10 new Views today
+                                  10 new views today
                                 </span>
                               </TopCardDiv>
                             </Grid>
@@ -564,7 +564,7 @@ export default function Dashboard() {
                                     </span>
                                   </div>
                                 </Box>
-                                <span>10 new Comments today</span>
+                                <span>10 new comments today</span>
                               </TopCardDiv>
                             </Grid>
                           </>
@@ -613,7 +613,7 @@ export default function Dashboard() {
                       </Grid>
                     </Grid>
                     {/*top table section*/}
-                    <Grid item xs={12} style={{ marginTop: "50px" }}>
+                    {/* <Grid item xs={12} style={{ marginTop: "50px" }}>
                       <Grid container spacing={1.3}>
                         <Grid item xs={12} style={{ marginBottom: "20px" }}>
                           <h2>Primary Sales</h2>
@@ -623,9 +623,9 @@ export default function Dashboard() {
                           <CustomTableContainer />
                         </Grid>
                       </Grid>
-                    </Grid>
+                    </Grid> */}
                     {/*bottom table section*/}
-                    <Grid item xs={12} style={{ marginTop: "50px" }}>
+                    {/* <Grid item xs={12} style={{ marginTop: "50px" }}>
                       <Grid container spacing={1.3}>
                         <Grid item xs={12} style={{ marginBottom: "20px" }}>
                           <h2>Secondary Sales</h2>
@@ -635,7 +635,7 @@ export default function Dashboard() {
                           <CustomTableContainer />
                         </Grid>
                       </Grid>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Grid>
               </Grid>

@@ -93,7 +93,7 @@ function EditMarketPlaceSalesindex() {
 
   // ! offers
   const [activeOffer, setActiveOffer] = useState(true);
-  const [offerHeader, setOfferHeader] = useState("Marketplace");
+  const [offerHeader, setOfferHeader] = useState("Shop");
   const [offerSubtexxt, setOfferSubtexxt] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim consequat massa arcu, scelerisque fermentum mauris aliquam nunc. Tellus quam magna eu mattis nulla vestibulum."
   );
@@ -150,6 +150,7 @@ function EditMarketPlaceSalesindex() {
   };
 
   //! for features  videosec
+  const [offerType, setOfferType] = useState("Web2");
   const [tokenType, setTokenType] = useState("");
   const [mintType, setMintType] = useState("");
   const [videoTitle, setVideoTitle] = useState("Draken's Origin");
@@ -821,6 +822,8 @@ function EditMarketPlaceSalesindex() {
                             setFeatureBtn={setFeatureBtn}
                             setAddStory={setAddStory}
                             setVideoTitle={setVideoTitle}
+                            offerType={offerType}
+                            setOfferType={setOfferType}
                             tokenType={tokenType}
                             setTokenType={setTokenType}
                             mintType={mintType}
@@ -840,9 +843,9 @@ function EditMarketPlaceSalesindex() {
                         className={
                           activeIndex === 4
                             ? activeOffer
-                              ? "page-editor-form  "
-                              : "page-editor-form active"
-                            : "page-editor-form "
+                              ? "page-editor-form bio"
+                              : "page-editor-form bio active"
+                            : "page-editor-form bio"
                         }
                       >
                         <div className="btn-flex">
